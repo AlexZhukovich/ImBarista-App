@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ImBarista</string>
+
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in_btn_text">Sign In</string>
+    <string name="sign_up_btn_text">Sign Up</string>
 </resources>
