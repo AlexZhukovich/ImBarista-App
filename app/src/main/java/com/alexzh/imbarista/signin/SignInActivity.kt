@@ -12,7 +12,7 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        sign_up_button.setOnClickListener {
+        signUp.setOnClickListener {
             SignUpActivity.start(this@SignInActivity)
         }
     }

@@ -9,7 +9,6 @@ import com.alexzh.imbarista.R
 class SignUpActivity : AppCompatActivity() {
 
     companion object {
-
         fun start(context: Context) {
             context.startActivity(Intent(context, SignUpActivity::class.java))
         }
