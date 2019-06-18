@@ -6,4 +6,8 @@
     <string name="password_hint">Password</string>
     <string name="sign_in_btn_text">Sign In</string>
     <string name="sign_up_btn_text">Sign Up</string>
+
+    <string name="nav_coffees">Coffees</string>
+    <string name="nav_near_me">Near Me</string>
+    <string name="nav_profile">Profile</string>
 </resources>
