@@ -1,5 +1,8 @@
 package com.alexzh.imbarista
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 object DummyData {
 
     fun getCoffees() : List<Coffee> = mutableListOf(
@@ -75,6 +78,7 @@ object DummyData {
                 Ingredient("Mocha C")))
     )
 
+    @Parcelize
     data class Coffee(
         val id: Long,
         val name: String,
@@ -82,9 +86,10 @@ object DummyData {
         val description: String,
         val isFavourite: Boolean,
         val ingredients: List<Ingredient>
-    )
+    ) : Parcelable
 
+    @Parcelize
     data class Ingredient(
         val name: String
-    )
+    ) :  Parcelable
 }
