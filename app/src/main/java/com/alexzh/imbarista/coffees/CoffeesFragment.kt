@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexzh.imbarista.DummyData
 import com.alexzh.imbarista.R
+import com.alexzh.imbarista.coffeedetails.CoffeeDetailsActivity
 import com.alexzh.imbarista.coffees.adapter.CoffeesAdapter
 import kotlinx.android.synthetic.main.fragment_coffees.view.*
 
@@ -18,7 +18,7 @@ class CoffeesFragment : Fragment() {
     private val adapter by lazy { CoffeesAdapter(coffeeItemClick) }
 
     private val coffeeItemClick: (DummyData.Coffee) -> Unit = {
-        Toast.makeText(this.context, it.name, Toast.LENGTH_SHORT).show()
+        CoffeeDetailsActivity.start(this.activity!!, it)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
