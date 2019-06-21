@@ -54,6 +54,19 @@ class CoffeeDetailsActivity : AppCompatActivity() {
             finish()
         }
 
-        // TODO: add support for favourite/non-favourite coffee
+        updateFavouriteIcon(coffee.isFavourite)
+
+        coffeeFavourite.setOnClickListener {
+            updateFavouriteIcon(!coffee.isFavourite)
+        }
+    }
+
+    private fun updateFavouriteIcon(isFavourite: Boolean) {
+        val favouriteIcon = if (isFavourite) {
+            R.drawable.ic_favorite_black_24dp
+        } else {
+            R.drawable.ic_favorite_border_black_24dp
+        }
+        coffeeFavourite.setImageResource(favouriteIcon)
     }
 }
