@@ -92,4 +92,9 @@ object DummyData {
     data class Ingredient(
         val name: String
     ) :  Parcelable
+
+    data class CoffeeDetailsItem(
+        val categoryIconRes: Int,
+        val categoryValue: String
+    )
 }

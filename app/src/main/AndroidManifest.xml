@@ -11,6 +11,14 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="OnlineMaps.Key"
+            android:value="@string/tomtom_map_api_key" />
+        <meta-data
+            android:name="OnlineSearch.Key"
+            android:value="@string/tomtom_map_api_key" />
+
         <activity android:name=".signin.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
