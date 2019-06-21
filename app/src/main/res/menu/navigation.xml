@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_coffees"
+        android:icon="@drawable/ic_coffees_black_24dp"
+        android:title="@string/nav_coffees" />
+
+    <item
+        android:id="@+id/navigation_near_me"
+        android:icon="@drawable/ic_map_black_24dp"
+        android:title="@string/nav_near_me" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_profile_black_24dp"
+        android:title="@string/nav_profile" />
+</menu>
