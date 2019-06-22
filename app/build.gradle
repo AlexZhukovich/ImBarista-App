@@ -49,6 +49,7 @@ dependencies {
 
     // TomTom Maps SDK
     implementation 'com.tomtom.online:sdk-maps:2.4126'
+    api 'com.tomtom.online:sdk-maps-ui-extensions:2.4126'
 
     testImplementation 'junit:junit:4.12'
 
