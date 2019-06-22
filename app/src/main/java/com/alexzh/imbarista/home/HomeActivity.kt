@@ -7,7 +7,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.alexzh.imbarista.R
 import com.alexzh.imbarista.coffees.CoffeesFragment
-import com.alexzh.imbarista.map.TomTomMapFragment
+import com.alexzh.imbarista.map.GoogleMapFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -45,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
     private fun handleNavigationItemClick(itemId: Int): Boolean {
         when (itemId) {
             R.id.navigation_coffees -> replaceFragment(CoffeesFragment())
-            R.id.navigation_near_me -> replaceFragment(TomTomMapFragment())
+            R.id.navigation_near_me -> replaceFragment(GoogleMapFragment())
             R.id.navigation_profile -> "Profile"
         }
         return true

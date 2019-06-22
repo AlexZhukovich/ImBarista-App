@@ -13,11 +13,14 @@
             android:theme="@style/AppTheme">
 
         <meta-data
-            android:name="OnlineMaps.Key"
-            android:value="@string/tomtom_map_api_key" />
+                android:name="OnlineMaps.Key"
+                android:value="@string/tomtom_maps_api_key" />
         <meta-data
-            android:name="OnlineSearch.Key"
-            android:value="@string/tomtom_map_api_key" />
+                android:name="OnlineSearch.Key"
+                android:value="@string/tomtom_maps_api_key" />
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_maps_api_key"/>
 
         <activity android:name=".signin.SignInActivity">
             <intent-filter>

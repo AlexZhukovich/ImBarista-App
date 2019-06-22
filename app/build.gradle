@@ -14,15 +14,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resValue("string", "tomtom_maps_api_key", "$System.env.BARISTA_TOMTOM_MAPS_API_KEY")
+        resValue("string", "google_maps_api_key", "$System.env.BARISTA_GOOGLE_MAPS_API_KEY")
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            resValue("string", "tomtom_map_api_key", "$System.env.BARISTA_TOMTOM_MAP_API_KEY")
-        }
-        debug {
-            resValue("string", "tomtom_map_api_key", "$System.env.BARISTA_TOMTOM_MAP_API_KEY")
         }
     }
     compileOptions {
@@ -45,6 +43,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha07'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
+    // Google Maps SDK
+    implementation "com.google.android.gms:play-services-maps:17.0.0"
+    implementation "com.google.android.gms:play-services-location:17.0.0"
+
+    // TomTom Maps SDK
     implementation 'com.tomtom.online:sdk-maps:2.4126'
 
     testImplementation 'junit:junit:4.12'
