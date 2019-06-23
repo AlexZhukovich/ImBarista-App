@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.alexzh.imbarista.R
 import com.alexzh.imbarista.coffees.CoffeesFragment
 import com.alexzh.imbarista.map.TomTomMapFragment
 import com.alexzh.imbarista.profile.ProfileFragment
+import com.alexzh.imbarista.settings.SettingsActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -32,6 +35,18 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setSupportActionBar(toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.settings_action -> SettingsActivity.start(this@HomeActivity)
+        }
+        return true
     }
 
     override fun onResume() {

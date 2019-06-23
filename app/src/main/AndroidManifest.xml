@@ -35,6 +35,10 @@
         </activity>
         <activity android:name=".coffeedetails.CoffeeDetailsActivity">
         </activity>
+        <activity
+                android:name=".settings.SettingsActivity"
+                android:label="@string/title_activity_settings">
+        </activity>
     </application>
 
 </manifest>

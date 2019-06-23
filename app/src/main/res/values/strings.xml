@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">ImBarista</string>
 
+    <string name="title_activity_settings">Settings</string>
+
     <string name="name_hint">Name</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
@@ -12,4 +14,14 @@
     <string name="nav_coffees">Coffees</string>
     <string name="nav_near_me">Near Me</string>
     <string name="nav_profile">Profile</string>
+
+    <string name="settings_action">Settings</string>
+
+    <!-- Preference Screen -->
+    <string name="pref_map_header">Map</string>
+    <string name="pref_map_provider_label">Map Provider</string>
+    <string name="pref_map_provider_google_entity_option">Google</string>
+    <string name="pref_map_provider_tomtom_entity_option">TomTom</string>
+    <string name="pref_map_provider_google_value_option">google</string>
+    <string name="pref_map_provider_tomtom_value_option">tomtom</string>
 </resources>

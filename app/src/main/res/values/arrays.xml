@@ -1,0 +1,11 @@
+<resources>
+    <!-- Map Provider preferences -->
+    <string-array name="pref_map_provider_entries">
+        <item>@string/pref_map_provider_google_entity_option</item>
+        <item>@string/pref_map_provider_tomtom_entity_option</item>
+    </string-array>
+    <string-array name="pref_map_provider_values">
+        <item>@string/pref_map_provider_google_value_option</item>
+        <item>@string/pref_map_provider_tomtom_value_option</item>
+    </string-array>
+</resources>
