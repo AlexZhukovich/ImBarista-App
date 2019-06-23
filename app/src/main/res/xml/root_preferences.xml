@@ -1,0 +1,16 @@
+<androidx.preference.PreferenceScreen
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+            app:title="@string/pref_map_header">
+
+        <ListPreference
+                app:key="reply"
+                app:title="@string/pref_map_provider_label"
+                app:entries="@array/pref_map_provider_entries"
+                app:entryValues="@array/pref_map_provider_values"
+                app:defaultValue="@string/pref_map_provider_google_value_option"
+                app:useSimpleSummaryProvider="true"/>
+
+    </PreferenceCategory>
+</androidx.preference.PreferenceScreen>
