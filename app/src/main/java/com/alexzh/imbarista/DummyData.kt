@@ -84,7 +84,7 @@ object DummyData {
         val name: String,
         val photoUrl: String,
         val description: String,
-        val isFavourite: Boolean,
+        var isFavourite: Boolean,
         val ingredients: List<Ingredient>
     ) : Parcelable
 
