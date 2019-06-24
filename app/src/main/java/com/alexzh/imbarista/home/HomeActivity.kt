@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.alexzh.imbarista.R
@@ -35,11 +34,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setSupportActionBar(toolbar)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
+        supportActionBar?.title = getString(R.string.nav_coffees)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -60,9 +55,18 @@ class HomeActivity : AppCompatActivity() {
 
     private fun handleNavigationItemClick(itemId: Int): Boolean {
         when (itemId) {
-            R.id.navigation_coffees -> replaceFragment(CoffeesFragment())
-            R.id.navigation_near_me -> replaceFragment(TomTomMapFragment())
-            R.id.navigation_profile -> replaceFragment(ProfileFragment())
+            R.id.navigation_coffees -> {
+                replaceFragment(CoffeesFragment())
+                supportActionBar?.title = getString(R.string.nav_coffees)
+            }
+            R.id.navigation_near_me -> {
+                replaceFragment(TomTomMapFragment())
+                supportActionBar?.title = getString(R.string.nav_near_me)
+            }
+            R.id.navigation_profile -> {
+                replaceFragment(ProfileFragment())
+                supportActionBar?.title = getString(R.string.nav_profile)
+            }
         }
         return true
     }
