@@ -1,9 +1,7 @@
 package com.alexzh.imbarista.coffees
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +19,10 @@ class CoffeesFragment : Fragment() {
         CoffeeDetailsActivity.start(this.activity!!, it)
     }
 
+    init {
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_coffees, container, false)
 
@@ -33,5 +35,10 @@ class CoffeesFragment : Fragment() {
         adapter.addCoffees(DummyData.getCoffees())
 
         return rootView
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.coffees_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

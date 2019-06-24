@@ -16,6 +16,7 @@
     <string name="nav_profile">Profile</string>
 
     <string name="settings_action">Settings</string>
+    <string name="search_action">Search</string>
 
     <!-- Preference Screen -->
     <string name="pref_map_header">Map</string>

@@ -1,9 +1,7 @@
 package com.alexzh.imbarista.map
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.alexzh.imbarista.R
@@ -15,6 +13,10 @@ import kotlinx.android.synthetic.main.fragment_google_map.view.*
 class GoogleMapFragment : Fragment(), OnMapReadyCallback {
 
     lateinit var map: GoogleMap
+
+    init {
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_google_map, container, false)
@@ -31,5 +33,10 @@ class GoogleMapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.general_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
