@@ -25,12 +25,13 @@
             android:id="@+id/emailInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
             app:errorEnabled="true"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintTop_toTopOf="parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:layout_constraintBottom_toTopOf="@+id/passwordInputLayout"
+            app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditText"
@@ -43,12 +44,13 @@
             android:id="@+id/passwordInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:errorEnabled="true"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:layout_constraintBottom_toTopOf="@+id/signIn" >
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordEditText"
@@ -63,19 +65,21 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"/>
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout"
+            app:layout_constraintBottom_toTopOf="@+id/separatorView"/>
 
     <View
             android:id="@+id/separatorView"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/signIn"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
-            app:layout_constraintStart_toStartOf="@+id/guidelineStart"/>
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/signIn"
+            app:layout_constraintBottom_toTopOf="@+id/signUp"/>
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/signUp"
@@ -85,5 +89,6 @@
             android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
-            app:layout_constraintTop_toBottomOf="@+id/separatorView"/>
+            app:layout_constraintTop_toBottomOf="@+id/separatorView"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
