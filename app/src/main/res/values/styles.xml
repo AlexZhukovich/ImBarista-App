@@ -8,12 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- TODO: fix it (Issue connected with displaying default my location button for TomTom maps-->
     <style name="CenterOnCurrentLocationView" parent="BaseCompactView">
-        <item name="android:layout_gravity">bottom|start</item>
-        <item name="android:layout_marginStart">-50dp</item>
-        <item name="android:layout_marginBottom">@dimen/current_location_default_margin_bottom
-        </item>
+        <item name="android:visibility">gone</item>
     </style>
 
 </resources>
