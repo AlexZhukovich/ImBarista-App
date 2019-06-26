@@ -11,21 +11,19 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
         <meta-data
                 android:name="OnlineMaps.Key"
-                android:value="@string/tomtom_maps_api_key" />
+                android:value="@string/tomtom_maps_api_key"/>
         <meta-data
                 android:name="OnlineSearch.Key"
-                android:value="@string/tomtom_maps_api_key" />
+                android:value="@string/tomtom_maps_api_key"/>
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_api_key"/>
 
         <activity
-                android:name=".login.LoginActivity"
-                android:windowSoftInputMode="stateVisible|adjustResize"
-                android:label="@string/activity_login_title">
+                android:name=".splash.SplashActivity"
+                android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -33,9 +31,13 @@
             </intent-filter>
         </activity>
         <activity
+                android:name=".login.LoginActivity"
+                android:label="@string/activity_login_title"
+                android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity
                 android:name=".createaccount.CreateAccountActivity"
-                android:windowSoftInputMode="stateVisible|adjustResize"
-                android:label="@string/activity_create_account_title">
+                android:label="@string/activity_create_account_title"
+                android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
         <activity android:name=".home.HomeActivity">
         </activity>
