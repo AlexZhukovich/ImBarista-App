@@ -26,6 +26,8 @@ class CoffeeDetailsActivity : AppCompatActivity() {
 
     private val adapter by lazy { CoffeeDetailsAdapter() }
 
+    private lateinit var currentCoffee: DummyData.Coffee
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coffee_details)
@@ -33,16 +35,16 @@ class CoffeeDetailsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""
 
-        val coffee = intent.getParcelableExtra<DummyData.Coffee>(KEY_COFFEE)
-        coffeeName.text = coffee.name
+        currentCoffee = intent.getParcelableExtra<DummyData.Coffee>(KEY_COFFEE)
+        coffeeName.text = currentCoffee.name
         Glide.with(this)
-            .load(coffee.photoUrl)
+            .load(currentCoffee.photoUrl)
             .apply(RequestOptions.circleCropTransform())
             .into(coffeePicture)
 
         val coffeeItems = mutableListOf<DummyData.CoffeeDetailsItem>()
-        coffeeItems.add(DummyData.CoffeeDetailsItem(R.drawable.ic_description_black_24dp, coffee.description))
-        coffeeItems.add(DummyData.CoffeeDetailsItem(R.drawable.ic_book_black_24dp, coffee.ingredients.toString()))
+        coffeeItems.add(DummyData.CoffeeDetailsItem(R.drawable.ic_description_black_24dp, currentCoffee.description))
+        coffeeItems.add(DummyData.CoffeeDetailsItem(R.drawable.ic_book_black_24dp, getStringIngredients(currentCoffee.ingredients)))
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
@@ -54,10 +56,10 @@ class CoffeeDetailsActivity : AppCompatActivity() {
             finish()
         }
 
-        updateFavouriteIcon(coffee.isFavourite)
+        updateFavouriteIcon(currentCoffee.isFavourite)
 
         coffeeFavourite.setOnClickListener {
-            updateFavouriteIcon(!coffee.isFavourite)
+            updateFavouriteIcon(!currentCoffee.isFavourite)
         }
     }
 
@@ -68,5 +70,14 @@ class CoffeeDetailsActivity : AppCompatActivity() {
             R.drawable.ic_favorite_border_black_24dp
         }
         coffeeFavourite.setImageResource(favouriteIcon)
+        currentCoffee.isFavourite = isFavourite
+    }
+
+    private fun getStringIngredients(ingredients: List<DummyData.Ingredient>) : String {
+        var result = String()
+        for (ingredient in ingredients) {
+            result += "${ingredient.name}\n"
+        }
+        return result
     }
 }

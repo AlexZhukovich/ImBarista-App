@@ -21,7 +21,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +70,7 @@
             android:clickable="true"
             android:focusable="true"
             app:srcCompat="@drawable/ic_favorite_border_black_24dp"
+            app:tint="@color/icon_favourite_tint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"/>

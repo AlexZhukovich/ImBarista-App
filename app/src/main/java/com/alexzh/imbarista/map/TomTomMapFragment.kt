@@ -33,7 +33,6 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: TomtomMap) {
         this.map = map
-        this.map.uiSettings.currentLocationView.hide()
         this.map.isMyLocationEnabled = true
         this.map.markerSettings.setMarkersClustering(true)
 
