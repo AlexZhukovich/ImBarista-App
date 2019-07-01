@@ -1,0 +1,23 @@
+ext {
+    // Kotlin version
+    kotlinVersion = '1.3.40'
+
+    // RxJava, RxKotlin and RxAndroid dependencies versions
+    rxJavaVersion = '2.2.8'
+    rxKotlinVersion = '2.3.0'
+
+    // Testing dependencies versions
+    jUnitVersion = '4.12'
+    mockKVersion = '1.9'
+
+    domainDependencies = [
+            kotlin:             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxKotlin:           "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
+    ]
+
+    domainTestDependencies = [
+            junit:              "junit:junit:${jUnitVersion}",
+            mockK:              "io.mockk:mockk:${mockKVersion}"
+    ]
+}
