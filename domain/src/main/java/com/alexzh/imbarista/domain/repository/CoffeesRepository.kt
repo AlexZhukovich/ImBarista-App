@@ -1,0 +1,13 @@
+package com.alexzh.imbarista.domain.repository
+
+import com.alexzh.imbarista.domain.model.Coffee
+import io.reactivex.Single
+
+interface CoffeesRepository {
+
+    fun getCoffees(): Single<List<Coffee>>
+
+    fun getCoffeesByName(name: String): Single<List<Coffee>>
+
+    fun getCoffeesById(id: Long): Single<Coffee>
+}
