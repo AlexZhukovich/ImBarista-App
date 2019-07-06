@@ -1,6 +1,7 @@
 package com.alexzh.imbarista.domain.repository
 
 import com.alexzh.imbarista.domain.model.Coffee
+import io.reactivex.Completable
 import io.reactivex.Single
 
 interface CoffeesRepository {
@@ -10,4 +11,6 @@ interface CoffeesRepository {
     fun getCoffeesByName(name: String): Single<List<Coffee>>
 
     fun getCoffeesById(id: Long): Single<Coffee>
+
+    fun addCoffeeToFavourites(coffeeId: Long): Completable
 }
