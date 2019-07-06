@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 abstract class CompletableUseCase<in Params> constructor(
     private val postExecutionThread: PostExecutionThread
 ) {
-    protected abstract fun buildCompletableUseCase(params: Params? = null): Completable
+    abstract fun buildCompletableUseCase(params: Params? = null): Completable
 
     private val disposables = CompositeDisposable()
 
