@@ -35,7 +35,6 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
         this.map = map
         this.map.isMyLocationEnabled = true
         this.map.markerSettings.setMarkersClustering(true)
-
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

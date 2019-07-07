@@ -26,7 +26,6 @@ class CoffeesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_coffees, container, false)
 
-
         val layoutManager = LinearLayoutManager(this.context)
         rootView.recyclerView.layoutManager = layoutManager
         rootView.recyclerView.adapter = adapter

@@ -23,14 +23,14 @@ class CoffeeViewHolder(
             itemView.ingredients.text = getStringIngredients(ingredients).substring(0, getStringIngredients(ingredients).length - 2)
 
             Glide.with(view.context)
-                .load( if(isFavourite) R.drawable.ic_favorite_black_24dp else R.drawable.ic_favorite_border_black_24dp)
+                .load(if (isFavourite) R.drawable.ic_favorite_black_24dp else R.drawable.ic_favorite_border_black_24dp)
                 .into(itemView.favouriteIcon)
 
             itemView.setOnClickListener { itemClick(coffee) }
         }
     }
 
-    private fun getStringIngredients(ingredients: List<DummyData.Ingredient>) : String {
+    private fun getStringIngredients(ingredients: List<DummyData.Ingredient>): String {
         var result = String()
         for (ingredient in ingredients) {
             result += "${ingredient.name}, "

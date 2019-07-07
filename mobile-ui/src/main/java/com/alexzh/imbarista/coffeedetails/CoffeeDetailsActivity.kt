@@ -73,7 +73,7 @@ class CoffeeDetailsActivity : AppCompatActivity() {
         currentCoffee.isFavourite = isFavourite
     }
 
-    private fun getStringIngredients(ingredients: List<DummyData.Ingredient>) : String {
+    private fun getStringIngredients(ingredients: List<DummyData.Ingredient>): String {
         var result = String()
         for (ingredient in ingredients) {
             result += "${ingredient.name}\n"
