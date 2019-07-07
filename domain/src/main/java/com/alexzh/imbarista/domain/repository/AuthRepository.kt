@@ -7,4 +7,8 @@ interface AuthRepository {
 
     fun logIn(email: String,
               password: String): Single<AuthUser>
+
+    fun createAccount(name: String,
+                      email: String,
+                      password: String): Single<AuthUser>
 }
