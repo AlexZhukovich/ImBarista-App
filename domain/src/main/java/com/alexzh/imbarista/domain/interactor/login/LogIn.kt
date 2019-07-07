@@ -7,10 +7,10 @@ import com.alexzh.imbarista.domain.repository.AuthRepository
 import io.reactivex.Single
 import java.lang.IllegalArgumentException
 
-class LogInUseCase(
+class LogIn(
     private val authRepository: AuthRepository,
     postExecutionThread: PostExecutionThread
-) : SingleUseCase<AuthUser, LogInUseCase.Param>(postExecutionThread) {
+) : SingleUseCase<AuthUser, LogIn.Param>(postExecutionThread) {
 
     override fun buildSingleUseCase(params: Param?): Single<AuthUser> {
         if (params == null) throw IllegalArgumentException("Param can't be null")
