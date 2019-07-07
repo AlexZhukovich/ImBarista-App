@@ -1,7 +1,7 @@
 package com.alexzh.imbarista.domain.interactor.profile
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
-import com.alexzh.imbarista.domain.repository.ProfileRepository
+import com.alexzh.imbarista.domain.repository.UserRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Completable
@@ -10,7 +10,7 @@ import java.lang.IllegalArgumentException
 
 class ChangeNameTest {
 
-    private val repository = mockk<ProfileRepository>()
+    private val repository = mockk<UserRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
     private val changeName = ChangeName(

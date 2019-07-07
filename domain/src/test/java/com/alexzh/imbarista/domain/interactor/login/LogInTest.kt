@@ -2,7 +2,7 @@ package com.alexzh.imbarista.domain.interactor.login
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.model.AuthUser
-import com.alexzh.imbarista.domain.repository.AuthRepository
+import com.alexzh.imbarista.domain.repository.UserRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
@@ -11,7 +11,7 @@ import java.lang.IllegalArgumentException
 
 class LogInTest {
 
-    private val repository = mockk<AuthRepository>()
+    private val repository = mockk<UserRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
     private val logIn = LogIn(

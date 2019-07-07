@@ -3,17 +3,17 @@ package com.alexzh.imbarista.domain.interactor.login
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.SingleUseCase
 import com.alexzh.imbarista.domain.model.AuthUser
-import com.alexzh.imbarista.domain.repository.AuthRepository
+import com.alexzh.imbarista.domain.repository.UserRepository
 import io.reactivex.Single
 
 class CreateAccount(
-    private val authRepository: AuthRepository,
+    private val userRepository: UserRepository,
     postExecutionThread: PostExecutionThread
 ) : SingleUseCase<AuthUser, CreateAccount.Param>(postExecutionThread) {
 
     override fun buildSingleUseCase(param: Param?): Single<AuthUser> {
         if (param == null) throw IllegalArgumentException("Param can't be null")
-        return authRepository.createAccount(
+        return userRepository.createAccount(
             param.name,
             param.email,
             param.password
