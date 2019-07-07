@@ -1,4 +1,11 @@
 ext {
+
+    // Android SDK
+    androidBuildToolsVersion = '29.0.0'
+    androidCompileSdkVersion = 28
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 28
+
     // Kotlin version
     kotlinVersion = '1.3.40'
 
@@ -9,18 +16,70 @@ ext {
     rxJavaVersion = '2.2.8'
     rxKotlinVersion = '2.3.0'
 
+    // AndroidX
+    androidxAppCompatVersion = '1.0.2'
+    androidxFragmentVersion = '1.1.0-beta01'
+    androidxPreferencesVersion = '1.1.0-rc01'
+    androidxConstraintLayoutVersion = '1.1.3'
+    androidxCoreKtxVersion = '1.0.2'
+
+    // Material Design Components
+    materialDesignComponentsVersion = '1.0.0'
+
+    // Glide
+    glideVersion = '4.9.0'
+
+    // Google Maps SDK
+    googlePlayServicesMapsVersion = '17.0.0'
+    googlePlayServicesLocationVersion = '17.0.0'
+
+    // TomTom Maps SDK
+    tomtomOnlineMapsVersion = '2.4126'
+
     // Testing dependencies versions
     jUnitVersion = '4.12'
     mockKVersion = '1.9'
 
+    // UI Testing dependencies
+    androidxTestRunnerVersion = '1.2.0'
+    espressoCoreVersion = '3.2.0'
+
+    mobileUiDependencies = [
+            kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            androidxAppCompat:          "androidx.appcompat:appcompat:${androidxAppCompatVersion}",
+            androidxFragment:           "androidx.fragment:fragment:${androidxFragmentVersion}",
+            androidxPreference:         "androidx.preference:preference:${androidxPreferencesVersion}",
+            androidxConstraintlayout:   "androidx.constraintlayout:constraintlayout:${androidxConstraintLayoutVersion}",
+            androidxCoreKtx:            "androidx.core:core-ktx:${androidxCoreKtxVersion}",
+            materialDesignComp:         "com.google.android.material:material:${materialDesignComponentsVersion}",
+            glide:                      "com.github.bumptech.glide:glide:${glideVersion}",
+            googleServicesMaps:         "com.google.android.gms:play-services-maps:${googlePlayServicesMapsVersion}",
+            googleServicesLocation:     "com.google.android.gms:play-services-location:${googlePlayServicesLocationVersion}",
+            tomtomMaps:                 "com.tomtom.online:sdk-maps:${tomtomOnlineMapsVersion}",
+            tomtomMapsExtensions:       "com.tomtom.online:sdk-maps-ui-extensions:${tomtomOnlineMapsVersion}",
+            rxJava:                     "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxKotlin:                   "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+
+    ]
+
+    mobileUiTestDependencies = [
+            junit:                      "junit:junit:${jUnitVersion}",
+            mockK:                      "io.mockk:mockk:${mockKVersion}"
+    ]
+
+    mobileUiAndroidTestDependencies = [
+            testRunner:                 "androidx.test:runner:${androidxTestRunnerVersion}",
+            espressoCore:               "androidx.test.espresso:espresso-core:${espressoCoreVersion}"
+    ]
+
     domainDependencies = [
-            kotlin:             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
-            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxKotlin:           "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
+            kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            rxJava:                     "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxKotlin:                   "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
     ]
 
     domainTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            mockK:              "io.mockk:mockk:${mockKVersion}"
+            junit:                      "junit:junit:${jUnitVersion}",
+            mockK:                      "io.mockk:mockk:${mockKVersion}"
     ]
 }

@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def globalConfig = rootProject.extensions.getByName("ext")
+
+
+    compileSdkVersion globalConfig["androidCompileSdkVersion"]
+    buildToolsVersion globalConfig["androidBuildToolsVersion"]
+    defaultConfig {
+        applicationId "com.alexzh.imbarista"
+        minSdkVersion globalConfig["androidMinSdkVersion"]
+        targetSdkVersion globalConfig["androidTargetSdkVersion"]
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resValue("string", "tomtom_maps_api_key", "$System.env.BARISTA_TOMTOM_MAPS_API_KEY")
+        resValue("string", "google_maps_api_key", "$System.env.BARISTA_GOOGLE_MAPS_API_KEY")
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+dependencies {
+    def mobileUiDependencies = rootProject.ext.mobileUiDependencies
+    def mobileUiTestDependencies = rootProject.ext.mobileUiTestDependencies
+    def mobileUiAndroidTestDependencies = rootProject.ext.mobileUiAndroidTestDependencies
+
+    // AndroidX
+    implementation mobileUiDependencies.kotlin
+    implementation mobileUiDependencies.androidxAppCompat
+    implementation mobileUiDependencies.androidxFragment
+    implementation mobileUiDependencies.androidxPreference
+    implementation mobileUiDependencies.androidxCoreKtx
+    implementation mobileUiDependencies.androidxConstraintlayout
+
+    // Material Design Components
+    implementation mobileUiDependencies.materialDesignComp
+
+    // Glide
+    implementation mobileUiDependencies.glide
+
+    // Google Maps SDK
+    implementation mobileUiDependencies.googleServicesMaps
+    implementation mobileUiDependencies.googleServicesLocation
+
+    // TomTom Maps SDK
+    implementation mobileUiDependencies.tomtomMaps
+    api mobileUiDependencies.tomtomMapsExtensions
+
+    // RxJava and RxKotlin
+    implementation mobileUiDependencies.rxJava
+    implementation mobileUiDependencies.rxKotlin
+
+    // Testing
+    testImplementation mobileUiTestDependencies.junit
+    testImplementation mobileUiTestDependencies.mockK
+
+    // UI Testing
+    androidTestImplementation mobileUiAndroidTestDependencies.testRunner
+    androidTestImplementation mobileUiAndroidTestDependencies.espressoCore
+}
