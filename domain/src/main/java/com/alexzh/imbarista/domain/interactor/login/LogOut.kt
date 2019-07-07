@@ -10,7 +10,7 @@ class LogOut(
     postExecutionThread: PostExecutionThread
 ) : CompletableUseCase<Nothing>(postExecutionThread) {
 
-    override fun buildCompletableUseCase(params: Nothing?): Completable {
+    override fun buildCompletableUseCase(param: Nothing?): Completable {
         return authRepository.logOut()
     }
 }

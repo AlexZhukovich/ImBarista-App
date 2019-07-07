@@ -77,9 +77,11 @@ class LogInTest {
             .assertValue(authUser)
     }
 
-    private fun stubLogIn(email: String,
-                          password: String,
-                          authSingle: Single<AuthUser>) {
+    private fun stubLogIn(
+        email: String,
+        password: String,
+        authSingle: Single<AuthUser>
+    ) {
         every { repository.logIn(email, password) } returns authSingle
     }
 }

@@ -12,16 +12,24 @@ class LogIn(
     postExecutionThread: PostExecutionThread
 ) : SingleUseCase<AuthUser, LogIn.Param>(postExecutionThread) {
 
-    override fun buildSingleUseCase(params: Param?): Single<AuthUser> {
-        if (params == null) throw IllegalArgumentException("Param can't be null")
-        return authRepository.logIn(params.email, params.password)
+    override fun buildSingleUseCase(param: Param?): Single<AuthUser> {
+        if (param == null) throw IllegalArgumentException("Param can't be null")
+        return authRepository.logIn(
+            param.email,
+            param.password
+        )
     }
 
-    data class Param(val email: String,
-                     val password: String) {
+    data class Param(
+        val email: String,
+        val password: String
+    ) {
         companion object {
-            fun forLogIn(email: String,
-                         password: String) : Param {
+
+            fun forLogIn(
+                email: String,
+                password: String
+            ): Param {
                 return Param(email, password)
             }
         }

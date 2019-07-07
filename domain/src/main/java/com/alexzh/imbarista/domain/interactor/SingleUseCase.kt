@@ -7,15 +7,15 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-abstract class SingleUseCase<T, in Params> constructor(
+abstract class SingleUseCase<T, in Param> constructor(
     private val postExecutionThread: PostExecutionThread
 ) {
-    abstract fun buildSingleUseCase(params: Params? = null): Single<T>
+    abstract fun buildSingleUseCase(param: Param? = null): Single<T>
 
     private val disposables = CompositeDisposable()
 
-    open fun execute(singleObserver: DisposableSingleObserver<T>, params: Params? = null) {
-        val single = this.buildSingleUseCase(params)
+    open fun execute(singleObserver: DisposableSingleObserver<T>, param: Param? = null) {
+        val single = this.buildSingleUseCase(param)
             .subscribeOn(Schedulers.io())
             .observeOn(postExecutionThread.scheduler)
         addDisposable(single.subscribeWith(singleObserver))

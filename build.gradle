@@ -18,6 +18,8 @@ buildscript {
 apply from: 'dependencies.gradle'
 
 allprojects {
+    apply from: "$rootDir/ktlint.gradle"
+
     repositories {
         google()
         jcenter()

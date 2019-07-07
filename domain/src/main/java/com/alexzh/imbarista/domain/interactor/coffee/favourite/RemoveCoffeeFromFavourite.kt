@@ -11,14 +11,14 @@ class RemoveCoffeeFromFavourite constructor(
     postExecutionThread: PostExecutionThread
 ) : CompletableUseCase<RemoveCoffeeFromFavourite.Param>(postExecutionThread) {
 
-    override fun buildCompletableUseCase(params: Param?): Completable {
-        if (params == null) throw IllegalArgumentException("Param can't be null")
-        return coffeesRepository.removeCoffeeFromFavourites(params.coffeeId)
+    override fun buildCompletableUseCase(param: Param?): Completable {
+        if (param == null) throw IllegalArgumentException("Param can't be null")
+        return coffeesRepository.removeCoffeeFromFavourites(param.coffeeId)
     }
 
     data class Param(val coffeeId: Long) {
         companion object {
-            fun forCoffee(id: Long) : Param {
+            fun forCoffee(id: Long): Param {
                 return Param(id)
             }
         }

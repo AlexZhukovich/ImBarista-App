@@ -9,9 +9,9 @@ import io.reactivex.Single
 open class GetCoffees constructor(
     private val coffeesRepository: CoffeesRepository,
     postExecutionThread: PostExecutionThread
-): SingleUseCase<List<Coffee>, Nothing?>(postExecutionThread) {
+) : SingleUseCase<List<Coffee>, Nothing?>(postExecutionThread) {
 
-    override fun buildSingleUseCase(params: Nothing?): Single<List<Coffee>> {
+    override fun buildSingleUseCase(param: Nothing?): Single<List<Coffee>> {
         return coffeesRepository.getCoffees()
     }
 }

@@ -10,11 +10,11 @@ import java.lang.IllegalArgumentException
 class GetCoffeesByName(
     private val coffeesRepository: CoffeesRepository,
     postExecutionThread: PostExecutionThread
-): SingleUseCase<List<Coffee>, GetCoffeesByName.Param>(postExecutionThread) {
+) : SingleUseCase<List<Coffee>, GetCoffeesByName.Param>(postExecutionThread) {
 
-    override fun buildSingleUseCase(params: Param?): Single<List<Coffee>> {
-        if (params == null) throw IllegalArgumentException("Param can't be null")
-        return coffeesRepository.getCoffeesByName(params.coffeeName)
+    override fun buildSingleUseCase(param: Param?): Single<List<Coffee>> {
+        if (param == null) throw IllegalArgumentException("Param can't be null")
+        return coffeesRepository.getCoffeesByName(param.coffeeName)
     }
 
     data class Param(val coffeeName: String) {

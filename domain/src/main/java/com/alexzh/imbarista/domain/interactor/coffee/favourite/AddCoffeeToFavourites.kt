@@ -11,9 +11,9 @@ class AddCoffeeToFavourites constructor(
     postExecutionThread: PostExecutionThread
 ) : CompletableUseCase<AddCoffeeToFavourites.Param>(postExecutionThread) {
 
-    override fun buildCompletableUseCase(params: Param?): Completable {
-        if (params == null) throw IllegalArgumentException("Param can't be null")
-        return coffeesRepository.addCoffeeToFavourites(params.coffeeId)
+    override fun buildCompletableUseCase(param: Param?): Completable {
+        if (param == null) throw IllegalArgumentException("Param can't be null")
+        return coffeesRepository.addCoffeeToFavourites(param.coffeeId)
     }
 
     data class Param(val coffeeId: Long) {

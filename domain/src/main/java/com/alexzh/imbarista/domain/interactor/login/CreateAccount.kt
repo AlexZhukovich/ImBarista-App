@@ -11,23 +11,27 @@ class CreateAccount(
     postExecutionThread: PostExecutionThread
 ) : SingleUseCase<AuthUser, CreateAccount.Param>(postExecutionThread) {
 
-    override fun buildSingleUseCase(params: Param?): Single<AuthUser> {
-        if (params == null) throw IllegalArgumentException("Param can't be null")
+    override fun buildSingleUseCase(param: Param?): Single<AuthUser> {
+        if (param == null) throw IllegalArgumentException("Param can't be null")
         return authRepository.createAccount(
-            params.name,
-            params.email,
-            params.password
+            param.name,
+            param.email,
+            param.password
         )
     }
 
-    data class Param(val name: String,
-                     val email: String,
-                     val password: String) {
-
+    data class Param(
+        val name: String,
+        val email: String,
+        val password: String
+    ) {
         companion object {
-            fun forCreatingAccount(name: String,
-                                   email: String,
-                                   password: String) : Param {
+
+            fun forCreatingAccount(
+                name: String,
+                email: String,
+                password: String
+            ): Param {
                 return Param(name, email, password)
             }
         }

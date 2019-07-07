@@ -104,10 +104,12 @@ class CreateAccountTest {
             .assertComplete()
     }
 
-    private fun stubCreateAccount(name: String,
-                                  email: String,
-                                  password: String,
-                                  authSingle: Single<AuthUser>) {
+    private fun stubCreateAccount(
+        name: String,
+        email: String,
+        password: String,
+        authSingle: Single<AuthUser>
+    ) {
         every { repository.createAccount(name, email, password) } returns authSingle
     }
 }

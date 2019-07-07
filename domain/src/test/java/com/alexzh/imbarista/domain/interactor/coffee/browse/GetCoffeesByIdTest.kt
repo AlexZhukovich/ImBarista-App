@@ -15,7 +15,10 @@ class GetCoffeesByIdTest {
     private val repository = mockk<CoffeesRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
-    private val getCoffeesById = GetCoffeesById(repository, postExecutionThread)
+    private val getCoffeesById = GetCoffeesById(
+        repository,
+        postExecutionThread
+    )
 
     @Test
     fun getCoffeesByIdCompletesSuccessfullyWhenParamIsCorrect() {

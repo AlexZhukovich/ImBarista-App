@@ -9,16 +9,16 @@ import java.lang.IllegalArgumentException
 class ChangePassword(
     private val profileRepository: ProfileRepository,
     postExecutionThread: PostExecutionThread
-): CompletableUseCase<ChangePassword.Param>(postExecutionThread) {
+) : CompletableUseCase<ChangePassword.Param>(postExecutionThread) {
 
-    override fun buildCompletableUseCase(params: Param?): Completable {
-        if (params == null) throw IllegalArgumentException("Param can't be null")
-        return profileRepository.changePassword(params.newPassword)
+    override fun buildCompletableUseCase(param: Param?): Completable {
+        if (param == null) throw IllegalArgumentException("Param can't be null")
+        return profileRepository.changePassword(param.newPassword)
     }
 
     data class Param(val newPassword: String) {
         companion object {
-            fun forChangingPassword(newPassword: String) : Param {
+            fun forChangingPassword(newPassword: String): Param {
                 return Param(newPassword)
             }
         }

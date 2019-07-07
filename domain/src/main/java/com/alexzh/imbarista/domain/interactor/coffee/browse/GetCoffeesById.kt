@@ -12,14 +12,14 @@ class GetCoffeesById(
     postExecutionThread: PostExecutionThread
 ) : SingleUseCase<Coffee, GetCoffeesById.Param>(postExecutionThread) {
 
-    override fun buildSingleUseCase(params: Param?): Single<Coffee> {
-        if (params == null) throw IllegalArgumentException("Param can't be null")
-        return coffeesRepository.getCoffeesById(params.coffeeId)
+    override fun buildSingleUseCase(param: Param?): Single<Coffee> {
+        if (param == null) throw IllegalArgumentException("Param can't be null")
+        return coffeesRepository.getCoffeesById(param.coffeeId)
     }
 
     data class Param(val coffeeId: Long) {
         companion object {
-            fun forCoffee(id: Long) : Param {
+            fun forCoffee(id: Long): Param {
                 return Param(id)
             }
         }

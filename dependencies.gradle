@@ -2,6 +2,9 @@ ext {
     // Kotlin version
     kotlinVersion = '1.3.40'
 
+    // KtLint
+    ktLintVersion = '0.33.0'
+
     // RxJava, RxKotlin and RxAndroid dependencies versions
     rxJavaVersion = '2.2.8'
     rxKotlinVersion = '2.3.0'
