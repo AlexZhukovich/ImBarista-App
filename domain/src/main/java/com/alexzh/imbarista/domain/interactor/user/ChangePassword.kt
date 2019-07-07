@@ -13,13 +13,16 @@ class ChangePassword(
 
     override fun buildCompletableUseCase(param: Param?): Completable {
         if (param == null) throw IllegalArgumentException("Param can't be null")
-        return userRepository.changePassword(param.newPassword)
+        return userRepository.changePassword(param.userId, param.newPassword)
     }
 
-    data class Param(val newPassword: String) {
+    data class Param(val userId: Long, val newPassword: String) {
         companion object {
-            fun forChangingPassword(newPassword: String): Param {
-                return Param(newPassword)
+            fun forChangingPassword(
+                userId: Long,
+                newPassword: String
+            ): Param {
+                return Param(userId, newPassword)
             }
         }
     }

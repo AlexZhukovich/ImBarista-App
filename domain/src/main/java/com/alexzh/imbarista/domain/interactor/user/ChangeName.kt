@@ -13,13 +13,16 @@ class ChangeName(
 
     override fun buildCompletableUseCase(param: Param?): Completable {
         if (param == null) throw IllegalArgumentException("Param can't be null")
-        return userRepository.changeName(param.newName)
+        return userRepository.changeName(param.userId, param.newName)
     }
 
-    data class Param(val newName: String) {
+    data class Param(val userId: Long, val newName: String) {
         companion object {
-            fun forChangingName(newName: String): Param {
-                return Param(newName)
+            fun forChangingName(
+                userId: Long,
+                newName: String
+            ): Param {
+                return Param(userId, newName)
             }
         }
     }

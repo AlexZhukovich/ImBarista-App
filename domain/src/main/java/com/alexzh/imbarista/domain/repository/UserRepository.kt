@@ -13,9 +13,9 @@ interface UserRepository {
 
     fun logOut(): Completable
 
-    fun getUser(id: Long): Single<User>
+    fun getUser(userId: Long): Single<User>
 
-    fun changeName(newName: String): Completable
+    fun changeName(userId: Long, newName: String): Completable
 
-    fun changePassword(newPassword: String): Completable
+    fun changePassword(userId: Long, newPassword: String): Completable
 }
