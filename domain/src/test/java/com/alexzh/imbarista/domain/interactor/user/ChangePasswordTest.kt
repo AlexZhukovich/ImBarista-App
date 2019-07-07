@@ -1,6 +1,7 @@
-package com.alexzh.imbarista.domain.interactor.profile
+package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
+import com.alexzh.imbarista.domain.interactor.user.ChangePassword
 import com.alexzh.imbarista.domain.repository.UserRepository
 import io.mockk.every
 import io.mockk.mockk

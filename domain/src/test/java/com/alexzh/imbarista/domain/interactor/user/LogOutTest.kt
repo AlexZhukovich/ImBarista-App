@@ -1,6 +1,7 @@
-package com.alexzh.imbarista.domain.interactor.login
+package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
+import com.alexzh.imbarista.domain.interactor.user.LogOut
 import com.alexzh.imbarista.domain.repository.UserRepository
 import io.mockk.mockk
 import org.junit.Test
