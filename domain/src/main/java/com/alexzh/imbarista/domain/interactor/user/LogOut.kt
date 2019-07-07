@@ -1,16 +1,16 @@
-package com.alexzh.imbarista.domain.interactor.login
+package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.CompletableUseCase
-import com.alexzh.imbarista.domain.repository.AuthRepository
+import com.alexzh.imbarista.domain.repository.UserRepository
 import io.reactivex.Completable
 
 class LogOut(
-    private val authRepository: AuthRepository,
+    private val userRepository: UserRepository,
     postExecutionThread: PostExecutionThread
 ) : CompletableUseCase<Nothing>(postExecutionThread) {
 
     override fun buildCompletableUseCase(param: Nothing?): Completable {
-        return authRepository.logOut()
+        return userRepository.logOut()
     }
 }

@@ -1,13 +1,13 @@
-package com.alexzh.imbarista.domain.interactor.login
+package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
-import com.alexzh.imbarista.domain.repository.AuthRepository
+import com.alexzh.imbarista.domain.repository.UserRepository
 import io.mockk.mockk
 import org.junit.Test
 
 class LogOutTest {
 
-    private val repository = mockk<AuthRepository>(relaxed = true)
+    private val repository = mockk<UserRepository>(relaxed = true)
     private val postExecutionThread = mockk<PostExecutionThread>()
 
     private val logOut = LogOut(

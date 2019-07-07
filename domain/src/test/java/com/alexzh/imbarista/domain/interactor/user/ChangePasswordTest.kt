@@ -1,7 +1,7 @@
-package com.alexzh.imbarista.domain.interactor.profile
+package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
-import com.alexzh.imbarista.domain.repository.ProfileRepository
+import com.alexzh.imbarista.domain.repository.UserRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Completable
@@ -10,7 +10,7 @@ import java.lang.IllegalArgumentException
 
 class ChangePasswordTest {
 
-    private val repository = mockk<ProfileRepository>()
+    private val repository = mockk<UserRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
     private val changePassword = ChangePassword(
@@ -20,9 +20,10 @@ class ChangePasswordTest {
 
     @Test
     fun changePasswordCompletesSuccessfullyWhenParamIsCorrect() {
+        val userId = 1L
         val newPassword = "new test password"
-        val param = ChangePassword.Param.forChangingPassword(newPassword)
-        stubChangePassword(newPassword, Completable.complete())
+        val param = ChangePassword.Param.forChangingPassword(userId, newPassword)
+        stubChangePassword(userId, newPassword, Completable.complete())
 
         changePassword.buildCompletableUseCase(param)
             .test()
@@ -31,8 +32,9 @@ class ChangePasswordTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun changePasswordThrowsExceptionWhenParamIsMissing() {
+        val userId = 1L
         val newPassword = "new test password"
-        stubChangePassword(newPassword, Completable.complete())
+        stubChangePassword(userId, newPassword, Completable.complete())
 
         changePassword.buildCompletableUseCase()
             .test()
@@ -41,15 +43,20 @@ class ChangePasswordTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun changePasswordThrowsExceptionWhenParamIsNull() {
+        val userId = 1L
         val newPassword = "new test password"
-        stubChangePassword(newPassword, Completable.complete())
+        stubChangePassword(userId, newPassword, Completable.complete())
 
         changePassword.buildCompletableUseCase(null)
             .test()
             .assertComplete()
     }
 
-    private fun stubChangePassword(newPassword: String, completable: Completable) {
-        every { repository.changePassword(newPassword) } returns completable
+    private fun stubChangePassword(
+        userId: Long,
+        newPassword: String,
+        completable: Completable
+    ) {
+        every { repository.changePassword(userId, newPassword) } returns completable
     }
 }
