@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 object DummyData {
 
-    fun getCoffees() : List<Coffee> = mutableListOf(
+    fun getCoffees(): List<Coffee> = mutableListOf(
         Coffee(
             id = 1,
             name = "Americano",
@@ -91,7 +91,7 @@ object DummyData {
     @Parcelize
     data class Ingredient(
         val name: String
-    ) :  Parcelable
+    ) : Parcelable
 
     data class CoffeeDetailsItem(
         val categoryIconRes: Int,
