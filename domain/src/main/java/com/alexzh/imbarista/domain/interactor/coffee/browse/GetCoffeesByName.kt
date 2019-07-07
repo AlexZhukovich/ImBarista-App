@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.domain.interactor.browse
+package com.alexzh.imbarista.domain.interactor.coffee.browse
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.SingleUseCase
@@ -7,20 +7,20 @@ import com.alexzh.imbarista.domain.repository.CoffeesRepository
 import io.reactivex.Single
 import java.lang.IllegalArgumentException
 
-class GetCoffeesById(
+class GetCoffeesByName(
     private val coffeesRepository: CoffeesRepository,
     postExecutionThread: PostExecutionThread
-) : SingleUseCase<Coffee, GetCoffeesById.Param>(postExecutionThread) {
+): SingleUseCase<List<Coffee>, GetCoffeesByName.Param>(postExecutionThread) {
 
-    override fun buildSingleUseCase(params: Param?): Single<Coffee> {
+    override fun buildSingleUseCase(params: Param?): Single<List<Coffee>> {
         if (params == null) throw IllegalArgumentException("Param can't be null")
-        return coffeesRepository.getCoffeesById(params.coffeeId)
+        return coffeesRepository.getCoffeesByName(params.coffeeName)
     }
 
-    data class Param(val coffeeId: Long) {
+    data class Param(val coffeeName: String) {
         companion object {
-            fun forCoffee(id: Long) : Param {
-                return Param(id)
+            fun forCoffees(name: String): Param {
+                return Param(name)
             }
         }
     }

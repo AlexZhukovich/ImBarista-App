@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.domain.interactor.favourite
+package com.alexzh.imbarista.domain.interactor.coffee.favourite
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.repository.CoffeesRepository

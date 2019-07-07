@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.domain.interactor.browse
+package com.alexzh.imbarista.domain.interactor.coffee.browse
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.model.Coffee
