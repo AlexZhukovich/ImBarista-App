@@ -1,7 +1,6 @@
 package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
-import com.alexzh.imbarista.domain.interactor.user.CreateAccount
 import com.alexzh.imbarista.domain.model.AuthUser
 import com.alexzh.imbarista.domain.repository.UserRepository
 import io.mockk.every
