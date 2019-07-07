@@ -60,7 +60,7 @@ class LogInTest {
 
         logIn.buildSingleUseCase()
             .test()
-            .assertValue(authUser)
+            .assertComplete()
     }
 
     @Test(expected = IllegalArgumentException::class)
@@ -74,7 +74,7 @@ class LogInTest {
 
         logIn.buildSingleUseCase(null)
             .test()
-            .assertValue(authUser)
+            .assertComplete()
     }
 
     private fun stubLogIn(

@@ -67,7 +67,7 @@ class GetCoffeesByIdTest {
 
         getCoffeesById.buildSingleUseCase()
             .test()
-            .assertValue(coffee)
+            .assertComplete()
     }
 
     @Test(expected = IllegalArgumentException::class)
@@ -83,7 +83,7 @@ class GetCoffeesByIdTest {
 
         getCoffeesById.buildSingleUseCase(null)
             .test()
-            .assertValue(coffee)
+            .assertComplete()
     }
 
     private fun stubGetCoffeesById(coffeeId: Long, single: Single<Coffee>) {

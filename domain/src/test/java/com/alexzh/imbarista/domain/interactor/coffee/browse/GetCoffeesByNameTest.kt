@@ -76,7 +76,7 @@ class GetCoffeesByNameTest {
 
         getCoffeesByName.buildSingleUseCase()
             .test()
-            .assertValue(coffees)
+            .assertComplete()
     }
 
     @Test(expected = IllegalArgumentException::class)
@@ -95,7 +95,7 @@ class GetCoffeesByNameTest {
 
         getCoffeesByName.buildSingleUseCase(null)
             .test()
-            .assertValue(coffees)
+            .assertComplete()
     }
 
     private fun stubGetCoffeesByName(name: String, coffees: Single<List<Coffee>>) {
