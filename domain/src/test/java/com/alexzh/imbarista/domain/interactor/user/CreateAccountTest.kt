@@ -3,6 +3,10 @@ package com.alexzh.imbarista.domain.interactor.user
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.model.AuthUser
 import com.alexzh.imbarista.domain.repository.UserRepository
+import com.alexzh.testdata.base.RandomData.randomEmail
+import com.alexzh.testdata.base.RandomData.randomString
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateAuthUser
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateCreateAccountParam
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
@@ -20,20 +24,12 @@ class CreateAccountTest {
 
     @Test
     fun createAccountCompletesSuccessfullyWhenParamIsCorrect() {
-        val name = "Test"
-        val email = "test@test.com"
-        val password = "test"
-        val token = "12345qwerty"
-        val authUser = AuthUser(name, token)
-        val param = CreateAccount.Param.forCreatingAccount(
-            name,
-            email,
-            password
-        )
+        val authUser = generateAuthUser()
+        val param = generateCreateAccountParam(authUser.name)
         stubCreateAccount(
-            name,
-            email,
-            password,
+            param.name,
+            param.email,
+            param.password,
             Single.just(authUser)
         )
 
@@ -44,20 +40,12 @@ class CreateAccountTest {
 
     @Test
     fun createAccountReturnsCorrectDataWhenParamIsCorrect() {
-        val name = "Test"
-        val email = "test@test.com"
-        val password = "test"
-        val token = "12345qwerty"
-        val authUser = AuthUser(name, token)
-        val param = CreateAccount.Param.forCreatingAccount(
-            name,
-            email,
-            password
-        )
+        val authUser = generateAuthUser()
+        val param = generateCreateAccountParam(authUser.name)
         stubCreateAccount(
-            name,
-            email,
-            password,
+            param.name,
+            param.email,
+            param.password,
             Single.just(authUser)
         )
 
@@ -68,16 +56,12 @@ class CreateAccountTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun createAccountThrowsExceptionWhenParamIsMissing() {
-        val name = "Test"
-        val email = "test@test.com"
-        val password = "test"
-        val token = "12345qwerty"
-        val authUser = AuthUser(name, token)
+        val authUser = generateAuthUser()
         stubCreateAccount(
-            name,
-            email,
-            password,
-            Single.just(authUser)
+            name = authUser.name,
+            email = randomEmail(),
+            password = randomString(),
+            authSingle = Single.just(authUser)
         )
 
         createAccount.buildSingleUseCase()
@@ -87,16 +71,12 @@ class CreateAccountTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun createAccountThrowsExceptionWhenParamIsNull() {
-        val name = "Test"
-        val email = "test@test.com"
-        val password = "test"
-        val token = "12345qwerty"
-        val authUser = AuthUser(name, token)
+        val authUser = generateAuthUser()
         stubCreateAccount(
-            name,
-            email,
-            password,
-            Single.just(authUser)
+            name = authUser.name,
+            email = randomEmail(),
+            password = randomString(),
+            authSingle = Single.just(authUser)
         )
 
         createAccount.buildSingleUseCase(null)

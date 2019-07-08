@@ -2,6 +2,8 @@ package com.alexzh.imbarista.domain.interactor.coffee.favourite
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.testdata.base.RandomData.randomLong
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateRemoveCoffeeFromFavourite
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Completable
@@ -20,9 +22,8 @@ class RemoveCoffeeFromFavouriteTest {
 
     @Test
     fun removeCoffeeFromFavouriteCompletesSuccessfullyWhenParamIsCorrect() {
-        val coffeeId = 1L
-        val param = RemoveCoffeeFromFavourite.Param.forCoffee(coffeeId)
-        stubRemoveCoffeeFromFavourite(coffeeId, Completable.complete())
+        val param = generateRemoveCoffeeFromFavourite()
+        stubRemoveCoffeeFromFavourite(param.coffeeId, Completable.complete())
 
         removeCoffeeFromFavourite.buildCompletableUseCase(param)
             .test()
@@ -31,7 +32,7 @@ class RemoveCoffeeFromFavouriteTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun removeCoffeeFromFavouriteThrowsExceptionWhenParamIsMissing() {
-        val coffeeId = 1L
+        val coffeeId = randomLong()
         stubRemoveCoffeeFromFavourite(coffeeId, Completable.complete())
 
         removeCoffeeFromFavourite.buildCompletableUseCase()
@@ -41,7 +42,7 @@ class RemoveCoffeeFromFavouriteTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun removeCoffeeFromFavouriteThrowsExceptionWhenParamIsNull() {
-        val coffeeId = 1L
+        val coffeeId = randomLong()
         stubRemoveCoffeeFromFavourite(coffeeId, Completable.complete())
 
         removeCoffeeFromFavourite.buildCompletableUseCase(null)

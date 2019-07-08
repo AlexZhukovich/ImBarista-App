@@ -3,6 +3,8 @@ package com.alexzh.imbarista.domain.interactor.user
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.model.User
 import com.alexzh.imbarista.domain.repository.UserRepository
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateGetUserByIdParam
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateUser
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
@@ -21,15 +23,9 @@ class GetUserByIdTest {
 
     @Test
     fun getUserByIdCompletesSuccessfullyWhenParamIsCorrect() {
-        val userId = 1L
-        val user = User(
-            userId,
-            "Test",
-            "test@test.com",
-            "test-password"
-        )
-        val param = GetUserById.Param.forUser(userId)
-        stubGetUserById(userId, Single.just(user))
+        val user = generateUser()
+        val param = generateGetUserByIdParam(user.id)
+        stubGetUserById(param.userId, Single.just(user))
 
         getUserById.buildSingleUseCase(param)
             .test()
@@ -38,15 +34,9 @@ class GetUserByIdTest {
 
     @Test
     fun getUserByIdReturnsCorrectDataWhenParamIsCorrect() {
-        val userId = 1L
-        val user = User(
-            userId,
-            "Test",
-            "test@test.com",
-            "test-password"
-        )
-        val param = GetUserById.Param.forUser(userId)
-        stubGetUserById(userId, Single.just(user))
+        val user = generateUser()
+        val param = generateGetUserByIdParam(user.id)
+        stubGetUserById(param.userId, Single.just(user))
 
         getUserById.buildSingleUseCase(param)
             .test()
@@ -55,14 +45,9 @@ class GetUserByIdTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun getUserByIdThrowsExceptionWhenParamIsMissing() {
-        val userId = 1L
-        val user = User(
-            userId,
-            "Test",
-            "test@test.com",
-            "test-password"
-        )
-        stubGetUserById(userId, Single.just(user))
+        val user = generateUser()
+        val param = generateGetUserByIdParam(user.id)
+        stubGetUserById(param.userId, Single.just(user))
 
         getUserById.buildSingleUseCase()
             .test()
@@ -71,14 +56,9 @@ class GetUserByIdTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun getUserByIdThrowsExceptionWhenParamIsNull() {
-        val userId = 1L
-        val user = User(
-            userId,
-            "Test",
-            "test@test.com",
-            "test-password"
-        )
-        stubGetUserById(userId, Single.just(user))
+        val user = generateUser()
+        val param = generateGetUserByIdParam(user.id)
+        stubGetUserById(param.userId, Single.just(user))
 
         getUserById.buildSingleUseCase(null)
             .test()

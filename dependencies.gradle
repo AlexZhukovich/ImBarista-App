@@ -44,6 +44,10 @@ ext {
     androidxTestRunnerVersion = '1.2.0'
     espressoCoreVersion = '3.2.0'
 
+    commonTestDataDependencies = [
+            kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
+    ]
+
     mobileUiDependencies = [
             kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
             androidxAppCompat:          "androidx.appcompat:appcompat:${androidxAppCompatVersion}",
