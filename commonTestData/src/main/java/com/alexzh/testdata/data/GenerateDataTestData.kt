@@ -1,6 +1,7 @@
 package com.alexzh.testdata.data
 
 import com.alexzh.data.model.AuthUserEntity
+import com.alexzh.data.model.IngredientEntity
 import com.alexzh.data.model.UserEntity
 import com.alexzh.testdata.base.RandomData
 
@@ -20,5 +21,9 @@ object GenerateDataTestData {
             email = RandomData.randomEmail(),
             password = RandomData.randomString()
         )
+    }
+
+    fun generateIngredientEntity(): IngredientEntity {
+        return IngredientEntity(RandomData.randomString())
     }
 }
