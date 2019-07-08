@@ -3,6 +3,7 @@ apply plugin: 'kotlin'
 dependencies {
     def commonTestDataDependencies = rootProject.ext.commonTestDataDependencies
 
+    implementation project(':data')
     implementation project(':domain')
     implementation commonTestDataDependencies.kotlin
 }

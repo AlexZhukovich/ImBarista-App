@@ -81,10 +81,14 @@ object GenerateDomainTestData {
         )
     }
 
+    fun generateIngredient(): Ingredient {
+        return Ingredient(randomString())
+    }
+
     private fun generateIngredients(ingredientsCount: Int): List<Ingredient> {
         val ingredients = mutableListOf<Ingredient>()
         repeat(ingredientsCount) {
-            ingredients.add(Ingredient(randomString()))
+            ingredients.add(generateIngredient())
         }
         return ingredients
     }
