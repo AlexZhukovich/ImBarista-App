@@ -7,10 +7,10 @@ import com.alexzh.imbarista.domain.repository.CoffeesRepository
 import io.reactivex.Single
 import java.lang.IllegalArgumentException
 
-class GetCoffeesById(
+class GetCoffeeById(
     private val coffeesRepository: CoffeesRepository,
     postExecutionThread: PostExecutionThread
-) : SingleUseCase<Coffee, GetCoffeesById.Param>(postExecutionThread) {
+) : SingleUseCase<Coffee, GetCoffeeById.Param>(postExecutionThread) {
 
     override fun buildSingleUseCase(param: Param?): Single<Coffee> {
         if (param == null) throw IllegalArgumentException("Param can't be null")

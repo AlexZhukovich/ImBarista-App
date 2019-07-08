@@ -2,13 +2,13 @@ package com.alexzh.imbarista.domain.interactor.coffee.browse
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.model.Coffee
-import com.alexzh.imbarista.domain.model.Ingredient
 import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffees
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateGetCoffeesByNameParam
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
 import org.junit.Test
-import java.lang.IllegalArgumentException
 
 class GetCoffeesByNameTest {
 
@@ -22,18 +22,9 @@ class GetCoffeesByNameTest {
 
     @Test
     fun getCoffeesByNameCompletesSuccessfullyWhenParamIsCorrect() {
-        val coffeeName = "Espresso"
-        val coffees = mutableListOf(
-            Coffee(
-                id = 1,
-                name = coffeeName,
-                description = "Espresso description",
-                ingredients = listOf(Ingredient("test ingredient"))
-            )
-        )
-        val param = GetCoffeesByName.Param.forCoffees(coffeeName)
-
-        stubGetCoffeesByName(coffeeName, Single.just(coffees))
+        val coffees = generateCoffees()
+        val param = generateGetCoffeesByNameParam(coffees.first().name)
+        stubGetCoffeesByName(param.coffeeName, Single.just(coffees))
 
         getCoffeesByName.buildSingleUseCase(param)
             .test()
@@ -42,18 +33,9 @@ class GetCoffeesByNameTest {
 
     @Test
     fun getCoffeesByNameReturnsCorrectDataWhenParamIsCorrect() {
-        val coffeeName = "Espresso"
-        val coffees = mutableListOf(
-            Coffee(
-                id = 1,
-                name = coffeeName,
-                description = "Espresso description",
-                ingredients = listOf(Ingredient("test ingredient"))
-            )
-        )
-        val param = GetCoffeesByName.Param.forCoffees(coffeeName)
-
-        stubGetCoffeesByName(coffeeName, Single.just(coffees))
+        val coffees = generateCoffees()
+        val param = generateGetCoffeesByNameParam(coffees.first().name)
+        stubGetCoffeesByName(param.coffeeName, Single.just(coffees))
 
         getCoffeesByName.buildSingleUseCase(param)
             .test()
@@ -62,17 +44,9 @@ class GetCoffeesByNameTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun getCoffeesByNameThrowsExceptionWhenParamIsMissing() {
-        val coffeeName = "Espresso"
-        val coffees = mutableListOf(
-            Coffee(
-                id = 1,
-                name = coffeeName,
-                description = "Espresso description",
-                ingredients = listOf(Ingredient("test ingredient"))
-            )
-        )
-
-        stubGetCoffeesByName(coffeeName, Single.just(coffees))
+        val coffees = generateCoffees()
+        val param = generateGetCoffeesByNameParam(coffees.first().name)
+        stubGetCoffeesByName(param.coffeeName, Single.just(coffees))
 
         getCoffeesByName.buildSingleUseCase()
             .test()
@@ -81,17 +55,9 @@ class GetCoffeesByNameTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun getCoffeesByNameThrowsExceptionWhenParamIsNull() {
-        val coffeeName = "Espresso"
-        val coffees = mutableListOf(
-            Coffee(
-                id = 1,
-                name = coffeeName,
-                description = "Espresso description",
-                ingredients = listOf(Ingredient("test ingredient"))
-            )
-        )
-
-        stubGetCoffeesByName(coffeeName, Single.just(coffees))
+        val coffees = generateCoffees()
+        val param = generateGetCoffeesByNameParam(coffees.first().name)
+        stubGetCoffeesByName(param.coffeeName, Single.just(coffees))
 
         getCoffeesByName.buildSingleUseCase(null)
             .test()

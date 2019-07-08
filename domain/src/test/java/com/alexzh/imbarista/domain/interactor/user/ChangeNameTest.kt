@@ -2,6 +2,9 @@ package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.repository.UserRepository
+import com.alexzh.testdata.base.RandomData.randomLong
+import com.alexzh.testdata.base.RandomData.randomString
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateChangeNameParam
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Completable
@@ -20,10 +23,8 @@ class ChangeNameTest {
 
     @Test
     fun changeNameCompletesSuccessfullyWhenParamIsCorrect() {
-        val userId = 1L
-        val newName = "new test name"
-        val param = ChangeName.Param.forChangingName(userId, newName)
-        stubChangeName(userId, newName, Completable.complete())
+        val param = generateChangeNameParam()
+        stubChangeName(param.userId, param.newName, Completable.complete())
 
         changeName.buildCompletableUseCase(param)
             .test()
@@ -32,8 +33,8 @@ class ChangeNameTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun changeNameThrowsExceptionWhenParamIsMissing() {
-        val userId = 1L
-        val newName = "new test name"
+        val userId = randomLong()
+        val newName = randomString()
         stubChangeName(userId, newName, Completable.complete())
 
         changeName.buildCompletableUseCase()
@@ -43,8 +44,8 @@ class ChangeNameTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun changeNameThrowsExceptionWhenParamIsNull() {
-        val userId = 1L
-        val newName = "new test name"
+        val userId = randomLong()
+        val newName = randomString()
         stubChangeName(userId, newName, Completable.complete())
 
         changeName.buildCompletableUseCase(null)

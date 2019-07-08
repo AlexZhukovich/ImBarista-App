@@ -8,6 +8,7 @@ dependencies {
     implementation domainDependencies.rxJava
     implementation domainDependencies.rxKotlin
 
+    testImplementation project(":commonTestData")
     testImplementation domainTestDependencies.junit
     testImplementation domainTestDependencies.mockK
 }

@@ -2,8 +2,8 @@ package com.alexzh.imbarista.domain.interactor.coffee.browse
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.model.Coffee
-import com.alexzh.imbarista.domain.model.Ingredient
 import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.testdata.domain.GenerateDomainTestData
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
@@ -21,14 +21,7 @@ class GetCoffeesTest {
 
     @Test
     fun getCoffeesCompletesSuccessfully() {
-        val coffees = listOf(
-            Coffee(
-                id = 1,
-                name = "Espresso",
-                description = "Espresso description",
-                ingredients = listOf(Ingredient("test ingredient"))
-            )
-        )
+        val coffees = GenerateDomainTestData.generateCoffees()
         stubGetCoffees(Single.just(coffees))
 
         getCoffees.buildSingleUseCase()
@@ -38,14 +31,7 @@ class GetCoffeesTest {
 
     @Test
     fun getCoffeesReturnsCorrectData() {
-        val coffees = listOf(
-            Coffee(
-                id = 1,
-                name = "Espresso",
-                description = "Espresso description",
-                ingredients = listOf(Ingredient("test ingredient"))
-            )
-        )
+        val coffees = GenerateDomainTestData.generateCoffees()
         stubGetCoffees(Single.just(coffees))
 
         getCoffees.buildSingleUseCase()

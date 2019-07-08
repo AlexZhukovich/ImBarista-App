@@ -2,11 +2,12 @@ package com.alexzh.imbarista.domain.interactor.coffee.favourite
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.testdata.base.RandomData.randomLong
+import com.alexzh.testdata.domain.GenerateDomainTestData
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Completable
 import org.junit.Test
-import java.lang.IllegalArgumentException
 
 class AddCoffeeToFavouritesTest {
 
@@ -20,9 +21,8 @@ class AddCoffeeToFavouritesTest {
 
     @Test
     fun addCoffeeToFavouritesCompletesSuccessfullyWhenParamIsCorrect() {
-        val coffeeId = 1L
-        val param = AddCoffeeToFavourites.Param.forCoffee(coffeeId)
-        stubAddCoffeeToFavourites(coffeeId, Completable.complete())
+        val param = GenerateDomainTestData.generateAddCoffeeToFavourites()
+        stubAddCoffeeToFavourites(param.coffeeId, Completable.complete())
 
         addCoffeeToFavourites.buildCompletableUseCase(param)
             .test()
@@ -31,7 +31,7 @@ class AddCoffeeToFavouritesTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun addCoffeeToFavouritesThrowsExceptionWhenParamIsMissing() {
-        val coffeeId = 1L
+        val coffeeId = randomLong()
         stubAddCoffeeToFavourites(coffeeId, Completable.complete())
 
         addCoffeeToFavourites.buildCompletableUseCase()
@@ -41,7 +41,7 @@ class AddCoffeeToFavouritesTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun addCoffeeToFavouritesThrowsExceptionWhenParamIsNull() {
-        val coffeeId = 1L
+        val coffeeId = randomLong()
         stubAddCoffeeToFavourites(coffeeId, Completable.complete())
 
         addCoffeeToFavourites.buildCompletableUseCase(null)
