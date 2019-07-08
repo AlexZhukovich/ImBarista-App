@@ -4,7 +4,7 @@ import com.alexzh.data.model.AuthUserEntity
 import com.alexzh.imbarista.domain.model.AuthUser
 import com.alexzh.testdata.data.GenerateDataTestData.generateAuthUserEntity
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateAuthUser
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class AuthUserMapperTest {
@@ -31,7 +31,7 @@ class AuthUserMapperTest {
         authUser: AuthUser,
         authUserEntity: AuthUserEntity
     ) {
-        Assert.assertEquals(authUser.name, authUserEntity.name)
-        Assert.assertEquals(authUser.token, authUserEntity.token)
+        assertEquals(authUser.name, authUserEntity.name)
+        assertEquals(authUser.token, authUserEntity.token)
     }
 }
