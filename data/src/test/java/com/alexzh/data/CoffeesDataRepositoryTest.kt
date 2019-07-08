@@ -99,5 +99,4 @@ class CoffeesDataRepositoryTest {
     ) {
         every { mapper.mapFromEntity(coffeeEntities) } returns coffee
     }
-
 }
