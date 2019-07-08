@@ -86,4 +86,15 @@ ext {
             junit:                      "junit:junit:${jUnitVersion}",
             mockK:                      "io.mockk:mockk:${mockKVersion}"
     ]
+
+    dataDependencies =[
+            kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            rxJava:                     "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxKotlin:                   "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
+    ]
+
+    dataTestDependencies = [
+            junit:                      "junit:junit:${jUnitVersion}",
+            mockK:                      "io.mockk:mockk:${mockKVersion}"
+    ]
 }
