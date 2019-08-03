@@ -1,8 +1,10 @@
 package com.alexzh.imbarista.remote.model
 
+import com.google.gson.annotations.SerializedName
+
 class UserModel(
-    val id: Long,
-    val name: String,
-    val email: String,
-    val password: String
+    @SerializedName("user_id") val id: Long = -1,
+    @SerializedName("fullname") val name: String = "",
+    @SerializedName("email") val email: String = "",
+    @SerializedName("password") val password: String = ""
 )
