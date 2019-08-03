@@ -12,6 +12,7 @@ object GenerateRemoteTestData {
 
     fun generateAuthUserModel(): AuthUserModel {
         return AuthUserModel(
+            randomLong(),
             randomString(),
             randomString()
         )

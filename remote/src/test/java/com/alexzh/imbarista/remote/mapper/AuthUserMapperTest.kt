@@ -22,6 +22,7 @@ class AuthUserMapperTest {
         authUserModel: AuthUserModel,
         authUserEntity: AuthUserEntity
     ) {
+        assertEquals(authUserModel.id, authUserEntity.id)
         assertEquals(authUserModel.name, authUserEntity.name)
         assertEquals(authUserModel.token, authUserEntity.token)
     }

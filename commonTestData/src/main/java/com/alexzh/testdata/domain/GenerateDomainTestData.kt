@@ -17,6 +17,7 @@ object GenerateDomainTestData {
 
     fun generateAuthUser(): AuthUser {
         return AuthUser(
+            id= randomLong(),
             name = randomString(),
             token = randomString()
         )

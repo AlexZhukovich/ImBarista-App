@@ -7,6 +7,7 @@ class AuthUserMapper : ModelMapper<AuthUserModel, AuthUserEntity> {
 
     override fun mapFromModel(model: AuthUserModel): AuthUserEntity {
         return AuthUserEntity(
+            model.id,
             model.name,
             model.token
         )

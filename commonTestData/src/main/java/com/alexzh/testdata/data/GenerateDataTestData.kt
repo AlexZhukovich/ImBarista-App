@@ -10,6 +10,7 @@ object GenerateDataTestData {
 
     fun generateAuthUserEntity(): AuthUserEntity {
         return AuthUserEntity(
+            id = RandomData.randomLong(),
             name = RandomData.randomString(),
             token = RandomData.randomString()
         )
