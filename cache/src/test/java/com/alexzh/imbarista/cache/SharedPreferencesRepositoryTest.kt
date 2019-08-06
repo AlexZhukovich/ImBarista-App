@@ -5,7 +5,7 @@ import android.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.imbarista.cache.mapper.SessionMapper
-import com.alexzh.testdata.data.GenerateDataTestData
+import com.alexzh.testdata.data.GenerateDataTestData.generateSessionEntity
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -22,10 +22,20 @@ class SharedPreferencesRepositoryTest {
 
     @Test
     fun shouldSaveSessionInfoToSharedPreferences() {
-        val session = GenerateDataTestData.generateSessionEntity()
+        val session = generateSessionEntity()
         repository.saveSessionInfo(session)
 
         assertEquals(session, repository.getSessionInfo())
+    }
+
+    @Test
+    fun shouldProvideDefaultValueAfterRemovingExistingSessionInfo() {
+        val emptySessionEntity = SessionEntity()
+
+        repository.saveSessionInfo(generateSessionEntity())
+        repository.clearSessionInfo()
+
+        assertEquals(emptySessionEntity, repository.getSessionInfo())
     }
 
     @Test

@@ -33,6 +33,16 @@ class SharedPreferencesRepository(
             .apply()
     }
 
+    override fun clearSessionInfo() {
+        prefs.edit()
+            .remove(SESSION_ID)
+            .remove(ACCESS_TOKEN)
+            .remove(ACCESS_TOKEN_EXPIRY)
+            .remove(REFRESH_TOKEN)
+            .remove(REFRESH_TOKEN_EXPIRY)
+            .apply()
+    }
+
     override fun getSessionInfo(): SessionEntity {
         return sessionMapper.mapFromCached(
             Session(
