@@ -9,8 +9,7 @@ class UserMapper : ModelMapper<UserModel, UserEntity> {
         return UserEntity(
             model.id,
             model.name,
-            model.email,
-            model.password
+            model.email
         )
     }
 }
