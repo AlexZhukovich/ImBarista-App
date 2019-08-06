@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    def globalConfig = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfig["androidCompileSdkVersion"]
+    buildToolsVersion globalConfig["androidBuildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion globalConfig["androidMinSdkVersion"]
+        targetSdkVersion globalConfig["androidTargetSdkVersion"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions.unitTests.includeAndroidResources = true
+}
+
+dependencies {
+    def cacheDependencies = rootProject.ext.cacheDependencies
+    def cacheTestDependencies = rootProject.ext.cacheTestDependencies
+
+    implementation project(':data')
+    implementation cacheDependencies.kotlin
+    implementation cacheDependencies.rxJava
+    implementation cacheDependencies.rxKotlin
+
+    testImplementation project(':commonTestData')
+    testImplementation project(':commonAndroidTestData')
+    testImplementation cacheTestDependencies.junit
+    testImplementation cacheTestDependencies.mockK
+    testImplementation cacheTestDependencies.androidXTestCore
+    testImplementation cacheTestDependencies.robolectric
+}

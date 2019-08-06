@@ -1,9 +1,6 @@
 package com.alexzh.testdata.data
 
-import com.alexzh.data.model.AuthUserEntity
-import com.alexzh.data.model.CoffeeEntity
-import com.alexzh.data.model.IngredientEntity
-import com.alexzh.data.model.UserEntity
+import com.alexzh.data.model.*
 import com.alexzh.testdata.base.RandomData
 
 object GenerateDataTestData {
@@ -16,12 +13,21 @@ object GenerateDataTestData {
         )
     }
 
+    fun generateSessionEntity(): SessionEntity {
+        return SessionEntity(
+            sessionId = RandomData.randomLong(),
+            accessToken = RandomData.randomString(),
+            accessTokenExpiry = RandomData.randomLong(),
+            refreshToken = RandomData.randomString(),
+            refreshTokenExpiry = RandomData.randomLong()
+        )
+    }
+
     fun generateUserEntity(): UserEntity {
         return UserEntity(
             id = RandomData.randomLong(),
             name = RandomData.randomString(),
-            email = RandomData.randomEmail(),
-            password = RandomData.randomString()
+            email = RandomData.randomEmail()
         )
     }
 
