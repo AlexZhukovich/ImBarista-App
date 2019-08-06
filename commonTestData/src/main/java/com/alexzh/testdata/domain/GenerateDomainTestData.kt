@@ -5,10 +5,7 @@ import com.alexzh.imbarista.domain.interactor.coffee.browse.GetCoffeesByName
 import com.alexzh.imbarista.domain.interactor.coffee.favourite.AddCoffeeToFavourites
 import com.alexzh.imbarista.domain.interactor.coffee.favourite.RemoveCoffeeFromFavourite
 import com.alexzh.imbarista.domain.interactor.user.*
-import com.alexzh.imbarista.domain.model.AuthUser
-import com.alexzh.imbarista.domain.model.Coffee
-import com.alexzh.imbarista.domain.model.Ingredient
-import com.alexzh.imbarista.domain.model.User
+import com.alexzh.imbarista.domain.model.*
 import com.alexzh.testdata.base.RandomData.randomEmail
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
@@ -17,9 +14,19 @@ object GenerateDomainTestData {
 
     fun generateAuthUser(): AuthUser {
         return AuthUser(
-            id= randomLong(),
+            id = randomLong(),
             name = randomString(),
             token = randomString()
+        )
+    }
+
+    fun generateSession(): Session {
+        return Session(
+            sessionId = randomLong(),
+            accessToken = randomString(),
+            accessTokenExpiry = randomLong(),
+            refreshToken = randomString(),
+            refreshTokenExpiry = randomLong()
         )
     }
 
@@ -27,8 +34,7 @@ object GenerateDomainTestData {
         return User(
             id = randomLong(),
             name = randomString(),
-            email = randomEmail(),
-            password = randomString()
+            email = randomEmail()
         )
     }
 
