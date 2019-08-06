@@ -29,6 +29,12 @@ ext {
     // Glide
     glideVersion = '4.9.0'
 
+    // Retrofit
+    gsonVersion = '2.8.5'
+    okHttpVersion = '3.14.1'
+    retrofitVersion = '2.5.0'
+
+
     // Google Maps SDK
     googlePlayServicesMapsVersion = '17.0.0'
     googlePlayServicesLocationVersion = '17.0.0'
@@ -94,6 +100,23 @@ ext {
     ]
 
     dataTestDependencies = [
+            junit:                      "junit:junit:${jUnitVersion}",
+            mockK:                      "io.mockk:mockk:${mockKVersion}"
+    ]
+
+    remoteDependencies = [
+            kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            rxJava:                     "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxKotlin:                   "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            gson:                       "com.google.code.gson:gson:${gsonVersion}",
+            okHttp:                     "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            okHttpLogger:               "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            retrofit:                   "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter:          "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitAdapter:            "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+    ]
+
+    remoteTestDependencies = [
             junit:                      "junit:junit:${jUnitVersion}",
             mockK:                      "io.mockk:mockk:${mockKVersion}"
     ]

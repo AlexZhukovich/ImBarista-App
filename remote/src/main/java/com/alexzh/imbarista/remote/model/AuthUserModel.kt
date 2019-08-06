@@ -1,6 +1,6 @@
-package com.alexzh.data.model
+package com.alexzh.imbarista.remote.model
 
-data class AuthUserEntity(
+class AuthUserModel(
     val id: Long,
     val name: String,
     val token: String
