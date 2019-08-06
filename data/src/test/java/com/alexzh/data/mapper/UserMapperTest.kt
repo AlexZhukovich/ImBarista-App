@@ -34,6 +34,5 @@ class UserMapperTest {
         assertEquals(user.id, userEntity.id)
         assertEquals(user.name, userEntity.name)
         assertEquals(user.email, userEntity.email)
-        assertEquals(user.password, userEntity.password)
     }
 }
