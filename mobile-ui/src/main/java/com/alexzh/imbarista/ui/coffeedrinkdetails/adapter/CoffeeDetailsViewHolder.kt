@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.coffeedrinkdetails.adapter
+package com.alexzh.imbarista.ui.coffeedrinkdetails.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

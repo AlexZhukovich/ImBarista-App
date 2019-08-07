@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.createaccount
+package com.alexzh.imbarista.ui.createaccount
 
 import android.content.Context
 import android.content.Intent

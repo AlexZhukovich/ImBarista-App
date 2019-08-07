@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.profile
+package com.alexzh.imbarista.ui.profile
 
 import android.os.Bundle
 import android.view.*

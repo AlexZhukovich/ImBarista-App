@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.coffeedrinks
+package com.alexzh.imbarista.ui.coffeedrinks
 
 import android.os.Bundle
 import android.view.*
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexzh.imbarista.DummyData
 import com.alexzh.imbarista.R
-import com.alexzh.imbarista.coffeedrinkdetails.CoffeeDetailsActivity
-import com.alexzh.imbarista.coffeedrinks.adapter.CoffeeDrinksAdapter
+import com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDetailsActivity
+import com.alexzh.imbarista.ui.coffeedrinks.adapter.CoffeeDrinksAdapter
 import kotlinx.android.synthetic.main.fragment_coffee_drinks.view.*
 
 class CoffeeDrinksFragment : Fragment() {

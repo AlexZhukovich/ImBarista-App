@@ -1,12 +1,12 @@
-package com.alexzh.imbarista.login
+package com.alexzh.imbarista.ui.login
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.alexzh.imbarista.R
-import com.alexzh.imbarista.home.HomeActivity
-import com.alexzh.imbarista.createaccount.CreateAccountActivity
+import com.alexzh.imbarista.ui.home.HomeActivity
+import com.alexzh.imbarista.ui.createaccount.CreateAccountActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {

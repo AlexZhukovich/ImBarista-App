@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.map
+package com.alexzh.imbarista.ui.map
 
 import android.os.Bundle
 import android.view.*

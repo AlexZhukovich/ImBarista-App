@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.coffeedrinkdetails
+package com.alexzh.imbarista.ui.coffeedrinkdetails
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexzh.imbarista.DummyData
 import com.alexzh.imbarista.R
-import com.alexzh.imbarista.coffeedrinkdetails.adapter.CoffeeDetailsAdapter
+import com.alexzh.imbarista.ui.coffeedrinkdetails.adapter.CoffeeDetailsAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_coffee_details.*

@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.settings
+package com.alexzh.imbarista.ui.settings
 
 import android.content.Context
 import android.content.Intent

@@ -1,8 +1,8 @@
-package com.alexzh.imbarista.splash
+package com.alexzh.imbarista.ui.splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.alexzh.imbarista.login.LoginActivity
+import com.alexzh.imbarista.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
