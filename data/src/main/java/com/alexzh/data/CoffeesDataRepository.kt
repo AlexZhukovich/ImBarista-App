@@ -25,14 +25,21 @@ class CoffeesDataRepository(
     }
 
     override fun getCoffeesById(id: Long): Single<Coffee> {
-        return Single.error(UnsupportedOperationException("Not implemented yet"))
+        return storeFactory.getRemoteDataStore().getCoffeeById(id)
+            .map { mapper.mapFromEntity(it) }
     }
 
     override fun addCoffeeToFavourites(coffeeId: Long): Completable {
-        return Completable.error(UnsupportedOperationException("Not implemented yet"))
+        return Completable.defer {
+            storeFactory.getRemoteDataStore().setCoffeeAsFavourite(coffeeId)
+            Completable.complete()
+        }
     }
 
     override fun removeCoffeeFromFavourites(coffeeId: Long): Completable {
-        return Completable.error(UnsupportedOperationException("Not implemented yet"))
+        return Completable.defer {
+            storeFactory.getRemoteDataStore().setCoffeeAsNotFavourite(coffeeId)
+            Completable.complete()
+        }
     }
 }

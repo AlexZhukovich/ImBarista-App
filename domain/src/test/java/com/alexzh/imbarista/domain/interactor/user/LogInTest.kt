@@ -1,15 +1,14 @@
 package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
-import com.alexzh.imbarista.domain.model.AuthUser
+import com.alexzh.imbarista.domain.model.Session
 import com.alexzh.imbarista.domain.repository.UserRepository
-import com.alexzh.testdata.domain.GenerateDomainTestData.generateAuthUser
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateLogInParam
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateSession
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
 import org.junit.Test
-import java.lang.IllegalArgumentException
 
 class LogInTest {
 
@@ -23,9 +22,9 @@ class LogInTest {
 
     @Test
     fun logInCompletesSuccessfullyWhenParamsAreCorrect() {
-        val authUser = generateAuthUser()
+        val session = generateSession()
         val param = generateLogInParam()
-        stubLogIn(param.email, param.password, Single.just(authUser))
+        stubLogIn(param.email, param.password, Single.just(session))
 
         logIn.buildSingleUseCase(param)
             .test()
@@ -34,20 +33,20 @@ class LogInTest {
 
     @Test
     fun logInReturnsCorrectDataWhenParamsAreCorrect() {
-        val authUser = generateAuthUser()
+        val session = generateSession()
         val param = generateLogInParam()
-        stubLogIn(param.email, param.password, Single.just(authUser))
+        stubLogIn(param.email, param.password, Single.just(session))
 
         logIn.buildSingleUseCase(param)
             .test()
-            .assertValue(authUser)
+            .assertValue(session)
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun logInThrowsExceptionWhenParamIsMissing() {
-        val authUser = generateAuthUser()
+        val session = generateSession()
         val param = generateLogInParam()
-        stubLogIn(param.email, param.password, Single.just(authUser))
+        stubLogIn(param.email, param.password, Single.just(session))
 
         logIn.buildSingleUseCase()
             .test()
@@ -56,9 +55,9 @@ class LogInTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun logInThrowsExceptionWhenParamIsNull() {
-        val authUser = generateAuthUser()
+        val session = generateSession()
         val param = generateLogInParam()
-        stubLogIn(param.email, param.password, Single.just(authUser))
+        stubLogIn(param.email, param.password, Single.just(session))
 
         logIn.buildSingleUseCase(null)
             .test()
@@ -68,8 +67,8 @@ class LogInTest {
     private fun stubLogIn(
         email: String,
         password: String,
-        authSingle: Single<AuthUser>
+        sessionSingle: Single<Session>
     ) {
-        every { repository.logIn(email, password) } returns authSingle
+        every { repository.logIn(email, password) } returns sessionSingle
     }
 }

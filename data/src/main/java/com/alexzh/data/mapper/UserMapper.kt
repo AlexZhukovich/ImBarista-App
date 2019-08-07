@@ -8,8 +8,7 @@ class UserMapper : EntityMapper<UserEntity, User> {
         return User(
             entity.id,
             entity.name,
-            entity.email,
-            entity.password
+            entity.email
         )
     }
 
@@ -17,8 +16,7 @@ class UserMapper : EntityMapper<UserEntity, User> {
         return UserEntity(
             domainModel.id,
             domainModel.name,
-            domainModel.email,
-            domainModel.password
+            domainModel.email
         )
     }
 }

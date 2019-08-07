@@ -1,9 +1,11 @@
 package com.alexzh.imbarista.remote.model
 
+import com.google.gson.annotations.SerializedName
+
 data class SessionModel(
-    val sessionId: Long = -1L,
-    val accessToken: String = "",
-    val accessTokenExpiry: Long = -1L,
-    val refreshToken: String = "",
-    val refreshTokenExpiry: Long = -1L
+    @SerializedName("session_id") val sessionId: Long = -1L,
+    @SerializedName("access_token") val accessToken: String = "",
+    @SerializedName("access_token_expires_in") val accessTokenExpiry: Long = -1L,
+    @SerializedName("refresh_token") val refreshToken: String = "",
+    @SerializedName("refresh_token_expires_in") val refreshTokenExpiry: Long = -1L
 )
