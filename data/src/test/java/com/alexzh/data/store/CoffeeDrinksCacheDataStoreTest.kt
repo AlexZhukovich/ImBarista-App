@@ -1,6 +1,6 @@
 package com.alexzh.data.store
 
-import com.alexzh.data.model.CoffeeEntity
+import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
@@ -19,43 +19,43 @@ class CoffeeDrinksCacheDataStoreTest {
     private val dataStore = CoffeeDrinksCacheDataStore(repository)
 
     @Test
-    fun getCoffeesReturnsCompletesSuccessfully() {
-        stubGetCoffees(Single.just(generateCoffeeEntities(2)))
+    fun getCoffeeDrinksReturnsCompletesSuccessfully() {
+        stubGetCoffeeDrinks(Single.just(generateCoffeeEntities(2)))
 
-        dataStore.getCoffees()
+        dataStore.getCoffeeDrinks()
             .test()
             .assertComplete()
     }
 
     @Test
-    fun getCoffeesReturnsReturnsCorrectData() {
-        val coffees = generateCoffeeEntities(2)
-        stubGetCoffees(Single.just(coffees))
+    fun getCoffeeDrinksReturnsReturnsCorrectData() {
+        val coffeeDrinks = generateCoffeeEntities(2)
+        stubGetCoffeeDrinks(Single.just(coffeeDrinks))
 
-        dataStore.getCoffees()
+        dataStore.getCoffeeDrinks()
             .test()
-            .assertValue(coffees)
+            .assertValue(coffeeDrinks)
     }
 
     @Test
-    fun getCoffeesByNameCompletesSuccessfully() {
+    fun getCoffeeDrinksByNameCompletesSuccessfully() {
         val coffeeName = randomString()
-        stubGetCoffeesByName(coffeeName, Single.just(generateCoffeeEntities(2)))
+        stubGetCoffeeDrinksByName(coffeeName, Single.just(generateCoffeeEntities(2)))
 
-        dataStore.getCoffeesByName(coffeeName)
+        dataStore.getCoffeeDrinksByName(coffeeName)
             .test()
             .assertComplete()
     }
 
     @Test
-    fun getCoffeesByNameReturnsCorrectData() {
+    fun getCoffeeDrinksByNameReturnsCorrectData() {
         val coffeeName = randomString()
-        val coffees = generateCoffeeEntities(2)
-        stubGetCoffeesByName(coffeeName, Single.just(coffees))
+        val coffeeDrinks = generateCoffeeEntities(2)
+        stubGetCoffeeDrinksByName(coffeeName, Single.just(coffeeDrinks))
 
-        dataStore.getCoffeesByName(coffeeName)
+        dataStore.getCoffeeDrinksByName(coffeeName)
             .test()
-            .assertValue(coffees)
+            .assertValue(coffeeDrinks)
     }
 
     @Test
@@ -100,40 +100,40 @@ class CoffeeDrinksCacheDataStoreTest {
     }
 
     @Test
-    fun saveCoffeesCompletesSuccessfully() {
-        val coffees = generateCoffeeEntities(2)
-        stubSaveCoffees(coffees, Completable.complete())
+    fun saveCoffeeDrinksCompletesSuccessfully() {
+        val coffeeDrinks = generateCoffeeEntities(2)
+        stubSaveCoffeeDrinks(coffeeDrinks, Completable.complete())
 
-        dataStore.saveCoffees(coffees)
+        dataStore.saveCoffeeDrinks(coffeeDrinks)
             .test()
             .assertComplete()
     }
 
     @Test
-    fun clearCoffeesCompletesSuccessfully() {
-        stubClearCoffees(Completable.complete())
+    fun clearCoffeeDrinksCompletesSuccessfully() {
+        stubClearCoffeeDrinks(Completable.complete())
 
-        dataStore.clearCoffees()
+        dataStore.clearCoffeeDrinks()
             .test()
             .assertComplete()
     }
 
-    private fun stubGetCoffees(coffeesSingle: Single<List<CoffeeEntity>>) {
-        every { repository.getCoffees() } returns coffeesSingle
+    private fun stubGetCoffeeDrinks(coffeeDrinksSingle: Single<List<CoffeeDrinkEntity>>) {
+        every { repository.getCoffeeDrinks() } returns coffeeDrinksSingle
     }
 
-    private fun stubGetCoffeesByName(
+    private fun stubGetCoffeeDrinksByName(
         name: String,
-        coffeesSingle: Single<List<CoffeeEntity>>
+        coffeeDrinksSingle: Single<List<CoffeeDrinkEntity>>
     ) {
-        every { repository.getCoffeesByName(name) } returns coffeesSingle
+        every { repository.getCoffeeDrinksByName(name) } returns coffeeDrinksSingle
     }
 
     private fun stubGetCoffeeById(
         id: Long,
-        coffeeSingle: Single<CoffeeEntity>
+        coffeeDrinkSingle: Single<CoffeeDrinkEntity>
     ) {
-        every { repository.getCoffeeById(id) } returns coffeeSingle
+        every { repository.getCoffeeById(id) } returns coffeeDrinkSingle
     }
 
     private fun stubSetCoffeeAsFavourite(
@@ -150,16 +150,16 @@ class CoffeeDrinksCacheDataStoreTest {
         every { repository.setCoffeeAsNotFavourite(id) } returns completable
     }
 
-    private fun stubSaveCoffees(
-        coffees: List<CoffeeEntity>,
+    private fun stubSaveCoffeeDrinks(
+        coffeeDrinks: List<CoffeeDrinkEntity>,
         completable: Completable
     ) {
-        every { repository.saveCoffees(coffees) } returns completable
+        every { repository.saveCoffeeDrinks(coffeeDrinks) } returns completable
     }
 
-    private fun stubClearCoffees(
+    private fun stubClearCoffeeDrinks(
         completable: Completable
     ) {
-        every { repository.clearCoffees() } returns completable
+        every { repository.clearCoffeeDrinks() } returns completable
     }
 }

@@ -1,11 +1,11 @@
 package com.alexzh.data
 
 import com.alexzh.data.mapper.CoffeeMapper
-import com.alexzh.data.model.CoffeeEntity
+import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
-import com.alexzh.data.store.CoffeesDataStoreFactory
+import com.alexzh.data.store.CoffeeDrinksDataStoreFactory
 import com.alexzh.data.store.CoffeeDrinksRemoteDataStore
-import com.alexzh.imbarista.domain.model.Coffee
+import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntity
@@ -19,7 +19,7 @@ import org.junit.Test
 class CoffeeDrinksDataRepositoryTest {
 
     private val mapper = mockk<CoffeeMapper>()
-    private val storeFactory = mockk<CoffeesDataStoreFactory>()
+    private val storeFactory = mockk<CoffeeDrinksDataStoreFactory>()
     private val cacheRepository = mockk<CoffeeDrinksCacheRepository>()
     private val remoteDataStore = mockk<CoffeeDrinksRemoteDataStore>()
 
@@ -30,43 +30,43 @@ class CoffeeDrinksDataRepositoryTest {
     )
 
     @Test
-    fun getCoffeesCompletesSuccessfully() {
+    fun getCoffeeDrinksCompletesSuccessfully() {
         val coffeeEntity = generateCoffeeEntity()
         val coffee = generateCoffee()
 
         stubGetRemoteDataStore()
-        stubGetCoffeesFromRemoteStore(Single.just(listOf(coffeeEntity)))
+        stubGetCoffeeDrinksFromRemoteStore(Single.just(listOf(coffeeEntity)))
         stubMapFromEntity(coffeeEntity, coffee)
 
-        dataRepository.getCoffees()
+        dataRepository.getCoffeeDrinks()
             .test()
             .assertComplete()
     }
 
     @Test
-    fun getCoffeesReturnsCorrectData() {
+    fun getCoffeeDrinksReturnsCorrectData() {
         val coffeeEntity = generateCoffeeEntity()
         val coffee = generateCoffee()
-        val expectedCoffees = listOf(coffee)
+        val expectedCoffeeDrinks = listOf(coffee)
 
         stubGetRemoteDataStore()
-        stubGetCoffeesFromRemoteStore(Single.just(listOf(coffeeEntity)))
+        stubGetCoffeeDrinksFromRemoteStore(Single.just(listOf(coffeeEntity)))
         stubMapFromEntity(coffeeEntity, coffee)
 
-        dataRepository.getCoffees()
+        dataRepository.getCoffeeDrinks()
             .test()
-            .assertValue(expectedCoffees)
+            .assertValue(expectedCoffeeDrinks)
     }
 
     @Test
-    fun getCoffeesByNameThrowsException() {
-        dataRepository.getCoffeesByName(randomString())
+    fun getCoffeeDrinksByNameThrowsException() {
+        dataRepository.getCoffeeDrinksByName(randomString())
             .test()
             .assertError(java.lang.UnsupportedOperationException::class.java)
     }
 
     @Test
-    fun getCoffeesByIdCompletesSuccessfully() {
+    fun getCoffeeDrinkByIdCompletesSuccessfully() {
         val coffeeEntity = generateCoffeeEntity()
         val coffee = generateCoffee()
 
@@ -74,13 +74,13 @@ class CoffeeDrinksDataRepositoryTest {
         stubGetCoffeeFromRemoteStoreById(coffeeEntity.id, Single.just(coffeeEntity))
         stubMapFromEntity(coffeeEntity, coffee)
 
-        dataRepository.getCoffeesById(randomLong())
+        dataRepository.getCoffeeDrinkById(randomLong())
             .test()
             .assertComplete()
     }
 
     @Test
-    fun getCoffeesByIdReturnsCorrectData() {
+    fun getCoffeeDrinkByIdReturnsCorrectData() {
         val coffeeEntity = generateCoffeeEntity()
         val coffee = generateCoffee()
 
@@ -88,7 +88,7 @@ class CoffeeDrinksDataRepositoryTest {
         stubGetCoffeeFromRemoteStoreById(coffeeEntity.id, Single.just(coffeeEntity))
         stubMapFromEntity(coffeeEntity, coffee)
 
-        dataRepository.getCoffeesById(randomLong())
+        dataRepository.getCoffeeDrinkById(randomLong())
             .test()
             .assertValue(coffee)
     }
@@ -100,7 +100,7 @@ class CoffeeDrinksDataRepositoryTest {
         stubGetRemoteDataStore()
         stubAddCoffeeToFavourites(coffeeId, Completable.complete())
 
-        dataRepository.addCoffeeToFavourites(coffeeId)
+        dataRepository.addCoffeeDrinkToFavourites(coffeeId)
             .test()
             .assertComplete()
     }
@@ -112,7 +112,7 @@ class CoffeeDrinksDataRepositoryTest {
         stubGetRemoteDataStore()
         stubRemoveCoffeeFromFavourites(coffeeId, Completable.complete())
 
-        dataRepository.removeCoffeeFromFavourites(randomLong())
+        dataRepository.removeCoffeeDrinkFromFavourites(randomLong())
             .test()
             .assertComplete()
     }
@@ -121,19 +121,19 @@ class CoffeeDrinksDataRepositoryTest {
         every { storeFactory.getRemoteDataStore() } returns remoteDataStore
     }
 
-    private fun stubGetCoffeesFromRemoteStore(coffeesSingle: Single<List<CoffeeEntity>>) {
-        every { remoteDataStore.getCoffees() } returns coffeesSingle
+    private fun stubGetCoffeeDrinksFromRemoteStore(coffeeDrinksSingle: Single<List<CoffeeDrinkEntity>>) {
+        every { remoteDataStore.getCoffeeDrinks() } returns coffeeDrinksSingle
     }
 
-    private fun stubGetCoffeeFromRemoteStoreById(coffeeId: Long, coffeeSingle: Single<CoffeeEntity>) {
-        every { remoteDataStore.getCoffeeById(coffeeId) } returns coffeeSingle
+    private fun stubGetCoffeeFromRemoteStoreById(coffeeId: Long, coffeeDrinkSingle: Single<CoffeeDrinkEntity>) {
+        every { remoteDataStore.getCoffeeById(coffeeId) } returns coffeeDrinkSingle
     }
 
     private fun stubMapFromEntity(
-        coffeeEntities: CoffeeEntity,
-        coffee: Coffee
+        coffeeDrinkEntities: CoffeeDrinkEntity,
+        coffeeDrink: CoffeeDrink
     ) {
-        every { mapper.mapFromEntity(coffeeEntities) } returns coffee
+        every { mapper.mapFromEntity(coffeeDrinkEntities) } returns coffeeDrink
     }
 
     private fun stubAddCoffeeToFavourites(

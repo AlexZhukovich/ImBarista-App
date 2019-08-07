@@ -41,7 +41,7 @@
         </activity>
         <activity android:name=".home.HomeActivity">
         </activity>
-        <activity android:name=".coffeedetails.CoffeeDetailsActivity">
+        <activity android:name=".coffeedrinkdetails.CoffeeDetailsActivity">
         </activity>
         <activity
                 android:name=".settings.SettingsActivity"

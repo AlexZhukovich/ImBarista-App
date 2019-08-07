@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexzh.imbarista.DummyData
 import com.alexzh.imbarista.R
-import com.alexzh.imbarista.coffeedetails.CoffeeDetailsActivity
+import com.alexzh.imbarista.coffeedrinkdetails.CoffeeDetailsActivity
 import com.alexzh.imbarista.coffeedrinks.adapter.CoffeeDrinksAdapter
 import kotlinx.android.synthetic.main.fragment_coffee_drinks.view.*
 
 class CoffeeDrinksFragment : Fragment() {
 
-    private val adapter by lazy { CoffeeDrinksAdapter(coffeeItemClick) }
+    private val adapter by lazy { CoffeeDrinksAdapter(coffeeDrinkItemClick) }
 
-    private val coffeeItemClick: (DummyData.Coffee) -> Unit = {
+    private val coffeeDrinkItemClick: (DummyData.CoffeeDrink) -> Unit = {
         CoffeeDetailsActivity.start(this.activity!!, it)
     }
 
@@ -31,13 +31,13 @@ class CoffeeDrinksFragment : Fragment() {
         rootView.recyclerView.adapter = adapter
         rootView.recyclerView.addItemDecoration(DividerItemDecoration(rootView.recyclerView.context, layoutManager.orientation))
 
-        adapter.addCoffees(DummyData.getCoffees())
+        adapter.addCoffeeDrinks(DummyData.getCoffeeDrinks())
 
         return rootView
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.coffees_menu, menu)
+        inflater.inflate(R.menu.coffee_drinks_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 }

@@ -7,24 +7,24 @@ import com.alexzh.imbarista.DummyData
 import com.alexzh.imbarista.R
 
 class CoffeeDrinksAdapter(
-    private val itemClick: (DummyData.Coffee) -> Unit
-) : RecyclerView.Adapter<CoffeeViewHolder>() {
+    private val itemClick: (DummyData.CoffeeDrink) -> Unit
+) : RecyclerView.Adapter<CoffeeDrinkViewHolder>() {
 
-    private val coffees = mutableListOf<DummyData.Coffee>()
+    private val coffeeDrinks = mutableListOf<DummyData.CoffeeDrink>()
 
-    fun addCoffees(coffees: List<DummyData.Coffee>) {
-        this.coffees += coffees
+    fun addCoffeeDrinks(coffeeDrinks: List<DummyData.CoffeeDrink>) {
+        this.coffeeDrinks += coffeeDrinks
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_coffee, parent, false)
-        return CoffeeViewHolder(view, itemClick)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeDrinkViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_coffee_drink, parent, false)
+        return CoffeeDrinkViewHolder(view, itemClick)
     }
 
-    override fun onBindViewHolder(holder: CoffeeViewHolder, position: Int) {
-        holder.bind(coffees[position])
+    override fun onBindViewHolder(holder: CoffeeDrinkViewHolder, position: Int) {
+        holder.bind(coffeeDrinks[position])
     }
 
-    override fun getItemCount(): Int = coffees.size
+    override fun getItemCount(): Int = coffeeDrinks.size
 }

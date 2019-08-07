@@ -9,42 +9,42 @@ class CoffeeDrinksDataStoreFactoryTest {
     private val cacheStore = mockk<CoffeeDrinksCacheDataStore>()
     private val remoteStore = mockk<CoffeeDrinksRemoteDataStore>()
 
-    private val factory = CoffeesDataStoreFactory(
+    private val factory = CoffeeDrinksDataStoreFactory(
         remoteStore,
         cacheStore
     )
 
     @Test
-    fun getDataStoreReturnsCachedDataStoreWhenCoffeesAreCachedAndCachedIsNotExpired() {
+    fun getDataStoreReturnsCachedDataStoreWhenCoffeeDrinksAreCachedAndCachedIsNotExpired() {
         val result = factory.getDataStore(
-            areCoffeesCached = true,
+            areCoffeeDrinksCached = true,
             isCachedExpired = false
         )
         assertEquals(cacheStore, result)
     }
 
     @Test
-    fun getDataStoreReturnsRemoteDataStoreWhenCoffeesAreCachedAndCachedIsExpired() {
+    fun getDataStoreReturnsRemoteDataStoreWhenCoffeeDrinksAreCachedAndCachedIsExpired() {
         val result = factory.getDataStore(
-            areCoffeesCached = true,
+            areCoffeeDrinksCached = true,
             isCachedExpired = true
         )
         assertEquals(remoteStore, result)
     }
 
     @Test
-    fun getDataStoreReturnsRemoteDataStoreWhenCoffeesAreNotCachedAndCachedIsExpired() {
+    fun getDataStoreReturnsRemoteDataStoreWhenCoffeeDrinksAreNotCachedAndCachedIsExpired() {
         val result = factory.getDataStore(
-            areCoffeesCached = false,
+            areCoffeeDrinksCached = false,
             isCachedExpired = true
         )
         assertEquals(remoteStore, result)
     }
 
     @Test
-    fun getDataStoreReturnsRemoteDataStoreWhenCoffeesAreNotCachedAndCachedIsNotExpired() {
+    fun getDataStoreReturnsRemoteDataStoreWhenCoffeeDrinksAreNotCachedAndCachedIsNotExpired() {
         val result = factory.getDataStore(
-            areCoffeesCached = false,
+            areCoffeeDrinksCached = false,
             isCachedExpired = false
         )
         assertEquals(remoteStore, result)

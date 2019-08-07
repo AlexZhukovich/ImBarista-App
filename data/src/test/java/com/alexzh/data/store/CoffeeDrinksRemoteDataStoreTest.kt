@@ -1,6 +1,6 @@
 package com.alexzh.data.store
 
-import com.alexzh.data.model.CoffeeEntity
+import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.data.repository.CoffeeDrinksRemoteRepository
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
@@ -13,7 +13,7 @@ import org.junit.Test
 import org.junit.rules.ExpectedException
 import java.lang.UnsupportedOperationException
 
-class CoffeesRemoteDataStoreTest {
+class CoffeeDrinksRemoteDataStoreTest {
 
     @Rule @JvmField
     val expectedException: ExpectedException = ExpectedException.none()
@@ -23,28 +23,28 @@ class CoffeesRemoteDataStoreTest {
     private val store = CoffeeDrinksRemoteDataStore(repository)
 
     @Test
-    fun getCoffeesCompletesSuccessfully() {
-        stubGetCoffees(Single.just(generateCoffeeEntities(2)))
-        store.getCoffees()
+    fun getCoffeeDrinksCompletesSuccessfully() {
+        stubGetCoffeeDrinks(Single.just(generateCoffeeEntities(2)))
+        store.getCoffeeDrinks()
             .test()
             .assertComplete()
     }
 
     @Test
-    fun getCoffeesReturnsCorrectData() {
-        val coffees = generateCoffeeEntities(2)
-        stubGetCoffees(Single.just(coffees))
-        store.getCoffees()
+    fun getCoffeeDrinksReturnsCorrectData() {
+        val coffeeDrinks = generateCoffeeEntities(2)
+        stubGetCoffeeDrinks(Single.just(coffeeDrinks))
+        store.getCoffeeDrinks()
             .test()
-            .assertValue(coffees)
+            .assertValue(coffeeDrinks)
     }
 
     @Test
-    fun getCoffeesByNameThrowsException() {
+    fun getCoffeeDrinksByNameThrowsException() {
         expectedException.expect(UnsupportedOperationException::class.java)
-        expectedException.expectMessage("'Getting coffees by name' operation is unsupported")
+        expectedException.expectMessage("'Getting coffee drinks by name' operation is unsupported")
 
-        store.getCoffeesByName(randomString())
+        store.getCoffeeDrinksByName(randomString())
     }
 
     @Test
@@ -72,22 +72,22 @@ class CoffeesRemoteDataStoreTest {
     }
 
     @Test
-    fun saveCoffeesThrowsException() {
+    fun saveCoffeeDrinksThrowsException() {
         expectedException.expect(UnsupportedOperationException::class.java)
-        expectedException.expectMessage("'Saving coffees' operation is unsupported")
+        expectedException.expectMessage("'Saving coffee drinks' operation is unsupported")
 
-        store.saveCoffees(generateCoffeeEntities())
+        store.saveCoffeeDrinks(generateCoffeeEntities())
     }
 
     @Test
-    fun clearCoffeesThrowsException() {
+    fun clearCoffeeDrinksThrowsException() {
         expectedException.expect(UnsupportedOperationException::class.java)
-        expectedException.expectMessage("'Clearing coffees' operation is unsupported")
+        expectedException.expectMessage("'Clearing coffee drinks' operation is unsupported")
 
-        store.clearCoffees()
+        store.clearCoffeeDrinks()
     }
 
-    private fun stubGetCoffees(coffeesSingle: Single<List<CoffeeEntity>>) {
-        every { repository.getCoffees() } returns coffeesSingle
+    private fun stubGetCoffeeDrinks(coffeeDrinksSingle: Single<List<CoffeeDrinkEntity>>) {
+        every { repository.getCoffeeDrinks() } returns coffeeDrinksSingle
     }
 }

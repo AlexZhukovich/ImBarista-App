@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.domain.interactor.coffee.favourite
+package com.alexzh.imbarista.domain.interactor.coffeedrink.favourite
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
@@ -51,6 +51,6 @@ class RemoveCoffeeFromFavouriteTest {
     }
 
     private fun stubRemoveCoffeeFromFavourite(coffeeId: Long, completable: Completable) {
-        every { repository.removeCoffeeFromFavourites(coffeeId) } returns completable
+        every { repository.removeCoffeeDrinkFromFavourites(coffeeId) } returns completable
     }
 }

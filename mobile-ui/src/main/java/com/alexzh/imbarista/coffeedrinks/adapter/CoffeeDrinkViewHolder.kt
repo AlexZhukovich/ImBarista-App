@@ -6,15 +6,15 @@ import com.alexzh.imbarista.DummyData
 import com.alexzh.imbarista.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.item_coffee.view.*
+import kotlinx.android.synthetic.main.item_coffee_drink.view.*
 
-class CoffeeViewHolder(
+class CoffeeDrinkViewHolder(
     private val view: View,
-    val itemClick: (DummyData.Coffee) -> Unit
+    val itemClick: (DummyData.CoffeeDrink) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
-    fun bind(coffee: DummyData.Coffee) {
-        with(coffee) {
+    fun bind(coffeeDrink: DummyData.CoffeeDrink) {
+        with(coffeeDrink) {
             Glide.with(view.context)
                 .load(photoUrl)
                 .apply(RequestOptions.circleCropTransform())
@@ -26,7 +26,7 @@ class CoffeeViewHolder(
                 .load(if (isFavourite) R.drawable.ic_favorite_black_24dp else R.drawable.ic_favorite_border_black_24dp)
                 .into(itemView.favouriteIcon)
 
-            itemView.setOnClickListener { itemClick(coffee) }
+            itemView.setOnClickListener { itemClick(coffeeDrink) }
         }
     }
 

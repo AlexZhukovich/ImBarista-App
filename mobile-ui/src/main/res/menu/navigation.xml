@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_coffees"
-        android:icon="@drawable/ic_coffees_black_24dp"
-        android:title="@string/nav_coffees" />
+        android:id="@+id/navigation_coffee_drinks"
+        android:icon="@drawable/ic_coffee_black_24dp"
+        android:title="@string/nav_coffee_drinks" />
 
     <item
         android:id="@+id/navigation_near_me"

@@ -1,18 +1,18 @@
 package com.alexzh.imbarista.domain.repository
 
-import com.alexzh.imbarista.domain.model.Coffee
+import com.alexzh.imbarista.domain.model.CoffeeDrink
 import io.reactivex.Completable
 import io.reactivex.Single
 
 interface CoffeeDrinksRepository {
 
-    fun getCoffees(): Single<List<Coffee>>
+    fun getCoffeeDrinks(): Single<List<CoffeeDrink>>
 
-    fun getCoffeesByName(name: String): Single<List<Coffee>>
+    fun getCoffeeDrinksByName(name: String): Single<List<CoffeeDrink>>
 
-    fun getCoffeesById(id: Long): Single<Coffee>
+    fun getCoffeeDrinkById(id: Long): Single<CoffeeDrink>
 
-    fun addCoffeeToFavourites(coffeeId: Long): Completable
+    fun addCoffeeDrinkToFavourites(coffeeId: Long): Completable
 
-    fun removeCoffeeFromFavourites(coffeeId: Long): Completable
+    fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Completable
 }

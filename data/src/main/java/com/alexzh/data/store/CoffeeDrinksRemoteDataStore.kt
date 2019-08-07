@@ -1,6 +1,6 @@
 package com.alexzh.data.store
 
-import com.alexzh.data.model.CoffeeEntity
+import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.data.repository.CoffeeDrinksRemoteRepository
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -10,15 +10,15 @@ class CoffeeDrinksRemoteDataStore(
     private val remoteRepository: CoffeeDrinksRemoteRepository
 ) : CoffeeDrinksDataStore {
 
-    override fun getCoffees(): Single<List<CoffeeEntity>> {
-        return remoteRepository.getCoffees()
+    override fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>> {
+        return remoteRepository.getCoffeeDrinks()
     }
 
-    override fun getCoffeesByName(name: String): Single<List<CoffeeEntity>> {
-        throw UnsupportedOperationException("'Getting coffees by name' operation is unsupported")
+    override fun getCoffeeDrinksByName(name: String): Single<List<CoffeeDrinkEntity>> {
+        throw UnsupportedOperationException("'Getting coffee drinks by name' operation is unsupported")
     }
 
-    override fun getCoffeeById(id: Long): Single<CoffeeEntity> {
+    override fun getCoffeeById(id: Long): Single<CoffeeDrinkEntity> {
         throw UnsupportedOperationException("'Getting coffee by id' operation is unsupported")
     }
 
@@ -30,11 +30,11 @@ class CoffeeDrinksRemoteDataStore(
         throw UnsupportedOperationException("'Setting coffee as not favourite' operation is unsupported")
     }
 
-    override fun saveCoffees(coffees: List<CoffeeEntity>): Completable {
-        throw UnsupportedOperationException("'Saving coffees' operation is unsupported")
+    override fun saveCoffeeDrinks(coffeeDrinks: List<CoffeeDrinkEntity>): Completable {
+        throw UnsupportedOperationException("'Saving coffeeDrinks' operation is unsupported")
     }
 
-    override fun clearCoffees(): Completable {
-        throw UnsupportedOperationException("'Clearing coffees' operation is unsupported")
+    override fun clearCoffeeDrinks(): Completable {
+        throw UnsupportedOperationException("'Clearing coffee drinks' operation is unsupported")
     }
 }

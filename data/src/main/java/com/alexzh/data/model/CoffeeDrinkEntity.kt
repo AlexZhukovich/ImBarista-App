@@ -1,6 +1,6 @@
 package com.alexzh.data.model
 
-data class CoffeeEntity(
+data class CoffeeDrinkEntity(
     val id: Long = -1L,
     val name: String = "",
     val description: String = "",

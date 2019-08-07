@@ -1,9 +1,9 @@
-package com.alexzh.imbarista.coffeedetails.adapter
+package com.alexzh.imbarista.coffeedrinkdetails.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.alexzh.imbarista.DummyData
-import kotlinx.android.synthetic.main.item_coffee_detail_info.view.*
+import kotlinx.android.synthetic.main.item_coffee_drink_detail_info.view.*
 
 class CoffeeDetailsViewHolder(
     view: View

@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.coffeedetails.adapter
+package com.alexzh.imbarista.coffeedrinkdetails.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,7 +16,7 @@ class CoffeeDetailsAdapter : RecyclerView.Adapter<CoffeeDetailsViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeDetailsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_coffee_detail_info, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_coffee_drink_detail_info, parent, false)
         return CoffeeDetailsViewHolder(view)
     }
 

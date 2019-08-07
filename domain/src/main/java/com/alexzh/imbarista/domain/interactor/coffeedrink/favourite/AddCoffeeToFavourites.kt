@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.domain.interactor.coffee.favourite
+package com.alexzh.imbarista.domain.interactor.coffeedrink.favourite
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.CompletableUseCase
@@ -13,7 +13,7 @@ class AddCoffeeToFavourites constructor(
 
     override fun buildCompletableUseCase(param: Param?): Completable {
         if (param == null) throw IllegalArgumentException("Param can't be null")
-        return coffeeDrinksRepository.addCoffeeToFavourites(param.coffeeId)
+        return coffeeDrinksRepository.addCoffeeDrinkToFavourites(param.coffeeId)
     }
 
     data class Param(val coffeeId: Long) {

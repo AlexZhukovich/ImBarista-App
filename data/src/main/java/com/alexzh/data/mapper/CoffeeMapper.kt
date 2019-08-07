@@ -1,18 +1,18 @@
 package com.alexzh.data.mapper
 
-import com.alexzh.data.model.CoffeeEntity
+import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.data.model.IngredientEntity
-import com.alexzh.imbarista.domain.model.Coffee
+import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.imbarista.domain.model.Ingredient
 
 class CoffeeMapper(
     private val ingredientMapper: EntityMapper<IngredientEntity, Ingredient>
-) : EntityMapper<CoffeeEntity, Coffee> {
+) : EntityMapper<CoffeeDrinkEntity, CoffeeDrink> {
 
-    override fun mapFromEntity(entity: CoffeeEntity): Coffee {
+    override fun mapFromEntity(entity: CoffeeDrinkEntity): CoffeeDrink {
         val ingredients = entity.ingredients.map { ingredientMapper.mapFromEntity(it) }
 
-        return Coffee(
+        return CoffeeDrink(
             entity.id,
             entity.name,
             entity.description,
@@ -20,10 +20,10 @@ class CoffeeMapper(
         )
     }
 
-    override fun mapToEntity(domainModel: Coffee): CoffeeEntity {
+    override fun mapToEntity(domainModel: CoffeeDrink): CoffeeDrinkEntity {
         val ingredientEntities = domainModel.ingredients.map { ingredientMapper.mapToEntity(it) }
 
-        return CoffeeEntity(
+        return CoffeeDrinkEntity(
             domainModel.id,
             domainModel.name,
             domainModel.description,

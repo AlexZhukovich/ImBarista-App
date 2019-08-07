@@ -30,8 +30,8 @@ object GenerateRemoteTestData {
         return IngredientModel(randomString())
     }
 
-    fun generateCoffeeModel(ingredientCount: Int = 1): CoffeeModel {
-        return CoffeeModel(
+    fun generateCoffeeModel(ingredientCount: Int = 1): CoffeeDrinkModel {
+        return CoffeeDrinkModel(
             id = randomLong(),
             name = randomString(),
             description = randomString(),

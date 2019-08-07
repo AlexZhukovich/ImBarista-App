@@ -1,19 +1,20 @@
-package com.alexzh.imbarista.domain.interactor.coffee.favourite
+package com.alexzh.imbarista.domain.interactor.coffeedrink.browse
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
-import com.alexzh.imbarista.domain.interactor.CompletableUseCase
+import com.alexzh.imbarista.domain.interactor.SingleUseCase
+import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
-import io.reactivex.Completable
+import io.reactivex.Single
 import java.lang.IllegalArgumentException
 
-class RemoveCoffeeFromFavourite constructor(
+class GetCoffeeDrinkById(
     private val coffeeDrinksRepository: CoffeeDrinksRepository,
     postExecutionThread: PostExecutionThread
-) : CompletableUseCase<RemoveCoffeeFromFavourite.Param>(postExecutionThread) {
+) : SingleUseCase<CoffeeDrink, GetCoffeeDrinkById.Param>(postExecutionThread) {
 
-    override fun buildCompletableUseCase(param: Param?): Completable {
+    override fun buildSingleUseCase(param: Param?): Single<CoffeeDrink> {
         if (param == null) throw IllegalArgumentException("Param can't be null")
-        return coffeeDrinksRepository.removeCoffeeFromFavourites(param.coffeeId)
+        return coffeeDrinksRepository.getCoffeeDrinkById(param.coffeeId)
     }
 
     data class Param(val coffeeId: Long) {

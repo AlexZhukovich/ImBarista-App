@@ -1,13 +1,13 @@
 package com.alexzh.data.mapper
 
-import com.alexzh.data.model.CoffeeEntity
-import com.alexzh.imbarista.domain.model.Coffee
+import com.alexzh.data.model.CoffeeDrinkEntity
+import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntity
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffee
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CoffeeMapperTest {
+class CoffeeDrinkMapperTest {
 
     private val mapper = CoffeeMapper(IngredientMapper())
 
@@ -60,16 +60,16 @@ class CoffeeMapperTest {
     }
 
     private fun assertEqualsData(
-        coffee: Coffee,
-        coffeeEntity: CoffeeEntity
+        coffeeDrink: CoffeeDrink,
+        coffeeDrinkEntity: CoffeeDrinkEntity
     ) {
-        assertEquals(coffee.id, coffeeEntity.id)
-        assertEquals(coffee.name, coffeeEntity.name)
-        assertEquals(coffee.description, coffeeEntity.description)
+        assertEquals(coffeeDrink.id, coffeeDrinkEntity.id)
+        assertEquals(coffeeDrink.name, coffeeDrinkEntity.name)
+        assertEquals(coffeeDrink.description, coffeeDrinkEntity.description)
 
-        assertEquals(coffee.ingredients.size, coffeeEntity.ingredients.size)
-        for (index in 0 until coffee.ingredients.size) {
-            assertEquals(coffee.ingredients[index].name, coffeeEntity.ingredients[index].name)
+        assertEquals(coffeeDrink.ingredients.size, coffeeDrinkEntity.ingredients.size)
+        for (index in 0 until coffeeDrink.ingredients.size) {
+            assertEquals(coffeeDrink.ingredients[index].name, coffeeDrinkEntity.ingredients[index].name)
         }
     }
 }

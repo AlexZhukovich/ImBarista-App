@@ -1,28 +1,28 @@
 package com.alexzh.data.repository
 
-import com.alexzh.data.model.CoffeeEntity
+import com.alexzh.data.model.CoffeeDrinkEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 
 interface CoffeeDrinksCacheRepository {
 
-    fun getCoffees(): Single<List<CoffeeEntity>>
+    fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>>
 
-    fun getCoffeesByName(name: String): Single<List<CoffeeEntity>>
+    fun getCoffeeDrinksByName(name: String): Single<List<CoffeeDrinkEntity>>
 
-    fun getCoffeeById(id: Long): Single<CoffeeEntity>
+    fun getCoffeeById(id: Long): Single<CoffeeDrinkEntity>
 
     fun setCoffeeAsFavourite(id: Long): Completable
 
     fun setCoffeeAsNotFavourite(id: Long): Completable
 
-    fun saveCoffees(coffees: List<CoffeeEntity>): Completable
+    fun saveCoffeeDrinks(coffeeDrinks: List<CoffeeDrinkEntity>): Completable
 
-    fun clearCoffees(): Completable
+    fun clearCoffeeDrinks(): Completable
 
-    fun areCoffeesCached(): Single<Boolean>
+    fun areCoffeeDrinksCached(): Single<Boolean>
 
     fun setLastCacheVersion(lastCacheVersion: Long): Completable
 
-    fun isCoffeesCacheExpired(lastCacheVersion: Long): Boolean
+    fun isCoffeeDrinksCacheExpired(lastCacheVersion: Long): Boolean
 }

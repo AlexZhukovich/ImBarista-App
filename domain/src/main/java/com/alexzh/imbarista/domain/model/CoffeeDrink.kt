@@ -1,6 +1,6 @@
 package com.alexzh.imbarista.domain.model
 
-data class Coffee(
+data class CoffeeDrink(
     val id: Long = -1L,
     val name: String = "",
     val description: String = "",

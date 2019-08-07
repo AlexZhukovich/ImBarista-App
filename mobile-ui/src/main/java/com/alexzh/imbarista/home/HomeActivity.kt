@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.title = getString(R.string.nav_coffees)
+        supportActionBar?.title = getString(R.string.nav_coffee_drinks)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -49,15 +49,15 @@ class HomeActivity : AppCompatActivity() {
 
         replaceFragment(CoffeeDrinksFragment())
 
-        navigation.selectedItemId = R.id.navigation_coffees
+        navigation.selectedItemId = R.id.navigation_coffee_drinks
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
     private fun handleNavigationItemClick(itemId: Int): Boolean {
         when (itemId) {
-            R.id.navigation_coffees -> {
+            R.id.navigation_coffee_drinks -> {
                 replaceFragment(CoffeeDrinksFragment())
-                supportActionBar?.title = getString(R.string.nav_coffees)
+                supportActionBar?.title = getString(R.string.nav_coffee_drinks)
             }
             R.id.navigation_near_me -> {
                 replaceFragment(TomTomMapFragment())

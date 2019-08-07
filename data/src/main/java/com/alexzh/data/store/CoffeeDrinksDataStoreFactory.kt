@@ -1,15 +1,15 @@
 package com.alexzh.data.store
 
-class CoffeesDataStoreFactory(
+class CoffeeDrinksDataStoreFactory(
     private val remoteDataStore: CoffeeDrinksRemoteDataStore,
     private val cacheDataStore: CoffeeDrinksCacheDataStore
 ) {
 
     fun getDataStore(
-        areCoffeesCached: Boolean,
+        areCoffeeDrinksCached: Boolean,
         isCachedExpired: Boolean
     ): CoffeeDrinksDataStore {
-        return if (areCoffeesCached && !isCachedExpired) {
+        return if (areCoffeeDrinksCached && !isCachedExpired) {
             cacheDataStore
         } else {
             remoteDataStore

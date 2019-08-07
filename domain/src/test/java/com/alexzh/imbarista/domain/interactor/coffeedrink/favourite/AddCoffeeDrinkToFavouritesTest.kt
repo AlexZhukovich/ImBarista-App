@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.domain.interactor.coffee.favourite
+package com.alexzh.imbarista.domain.interactor.coffeedrink.favourite
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
@@ -9,7 +9,7 @@ import io.mockk.mockk
 import io.reactivex.Completable
 import org.junit.Test
 
-class AddCoffeeToFavouritesTest {
+class AddCoffeeDrinkToFavouritesTest {
 
     private val repository = mockk<CoffeeDrinksRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
@@ -50,6 +50,6 @@ class AddCoffeeToFavouritesTest {
     }
 
     private fun stubAddCoffeeToFavourites(coffeeId: Long, completable: Completable) {
-        every { repository.addCoffeeToFavourites(coffeeId) } returns completable
+        every { repository.addCoffeeDrinkToFavourites(coffeeId) } returns completable
     }
 }
