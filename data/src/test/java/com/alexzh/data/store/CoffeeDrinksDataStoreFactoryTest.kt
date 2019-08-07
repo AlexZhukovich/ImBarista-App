@@ -4,10 +4,10 @@ import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CoffeesDataStoreFactoryTest {
+class CoffeeDrinksDataStoreFactoryTest {
 
-    private val cacheStore = mockk<CoffeesCacheDataStore>()
-    private val remoteStore = mockk<CoffeesRemoteDataStore>()
+    private val cacheStore = mockk<CoffeeDrinksCacheDataStore>()
+    private val remoteStore = mockk<CoffeeDrinksRemoteDataStore>()
 
     private val factory = CoffeesDataStoreFactory(
         remoteStore,

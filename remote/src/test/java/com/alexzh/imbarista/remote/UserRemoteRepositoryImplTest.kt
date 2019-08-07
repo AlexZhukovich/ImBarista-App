@@ -19,13 +19,13 @@ import io.mockk.mockk
 import io.reactivex.Single
 import org.junit.Test
 
-class AuthUserRemoteRepositoryImplTest {
+class UserRemoteRepositoryImplTest {
 
     private val service = mockk<CoffeeDrinksService>()
     private val userMapper = mockk<UserMapper>()
     private val sessionMapper = mockk<SessionMapper>()
 
-    private val repository = AuthUserRemoteRepositoryImpl(service, userMapper, sessionMapper)
+    private val repository = UserRemoteRepositoryImpl(service, userMapper, sessionMapper)
 
     @Test
     fun createAccountCompletesSuccessfully() {

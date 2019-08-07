@@ -2,18 +2,18 @@ package com.alexzh.imbarista.domain.interactor.coffee.favourite
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.CompletableUseCase
-import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import io.reactivex.Completable
 import java.lang.IllegalArgumentException
 
 class RemoveCoffeeFromFavourite constructor(
-    private val coffeesRepository: CoffeesRepository,
+    private val coffeeDrinksRepository: CoffeeDrinksRepository,
     postExecutionThread: PostExecutionThread
 ) : CompletableUseCase<RemoveCoffeeFromFavourite.Param>(postExecutionThread) {
 
     override fun buildCompletableUseCase(param: Param?): Completable {
         if (param == null) throw IllegalArgumentException("Param can't be null")
-        return coffeesRepository.removeCoffeeFromFavourites(param.coffeeId)
+        return coffeeDrinksRepository.removeCoffeeFromFavourites(param.coffeeId)
     }
 
     data class Param(val coffeeId: Long) {

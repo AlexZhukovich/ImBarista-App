@@ -4,7 +4,7 @@ import com.alexzh.data.model.SessionEntity
 import com.alexzh.data.model.UserEntity
 import io.reactivex.Single
 
-interface AuthUserRemoteRepository {
+interface UserRemoteRepository {
 
     fun createAccount(name: String, email: String, password: String): Single<UserEntity>
 

@@ -1,14 +1,14 @@
 package com.alexzh.data.store
 
 import com.alexzh.data.model.CoffeeEntity
-import com.alexzh.data.repository.CoffeesRemoteRepository
+import com.alexzh.data.repository.CoffeeDrinksRemoteRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 import java.lang.UnsupportedOperationException
 
-class CoffeesRemoteDataStore(
-    private val remoteRepository: CoffeesRemoteRepository
-) : CoffeesDataStore {
+class CoffeeDrinksRemoteDataStore(
+    private val remoteRepository: CoffeeDrinksRemoteRepository
+) : CoffeeDrinksDataStore {
 
     override fun getCoffees(): Single<List<CoffeeEntity>> {
         return remoteRepository.getCoffees()

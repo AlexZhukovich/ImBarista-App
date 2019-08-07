@@ -1,7 +1,7 @@
 package com.alexzh.data.store
 
 import com.alexzh.data.model.CoffeeEntity
-import com.alexzh.data.repository.CoffeesRemoteRepository
+import com.alexzh.data.repository.CoffeeDrinksRemoteRepository
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntities
@@ -18,9 +18,9 @@ class CoffeesRemoteDataStoreTest {
     @Rule @JvmField
     val expectedException: ExpectedException = ExpectedException.none()
 
-    private val repository = mockk<CoffeesRemoteRepository>()
+    private val repository = mockk<CoffeeDrinksRemoteRepository>()
 
-    private val store = CoffeesRemoteDataStore(repository)
+    private val store = CoffeeDrinksRemoteDataStore(repository)
 
     @Test
     fun getCoffeesCompletesSuccessfully() {

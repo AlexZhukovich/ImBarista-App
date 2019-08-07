@@ -2,7 +2,7 @@ package com.alexzh.imbarista.domain.interactor.coffee.browse
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.model.Coffee
-import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffee
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateGetCoffeeByIdParam
 import io.mockk.every
@@ -12,7 +12,7 @@ import org.junit.Test
 
 class GetCoffeeByIdTest {
 
-    private val repository = mockk<CoffeesRepository>()
+    private val repository = mockk<CoffeeDrinksRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
     private val getCoffeeById = GetCoffeeById(

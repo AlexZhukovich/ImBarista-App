@@ -2,7 +2,7 @@ package com.alexzh.imbarista.domain.interactor.coffee.browse
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.model.Coffee
-import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffees
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateGetCoffeesByNameParam
 import io.mockk.every
@@ -10,12 +10,12 @@ import io.mockk.mockk
 import io.reactivex.Single
 import org.junit.Test
 
-class GetCoffeesByNameTest {
+class GetCoffeeDrinksByNameTest {
 
-    private val repository = mockk<CoffeesRepository>()
+    private val repository = mockk<CoffeeDrinksRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
-    private val getCoffeesByName = GetCoffeesByName(
+    private val getCoffeesByName = GetCoffeeDrinksByName(
         repository,
         postExecutionThread
     )

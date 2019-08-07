@@ -1,7 +1,7 @@
 package com.alexzh.imbarista.domain.interactor.coffee.favourite
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
-import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.domain.GenerateDomainTestData
 import io.mockk.every
@@ -11,7 +11,7 @@ import org.junit.Test
 
 class AddCoffeeToFavouritesTest {
 
-    private val repository = mockk<CoffeesRepository>()
+    private val repository = mockk<CoffeeDrinksRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
     private val addCoffeeToFavourites = AddCoffeeToFavourites(

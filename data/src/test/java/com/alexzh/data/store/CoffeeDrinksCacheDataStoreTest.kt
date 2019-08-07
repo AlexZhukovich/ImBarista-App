@@ -1,7 +1,7 @@
 package com.alexzh.data.store
 
 import com.alexzh.data.model.CoffeeEntity
-import com.alexzh.data.repository.CoffeesCacheRepository
+import com.alexzh.data.repository.CoffeeDrinksCacheRepository
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntities
@@ -12,11 +12,11 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Test
 
-class CoffeesCacheDataStoreTest {
+class CoffeeDrinksCacheDataStoreTest {
 
-    private val repository = mockk<CoffeesCacheRepository>()
+    private val repository = mockk<CoffeeDrinksCacheRepository>()
 
-    private val dataStore = CoffeesCacheDataStore(repository)
+    private val dataStore = CoffeeDrinksCacheDataStore(repository)
 
     @Test
     fun getCoffeesReturnsCompletesSuccessfully() {

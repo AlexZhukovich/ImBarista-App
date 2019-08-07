@@ -1,10 +1,10 @@
-package com.alexzh.data.repository
+package com.alexzh.data.store
 
 import com.alexzh.data.model.CoffeeEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 
-interface CoffeesCacheRepository {
+interface CoffeeDrinksDataStore {
 
     fun getCoffees(): Single<List<CoffeeEntity>>
 
@@ -19,10 +19,4 @@ interface CoffeesCacheRepository {
     fun saveCoffees(coffees: List<CoffeeEntity>): Completable
 
     fun clearCoffees(): Completable
-
-    fun areCoffeesCached(): Single<Boolean>
-
-    fun setLastCacheVersion(lastCacheVersion: Long): Completable
-
-    fun isCoffeesCacheExpired(lastCacheVersion: Long): Boolean
 }

@@ -1,7 +1,7 @@
 package com.alexzh.testdata.domain
 
 import com.alexzh.imbarista.domain.interactor.coffee.browse.GetCoffeeById
-import com.alexzh.imbarista.domain.interactor.coffee.browse.GetCoffeesByName
+import com.alexzh.imbarista.domain.interactor.coffee.browse.GetCoffeeDrinksByName
 import com.alexzh.imbarista.domain.interactor.coffee.favourite.AddCoffeeToFavourites
 import com.alexzh.imbarista.domain.interactor.coffee.favourite.RemoveCoffeeFromFavourite
 import com.alexzh.imbarista.domain.interactor.user.*
@@ -27,20 +27,6 @@ object GenerateDomainTestData {
             id = randomLong(),
             name = randomString(),
             email = randomEmail()
-        )
-    }
-
-    fun generateChangeNameParam(): ChangeName.Param {
-        return ChangeName.Param.forChangingName(
-            randomLong(),
-            randomString()
-        )
-    }
-
-    fun generateChangePasswordParam(): ChangePassword.Param {
-        return ChangePassword.Param.forChangingPassword(
-            randomLong(),
-            randomString()
         )
     }
 
@@ -96,8 +82,8 @@ object GenerateDomainTestData {
         return GetCoffeeById.Param.forCoffee(coffeeId)
     }
 
-    fun generateGetCoffeesByNameParam(coffeeName: String = randomString()): GetCoffeesByName.Param {
-        return GetCoffeesByName.Param.forCoffees(coffeeName)
+    fun generateGetCoffeesByNameParam(coffeeName: String = randomString()): GetCoffeeDrinksByName.Param {
+        return GetCoffeeDrinksByName.Param.forCoffees(coffeeName)
     }
 
     fun generateAddCoffeeToFavourites(coffeeId: Long = randomLong()): AddCoffeeToFavourites.Param {

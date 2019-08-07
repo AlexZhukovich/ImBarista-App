@@ -2,12 +2,12 @@ package com.alexzh.data.store
 
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.data.model.UserEntity
-import com.alexzh.data.repository.AuthUserRemoteRepository
+import com.alexzh.data.repository.UserRemoteRepository
 import io.reactivex.Single
 
-class AuthUserRemoteDataStore(
-    private val repository: AuthUserRemoteRepository
-) : AuthUserDataStore {
+class UserRemoteDataStore(
+    private val repository: UserRemoteRepository
+) : UserDataStore {
 
     override fun createAccount(name: String, email: String, password: String): Single<UserEntity> {
         return repository.createAccount(name, email, password)

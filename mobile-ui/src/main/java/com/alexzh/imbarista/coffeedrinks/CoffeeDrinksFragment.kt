@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.coffees
+package com.alexzh.imbarista.coffeedrinks
 
 import android.os.Bundle
 import android.view.*
@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexzh.imbarista.DummyData
 import com.alexzh.imbarista.R
 import com.alexzh.imbarista.coffeedetails.CoffeeDetailsActivity
-import com.alexzh.imbarista.coffees.adapter.CoffeesAdapter
-import kotlinx.android.synthetic.main.fragment_coffees.view.*
+import com.alexzh.imbarista.coffeedrinks.adapter.CoffeeDrinksAdapter
+import kotlinx.android.synthetic.main.fragment_coffee_drinks.view.*
 
-class CoffeesFragment : Fragment() {
+class CoffeeDrinksFragment : Fragment() {
 
-    private val adapter by lazy { CoffeesAdapter(coffeeItemClick) }
+    private val adapter by lazy { CoffeeDrinksAdapter(coffeeItemClick) }
 
     private val coffeeItemClick: (DummyData.Coffee) -> Unit = {
         CoffeeDetailsActivity.start(this.activity!!, it)
@@ -24,7 +24,7 @@ class CoffeesFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_coffees, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_coffee_drinks, container, false)
 
         val layoutManager = LinearLayoutManager(this.context)
         rootView.recyclerView.layoutManager = layoutManager

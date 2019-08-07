@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.coffees.adapter
+package com.alexzh.imbarista.coffeedrinks.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alexzh.imbarista.DummyData
 import com.alexzh.imbarista.R
 
-class CoffeesAdapter(
+class CoffeeDrinksAdapter(
     private val itemClick: (DummyData.Coffee) -> Unit
 ) : RecyclerView.Adapter<CoffeeViewHolder>() {
 

@@ -1,19 +1,19 @@
 package com.alexzh.data
 
 import com.alexzh.data.mapper.CoffeeMapper
-import com.alexzh.data.repository.CoffeesCacheRepository
+import com.alexzh.data.repository.CoffeeDrinksCacheRepository
 import com.alexzh.data.store.CoffeesDataStoreFactory
 import com.alexzh.imbarista.domain.model.Coffee
-import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 import java.lang.UnsupportedOperationException
 
-class CoffeesDataRepository(
+class CoffeeDrinksDataRepository(
     private val mapper: CoffeeMapper,
-    private val cacheRepository: CoffeesCacheRepository,
+    private val cacheRepository: CoffeeDrinksCacheRepository,
     private val storeFactory: CoffeesDataStoreFactory
-) : CoffeesRepository {
+) : CoffeeDrinksRepository {
 
     override fun getCoffees(): Single<List<Coffee>> {
         return storeFactory.getRemoteDataStore().getCoffees()

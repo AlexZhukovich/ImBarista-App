@@ -1,7 +1,7 @@
 package com.alexzh.imbarista.domain.interactor.coffee.favourite
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
-import com.alexzh.imbarista.domain.repository.CoffeesRepository
+import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateRemoveCoffeeFromFavourite
 import io.mockk.every
@@ -12,7 +12,7 @@ import java.lang.IllegalArgumentException
 
 class RemoveCoffeeFromFavouriteTest {
 
-    private val repository = mockk<CoffeesRepository>()
+    private val repository = mockk<CoffeeDrinksRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
     private val removeCoffeeFromFavourite = RemoveCoffeeFromFavourite(

@@ -2,7 +2,7 @@ package com.alexzh.imbarista.remote
 
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.data.model.UserEntity
-import com.alexzh.data.repository.AuthUserRemoteRepository
+import com.alexzh.data.repository.UserRemoteRepository
 import com.alexzh.imbarista.remote.mapper.SessionMapper
 import com.alexzh.imbarista.remote.mapper.UserMapper
 import com.alexzh.imbarista.remote.model.UserModel
@@ -10,11 +10,11 @@ import com.alexzh.imbarista.remote.service.CoffeeDrinksService
 import io.reactivex.Single
 import java.lang.UnsupportedOperationException
 
-class AuthUserRemoteRepositoryImpl(
+class UserRemoteRepositoryImpl(
     private val service: CoffeeDrinksService,
     private val userMapper: UserMapper,
     private val sessionMapper: SessionMapper
-) : AuthUserRemoteRepository {
+) : UserRemoteRepository {
 
     override fun createAccount(name: String, email: String, password: String): Single<UserEntity> {
         val user = UserModel(

@@ -1,13 +1,13 @@
 package com.alexzh.data.store
 
 import com.alexzh.data.model.CoffeeEntity
-import com.alexzh.data.repository.CoffeesCacheRepository
+import com.alexzh.data.repository.CoffeeDrinksCacheRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 
-class CoffeesCacheDataStore(
-    private val cacheRepository: CoffeesCacheRepository
-) : CoffeesDataStore {
+class CoffeeDrinksCacheDataStore(
+    private val cacheRepository: CoffeeDrinksCacheRepository
+) : CoffeeDrinksDataStore {
 
     override fun getCoffees(): Single<List<CoffeeEntity>> {
         return cacheRepository.getCoffees()

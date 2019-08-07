@@ -1,14 +1,14 @@
 package com.alexzh.data.store
 
 class CoffeesDataStoreFactory(
-    private val remoteDataStore: CoffeesRemoteDataStore,
-    private val cacheDataStore: CoffeesCacheDataStore
+    private val remoteDataStore: CoffeeDrinksRemoteDataStore,
+    private val cacheDataStore: CoffeeDrinksCacheDataStore
 ) {
 
     fun getDataStore(
         areCoffeesCached: Boolean,
         isCachedExpired: Boolean
-    ): CoffeesDataStore {
+    ): CoffeeDrinksDataStore {
         return if (areCoffeesCached && !isCachedExpired) {
             cacheDataStore
         } else {
@@ -16,11 +16,11 @@ class CoffeesDataStoreFactory(
         }
     }
 
-    fun getCachedDataStore(): CoffeesDataStore {
+    fun getCachedDataStore(): CoffeeDrinksDataStore {
         return cacheDataStore
     }
 
-    fun getRemoteDataStore(): CoffeesDataStore {
+    fun getRemoteDataStore(): CoffeeDrinksDataStore {
         return remoteDataStore
     }
 }

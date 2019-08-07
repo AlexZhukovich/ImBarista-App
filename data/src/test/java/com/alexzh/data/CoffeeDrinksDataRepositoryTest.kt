@@ -2,9 +2,9 @@ package com.alexzh.data
 
 import com.alexzh.data.mapper.CoffeeMapper
 import com.alexzh.data.model.CoffeeEntity
-import com.alexzh.data.repository.CoffeesCacheRepository
+import com.alexzh.data.repository.CoffeeDrinksCacheRepository
 import com.alexzh.data.store.CoffeesDataStoreFactory
-import com.alexzh.data.store.CoffeesRemoteDataStore
+import com.alexzh.data.store.CoffeeDrinksRemoteDataStore
 import com.alexzh.imbarista.domain.model.Coffee
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
@@ -16,14 +16,14 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Test
 
-class CoffeesDataRepositoryTest {
+class CoffeeDrinksDataRepositoryTest {
 
     private val mapper = mockk<CoffeeMapper>()
     private val storeFactory = mockk<CoffeesDataStoreFactory>()
-    private val cacheRepository = mockk<CoffeesCacheRepository>()
-    private val remoteDataStore = mockk<CoffeesRemoteDataStore>()
+    private val cacheRepository = mockk<CoffeeDrinksCacheRepository>()
+    private val remoteDataStore = mockk<CoffeeDrinksRemoteDataStore>()
 
-    private val dataRepository = CoffeesDataRepository(
+    private val dataRepository = CoffeeDrinksDataRepository(
         mapper,
         cacheRepository,
         storeFactory

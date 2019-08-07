@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.alexzh.imbarista.R
-import com.alexzh.imbarista.coffees.CoffeesFragment
+import com.alexzh.imbarista.coffeedrinks.CoffeeDrinksFragment
 import com.alexzh.imbarista.map.TomTomMapFragment
 import com.alexzh.imbarista.profile.ProfileFragment
 import com.alexzh.imbarista.settings.SettingsActivity
@@ -47,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        replaceFragment(CoffeesFragment())
+        replaceFragment(CoffeeDrinksFragment())
 
         navigation.selectedItemId = R.id.navigation_coffees
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
@@ -56,7 +56,7 @@ class HomeActivity : AppCompatActivity() {
     private fun handleNavigationItemClick(itemId: Int): Boolean {
         when (itemId) {
             R.id.navigation_coffees -> {
-                replaceFragment(CoffeesFragment())
+                replaceFragment(CoffeeDrinksFragment())
                 supportActionBar?.title = getString(R.string.nav_coffees)
             }
             R.id.navigation_near_me -> {

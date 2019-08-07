@@ -4,7 +4,7 @@ import com.alexzh.imbarista.domain.model.Coffee
 import io.reactivex.Completable
 import io.reactivex.Single
 
-interface CoffeesRepository {
+interface CoffeeDrinksRepository {
 
     fun getCoffees(): Single<List<Coffee>>
 
