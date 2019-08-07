@@ -12,6 +12,7 @@ import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntity
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffee
 import io.mockk.every
 import io.mockk.mockk
+import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Test
 
@@ -65,24 +66,55 @@ class CoffeesDataRepositoryTest {
     }
 
     @Test
-    fun getCoffeesByIdThrowsException() {
+    fun getCoffeesByIdCompletesSuccessfully() {
+        val coffeeEntity = generateCoffeeEntity()
+        val coffee = generateCoffee()
+
+        stubGetRemoteDataStore()
+        stubGetCoffeeFromRemoteStoreById(coffeeEntity.id, Single.just(coffeeEntity))
+        stubMapFromEntity(coffeeEntity, coffee)
+
         dataRepository.getCoffeesById(randomLong())
             .test()
-            .assertError(java.lang.UnsupportedOperationException::class.java)
+            .assertComplete()
     }
 
     @Test
-    fun addCoffeeToFavouritesThrowsException() {
-        dataRepository.addCoffeeToFavourites(randomLong())
+    fun getCoffeesByIdReturnsCorrectData() {
+        val coffeeEntity = generateCoffeeEntity()
+        val coffee = generateCoffee()
+
+        stubGetRemoteDataStore()
+        stubGetCoffeeFromRemoteStoreById(coffeeEntity.id, Single.just(coffeeEntity))
+        stubMapFromEntity(coffeeEntity, coffee)
+
+        dataRepository.getCoffeesById(randomLong())
             .test()
-            .assertError(java.lang.UnsupportedOperationException::class.java)
+            .assertValue(coffee)
     }
 
     @Test
-    fun removeCoffeeFromFavouritesThrowsException() {
+    fun addCoffeeToFavouritesCompletesSuccessfully() {
+        val coffeeId = randomLong()
+
+        stubGetRemoteDataStore()
+        stubAddCoffeeToFavourites(coffeeId, Completable.complete())
+
+        dataRepository.addCoffeeToFavourites(coffeeId)
+            .test()
+            .assertComplete()
+    }
+
+    @Test
+    fun removeCoffeeFromFavouritesCompletesSuccessfully() {
+        val coffeeId = randomLong()
+
+        stubGetRemoteDataStore()
+        stubRemoveCoffeeFromFavourites(coffeeId, Completable.complete())
+
         dataRepository.removeCoffeeFromFavourites(randomLong())
             .test()
-            .assertError(java.lang.UnsupportedOperationException::class.java)
+            .assertComplete()
     }
 
     private fun stubGetRemoteDataStore() {
@@ -93,10 +125,28 @@ class CoffeesDataRepositoryTest {
         every { remoteDataStore.getCoffees() } returns coffeesSingle
     }
 
+    private fun stubGetCoffeeFromRemoteStoreById(coffeeId: Long, coffeeSingle: Single<CoffeeEntity>) {
+        every { remoteDataStore.getCoffeeById(coffeeId) } returns coffeeSingle
+    }
+
     private fun stubMapFromEntity(
         coffeeEntities: CoffeeEntity,
         coffee: Coffee
     ) {
         every { mapper.mapFromEntity(coffeeEntities) } returns coffee
+    }
+
+    private fun stubAddCoffeeToFavourites(
+        coffeeId: Long,
+        completable: Completable
+    ) {
+        every { remoteDataStore.setCoffeeAsFavourite(coffeeId) } returns completable
+    }
+
+    private fun stubRemoveCoffeeFromFavourites(
+        coffeeId: Long,
+        completable: Completable
+    ) {
+        every { remoteDataStore.setCoffeeAsNotFavourite(coffeeId) } returns completable
     }
 }
