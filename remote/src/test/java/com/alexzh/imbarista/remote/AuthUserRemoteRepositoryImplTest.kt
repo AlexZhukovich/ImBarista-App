@@ -148,7 +148,7 @@ class AuthUserRemoteRepositoryImplTest {
     }
 
     private fun stubLogIn(user: UserModel, sessionSingle: Single<ResponseModel<SessionModel>>) {
-        every { service.logIn(user) } returns  sessionSingle
+        every { service.logIn(user) } returns sessionSingle
     }
 
     private fun stubLogOut(sessionId: Long, accessToken: String, sessionSingle: Single<ResponseModel<SessionModel>>) {
