@@ -14,8 +14,8 @@ class CoffeeDrinkRemoteRepositoryImplTest {
     private val repository = CoffeeDrinkRemoteRepositoryImpl(service, mapper)
 
     @Test
-    fun getCoffeesThrowsException() {
-        repository.getCoffees()
+    fun getCoffeeDrinksThrowsException() {
+        repository.getCoffeeDrinks()
             .test()
             .assertError(UnsupportedOperationException::class.java)
     }

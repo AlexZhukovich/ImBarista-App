@@ -5,8 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 object DummyData {
 
-    fun getCoffees(): List<Coffee> = mutableListOf(
-        Coffee(
+    fun getCoffeeDrinks(): List<CoffeeDrink> = mutableListOf(
+        CoffeeDrink(
             id = 1,
             name = "Americano",
             photoUrl = "",
@@ -16,7 +16,7 @@ object DummyData {
                 Ingredient("Americano A"),
                 Ingredient("Americano B"),
                 Ingredient("Americano C"))),
-        Coffee(
+        CoffeeDrink(
             id = 2,
             name = "Latte",
             photoUrl = "",
@@ -26,7 +26,7 @@ object DummyData {
                 Ingredient("Latte A"),
                 Ingredient("Latte B"),
                 Ingredient("Latte C"))),
-        Coffee(
+        CoffeeDrink(
             id = 3,
             name = "Cappuccino",
             photoUrl = "",
@@ -36,7 +36,7 @@ object DummyData {
                 Ingredient("Cappuccino A"),
                 Ingredient("Cappuccino B"),
                 Ingredient("Cappuccino C"))),
-        Coffee(
+        CoffeeDrink(
             id = 4,
             name = "Espresso",
             photoUrl = "",
@@ -46,7 +46,7 @@ object DummyData {
                 Ingredient("Espresso A"),
                 Ingredient("Espresso B"),
                 Ingredient("Espresso C"))),
-        Coffee(
+        CoffeeDrink(
             id = 5,
             name = "Espresso Macchiato",
             photoUrl = "",
@@ -56,7 +56,7 @@ object DummyData {
                 Ingredient("Espresso Macchiato A"),
                 Ingredient("Espresso Macchiato B"),
                 Ingredient("Espresso Macchiato C"))),
-        Coffee(
+        CoffeeDrink(
             id = 6,
             name = "Latte Macchiato",
             photoUrl = "",
@@ -66,7 +66,7 @@ object DummyData {
                 Ingredient("Latte Macchiato A"),
                 Ingredient("Latte Macchiato B"),
                 Ingredient("Latte Macchiato C"))),
-        Coffee(
+        CoffeeDrink(
             id = 7,
             name = "Mocha",
             photoUrl = "",
@@ -79,7 +79,7 @@ object DummyData {
     )
 
     @Parcelize
-    data class Coffee(
+    data class CoffeeDrink(
         val id: Long,
         val name: String,
         val photoUrl: String,

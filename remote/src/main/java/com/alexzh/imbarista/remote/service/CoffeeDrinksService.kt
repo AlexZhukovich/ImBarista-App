@@ -36,15 +36,15 @@ interface CoffeeDrinksService {
     @GET("coffee-drinks")
     fun getCoffeeDrinks(
         @Header("Authorization") token: String
-    ): Single<ResponseModel<CoffeeDataModel>>
+    ): Single<ResponseModel<CoffeeDrinkDataModel>>
 
     @Headers("Content-Type: application/json")
     @PATCH("coffee-drinks/{coffeeId}")
     fun markDrinkAsFavourite(
         @Path("coffeeId") coffeeId: Long,
         @Header("Authorization") token: String,
-        @Body favourite: CoffeeFavouriteValueModel
-    ): Single<ResponseModel<CoffeeDataModel>>
+        @Body favourite: CoffeeDrinkFavouriteValueModel
+    ): Single<ResponseModel<CoffeeDrinkDataModel>>
 
     @GET("coffee-drinks/page/{pageNumber}")
     fun getCoffeeDrinksByPageNumber(

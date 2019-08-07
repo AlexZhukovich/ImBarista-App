@@ -6,5 +6,5 @@ data class PagingCoffeeDataModel(
     val totalPages: Long,
     val hasNextPage: Boolean,
     val hasPreviousPage: Boolean,
-    val data: List<CoffeeModel>
+    val data: List<CoffeeDrinkModel>
 )

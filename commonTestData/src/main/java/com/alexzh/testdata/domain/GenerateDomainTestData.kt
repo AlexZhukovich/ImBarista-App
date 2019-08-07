@@ -1,9 +1,9 @@
 package com.alexzh.testdata.domain
 
-import com.alexzh.imbarista.domain.interactor.coffee.browse.GetCoffeeById
-import com.alexzh.imbarista.domain.interactor.coffee.browse.GetCoffeesByName
-import com.alexzh.imbarista.domain.interactor.coffee.favourite.AddCoffeeToFavourites
-import com.alexzh.imbarista.domain.interactor.coffee.favourite.RemoveCoffeeFromFavourite
+import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinkById
+import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinksByName
+import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.AddCoffeeToFavourites
+import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.RemoveCoffeeFromFavourite
 import com.alexzh.imbarista.domain.interactor.user.*
 import com.alexzh.imbarista.domain.model.*
 import com.alexzh.testdata.base.RandomData.randomEmail
@@ -30,20 +30,6 @@ object GenerateDomainTestData {
         )
     }
 
-    fun generateChangeNameParam(): ChangeName.Param {
-        return ChangeName.Param.forChangingName(
-            randomLong(),
-            randomString()
-        )
-    }
-
-    fun generateChangePasswordParam(): ChangePassword.Param {
-        return ChangePassword.Param.forChangingPassword(
-            randomLong(),
-            randomString()
-        )
-    }
-
     fun generateGetUserByIdParam(userId: Long = randomLong()): GetUserById.Param {
         return GetUserById.Param.forUser(userId)
     }
@@ -63,16 +49,16 @@ object GenerateDomainTestData {
         )
     }
 
-    fun generateCoffees(coffeeCount: Int = 1, ingredientsCount: Int = 1): List<Coffee> {
-        val coffees = mutableListOf<Coffee>()
+    fun generateCoffeeDrinks(coffeeCount: Int = 1, ingredientsCount: Int = 1): List<CoffeeDrink> {
+        val coffeeDrinks = mutableListOf<CoffeeDrink>()
         repeat(coffeeCount) {
-            coffees.add(generateCoffee(ingredientsCount))
+            coffeeDrinks.add(generateCoffee(ingredientsCount))
         }
-        return coffees
+        return coffeeDrinks
     }
 
-    fun generateCoffee(ingredientsCount: Int = 1): Coffee {
-        return Coffee(
+    fun generateCoffee(ingredientsCount: Int = 1): CoffeeDrink {
+        return CoffeeDrink(
             id = randomLong(),
             name = randomString(),
             description = randomString(),
@@ -92,12 +78,12 @@ object GenerateDomainTestData {
         return ingredients
     }
 
-    fun generateGetCoffeeByIdParam(coffeeId: Long = randomLong()): GetCoffeeById.Param {
-        return GetCoffeeById.Param.forCoffee(coffeeId)
+    fun generateGetCoffeeByIdParam(coffeeId: Long = randomLong()): GetCoffeeDrinkById.Param {
+        return GetCoffeeDrinkById.Param.forCoffee(coffeeId)
     }
 
-    fun generateGetCoffeesByNameParam(coffeeName: String = randomString()): GetCoffeesByName.Param {
-        return GetCoffeesByName.Param.forCoffees(coffeeName)
+    fun generateGetCoffeeDrinksByNameParam(coffeeName: String = randomString()): GetCoffeeDrinksByName.Param {
+        return GetCoffeeDrinksByName.Param.forCoffeeDrinks(coffeeName)
     }
 
     fun generateAddCoffeeToFavourites(coffeeId: Long = randomLong()): AddCoffeeToFavourites.Param {

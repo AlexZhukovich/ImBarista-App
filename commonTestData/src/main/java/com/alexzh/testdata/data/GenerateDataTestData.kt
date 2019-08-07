@@ -27,13 +27,13 @@ object GenerateDataTestData {
         return IngredientEntity(RandomData.randomString())
     }
 
-    fun generateCoffeeEntity(ingredientCount: Int = 1): CoffeeEntity {
+    fun generateCoffeeEntity(ingredientCount: Int = 1): CoffeeDrinkEntity {
         val ingredients = mutableListOf<IngredientEntity>()
         repeat(ingredientCount) {
             ingredients.add(generateIngredientEntity())
         }
 
-        return CoffeeEntity(
+        return CoffeeDrinkEntity(
             id = RandomData.randomLong(),
             name = RandomData.randomString(),
             description = RandomData.randomString(),
@@ -44,11 +44,11 @@ object GenerateDataTestData {
     fun generateCoffeeEntities(
         coffeeCount: Int = 1,
         ingredientCount: Int = 1
-    ): List<CoffeeEntity> {
-        val coffees = mutableListOf<CoffeeEntity>()
+    ): List<CoffeeDrinkEntity> {
+        val coffeeDrinks = mutableListOf<CoffeeDrinkEntity>()
         repeat(coffeeCount) {
-            coffees.add(generateCoffeeEntity(ingredientCount))
+            coffeeDrinks.add(generateCoffeeEntity(ingredientCount))
         }
-        return coffees
+        return coffeeDrinks
     }
 }
