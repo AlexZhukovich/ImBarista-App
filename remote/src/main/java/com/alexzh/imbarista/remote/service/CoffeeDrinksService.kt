@@ -10,7 +10,7 @@ interface CoffeeDrinksService {
     @POST("users")
     fun createUser(
         @Body user: UserModel
-    ): Single<ResponseModel<AuthUserModel>>
+    ): Single<ResponseModel<UserModel>>
 
     @Headers("Content-Type: application/json")
     @POST("sessions")
