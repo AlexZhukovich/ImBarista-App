@@ -2,7 +2,6 @@ package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.SingleUseCase
-import com.alexzh.imbarista.domain.model.AuthUser
 import com.alexzh.imbarista.domain.model.Session
 import com.alexzh.imbarista.domain.repository.UserRepository
 import io.reactivex.Single

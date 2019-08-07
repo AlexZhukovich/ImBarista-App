@@ -5,14 +5,6 @@ import com.alexzh.testdata.base.RandomData
 
 object GenerateDataTestData {
 
-    fun generateAuthUserEntity(): AuthUserEntity {
-        return AuthUserEntity(
-            id = RandomData.randomLong(),
-            name = RandomData.randomString(),
-            token = RandomData.randomString()
-        )
-    }
-
     fun generateSessionEntity(): SessionEntity {
         return SessionEntity(
             sessionId = RandomData.randomLong(),
@@ -52,7 +44,7 @@ object GenerateDataTestData {
     fun generateCoffeeEntities(
         coffeeCount: Int = 1,
         ingredientCount: Int = 1
-    ) : List<CoffeeEntity> {
+    ): List<CoffeeEntity> {
         val coffees = mutableListOf<CoffeeEntity>()
         repeat(coffeeCount) {
             coffees.add(generateCoffeeEntity(ingredientCount))

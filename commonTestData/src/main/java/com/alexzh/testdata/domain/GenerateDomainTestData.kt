@@ -12,14 +12,6 @@ import com.alexzh.testdata.base.RandomData.randomString
 
 object GenerateDomainTestData {
 
-    fun generateAuthUser(): AuthUser {
-        return AuthUser(
-            id = randomLong(),
-            name = randomString(),
-            token = randomString()
-        )
-    }
-
     fun generateSession(): Session {
         return Session(
             sessionId = randomLong(),

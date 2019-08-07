@@ -1,12 +1,12 @@
 package com.alexzh.imbarista.domain.interactor.user
 
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
-import com.alexzh.imbarista.domain.model.AuthUser
+import com.alexzh.imbarista.domain.model.User
 import com.alexzh.imbarista.domain.repository.UserRepository
 import com.alexzh.testdata.base.RandomData.randomEmail
 import com.alexzh.testdata.base.RandomData.randomString
-import com.alexzh.testdata.domain.GenerateDomainTestData.generateAuthUser
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateCreateAccountParam
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateUser
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
@@ -24,13 +24,13 @@ class CreateAccountTest {
 
     @Test
     fun createAccountCompletesSuccessfullyWhenParamIsCorrect() {
-        val authUser = generateAuthUser()
-        val param = generateCreateAccountParam(authUser.name)
+        val user = generateUser()
+        val param = generateCreateAccountParam(user.name)
         stubCreateAccount(
-            param.name,
-            param.email,
-            param.password,
-            Single.just(authUser)
+            name = param.name,
+            email = param.email,
+            password = param.password,
+            userSingle = Single.just(user)
         )
 
         createAccount.buildSingleUseCase(param)
@@ -40,28 +40,28 @@ class CreateAccountTest {
 
     @Test
     fun createAccountReturnsCorrectDataWhenParamIsCorrect() {
-        val authUser = generateAuthUser()
-        val param = generateCreateAccountParam(authUser.name)
+        val user = generateUser()
+        val param = generateCreateAccountParam(user.name)
         stubCreateAccount(
-            param.name,
-            param.email,
-            param.password,
-            Single.just(authUser)
+            name = param.name,
+            email = param.email,
+            password = param.password,
+            userSingle = Single.just(user)
         )
 
         createAccount.buildSingleUseCase(param)
             .test()
-            .assertValue(authUser)
+            .assertValue(user)
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun createAccountThrowsExceptionWhenParamIsMissing() {
-        val authUser = generateAuthUser()
+        val user = generateUser()
         stubCreateAccount(
-            name = authUser.name,
+            name = user.name,
             email = randomEmail(),
             password = randomString(),
-            authSingle = Single.just(authUser)
+            userSingle = Single.just(user)
         )
 
         createAccount.buildSingleUseCase()
@@ -71,12 +71,12 @@ class CreateAccountTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun createAccountThrowsExceptionWhenParamIsNull() {
-        val authUser = generateAuthUser()
+        val user = generateUser()
         stubCreateAccount(
-            name = authUser.name,
+            name = user.name,
             email = randomEmail(),
             password = randomString(),
-            authSingle = Single.just(authUser)
+            userSingle = Single.just(user)
         )
 
         createAccount.buildSingleUseCase(null)
@@ -88,8 +88,8 @@ class CreateAccountTest {
         name: String,
         email: String,
         password: String,
-        authSingle: Single<AuthUser>
+        userSingle: Single<User>
     ) {
-        every { repository.createAccount(name, email, password) } returns authSingle
+        every { repository.createAccount(name, email, password) } returns userSingle
     }
 }
