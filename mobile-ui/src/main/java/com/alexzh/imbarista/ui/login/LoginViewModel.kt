@@ -49,7 +49,7 @@ class LoginViewModel(
     fun changeEmailText(email: String) {
         when {
             email.isBlank() -> emailErrorLiveData.postValue(R.string.error_email_is_blank)
-            email.isValidEmail() -> emailErrorLiveData.postValue(R.string.error_email_is_not_email)
+            !email.isValidEmail() -> emailErrorLiveData.postValue(R.string.error_email_is_not_email)
             else -> emailErrorLiveData.postValue(INVALID_RESOURCE_VALUE)
         }
     }
