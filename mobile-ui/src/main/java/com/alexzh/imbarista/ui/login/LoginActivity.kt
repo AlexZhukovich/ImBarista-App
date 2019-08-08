@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
 import com.alexzh.imbarista.R
@@ -20,6 +22,8 @@ import java.net.UnknownHostException
 class LoginActivity : AppCompatActivity() {
 
     companion object {
+        private const val INVALID_RESOURCE_VALUE = -1
+
         fun start(context: Context) {
             context.startActivity(Intent(context, LoginActivity::class.java))
         }
@@ -43,14 +47,54 @@ class LoginActivity : AppCompatActivity() {
         createAccountButton.setOnClickListener {
             CreateAccountActivity.start(this@LoginActivity)
         }
+
+        emailEditText.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // not used
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // not used
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.changeEmailText(s.toString())
+            }
+        })
+
+        emailEditText.setOnFocusChangeListener{
+                _, hasFocus -> if (hasFocus) viewModel.changeEmailText(emailEditText.text.toString())
+        }
+
+        passwordEditText.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // not used
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // not used
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.changePasswordText(s.toString())
+            }
+        })
+
+        passwordEditText.setOnFocusChangeListener{
+                _, hasFocus -> if (hasFocus) viewModel.changePasswordText(passwordEditText.text.toString())
+        }
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.getLogInInfo().observe(this, Observer<Resource<SessionView>>{
-            it?.let {
-                handleState(it)
-            }
+            it?.let { handleState(it) }
+        })
+        viewModel.getEmailError().observe(this, Observer<Int> {
+            it?.let { emailInputLayout.error = if (it != INVALID_RESOURCE_VALUE) getString(it) else "" }
+        })
+        viewModel.getPasswordError().observe(this, Observer<Int> {
+            it?.let { passwordInputLayout.error = if (it != INVALID_RESOURCE_VALUE) getString(it) else "" }
         })
     }
 
