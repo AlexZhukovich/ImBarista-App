@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.alexzh.imbarista.domain.interactor.user.LogIn
 import com.alexzh.imbarista.domain.model.Session
 import com.alexzh.imbarista.mapper.SessionViewModelMapper
-import com.alexzh.imbarista.model.SessionViewModel
+import com.alexzh.imbarista.model.SessionView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import io.reactivex.observers.DisposableSingleObserver
@@ -16,9 +16,9 @@ class LoginViewModel(
     private val mapper: SessionViewModelMapper
 ): ViewModel() {
 
-    private val liveData: MutableLiveData<Resource<SessionViewModel>> = MutableLiveData()
+    private val liveData: MutableLiveData<Resource<SessionView>> = MutableLiveData()
 
-    fun getLogInInfo(): LiveData<Resource<SessionViewModel>> = liveData
+    fun getLogInInfo(): LiveData<Resource<SessionView>> = liveData
 
     fun logIn(email: String, password: String) {
         liveData.postValue(Resource(ResourceState.LOADING, null, null))

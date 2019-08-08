@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.alexzh.imbarista.R
-import com.alexzh.imbarista.model.SessionViewModel
+import com.alexzh.imbarista.model.SessionView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.createaccount.CreateAccountActivity
@@ -47,14 +47,14 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getLogInInfo().observe(this, Observer<Resource<SessionViewModel>>{
+        viewModel.getLogInInfo().observe(this, Observer<Resource<SessionView>>{
             it?.let {
                 handleState(it)
             }
         })
     }
 
-    private fun handleState(resource: Resource<SessionViewModel>) {
+    private fun handleState(resource: Resource<SessionView>) {
         when (resource.status) {
             ResourceState.LOADING -> {
                 progressBar.visibility = View.VISIBLE

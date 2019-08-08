@@ -1,6 +1,6 @@
 package com.alexzh.imbarista.model
 
-data class SessionViewModel(
+data class SessionView(
     val sessionId: Long = -1L,
     val accessToken: String = "",
     val accessTokenExpiry: Long = -1L,
