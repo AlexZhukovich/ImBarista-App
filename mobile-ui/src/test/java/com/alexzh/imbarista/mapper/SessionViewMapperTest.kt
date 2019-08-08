@@ -8,7 +8,7 @@ import org.junit.Test
 
 class SessionViewMapperTest {
 
-    private val mapper = SessionViewModelMapper()
+    private val mapper = SessionViewMapper()
 
     @Test
     fun mapToViewMapsDataCorrectly() {

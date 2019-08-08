@@ -7,7 +7,7 @@ import com.alexzh.imbarista.R
 import com.alexzh.imbarista.domain.interactor.user.LogIn
 import com.alexzh.imbarista.domain.model.Session
 import com.alexzh.imbarista.ext.isValidEmail
-import com.alexzh.imbarista.mapper.SessionViewModelMapper
+import com.alexzh.imbarista.mapper.SessionViewMapper
 import com.alexzh.imbarista.model.SessionView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
@@ -15,7 +15,7 @@ import io.reactivex.observers.DisposableSingleObserver
 
 class LoginViewModel(
     private val logIn: LogIn,
-    private val mapper: SessionViewModelMapper
+    private val mapper: SessionViewMapper
 ): ViewModel() {
 
     companion object {

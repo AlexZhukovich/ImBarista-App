@@ -19,7 +19,7 @@ import com.alexzh.imbarista.domain.interactor.user.LogIn
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.imbarista.domain.repository.UserRepository
 import com.alexzh.imbarista.executor.UiThread
-import com.alexzh.imbarista.mapper.SessionViewModelMapper
+import com.alexzh.imbarista.mapper.SessionViewMapper
 import com.alexzh.imbarista.remote.CoffeeDrinkRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.UserRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.mapper.IngredientsMapper
@@ -45,7 +45,7 @@ val mapperModule = module {
     factory { CoffeeMapper(ingredientMapper = get()) }
     factory { IngredientsMapper() }
     factory { com.alexzh.imbarista.remote.mapper.CoffeeMapper(ingredientMapper = get()) }
-    factory { SessionViewModelMapper() }
+    factory { SessionViewMapper() }
     factory { UserMapper() }
     factory { com.alexzh.data.mapper.UserMapper() }
     factory { SessionMapper() }
