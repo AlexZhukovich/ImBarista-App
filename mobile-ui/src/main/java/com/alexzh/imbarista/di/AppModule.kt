@@ -15,17 +15,20 @@ import com.alexzh.imbarista.cache.CoffeeDrinksCacheRepositoryImpl
 import com.alexzh.imbarista.cache.SharedPreferencesRepository
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinks
+import com.alexzh.imbarista.domain.interactor.user.CreateAccount
 import com.alexzh.imbarista.domain.interactor.user.LogIn
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.imbarista.domain.repository.UserRepository
 import com.alexzh.imbarista.executor.UiThread
 import com.alexzh.imbarista.mapper.SessionViewMapper
+import com.alexzh.imbarista.mapper.UserViewMapper
 import com.alexzh.imbarista.remote.CoffeeDrinkRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.UserRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.mapper.IngredientsMapper
 import com.alexzh.imbarista.remote.mapper.SessionMapper
 import com.alexzh.imbarista.remote.mapper.UserMapper
 import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
+import com.alexzh.imbarista.ui.createaccount.CreateAccountViewModel
 import com.alexzh.imbarista.ui.login.LoginViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -33,10 +36,12 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { LoginViewModel(logIn = get(), mapper = get()) }
+    viewModel { CreateAccountViewModel(createAccount = get(), mapper = get()) }
 }
 
 val useCaseModule = module {
     factory { LogIn(userRepository = get(), postExecutionThread = get()) }
+    factory { CreateAccount(userRepository = get(), postExecutionThread = get()) }
     factory { GetCoffeeDrinks(coffeeDrinksRepository = get(), postExecutionThread = get()) }
 }
 
@@ -46,6 +51,7 @@ val mapperModule = module {
     factory { IngredientsMapper() }
     factory { com.alexzh.imbarista.remote.mapper.CoffeeMapper(ingredientMapper = get()) }
     factory { SessionViewMapper() }
+    factory { UserViewMapper() }
     factory { UserMapper() }
     factory { com.alexzh.data.mapper.UserMapper() }
     factory { SessionMapper() }

@@ -21,11 +21,16 @@
     <string name="search_action">Search</string>
 
     <!-- Errors -->
+    <string name="error_name_is_blank">Name is blank</string>
     <string name="error_email_is_blank">Email is blank</string>
     <string name="error_email_is_not_email">Text is not an email address</string>
     <string name="error_password_is_blank">Password is blank</string>
     <string name="error_internet_connection">Internet connection error</string>
     <string name="error_email_password_validation">Check email and password</string>
+    <string name="error_name_email_password_validation">Check name, email and password</string>
+
+    <!-- Messages -->
+    <string name="user_was_created">User was created, please log in</string>
 
     <!-- Preference Screen -->
     <string name="pref_map_header">Map</string>
