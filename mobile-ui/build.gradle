@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -41,6 +40,11 @@ dependencies {
     def mobileUiTestDependencies = rootProject.ext.mobileUiTestDependencies
     def mobileUiAndroidTestDependencies = rootProject.ext.mobileUiAndroidTestDependencies
 
+    implementation project(':domain')
+    implementation project(':data')
+    implementation project(':remote')
+    implementation project(':cache')
+
     // AndroidX
     implementation mobileUiDependencies.kotlin
     implementation mobileUiDependencies.androidxAppCompat
@@ -48,6 +52,9 @@ dependencies {
     implementation mobileUiDependencies.androidxPreference
     implementation mobileUiDependencies.androidxCoreKtx
     implementation mobileUiDependencies.androidxConstraintlayout
+    implementation mobileUiDependencies.lifecycleRuntime
+    implementation mobileUiDependencies.lifecycleExt
+    kapt mobileUiDependencies.lifecycleCompiler
 
     // Material Design Components
     implementation mobileUiDependencies.materialDesignComp
@@ -66,6 +73,10 @@ dependencies {
     // RxJava and RxKotlin
     implementation mobileUiDependencies.rxJava
     implementation mobileUiDependencies.rxKotlin
+
+    // Koin
+    implementation mobileUiDependencies.koin
+    implementation mobileUiDependencies.koinViewModel
 
     // Testing
     testImplementation mobileUiTestDependencies.junit
