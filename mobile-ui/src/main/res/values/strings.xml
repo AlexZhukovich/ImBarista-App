@@ -29,6 +29,7 @@
     <string name="error_internet_connection">Internet connection error</string>
     <string name="error_email_password_validation">Check email and password</string>
     <string name="error_name_email_password_validation">Check name, email and password</string>
+    <string name="error_loading_user_info">Loading user info error</string>
 
     <!-- Messages -->
     <string name="user_was_created">User was created, please log in</string>

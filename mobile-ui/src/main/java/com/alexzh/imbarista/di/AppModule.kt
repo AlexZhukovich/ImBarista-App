@@ -15,10 +15,7 @@ import com.alexzh.imbarista.cache.CoffeeDrinksCacheRepositoryImpl
 import com.alexzh.imbarista.cache.SharedPreferencesRepository
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinks
-import com.alexzh.imbarista.domain.interactor.user.CreateAccount
-import com.alexzh.imbarista.domain.interactor.user.GetExistingSession
-import com.alexzh.imbarista.domain.interactor.user.LogIn
-import com.alexzh.imbarista.domain.interactor.user.LogOut
+import com.alexzh.imbarista.domain.interactor.user.*
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.imbarista.domain.repository.UserRepository
 import com.alexzh.imbarista.executor.UiThread
@@ -30,10 +27,7 @@ import com.alexzh.imbarista.remote.mapper.IngredientsMapper
 import com.alexzh.imbarista.remote.mapper.SessionMapper
 import com.alexzh.imbarista.remote.mapper.UserMapper
 import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
-import com.alexzh.imbarista.viewmodel.CreateAccountViewModel
-import com.alexzh.imbarista.viewmodel.LogInViewModel
-import com.alexzh.imbarista.viewmodel.LogOutViewModel
-import com.alexzh.imbarista.viewmodel.CheckExistingSessionViewModel
+import com.alexzh.imbarista.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -43,6 +37,7 @@ val viewModelModule = module {
     viewModel { CreateAccountViewModel(createAccount = get(), mapper = get()) }
     viewModel { CheckExistingSessionViewModel(getExistingSession = get(), mapper = get()) }
     viewModel { LogOutViewModel(logOut = get()) }
+    viewModel { CurrentUserViewModel(getCurrentUser = get(), mapper = get()) }
 }
 
 val useCaseModule = module {
@@ -50,6 +45,7 @@ val useCaseModule = module {
     factory { LogOut(userRepository = get(), postExecutionThread = get()) }
     factory { CreateAccount(userRepository = get(), postExecutionThread = get()) }
     factory { GetExistingSession(userRepository = get(), postExecutionThread = get()) }
+    factory { GetCurrentUser(userRepository = get(), postExecutionThread = get()) }
     factory { GetCoffeeDrinks(coffeeDrinksRepository = get(), postExecutionThread = get()) }
 }
 

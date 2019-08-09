@@ -31,7 +31,7 @@ class CoffeeDrinksRemoteDataStore(
     }
 
     override fun saveCoffeeDrinks(coffeeDrinks: List<CoffeeDrinkEntity>): Completable {
-        throw UnsupportedOperationException("'Saving coffeeDrinks' operation is unsupported")
+        throw UnsupportedOperationException("'Saving coffee drinks' operation is unsupported")
     }
 
     override fun clearCoffeeDrinks(): Completable {

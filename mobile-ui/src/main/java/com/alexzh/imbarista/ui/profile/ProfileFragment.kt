@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.alexzh.imbarista.R
+import com.alexzh.imbarista.model.UserView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.login.LoginActivity
+import com.alexzh.imbarista.viewmodel.GetCurrentUserViewModel
 import com.alexzh.imbarista.viewmodel.LogOutViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
-    private val viewModel: LogOutViewModel by viewModel()
+    private val logOutViewModel: LogOutViewModel by viewModel()
+    private val getCurrentUserViewModel: GetCurrentUserViewModel by viewModel()
 
     init {
         setHasOptionsMenu(true)
@@ -34,7 +38,7 @@ class ProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logout_action -> {
-                viewModel.logOut()
+                logOutViewModel.logOut()
                 return true
             }
         }
@@ -42,10 +46,35 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onStart() {
-        viewModel.getLogOutInfo().observe(this, Observer<Resource<Any>> {
+        logOutViewModel.getLogOutInfo().observe(this, Observer<Resource<Any>> {
             it?.let { handleLogOut(it) }
         })
+        getCurrentUserViewModel.getUserInfo().observe(this, Observer<Resource<UserView>> {
+            it?.let { handleProfileInfo(it) }
+        })
+        getCurrentUserViewModel.fetchUserInfo()
         super.onStart()
+    }
+
+    private fun handleProfileInfo(resource: Resource<UserView>) {
+        when (resource.status) {
+            ResourceState.LOADING -> {
+                progressBar.visibility = View.VISIBLE
+            }
+            ResourceState.SUCCESS -> {
+                nameTextView.text = resource.data?.name
+                emailTextView.text = resource.data?.email
+                progressBar.visibility = View.GONE
+            }
+            ResourceState.ERROR -> {
+                progressBar.visibility = View.GONE
+                displayError(getString(R.string.error_loading_user_info))
+            }
+        }
+    }
+
+    private fun displayError(text: String) {
+        Snackbar.make(root, text, Snackbar.LENGTH_LONG).show()
     }
 
     private fun handleLogOut(resource: Resource<Any>) {

@@ -43,4 +43,9 @@ class UserRemoteRepositoryImpl(
     override fun refreshToken(accessToken: String): Single<SessionEntity> {
         return Single.error(UnsupportedOperationException("Not implemented yet"))
     }
+
+    override fun getCurrentUser(accessToken: String): Single<UserEntity> {
+        return service.getCurrentUser(accessToken)
+            .map { userMapper.mapFromModel(it.data) }
+    }
 }

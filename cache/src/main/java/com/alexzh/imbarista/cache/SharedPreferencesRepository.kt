@@ -20,6 +20,22 @@ class SharedPreferencesRepository(
         private const val REFRESH_TOKEN = "refresh_token"
         private const val ACCESS_TOKEN_EXPIRY = "access_token_expiry"
         private const val REFRESH_TOKEN_EXPIRY = "refresh_token_expiry"
+
+        private const val USER_ID = "user_id"
+        private const val USER_NAME = "user_name"
+        private const val USER_EMAIL = "user_email"
+    }
+
+    override fun getSessionInfo(): SessionEntity {
+        return sessionMapper.mapFromCached(
+            Session(
+                prefs.getLong(SESSION_ID, LONG_DEFAULT_VALUE),
+                prefs.getString(ACCESS_TOKEN, STR_DEFAULT_VALUE) as String,
+                prefs.getLong(ACCESS_TOKEN_EXPIRY, LONG_DEFAULT_VALUE),
+                prefs.getString(REFRESH_TOKEN, STR_DEFAULT_VALUE) as String,
+                prefs.getLong(REFRESH_TOKEN_EXPIRY, LONG_DEFAULT_VALUE)
+            )
+        )
     }
 
     override fun saveSessionInfo(sessionEntity: SessionEntity) {
@@ -41,17 +57,5 @@ class SharedPreferencesRepository(
             .remove(REFRESH_TOKEN)
             .remove(REFRESH_TOKEN_EXPIRY)
             .apply()
-    }
-
-    override fun getSessionInfo(): SessionEntity {
-        return sessionMapper.mapFromCached(
-            Session(
-                prefs.getLong(SESSION_ID, LONG_DEFAULT_VALUE),
-                prefs.getString(ACCESS_TOKEN, STR_DEFAULT_VALUE) as String,
-                prefs.getLong(ACCESS_TOKEN_EXPIRY, LONG_DEFAULT_VALUE),
-                prefs.getString(REFRESH_TOKEN, STR_DEFAULT_VALUE) as String,
-                prefs.getLong(REFRESH_TOKEN_EXPIRY, LONG_DEFAULT_VALUE)
-            )
-        )
     }
 }

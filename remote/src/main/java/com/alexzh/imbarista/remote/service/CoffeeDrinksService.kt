@@ -12,6 +12,11 @@ interface CoffeeDrinksService {
         @Body user: UserModel
     ): Single<ResponseModel<UserModel>>
 
+    @GET("users")
+    fun getCurrentUser(
+        @Header("Authorization") token: String
+    ): Single<ResponseModel<UserModel>>
+
     @Headers("Content-Type: application/json")
     @POST("sessions")
     fun logIn(
