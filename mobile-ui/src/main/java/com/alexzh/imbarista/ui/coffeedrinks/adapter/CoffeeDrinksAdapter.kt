@@ -3,16 +3,16 @@ package com.alexzh.imbarista.ui.coffeedrinks.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alexzh.imbarista.DummyData
 import com.alexzh.imbarista.R
+import com.alexzh.imbarista.model.CoffeeDrinkView
 
 class CoffeeDrinksAdapter(
-    private val itemClick: (DummyData.CoffeeDrink) -> Unit
+    private val itemClick: (CoffeeDrinkView) -> Unit
 ) : RecyclerView.Adapter<CoffeeDrinkViewHolder>() {
 
-    private val coffeeDrinks = mutableListOf<DummyData.CoffeeDrink>()
+    private val coffeeDrinks = mutableListOf<CoffeeDrinkView>()
 
-    fun addCoffeeDrinks(coffeeDrinks: List<DummyData.CoffeeDrink>) {
+    fun addCoffeeDrinks(coffeeDrinks: List<CoffeeDrinkView>) {
         this.coffeeDrinks += coffeeDrinks
         notifyDataSetChanged()
     }

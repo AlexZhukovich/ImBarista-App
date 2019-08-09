@@ -12,7 +12,12 @@ class CoffeeDrinkRemoteRepositoryImpl(
     private val mapper: CoffeeMapper
 ) : CoffeeDrinksRemoteRepository {
 
-    override fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>> {
-        return Single.error(UnsupportedOperationException("Not implemented yet"))
+    override fun getCoffeeDrinks(accessToken: String): Single<List<CoffeeDrinkEntity>> {
+        return service.getCoffeeDrinks(accessToken)
+            .map { response ->
+                response.data.data.map { coffeeDrinkModel ->
+                    mapper.mapFromModel(coffeeDrinkModel)
+                }
+            }
     }
 }

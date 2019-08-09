@@ -9,7 +9,7 @@ import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntity
-import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffee
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffeeDrink
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Completable
@@ -32,7 +32,7 @@ class CoffeeDrinksDataRepositoryTest {
     @Test
     fun getCoffeeDrinksCompletesSuccessfully() {
         val coffeeEntity = generateCoffeeEntity()
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
 
         stubGetRemoteDataStore()
         stubGetCoffeeDrinksFromRemoteStore(Single.just(listOf(coffeeEntity)))
@@ -46,7 +46,7 @@ class CoffeeDrinksDataRepositoryTest {
     @Test
     fun getCoffeeDrinksReturnsCorrectData() {
         val coffeeEntity = generateCoffeeEntity()
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
         val expectedCoffeeDrinks = listOf(coffee)
 
         stubGetRemoteDataStore()
@@ -68,7 +68,7 @@ class CoffeeDrinksDataRepositoryTest {
     @Test
     fun getCoffeeDrinkByIdCompletesSuccessfully() {
         val coffeeEntity = generateCoffeeEntity()
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
 
         stubGetRemoteDataStore()
         stubGetCoffeeFromRemoteStoreById(coffeeEntity.id, Single.just(coffeeEntity))
@@ -82,7 +82,7 @@ class CoffeeDrinksDataRepositoryTest {
     @Test
     fun getCoffeeDrinkByIdReturnsCorrectData() {
         val coffeeEntity = generateCoffeeEntity()
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
 
         stubGetRemoteDataStore()
         stubGetCoffeeFromRemoteStoreById(coffeeEntity.id, Single.just(coffeeEntity))

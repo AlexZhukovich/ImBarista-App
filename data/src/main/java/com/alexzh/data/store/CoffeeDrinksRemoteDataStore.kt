@@ -10,8 +10,8 @@ class CoffeeDrinksRemoteDataStore(
     private val remoteRepository: CoffeeDrinksRemoteRepository
 ) : CoffeeDrinksDataStore {
 
-    override fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>> {
-        return remoteRepository.getCoffeeDrinks()
+    override fun getCoffeeDrinks(accessToken: String): Single<List<CoffeeDrinkEntity>> {
+        return remoteRepository.getCoffeeDrinks(accessToken)
     }
 
     override fun getCoffeeDrinksByName(name: String): Single<List<CoffeeDrinkEntity>> {

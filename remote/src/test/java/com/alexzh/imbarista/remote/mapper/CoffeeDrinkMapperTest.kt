@@ -8,7 +8,7 @@ import org.junit.Test
 
 class CoffeeDrinkMapperTest {
 
-    private val mapper = CoffeeMapper(IngredientsMapper())
+    private val mapper = CoffeeMapper()
 
     @Test
     fun mapFromModelWithOneIngredientMapsDataCorrectly() {
@@ -40,11 +40,9 @@ class CoffeeDrinkMapperTest {
     ) {
         assertEquals(coffeeDrinkModel.id, coffeeDrinkEntity.id)
         assertEquals(coffeeDrinkModel.name, coffeeDrinkEntity.name)
+        assertEquals(coffeeDrinkModel.imageUrl, coffeeDrinkEntity.imageUrl)
         assertEquals(coffeeDrinkModel.description, coffeeDrinkEntity.description)
-
-        assertEquals(coffeeDrinkModel.ingredients.size, coffeeDrinkEntity.ingredients.size)
-        for (index in 0 until coffeeDrinkModel.ingredients.size) {
-            assertEquals(coffeeDrinkModel.ingredients[index].name, coffeeDrinkEntity.ingredients[index].name)
-        }
+        assertEquals(coffeeDrinkModel.ingredients, coffeeDrinkEntity.ingredients)
+        assertEquals(coffeeDrinkModel.isFavourite, coffeeDrinkEntity.isFavourite)
     }
 }

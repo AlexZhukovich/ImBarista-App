@@ -6,6 +6,7 @@ import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.AddCoffeeToF
 import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.RemoveCoffeeFromFavourite
 import com.alexzh.imbarista.domain.interactor.user.*
 import com.alexzh.imbarista.domain.model.*
+import com.alexzh.testdata.base.RandomData.randomBoolean
 import com.alexzh.testdata.base.RandomData.randomEmail
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
@@ -48,30 +49,25 @@ object GenerateDomainTestData {
     fun generateCoffeeDrinks(coffeeCount: Int = 1, ingredientsCount: Int = 1): List<CoffeeDrink> {
         val coffeeDrinks = mutableListOf<CoffeeDrink>()
         repeat(coffeeCount) {
-            coffeeDrinks.add(generateCoffee(ingredientsCount))
+            coffeeDrinks.add(generateCoffeeDrink(ingredientsCount))
         }
         return coffeeDrinks
     }
 
-    fun generateCoffee(ingredientsCount: Int = 1): CoffeeDrink {
+    fun generateCoffeeDrink(ingredientsCount: Int = 1): CoffeeDrink {
+        var ingredients = ""
+        repeat(ingredientsCount) {
+            ingredients += "${randomString()}, "
+        }
+
         return CoffeeDrink(
             id = randomLong(),
             name = randomString(),
+            imageUrl = randomString(),
             description = randomString(),
-            ingredients = generateIngredients(ingredientsCount)
+            ingredients = ingredients,
+            isFavourite = randomBoolean()
         )
-    }
-
-    fun generateIngredient(): Ingredient {
-        return Ingredient(randomString())
-    }
-
-    private fun generateIngredients(ingredientsCount: Int): List<Ingredient> {
-        val ingredients = mutableListOf<Ingredient>()
-        repeat(ingredientsCount) {
-            ingredients.add(generateIngredient())
-        }
-        return ingredients
     }
 
     fun generateGetCoffeeByIdParam(coffeeId: Long = randomLong()): GetCoffeeDrinkById.Param {

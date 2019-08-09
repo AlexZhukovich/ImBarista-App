@@ -5,7 +5,6 @@ import android.preference.PreferenceManager
 import com.alexzh.data.CoffeeDrinksDataRepository
 import com.alexzh.data.UserDataRepository
 import com.alexzh.data.mapper.CoffeeMapper
-import com.alexzh.data.mapper.IngredientMapper
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
 import com.alexzh.data.repository.CoffeeDrinksRemoteRepository
 import com.alexzh.data.repository.PreferencesRepository
@@ -19,11 +18,11 @@ import com.alexzh.imbarista.domain.interactor.user.*
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.imbarista.domain.repository.UserRepository
 import com.alexzh.imbarista.executor.UiThread
+import com.alexzh.imbarista.mapper.CoffeeDrinkViewMapper
 import com.alexzh.imbarista.mapper.SessionViewMapper
 import com.alexzh.imbarista.mapper.UserViewMapper
 import com.alexzh.imbarista.remote.CoffeeDrinkRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.UserRemoteRepositoryImpl
-import com.alexzh.imbarista.remote.mapper.IngredientsMapper
 import com.alexzh.imbarista.remote.mapper.SessionMapper
 import com.alexzh.imbarista.remote.mapper.UserMapper
 import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
@@ -37,7 +36,8 @@ val viewModelModule = module {
     viewModel { CreateAccountViewModel(createAccount = get(), mapper = get()) }
     viewModel { CheckExistingSessionViewModel(getExistingSession = get(), mapper = get()) }
     viewModel { LogOutViewModel(logOut = get()) }
-    viewModel { CurrentUserViewModel(getCurrentUser = get(), mapper = get()) }
+    viewModel { GetCurrentUserViewModel(getCurrentUser = get(), mapper = get()) }
+    viewModel { GetCoffeeDrinksViewModel(getCoffeeDrinks = get(), coffeeDrinkViewMapper = get()) }
 }
 
 val useCaseModule = module {
@@ -50,10 +50,8 @@ val useCaseModule = module {
 }
 
 val mapperModule = module {
-    factory { IngredientMapper() }
-    factory { CoffeeMapper(ingredientMapper = get()) }
-    factory { IngredientsMapper() }
-    factory { com.alexzh.imbarista.remote.mapper.CoffeeMapper(ingredientMapper = get()) }
+    factory { CoffeeMapper() }
+    factory { com.alexzh.imbarista.remote.mapper.CoffeeMapper() }
     factory { SessionViewMapper() }
     factory { UserViewMapper() }
     factory { UserMapper() }
@@ -61,6 +59,7 @@ val mapperModule = module {
     factory { SessionMapper() }
     factory { com.alexzh.data.mapper.SessionMapper() }
     factory { com.alexzh.imbarista.cache.mapper.SessionMapper() }
+    factory { CoffeeDrinkViewMapper() }
 }
 
 val dataModule = module {
@@ -70,7 +69,7 @@ val dataModule = module {
     factory { CoffeeDrinksCacheDataStore(cacheRepository = get()) }
     factory { CoffeeDrinksRemoteDataStore(remoteRepository = get()) }
     factory { CoffeeDrinksDataStoreFactory(remoteDataStore = get(), cacheDataStore = get()) }
-    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(mapper = get(), cacheRepository = get(), storeFactory = get()) }
+    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(mapper = get(), cacheRepository = get(), storeFactory = get(), preferencesRepository = get()) }
     factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userMapper = get(), sessionMapper = get()) }
     factory<UserDataStore> { UserRemoteDataStore(repository = get()) }
     factory<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(androidContext()) }

@@ -2,6 +2,7 @@ package com.alexzh.data
 
 import com.alexzh.data.mapper.CoffeeMapper
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
+import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.data.store.CoffeeDrinksDataStoreFactory
 import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
@@ -12,11 +13,13 @@ import java.lang.UnsupportedOperationException
 class CoffeeDrinksDataRepository(
     private val mapper: CoffeeMapper,
     private val cacheRepository: CoffeeDrinksCacheRepository,
-    private val storeFactory: CoffeeDrinksDataStoreFactory
+    private val storeFactory: CoffeeDrinksDataStoreFactory,
+    private val preferencesRepository: PreferencesRepository
 ) : CoffeeDrinksRepository {
 
     override fun getCoffeeDrinks(): Single<List<CoffeeDrink>> {
-        return storeFactory.getRemoteDataStore().getCoffeeDrinks()
+        val sessionEntity = preferencesRepository.getSessionInfo()
+        return storeFactory.getRemoteDataStore().getCoffeeDrinks(sessionEntity.accessToken)
             .map { it.map { entity -> mapper.mapFromEntity(entity) } }
     }
 

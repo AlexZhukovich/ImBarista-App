@@ -1,6 +1,7 @@
 package com.alexzh.testdata.remote
 
 import com.alexzh.imbarista.remote.model.*
+import com.alexzh.testdata.base.RandomData.randomBoolean
 import com.alexzh.testdata.base.RandomData.randomEmail
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
@@ -26,24 +27,19 @@ object GenerateRemoteTestData {
         )
     }
 
-    fun generateIngredientModel(): IngredientModel {
-        return IngredientModel(randomString())
-    }
+    fun generateCoffeeModel(ingredientsCount: Int = 1): CoffeeDrinkModel {
+        var ingredients = ""
+        repeat(ingredientsCount) {
+            ingredients += "${randomString()}, "
+        }
 
-    fun generateCoffeeModel(ingredientCount: Int = 1): CoffeeDrinkModel {
         return CoffeeDrinkModel(
             id = randomLong(),
             name = randomString(),
+            imageUrl = randomString(),
             description = randomString(),
-            ingredients = generateIngredientModels(ingredientCount)
+            ingredients = ingredients,
+            isFavourite = randomBoolean()
         )
-    }
-
-    private fun generateIngredientModels(count: Int = 1): List<IngredientModel> {
-        val ingredients = mutableListOf<IngredientModel>()
-        repeat(count) {
-            ingredients.add(generateIngredientModel())
-        }
-        return ingredients
     }
 }

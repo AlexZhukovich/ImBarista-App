@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface CoffeeDrinksRemoteRepository {
 
-    fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>>
+    fun getCoffeeDrinks(accessToken: String): Single<List<CoffeeDrinkEntity>>
 }

@@ -3,7 +3,7 @@ package com.alexzh.imbarista.domain.interactor.coffeedrink.browse
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
-import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffee
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffeeDrink
 import com.alexzh.testdata.domain.GenerateDomainTestData.generateGetCoffeeByIdParam
 import io.mockk.every
 import io.mockk.mockk
@@ -22,7 +22,7 @@ class GetCoffeeDrinkByIdTest {
 
     @Test
     fun getCoffeeDrinkByIdCompletesSuccessfullyWhenParamIsCorrect() {
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
         val param = generateGetCoffeeByIdParam(coffee.id)
         stubGetCoffeeDrinksById(param.coffeeId, Single.just(coffee))
 
@@ -33,7 +33,7 @@ class GetCoffeeDrinkByIdTest {
 
     @Test
     fun getCoffeeDrinkByIdReturnsCorrectDataWhenParamIsCorrect() {
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
         val param = generateGetCoffeeByIdParam(coffee.id)
         stubGetCoffeeDrinksById(param.coffeeId, Single.just(coffee))
 
@@ -44,7 +44,7 @@ class GetCoffeeDrinkByIdTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun getCoffeeDrinkByIdThrowsExceptionWhenParamIsMissing() {
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
         val param = generateGetCoffeeByIdParam(coffee.id)
         stubGetCoffeeDrinksById(param.coffeeId, Single.just(coffee))
 
@@ -55,7 +55,7 @@ class GetCoffeeDrinkByIdTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun getCoffeeDrinkByIdThrowsExceptionWhenParamIsNull() {
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
         val param = generateGetCoffeeByIdParam(coffee.id)
         stubGetCoffeeDrinksById(param.coffeeId, Single.just(coffee))
 

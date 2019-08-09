@@ -23,21 +23,19 @@ object GenerateDataTestData {
         )
     }
 
-    fun generateIngredientEntity(): IngredientEntity {
-        return IngredientEntity(RandomData.randomString())
-    }
-
-    fun generateCoffeeEntity(ingredientCount: Int = 1): CoffeeDrinkEntity {
-        val ingredients = mutableListOf<IngredientEntity>()
-        repeat(ingredientCount) {
-            ingredients.add(generateIngredientEntity())
+    fun generateCoffeeEntity(ingredientsCount: Int = 1): CoffeeDrinkEntity {
+        var ingredients = ""
+        repeat(ingredientsCount) {
+            ingredients += "${RandomData.randomString()}, "
         }
 
         return CoffeeDrinkEntity(
             id = RandomData.randomLong(),
             name = RandomData.randomString(),
+            imageUrl = RandomData.randomString(),
             description = RandomData.randomString(),
-            ingredients = ingredients
+            ingredients = ingredients,
+            isFavourite = RandomData.randomBoolean()
         )
     }
 
