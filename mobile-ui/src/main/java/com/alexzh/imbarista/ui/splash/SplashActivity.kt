@@ -16,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getExistingSessionInfo().observe(this, Observer<Resource<SessionView>>{
+        viewModel.getExistingSessionInfo().observe(this, Observer<Resource<SessionView>> {
             it?.let { handleExistingSession(it) }
         })
         viewModel.checkExistingSession()

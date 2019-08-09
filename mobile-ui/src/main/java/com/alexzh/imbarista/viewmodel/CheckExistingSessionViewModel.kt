@@ -14,7 +14,7 @@ import io.reactivex.observers.DisposableSingleObserver
 class CheckExistingSessionViewModel(
     private val getExistingSession: GetExistingSession,
     private val mapper: SessionViewMapper
-): ViewModel() {
+) : ViewModel() {
 
     private val sessionLiveData: MutableLiveData<Resource<SessionView>> = MutableLiveData()
 
@@ -33,7 +33,7 @@ class CheckExistingSessionViewModel(
         super.onCleared()
     }
 
-    private inner class GetExistingSessionSubscriber: DisposableSingleObserver<Session>() {
+    private inner class GetExistingSessionSubscriber : DisposableSingleObserver<Session>() {
 
         override fun onSuccess(session: Session) {
             sessionLiveData.postValue(Resource(

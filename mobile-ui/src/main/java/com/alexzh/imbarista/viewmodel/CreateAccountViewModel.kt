@@ -16,7 +16,7 @@ import io.reactivex.observers.DisposableSingleObserver
 class CreateAccountViewModel(
     private val createAccount: CreateAccount,
     private val mapper: UserViewMapper
-): ViewModel() {
+) : ViewModel() {
 
     companion object {
         private const val INVALID_RESOURCE_VALUE = -1
@@ -71,7 +71,7 @@ class CreateAccountViewModel(
         }
     }
 
-    private inner class CreateAccountSubscriber: DisposableSingleObserver<User>() {
+    private inner class CreateAccountSubscriber : DisposableSingleObserver<User>() {
         override fun onSuccess(user: User) {
             userLiveData.postValue(Resource(
                 ResourceState.SUCCESS,

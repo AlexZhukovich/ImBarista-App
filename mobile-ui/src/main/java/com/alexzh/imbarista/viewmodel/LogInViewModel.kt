@@ -16,7 +16,7 @@ import io.reactivex.observers.DisposableSingleObserver
 class LogInViewModel(
     private val logIn: LogIn,
     private val mapper: SessionViewMapper
-): ViewModel() {
+) : ViewModel() {
 
     companion object {
         private const val INVALID_RESOURCE_VALUE = -1
@@ -57,12 +57,12 @@ class LogInViewModel(
     fun changePasswordText(password: String) {
         if (password.isBlank()) {
             passwordErrorLiveData.postValue(R.string.error_password_is_blank)
-        }  else {
+        } else {
             passwordErrorLiveData.postValue(INVALID_RESOURCE_VALUE)
         }
     }
 
-    private inner class LogInSubscriber: DisposableSingleObserver<Session>() {
+    private inner class LogInSubscriber : DisposableSingleObserver<Session>() {
         override fun onSuccess(session: Session) {
             liveData.postValue(Resource(
                 ResourceState.SUCCESS,

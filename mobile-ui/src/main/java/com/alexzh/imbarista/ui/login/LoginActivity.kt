@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
             CreateAccountActivity.start(this@LoginActivity)
         }
 
-        emailEditText.addTextChangedListener(object: TextWatcher {
+        emailEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // not used
             }
@@ -63,11 +63,11 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        emailEditText.setOnFocusChangeListener{
+        emailEditText.setOnFocusChangeListener {
                 _, hasFocus -> if (hasFocus) viewModel.changeEmailText(emailEditText.text.toString())
         }
 
-        passwordEditText.addTextChangedListener(object: TextWatcher {
+        passwordEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // not used
             }
@@ -81,14 +81,14 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        passwordEditText.setOnFocusChangeListener{
+        passwordEditText.setOnFocusChangeListener {
                 _, hasFocus -> if (hasFocus) viewModel.changePasswordText(passwordEditText.text.toString())
         }
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.getLogInInfo().observe(this, Observer<Resource<SessionView>>{
+        viewModel.getLogInInfo().observe(this, Observer<Resource<SessionView>> {
             it?.let { handleState(it) }
         })
         viewModel.getEmailError().observe(this, Observer<Int> {

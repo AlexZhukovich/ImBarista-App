@@ -6,7 +6,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import java.lang.UnsupportedOperationException
 
-class CoffeeDrinksCacheRepositoryImpl: CoffeeDrinksCacheRepository {
+class CoffeeDrinksCacheRepositoryImpl : CoffeeDrinksCacheRepository {
 
     override fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>> {
         return Single.error(UnsupportedOperationException("Not implemented yet"))

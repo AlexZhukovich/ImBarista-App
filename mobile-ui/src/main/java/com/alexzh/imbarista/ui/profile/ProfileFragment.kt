@@ -32,7 +32,7 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.logout_action -> {
                 viewModel.logOut()
                 return true

@@ -54,7 +54,7 @@ class CreateAccountActivity : AppCompatActivity() {
                 _, hasFocus -> if (hasFocus) viewModel.changeNameText(nameEditText.text.toString())
         }
 
-        nameEditText.addTextChangedListener(object: TextWatcher {
+        nameEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // not used
             }
@@ -72,7 +72,7 @@ class CreateAccountActivity : AppCompatActivity() {
                 _, hasFocus -> if (hasFocus) viewModel.changeEmailText(emailEditText.text.toString())
         }
 
-        emailEditText.addTextChangedListener(object: TextWatcher {
+        emailEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // not used
             }
@@ -90,7 +90,7 @@ class CreateAccountActivity : AppCompatActivity() {
                 _, hasFocus -> if (hasFocus) viewModel.changePasswordText(passwordEditText.text.toString())
         }
 
-        passwordEditText.addTextChangedListener(object: TextWatcher {
+        passwordEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // not used
             }

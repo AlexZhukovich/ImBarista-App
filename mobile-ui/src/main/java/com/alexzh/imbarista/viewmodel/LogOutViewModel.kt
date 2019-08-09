@@ -10,8 +10,8 @@ import io.reactivex.observers.DisposableCompletableObserver
 
 class LogOutViewModel(
     private val logOut: LogOut
-): ViewModel() {
-    private val logOutLiveData:MutableLiveData<Resource<Any>> = MutableLiveData()
+) : ViewModel() {
+    private val logOutLiveData: MutableLiveData<Resource<Any>> = MutableLiveData()
 
     fun getLogOutInfo(): LiveData<Resource<Any>> = logOutLiveData
 
@@ -28,7 +28,7 @@ class LogOutViewModel(
         super.onCleared()
     }
 
-    private inner class LogOutSubscriber: DisposableCompletableObserver() {
+    private inner class LogOutSubscriber : DisposableCompletableObserver() {
         override fun onComplete() {
             logOutLiveData.postValue(Resource(
                 ResourceState.SUCCESS,
@@ -38,11 +38,11 @@ class LogOutViewModel(
         }
 
         override fun onError(error: Throwable) {
-               logOutLiveData.postValue(Resource(
-                   ResourceState.ERROR,
-                   null,
-                   error
-               ))
+            logOutLiveData.postValue(Resource(
+                ResourceState.ERROR,
+                null,
+                error
+            ))
         }
     }
 }
