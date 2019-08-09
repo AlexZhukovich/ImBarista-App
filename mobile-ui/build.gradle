@@ -82,6 +82,10 @@ dependencies {
     // Testing
     testImplementation mobileUiTestDependencies.junit
     testImplementation mobileUiTestDependencies.mockK
+    testImplementation mobileUiTestDependencies.androidXTestCore
+    testImplementation mobileUiTestDependencies.testRunner
+    testImplementation mobileUiTestDependencies.testRules
+    testImplementation mobileUiTestDependencies.androidXTesting
 
     // UI Testing
     androidTestImplementation mobileUiAndroidTestDependencies.testRunner

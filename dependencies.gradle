@@ -29,6 +29,9 @@ ext {
 
     // AndroidX testing Components
     androidXTestCore = '1.0.0'
+    androidXTestingVersion = '2.0.0-rc01'
+    testRunner = '1.1.0'
+    testRules = '1.1.0'
 
     // Material Design Components
     materialDesignComponentsVersion = '1.0.0'
@@ -89,7 +92,12 @@ ext {
 
     mobileUiTestDependencies = [
             junit:                      "junit:junit:${jUnitVersion}",
-            mockK:                      "io.mockk:mockk:${mockKVersion}"
+            mockK:                      "io.mockk:mockk:${mockKVersion}",
+            androidXTesting:            "androidx.arch.core:core-testing:${androidXTestingVersion}",
+            androidXTestCore:           "androidx.test:core:${androidXTestCore}",
+            testRunner:                 "androidx.test:runner:${testRunner}",
+            testRules:                  "androidx.test:rules:${testRules}",
+
     ]
 
     mobileUiAndroidTestDependencies = [
