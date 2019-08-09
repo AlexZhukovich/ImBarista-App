@@ -5,7 +5,6 @@ import com.alexzh.imbarista.domain.interactor.SingleUseCase
 import com.alexzh.imbarista.domain.model.User
 import com.alexzh.imbarista.domain.repository.UserRepository
 import io.reactivex.Single
-import java.lang.IllegalArgumentException
 
 class GetCurrentUser(
     private val userRepository: UserRepository,
