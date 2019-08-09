@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.ui.createaccount
+package com.alexzh.imbarista.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

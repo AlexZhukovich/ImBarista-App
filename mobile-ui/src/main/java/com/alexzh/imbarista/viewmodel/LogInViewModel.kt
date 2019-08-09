@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.ui.login
+package com.alexzh.imbarista.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import io.reactivex.observers.DisposableSingleObserver
 
-class LoginViewModel(
+class LogInViewModel(
     private val logIn: LogIn,
     private val mapper: SessionViewMapper
 ): ViewModel() {

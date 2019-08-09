@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.ui.profile
+package com.alexzh.imbarista.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import io.reactivex.observers.DisposableCompletableObserver
 
-class ProfileViewModel(
+class LogOutViewModel(
     private val logOut: LogOut
 ): ViewModel() {
     private val logOutLiveData:MutableLiveData<Resource<Any>> = MutableLiveData()

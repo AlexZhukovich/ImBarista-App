@@ -1,4 +1,4 @@
-package com.alexzh.imbarista.ui.splash
+package com.alexzh.imbarista.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import io.reactivex.observers.DisposableSingleObserver
 
-class SplashViewModel(
+class CheckExistingSessionViewModel(
     private val getExistingSession: GetExistingSession,
     private val mapper: SessionViewMapper
 ): ViewModel() {
