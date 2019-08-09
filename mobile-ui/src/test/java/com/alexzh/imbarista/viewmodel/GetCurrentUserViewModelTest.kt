@@ -17,7 +17,7 @@ import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 
-class CurrentUserViewModelTest {
+class GetCurrentUserViewModelTest {
 
     @Rule @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -28,7 +28,7 @@ class CurrentUserViewModelTest {
 
     private val userSlot = slot<DisposableSingleObserver<User>>()
 
-    private val viewModel = CurrentUserViewModel(
+    private val viewModel = GetCurrentUserViewModel(
         getCurrentUserInfo,
         userMapper
     )

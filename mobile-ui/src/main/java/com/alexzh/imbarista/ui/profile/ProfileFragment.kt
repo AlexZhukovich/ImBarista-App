@@ -9,7 +9,7 @@ import com.alexzh.imbarista.model.UserView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.login.LoginActivity
-import com.alexzh.imbarista.viewmodel.CurrentUserViewModel
+import com.alexzh.imbarista.viewmodel.GetCurrentUserViewModel
 import com.alexzh.imbarista.viewmodel.LogOutViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ProfileFragment : Fragment() {
 
     private val logOutViewModel: LogOutViewModel by viewModel()
-    private val currentUserViewModel: CurrentUserViewModel by viewModel()
+    private val getCurrentUserViewModel: GetCurrentUserViewModel by viewModel()
 
     init {
         setHasOptionsMenu(true)
@@ -49,10 +49,10 @@ class ProfileFragment : Fragment() {
         logOutViewModel.getLogOutInfo().observe(this, Observer<Resource<Any>> {
             it?.let { handleLogOut(it) }
         })
-        currentUserViewModel.getUserInfo().observe(this, Observer<Resource<UserView>> {
+        getCurrentUserViewModel.getUserInfo().observe(this, Observer<Resource<UserView>> {
             it?.let { handleProfileInfo(it) }
         })
-        currentUserViewModel.fetchUserInfo()
+        getCurrentUserViewModel.fetchUserInfo()
         super.onStart()
     }
 

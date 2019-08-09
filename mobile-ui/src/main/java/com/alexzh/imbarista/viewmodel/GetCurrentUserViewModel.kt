@@ -11,7 +11,7 @@ import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import io.reactivex.observers.DisposableSingleObserver
 
-class CurrentUserViewModel(
+class GetCurrentUserViewModel(
     private val getCurrentUser: GetCurrentUser,
     private val mapper: UserViewMapper
 ) : ViewModel() {
