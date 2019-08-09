@@ -19,6 +19,7 @@
 
     <string name="settings_action">Settings</string>
     <string name="search_action">Search</string>
+    <string name="logout_action">Log Out</string>
 
     <!-- Errors -->
     <string name="error_name_is_blank">Name is blank</string>

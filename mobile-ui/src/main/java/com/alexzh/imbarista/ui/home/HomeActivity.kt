@@ -39,9 +39,12 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.settings_action -> SettingsActivity.start(this@HomeActivity)
+            R.id.settings_action -> {
+                SettingsActivity.start(this@HomeActivity)
+                return true
+            }
         }
-        return true
+        return false
     }
 
     override fun onResume() {

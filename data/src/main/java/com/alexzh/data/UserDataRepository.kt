@@ -34,7 +34,7 @@ class UserDataRepository(
     override fun logOut(): Completable {
         return Completable.defer {
             val sessionEntity = preferencesRepository.getSessionInfo()
-            userDataStore.logOut(sessionEntity.sessionId, sessionEntity.accessToken)
+            userDataStore.logOut(sessionEntity.sessionId, sessionEntity.accessToken).blockingGet()
             preferencesRepository.clearSessionInfo()
             Completable.complete()
         }
