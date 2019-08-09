@@ -43,4 +43,9 @@ class UserDataRepository(
     override fun getUser(userId: Long): Single<User> {
         return Single.error(UnsupportedOperationException("The getUser operation is not supported"))
     }
+
+    override fun getExistingSession(): Single<Session> {
+        return Single.just(preferencesRepository.getSessionInfo())
+            .map { sessionMapper.mapFromEntity(it) }
+    }
 }

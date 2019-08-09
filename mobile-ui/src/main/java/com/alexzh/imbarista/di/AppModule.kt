@@ -16,6 +16,7 @@ import com.alexzh.imbarista.cache.SharedPreferencesRepository
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinks
 import com.alexzh.imbarista.domain.interactor.user.CreateAccount
+import com.alexzh.imbarista.domain.interactor.user.GetExistingSession
 import com.alexzh.imbarista.domain.interactor.user.LogIn
 import com.alexzh.imbarista.domain.interactor.user.LogOut
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
@@ -32,6 +33,7 @@ import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
 import com.alexzh.imbarista.ui.createaccount.CreateAccountViewModel
 import com.alexzh.imbarista.ui.login.LoginViewModel
 import com.alexzh.imbarista.ui.profile.ProfileViewModel
+import com.alexzh.imbarista.ui.splash.SplashViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -39,6 +41,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { LoginViewModel(logIn = get(), mapper = get()) }
     viewModel { CreateAccountViewModel(createAccount = get(), mapper = get()) }
+    viewModel { SplashViewModel(getExistingSession = get(), mapper = get()) }
     viewModel { ProfileViewModel(logOut = get()) }
 }
 
@@ -46,6 +49,7 @@ val useCaseModule = module {
     factory { LogIn(userRepository = get(), postExecutionThread = get()) }
     factory { LogOut(userRepository = get(), postExecutionThread = get()) }
     factory { CreateAccount(userRepository = get(), postExecutionThread = get()) }
+    factory { GetExistingSession(userRepository = get(), postExecutionThread = get()) }
     factory { GetCoffeeDrinks(coffeeDrinksRepository = get(), postExecutionThread = get()) }
 }
 
