@@ -10,7 +10,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:name=".ImBaristaApp">
         <meta-data
                 android:name="OnlineMaps.Key"
                 android:value="@string/tomtom_maps_api_key"/>
@@ -22,7 +23,7 @@
                 android:value="@string/google_maps_api_key"/>
 
         <activity
-                android:name=".splash.SplashActivity"
+                android:name="com.alexzh.imbarista.ui.splash.SplashActivity"
                 android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -31,20 +32,20 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".login.LoginActivity"
+                android:name="com.alexzh.imbarista.ui.login.LoginActivity"
                 android:label="@string/activity_login_title"
                 android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
-                android:name=".createaccount.CreateAccountActivity"
+                android:name="com.alexzh.imbarista.ui.createaccount.CreateAccountActivity"
                 android:label="@string/activity_create_account_title"
                 android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
-        <activity android:name=".home.HomeActivity">
+        <activity android:name="com.alexzh.imbarista.ui.home.HomeActivity">
         </activity>
-        <activity android:name=".coffeedrinkdetails.CoffeeDetailsActivity">
+        <activity android:name="com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDetailsActivity">
         </activity>
         <activity
-                android:name=".settings.SettingsActivity"
+                android:name="com.alexzh.imbarista.ui.settings.SettingsActivity"
                 android:label="@string/activity_settings_title">
         </activity>
     </application>

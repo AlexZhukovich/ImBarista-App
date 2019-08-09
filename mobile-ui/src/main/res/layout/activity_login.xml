@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".login.LoginActivity">
+        android:id="@+id/root"
+        tools:context=".ui.login.LoginActivity">
 
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -78,7 +79,8 @@
                         android:id="@+id/passwordEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/password_hint"/>
+                        android:hint="@string/password_hint"
+                        android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -87,7 +89,8 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout"
-                    app:layout_constraintBottom_toTopOf="@+id/createAccountButton" android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/createAccountButton"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@+id/guidelineStart"
                     app:backgroundTint="@color/colorPrimary"/>
@@ -105,4 +108,14 @@
                     app:backgroundTint="@color/colorPrimaryDark"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+    <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
