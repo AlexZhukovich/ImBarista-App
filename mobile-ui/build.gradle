@@ -86,6 +86,7 @@ dependencies {
     testImplementation mobileUiTestDependencies.testRunner
     testImplementation mobileUiTestDependencies.testRules
     testImplementation mobileUiTestDependencies.androidXTesting
+    testImplementation mobileUiTestDependencies.robolectric
 
     // UI Testing
     androidTestImplementation mobileUiAndroidTestDependencies.testRunner

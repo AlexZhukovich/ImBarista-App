@@ -97,6 +97,7 @@ ext {
             androidXTestCore:           "androidx.test:core:${androidXTestCore}",
             testRunner:                 "androidx.test:runner:${testRunner}",
             testRules:                  "androidx.test:rules:${testRules}",
+            robolectric:                "org.robolectric:robolectric:${robolectricVersion}"
 
     ]
 

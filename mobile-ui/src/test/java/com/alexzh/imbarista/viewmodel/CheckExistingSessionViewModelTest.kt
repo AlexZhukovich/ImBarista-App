@@ -16,6 +16,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
+import java.lang.RuntimeException
 
 class CheckExistingSessionViewModelTest {
 
@@ -51,6 +52,15 @@ class CheckExistingSessionViewModelTest {
         slot.captured.onSuccess(session)
 
         assertEquals(ResourceState.SUCCESS, viewModel.getExistingSessionInfo().value?.status)
+    }
+
+    @Test
+    fun checkExistingSessionReturnError() {
+        viewModel.checkExistingSession()
+        verify { getExistingSession.execute(capture(slot)) }
+        slot.captured.onError(RuntimeException())
+
+        assertEquals(ResourceState.ERROR, viewModel.getExistingSessionInfo().value?.status)
     }
 
     @Test
