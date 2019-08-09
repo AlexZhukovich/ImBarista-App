@@ -7,11 +7,12 @@ import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.home.HomeActivity
 import com.alexzh.imbarista.ui.login.LoginActivity
+import com.alexzh.imbarista.viewmodel.CheckExistingSessionViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
 
-    private val viewModel: SplashViewModel by viewModel()
+    private val viewModel: CheckExistingSessionViewModel by viewModel()
 
     override fun onResume() {
         super.onResume()

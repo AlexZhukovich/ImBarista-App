@@ -30,19 +30,19 @@ import com.alexzh.imbarista.remote.mapper.IngredientsMapper
 import com.alexzh.imbarista.remote.mapper.SessionMapper
 import com.alexzh.imbarista.remote.mapper.UserMapper
 import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
-import com.alexzh.imbarista.ui.createaccount.CreateAccountViewModel
-import com.alexzh.imbarista.ui.login.LoginViewModel
-import com.alexzh.imbarista.ui.profile.ProfileViewModel
-import com.alexzh.imbarista.ui.splash.SplashViewModel
+import com.alexzh.imbarista.viewmodel.CreateAccountViewModel
+import com.alexzh.imbarista.viewmodel.LogInViewModel
+import com.alexzh.imbarista.viewmodel.LogOutViewModel
+import com.alexzh.imbarista.viewmodel.CheckExistingSessionViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { LoginViewModel(logIn = get(), mapper = get()) }
+    viewModel { LogInViewModel(logIn = get(), mapper = get()) }
     viewModel { CreateAccountViewModel(createAccount = get(), mapper = get()) }
-    viewModel { SplashViewModel(getExistingSession = get(), mapper = get()) }
-    viewModel { ProfileViewModel(logOut = get()) }
+    viewModel { CheckExistingSessionViewModel(getExistingSession = get(), mapper = get()) }
+    viewModel { LogOutViewModel(logOut = get()) }
 }
 
 val useCaseModule = module {

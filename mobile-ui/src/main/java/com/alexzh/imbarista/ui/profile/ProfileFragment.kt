@@ -9,11 +9,12 @@ import com.alexzh.imbarista.R
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.login.LoginActivity
+import com.alexzh.imbarista.viewmodel.LogOutViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
 
-    private val viewModel: ProfileViewModel by viewModel()
+    private val viewModel: LogOutViewModel by viewModel()
 
     init {
         setHasOptionsMenu(true)

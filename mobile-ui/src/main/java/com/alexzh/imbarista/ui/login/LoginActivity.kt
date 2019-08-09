@@ -14,6 +14,7 @@ import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.createaccount.CreateAccountActivity
 import com.alexzh.imbarista.ui.home.HomeActivity
+import com.alexzh.imbarista.viewmodel.LogInViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private val viewModel: LoginViewModel by viewModel()
+    private val viewModel: LogInViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

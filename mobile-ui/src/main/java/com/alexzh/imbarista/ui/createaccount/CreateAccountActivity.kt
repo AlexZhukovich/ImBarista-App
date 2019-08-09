@@ -13,6 +13,7 @@ import com.alexzh.imbarista.model.UserView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.login.LoginActivity
+import com.alexzh.imbarista.viewmodel.CreateAccountViewModel
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlinx.android.synthetic.main.activity_create_account.*
