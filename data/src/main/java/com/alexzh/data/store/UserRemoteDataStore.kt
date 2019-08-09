@@ -25,7 +25,7 @@ class UserRemoteDataStore(
         return repository.refreshToken(accessToken)
     }
 
-    override fun getUser(userId: Long): Single<UserEntity> {
-        return Single.error(UnsupportedOperationException("Not implemented yet"))
+    override fun getCurrentUser(accessToken: String): Single<UserEntity> {
+        return repository.getCurrentUser(accessToken)
     }
 }

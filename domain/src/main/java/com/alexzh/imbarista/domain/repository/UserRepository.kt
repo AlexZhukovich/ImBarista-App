@@ -13,7 +13,7 @@ interface UserRepository {
 
     fun logOut(): Completable
 
-    fun getUser(userId: Long): Single<User>
+    fun getCurrentUserInfo(): Single<User>
 
     fun getExistingSession(): Single<Session>
 }

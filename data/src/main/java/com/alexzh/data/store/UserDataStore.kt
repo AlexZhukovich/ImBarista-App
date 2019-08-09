@@ -14,5 +14,5 @@ interface UserDataStore {
 
     fun refreshToken(accessToken: String): Single<SessionEntity>
 
-    fun getUser(userId: Long): Single<UserEntity>
+    fun getCurrentUser(accessToken: String): Single<UserEntity>
 }

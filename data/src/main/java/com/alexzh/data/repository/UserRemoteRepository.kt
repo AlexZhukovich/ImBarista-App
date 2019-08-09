@@ -13,4 +13,6 @@ interface UserRemoteRepository {
     fun logOut(sessionId: Long, accessToken: String): Single<SessionEntity>
 
     fun refreshToken(accessToken: String): Single<SessionEntity>
+
+    fun getCurrentUser(accessToken: String): Single<UserEntity>
 }

@@ -30,10 +30,6 @@ object GenerateDomainTestData {
         )
     }
 
-    fun generateGetUserByIdParam(userId: Long = randomLong()): GetUserById.Param {
-        return GetUserById.Param.forUser(userId)
-    }
-
     fun generateCreateAccountParam(name: String = randomString()): CreateAccount.Param {
         return CreateAccount.Param.forCreatingAccount(
             name = name,

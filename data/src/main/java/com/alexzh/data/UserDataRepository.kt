@@ -40,8 +40,10 @@ class UserDataRepository(
         }
     }
 
-    override fun getUser(userId: Long): Single<User> {
-        return Single.error(UnsupportedOperationException("The getUser operation is not supported"))
+    override fun getCurrentUserInfo(): Single<User> {
+        val sessionEntity = preferencesRepository.getSessionInfo()
+        return userDataStore.getCurrentUser(sessionEntity.accessToken)
+            .map { userMapper.mapFromEntity(it) }
     }
 
     override fun getExistingSession(): Single<Session> {
