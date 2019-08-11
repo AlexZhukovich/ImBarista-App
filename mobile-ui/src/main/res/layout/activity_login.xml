@@ -30,7 +30,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
 
             <androidx.constraintlayout.widget.Guideline
                     android:layout_width="wrap_content"
@@ -48,14 +49,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/emailInputLayout"
-                    android:layout_width="379dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/passwordInputLayout"
                     app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
-                    app:layout_constraintStart_toStartOf="@+id/guidelineStart">
+                    app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/passwordInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/emailEditText"
@@ -66,10 +66,9 @@
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/passwordInputLayout"
-                    android:layout_width="379dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
                     app:layout_constraintBottom_toTopOf="@+id/loginButton" android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="@+id/guidelineStart"
@@ -90,7 +89,7 @@
                     android:layout_width="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout"
                     app:layout_constraintBottom_toTopOf="@+id/createAccountButton"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@+id/guidelineStart"
                     app:backgroundTint="@color/colorPrimary"/>
@@ -104,7 +103,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/loginButton"
                     app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.5"
-                    android:layout_marginTop="24dp" android:layout_marginBottom="16dp"
+                    android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
                     app:backgroundTint="@color/colorPrimaryDark"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
