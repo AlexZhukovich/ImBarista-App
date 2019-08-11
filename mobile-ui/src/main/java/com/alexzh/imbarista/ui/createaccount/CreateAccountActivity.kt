@@ -132,18 +132,18 @@ class CreateAccountActivity : AppCompatActivity() {
             }
             ResourceState.SUCCESS -> {
                 progressBar.visibility = View.GONE
-                nameEditText.isEnabled = false
-                emailEditText.isEnabled = false
-                passwordEditText.isEnabled = false
-                createAccountButton.isEnabled = false
+                nameEditText.isEnabled = true
+                emailEditText.isEnabled = true
+                passwordEditText.isEnabled = true
+                createAccountButton.isEnabled = true
                 displaySuccessMessage()
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
-                nameEditText.isEnabled = false
-                emailEditText.isEnabled = false
-                passwordEditText.isEnabled = false
-                createAccountButton.isEnabled = false
+                nameEditText.isEnabled = true
+                emailEditText.isEnabled = true
+                passwordEditText.isEnabled = true
+                createAccountButton.isEnabled = true
                 displayErrorMessage(resource.error)
             }
         }
