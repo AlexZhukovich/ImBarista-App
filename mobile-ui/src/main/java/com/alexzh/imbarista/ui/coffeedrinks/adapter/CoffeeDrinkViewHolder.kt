@@ -13,12 +13,18 @@ class CoffeeDrinkViewHolder(
     val itemClick: (CoffeeDrinkView) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
+    companion object {
+        const val SMALL_COFFEE_DRINK_ICON_BASE_URL = "https://api.coffee-drinks.alexzh.com/store/img/196"
+    }
+
     fun bind(coffeeDrink: CoffeeDrinkView) {
+        val imageSize = itemView.photo.height
         with(coffeeDrink) {
             if (imageUrl.isNotBlank()) {
                 Glide.with(view.context)
-                    .load(imageUrl)
+                    .load("$SMALL_COFFEE_DRINK_ICON_BASE_URL/$imageUrl")
                     .apply(RequestOptions.circleCropTransform())
+                    .override(imageSize, imageSize)
                     .into(itemView.photo)
             }
             itemView.name.text = name

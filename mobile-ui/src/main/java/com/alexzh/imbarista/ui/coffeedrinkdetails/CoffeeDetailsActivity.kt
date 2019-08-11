@@ -17,6 +17,7 @@ class CoffeeDetailsActivity : AppCompatActivity() {
 
     companion object {
         private const val KEY_COFFEE = "coffee"
+        private const val LARGE_COFFEE_DRINK_ICON_BASE_URL = "https://api.coffee-drinks.alexzh.com/store/img/512"
 
         fun start(context: Context, coffeeDrink: CoffeeDrinkView) {
             val intent = Intent(context, CoffeeDetailsActivity::class.java)
@@ -39,7 +40,7 @@ class CoffeeDetailsActivity : AppCompatActivity() {
         currentCoffeeDrink = intent.getParcelableExtra<CoffeeDrinkView>(KEY_COFFEE)
         coffeeDrinkName.text = currentCoffeeDrink.name
         Glide.with(this)
-            .load(currentCoffeeDrink.imageUrl)
+            .load("$LARGE_COFFEE_DRINK_ICON_BASE_URL/${currentCoffeeDrink.imageUrl}")
             .apply(RequestOptions.circleCropTransform())
             .into(coffeeDrinkPicture)
 
