@@ -11,16 +11,16 @@ import com.alexzh.imbarista.model.CoffeeDrinkView
 import com.alexzh.imbarista.ui.coffeedrinkdetails.adapter.CoffeeDetailsAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.activity_coffee_details.*
+import kotlinx.android.synthetic.main.activity_coffee_drink_details.*
 
-class CoffeeDetailsActivity : AppCompatActivity() {
+class CoffeeDrinkDetailsActivity : AppCompatActivity() {
 
     companion object {
         private const val KEY_COFFEE = "coffee"
         private const val LARGE_COFFEE_DRINK_ICON_BASE_URL = "https://api.coffee-drinks.alexzh.com/store/img/512"
 
         fun start(context: Context, coffeeDrink: CoffeeDrinkView) {
-            val intent = Intent(context, CoffeeDetailsActivity::class.java)
+            val intent = Intent(context, CoffeeDrinkDetailsActivity::class.java)
             intent.putExtra(KEY_COFFEE, coffeeDrink)
             context.startActivity(intent)
         }
@@ -32,7 +32,7 @@ class CoffeeDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coffee_details)
+        setContentView(R.layout.activity_coffee_drink_details)
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""

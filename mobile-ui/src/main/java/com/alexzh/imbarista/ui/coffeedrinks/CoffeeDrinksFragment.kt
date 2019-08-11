@@ -10,7 +10,7 @@ import com.alexzh.imbarista.R
 import com.alexzh.imbarista.model.CoffeeDrinkView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
-import com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDetailsActivity
+import com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDrinkDetailsActivity
 import com.alexzh.imbarista.ui.coffeedrinks.adapter.CoffeeDrinksAdapter
 import com.alexzh.imbarista.viewmodel.GetCoffeeDrinksViewModel
 import kotlinx.android.synthetic.main.fragment_coffee_drinks.*
@@ -24,7 +24,7 @@ class CoffeeDrinksFragment : Fragment() {
     private val adapter by lazy { CoffeeDrinksAdapter(coffeeDrinkItemClick) }
 
     private val coffeeDrinkItemClick: (CoffeeDrinkView) -> Unit = {
-        CoffeeDetailsActivity.start(this.activity!!, it)
+        CoffeeDrinkDetailsActivity.start(this.activity!!, it)
     }
 
     init {
