@@ -30,6 +30,7 @@ class CoffeeDrinksServiceFactory {
 
     private fun createOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
+            .hostnameVerifier { _, _ -> true }
             .addInterceptor(httpLoggingInterceptor)
             .connectTimeout(90, TimeUnit.SECONDS)
             .readTimeout(90, TimeUnit.SECONDS)
