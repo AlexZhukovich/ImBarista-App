@@ -10,12 +10,12 @@ import io.reactivex.Completable
 import org.junit.Test
 import java.lang.IllegalArgumentException
 
-class RemoveCoffeeFromFavouriteTest {
+class RemoveCoffeeDrinkFromFavouriteTest {
 
     private val repository = mockk<CoffeeDrinksRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
-    private val removeCoffeeFromFavourite = RemoveCoffeeFromFavourite(
+    private val removeCoffeeFromFavourite = RemoveCoffeeDrinkFromFavourite(
         repository,
         postExecutionThread
     )

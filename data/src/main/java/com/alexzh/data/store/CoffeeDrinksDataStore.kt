@@ -12,9 +12,9 @@ interface CoffeeDrinksDataStore {
 
     fun getCoffeeById(id: Long): Single<CoffeeDrinkEntity>
 
-    fun setCoffeeAsFavourite(id: Long): Completable
+    fun setCoffeeAsFavourite(id: Long): Single<CoffeeDrinkEntity>
 
-    fun setCoffeeAsNotFavourite(id: Long): Completable
+    fun setCoffeeAsNotFavourite(id: Long): Single<CoffeeDrinkEntity>
 
     fun saveCoffeeDrinks(coffeeDrinks: List<CoffeeDrinkEntity>): Completable
 

@@ -43,6 +43,12 @@ interface CoffeeDrinksService {
         @Header("Authorization") token: String
     ): Single<ResponseModel<CoffeeDrinkDataModel>>
 
+    @GET("coffee-drinks/{coffeeDrinkId}")
+    fun getCoffeeDrinkById(
+        @Path("coffeeDrinkId") coffeeId: Long,
+        @Header("Authorization") token: String
+    ): Single<ResponseModel<CoffeeDrinkDataModel>>
+
     @Headers("Content-Type: application/json")
     @PATCH("coffee-drinks/{coffeeId}")
     fun markDrinkAsFavourite(

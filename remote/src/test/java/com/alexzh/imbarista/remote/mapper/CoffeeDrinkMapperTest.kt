@@ -2,7 +2,7 @@ package com.alexzh.imbarista.remote.mapper
 
 import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.imbarista.remote.model.CoffeeDrinkModel
-import com.alexzh.testdata.remote.GenerateRemoteTestData.generateCoffeeModel
+import com.alexzh.testdata.remote.GenerateRemoteTestData.generateCoffeeDrinkModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -12,7 +12,7 @@ class CoffeeDrinkMapperTest {
 
     @Test
     fun mapFromModelWithOneIngredientMapsDataCorrectly() {
-        val coffeeModel = generateCoffeeModel()
+        val coffeeModel = generateCoffeeDrinkModel()
         val coffeeEntity = mapper.mapFromModel(coffeeModel)
 
         assertEqualsData(coffeeModel, coffeeEntity)
@@ -20,7 +20,7 @@ class CoffeeDrinkMapperTest {
 
     @Test
     fun mapFromModelWithMultipleIngredientsMapsDataCorrectly() {
-        val coffeeModel = generateCoffeeModel(10)
+        val coffeeModel = generateCoffeeDrinkModel(10)
         val coffeeEntity = mapper.mapFromModel(coffeeModel)
 
         assertEqualsData(coffeeModel, coffeeEntity)
@@ -28,7 +28,7 @@ class CoffeeDrinkMapperTest {
 
     @Test
     fun mapFromModelWithNoIngredientsMapsDataCorrectly() {
-        val coffeeModel = generateCoffeeModel(0)
+        val coffeeModel = generateCoffeeDrinkModel(0)
         val coffeeEntity = mapper.mapFromModel(coffeeModel)
 
         assertEqualsData(coffeeModel, coffeeEntity)

@@ -13,6 +13,7 @@ import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDrinkDetailsActivity
 import com.alexzh.imbarista.ui.coffeedrinks.adapter.CoffeeDrinksAdapter
 import com.alexzh.imbarista.viewmodel.GetCoffeeDrinksViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_coffee_drinks.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlinx.android.synthetic.main.fragment_coffee_drinks.view.*
@@ -61,6 +62,7 @@ class CoffeeDrinksFragment : Fragment() {
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
+                Snackbar.make(root, "ERROR", Snackbar.LENGTH_LONG).show()
             }
         }
     }

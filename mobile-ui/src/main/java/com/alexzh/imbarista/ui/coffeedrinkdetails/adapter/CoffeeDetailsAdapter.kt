@@ -10,7 +10,8 @@ class CoffeeDetailsAdapter : RecyclerView.Adapter<CoffeeDetailsViewHolder>() {
 
     private val items = mutableListOf<CoffeeDrinkDetailsItemView>()
 
-    fun addItems(items: List<CoffeeDrinkDetailsItemView>) {
+    fun setItems(items: List<CoffeeDrinkDetailsItemView>) {
+        this.items.clear()
         this.items += items
         notifyDataSetChanged()
     }

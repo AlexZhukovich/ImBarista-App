@@ -5,6 +5,7 @@ import com.alexzh.testdata.base.RandomData.randomBoolean
 import com.alexzh.testdata.base.RandomData.randomEmail
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
+import com.alexzh.testdata.base.RandomData.randomYN
 
 object GenerateRemoteTestData {
 
@@ -27,7 +28,7 @@ object GenerateRemoteTestData {
         )
     }
 
-    fun generateCoffeeModel(ingredientsCount: Int = 1): CoffeeDrinkModel {
+    fun generateCoffeeDrinkModel(ingredientsCount: Int = 1): CoffeeDrinkModel {
         var ingredients = ""
         repeat(ingredientsCount) {
             ingredients += "${randomString()}, "
@@ -39,7 +40,19 @@ object GenerateRemoteTestData {
             imageUrl = randomString(),
             description = randomString(),
             ingredients = ingredients,
-            isFavourite = randomBoolean()
+            isFavourite = randomYN()
+        )
+    }
+
+    fun generateCoffeeDrinkDataModel(coffeeDrinkCount: Int = 1, ingredientsCount: Int = 1): CoffeeDrinkDataModel {
+        val coffeeDrinks = mutableListOf<CoffeeDrinkModel>()
+        repeat(coffeeDrinkCount) {
+            coffeeDrinks.add(generateCoffeeDrinkModel(ingredientsCount))
+        }
+
+        return CoffeeDrinkDataModel(
+            rows = coffeeDrinkCount.toLong(),
+            data = coffeeDrinks
         )
     }
 }

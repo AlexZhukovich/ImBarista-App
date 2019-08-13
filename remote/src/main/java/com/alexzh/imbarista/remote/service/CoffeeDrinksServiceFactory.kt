@@ -31,9 +31,30 @@ class CoffeeDrinksServiceFactory {
     private fun createOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .hostnameVerifier { _, _ -> true }
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
-            .connectTimeout(90, TimeUnit.SECONDS)
-            .readTimeout(90, TimeUnit.SECONDS)
+            .addInterceptor { chain ->
+                val request = chain.request()
+
+                // try the request
+                var response = chain.proceed(request)
+
+                var tryCount = 0
+                val maxLimit = 5 //Set your max limit here
+
+                while (!response.isSuccessful && tryCount < maxLimit) {
+                    tryCount++
+
+                    response.close()
+                    // retry the request
+                    response = chain.proceed(request)
+                }
+
+                // otherwise just pass the original response on
+                response
+            }
+
             .build()
     }
 

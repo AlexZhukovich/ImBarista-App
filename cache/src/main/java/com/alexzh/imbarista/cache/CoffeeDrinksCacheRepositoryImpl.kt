@@ -20,12 +20,12 @@ class CoffeeDrinksCacheRepositoryImpl : CoffeeDrinksCacheRepository {
         return Single.error(UnsupportedOperationException("Not implemented yet"))
     }
 
-    override fun setCoffeeAsFavourite(id: Long): Completable {
-        return Completable.error(UnsupportedOperationException("Not implemented yet"))
+    override fun setCoffeeAsFavourite(id: Long): Single<CoffeeDrinkEntity> {
+        return Single.error(UnsupportedOperationException("Not implemented yet"))
     }
 
-    override fun setCoffeeAsNotFavourite(id: Long): Completable {
-        return Completable.error(UnsupportedOperationException("Not implemented yet"))
+    override fun setCoffeeAsNotFavourite(id: Long): Single<CoffeeDrinkEntity> {
+        return Single.error(UnsupportedOperationException("Not implemented yet"))
     }
 
     override fun saveCoffeeDrinks(coffeeDrinks: List<CoffeeDrinkEntity>): Completable {

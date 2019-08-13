@@ -14,7 +14,7 @@ class AddCoffeeDrinkToFavouritesTest {
     private val repository = mockk<CoffeeDrinksRepository>()
     private val postExecutionThread = mockk<PostExecutionThread>()
 
-    private val addCoffeeToFavourites = AddCoffeeToFavourites(
+    private val addCoffeeToFavourites = AddCoffeeDrinkToFavourites(
         repository,
         postExecutionThread
     )

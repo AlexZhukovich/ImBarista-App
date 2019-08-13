@@ -2,8 +2,8 @@ package com.alexzh.testdata.domain
 
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinkById
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinksByName
-import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.AddCoffeeToFavourites
-import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.RemoveCoffeeFromFavourite
+import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.AddCoffeeDrinkToFavourites
+import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.RemoveCoffeeDrinkFromFavourite
 import com.alexzh.imbarista.domain.interactor.user.*
 import com.alexzh.imbarista.domain.model.*
 import com.alexzh.testdata.base.RandomData.randomBoolean
@@ -78,11 +78,11 @@ object GenerateDomainTestData {
         return GetCoffeeDrinksByName.Param.forCoffeeDrinks(coffeeName)
     }
 
-    fun generateAddCoffeeToFavourites(coffeeId: Long = randomLong()): AddCoffeeToFavourites.Param {
-        return AddCoffeeToFavourites.Param.forCoffee(coffeeId)
+    fun generateAddCoffeeToFavourites(coffeeId: Long = randomLong()): AddCoffeeDrinkToFavourites.Param {
+        return AddCoffeeDrinkToFavourites.Param.forCoffeeDrink(coffeeId)
     }
 
-    fun generateRemoveCoffeeFromFavourite(coffeeId: Long = randomLong()): RemoveCoffeeFromFavourite.Param {
-        return RemoveCoffeeFromFavourite.Param.forCoffee(coffeeId)
+    fun generateRemoveCoffeeFromFavourite(coffeeId: Long = randomLong()): RemoveCoffeeDrinkFromFavourite.Param {
+        return RemoveCoffeeDrinkFromFavourite.Param.forCoffeeDrink(coffeeId)
     }
 }

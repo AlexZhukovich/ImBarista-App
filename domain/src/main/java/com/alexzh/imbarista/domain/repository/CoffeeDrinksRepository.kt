@@ -12,7 +12,7 @@ interface CoffeeDrinksRepository {
 
     fun getCoffeeDrinkById(id: Long): Single<CoffeeDrink>
 
-    fun addCoffeeDrinkToFavourites(coffeeId: Long): Completable
+    fun addCoffeeDrinkToFavourites(coffeeId: Long): Single<CoffeeDrink>
 
-    fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Completable
+    fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Single<CoffeeDrink>
 }

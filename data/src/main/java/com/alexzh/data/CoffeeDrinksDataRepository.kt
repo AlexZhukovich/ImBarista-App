@@ -32,17 +32,14 @@ class CoffeeDrinksDataRepository(
             .map { mapper.mapFromEntity(it) }
     }
 
-    override fun addCoffeeDrinkToFavourites(coffeeId: Long): Completable {
-        return Completable.defer {
-            storeFactory.getRemoteDataStore().setCoffeeAsFavourite(coffeeId)
-            Completable.complete()
-        }
+    override fun addCoffeeDrinkToFavourites(coffeeId: Long): Single<CoffeeDrink> {
+        return storeFactory.getRemoteDataStore().setCoffeeAsFavourite(coffeeId)
+            .map { mapper.mapFromEntity(it) }
+
     }
 
-    override fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Completable {
-        return Completable.defer {
-            storeFactory.getRemoteDataStore().setCoffeeAsNotFavourite(coffeeId)
-            Completable.complete()
-        }
+    override fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Single<CoffeeDrink> {
+        return storeFactory.getRemoteDataStore().setCoffeeAsNotFavourite(coffeeId)
+            .map { mapper.mapFromEntity(it) }
     }
 }

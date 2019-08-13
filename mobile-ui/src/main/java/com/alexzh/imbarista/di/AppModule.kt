@@ -13,7 +13,10 @@ import com.alexzh.data.store.*
 import com.alexzh.imbarista.cache.CoffeeDrinksCacheRepositoryImpl
 import com.alexzh.imbarista.cache.SharedPreferencesRepository
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
+import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinkById
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinks
+import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.AddCoffeeDrinkToFavourites
+import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.RemoveCoffeeDrinkFromFavourite
 import com.alexzh.imbarista.domain.interactor.user.*
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.imbarista.domain.repository.UserRepository
@@ -38,6 +41,7 @@ val viewModelModule = module {
     viewModel { LogOutViewModel(logOut = get()) }
     viewModel { GetCurrentUserViewModel(getCurrentUser = get(), mapper = get()) }
     viewModel { GetCoffeeDrinksViewModel(getCoffeeDrinks = get(), coffeeDrinkViewMapper = get()) }
+    viewModel { CoffeeDrinkDetailsViewModel(getCoffeeDrinkById = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get()) }
 }
 
 val useCaseModule = module {
@@ -47,6 +51,9 @@ val useCaseModule = module {
     factory { GetExistingSession(userRepository = get(), postExecutionThread = get()) }
     factory { GetCurrentUser(userRepository = get(), postExecutionThread = get()) }
     factory { GetCoffeeDrinks(coffeeDrinksRepository = get(), postExecutionThread = get()) }
+    factory { GetCoffeeDrinkById(coffeeDrinksRepository = get(), postExecutionThread = get()) }
+    factory { AddCoffeeDrinkToFavourites(coffeeDrinksRepository = get(), postExecutionThread = get()) }
+    factory { RemoveCoffeeDrinkFromFavourite(coffeeDrinksRepository = get(), postExecutionThread = get()) }
 }
 
 val mapperModule = module {
@@ -67,7 +74,7 @@ val dataModule = module {
     factory<CoffeeDrinksCacheRepository> { CoffeeDrinksCacheRepositoryImpl() }
     factory<CoffeeDrinksRemoteRepository> { CoffeeDrinkRemoteRepositoryImpl(service = get(), mapper = get()) }
     factory { CoffeeDrinksCacheDataStore(cacheRepository = get()) }
-    factory { CoffeeDrinksRemoteDataStore(remoteRepository = get()) }
+    factory { CoffeeDrinksRemoteDataStore(remoteRepository = get(), preferencesRepository = get()) }
     factory { CoffeeDrinksDataStoreFactory(remoteDataStore = get(), cacheDataStore = get()) }
     factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(mapper = get(), cacheRepository = get(), storeFactory = get(), preferencesRepository = get()) }
     factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userMapper = get(), sessionMapper = get()) }
