@@ -1,7 +1,6 @@
 package com.alexzh.testdata.remote
 
 import com.alexzh.imbarista.remote.model.*
-import com.alexzh.testdata.base.RandomData.randomBoolean
 import com.alexzh.testdata.base.RandomData.randomEmail
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString

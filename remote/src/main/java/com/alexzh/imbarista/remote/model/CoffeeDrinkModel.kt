@@ -10,7 +10,7 @@ data class CoffeeDrinkModel(
     @SerializedName("ingredients") val ingredients: String = "",
     @SerializedName("favourite") val isFavourite: String = ""
 ) {
-    fun isCoffeeDrinkFaviorite(): Boolean {
+    fun isCoffeeDrinkFavourite(): Boolean {
         return isFavourite == "Y"
     }
 }

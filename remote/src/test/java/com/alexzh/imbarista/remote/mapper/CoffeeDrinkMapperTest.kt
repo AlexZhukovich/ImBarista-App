@@ -43,6 +43,6 @@ class CoffeeDrinkMapperTest {
         assertEquals(coffeeDrinkModel.imageUrl, coffeeDrinkEntity.imageUrl)
         assertEquals(coffeeDrinkModel.description, coffeeDrinkEntity.description)
         assertEquals(coffeeDrinkModel.ingredients, coffeeDrinkEntity.ingredients)
-        assertEquals(coffeeDrinkModel.isFavourite, coffeeDrinkEntity.isFavourite)
+        assertEquals(coffeeDrinkModel.isCoffeeDrinkFavourite(), coffeeDrinkEntity.isFavourite)
     }
 }

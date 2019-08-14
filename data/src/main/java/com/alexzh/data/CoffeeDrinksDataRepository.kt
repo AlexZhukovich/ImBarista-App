@@ -6,7 +6,6 @@ import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.data.store.CoffeeDrinksDataStoreFactory
 import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
-import io.reactivex.Completable
 import io.reactivex.Single
 import java.lang.UnsupportedOperationException
 
@@ -35,7 +34,6 @@ class CoffeeDrinksDataRepository(
     override fun addCoffeeDrinkToFavourites(coffeeId: Long): Single<CoffeeDrink> {
         return storeFactory.getRemoteDataStore().setCoffeeAsFavourite(coffeeId)
             .map { mapper.mapFromEntity(it) }
-
     }
 
     override fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Single<CoffeeDrink> {

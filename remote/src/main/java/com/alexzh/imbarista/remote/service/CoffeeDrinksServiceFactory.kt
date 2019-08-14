@@ -35,26 +35,19 @@ class CoffeeDrinksServiceFactory {
             .readTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor { chain ->
-                val request = chain.request()
-
-                // try the request
-                var response = chain.proceed(request)
-
                 var tryCount = 0
-                val maxLimit = 5 //Set your max limit here
+                val maxLimit = 5
+                val request = chain.request()
+                var response = chain.proceed(request)
 
                 while (!response.isSuccessful && tryCount < maxLimit) {
                     tryCount++
-
                     response.close()
-                    // retry the request
                     response = chain.proceed(request)
                 }
 
-                // otherwise just pass the original response on
                 response
             }
-
             .build()
     }
 

@@ -69,8 +69,6 @@ class CoffeeDrinksRemoteDataStoreTest {
             .assertComplete()
     }
 
-
-
     @Test
     fun getCoffeeByIdReturnsCorrectData() {
         val coffeeDrinkId = randomLong()
@@ -166,17 +164,14 @@ class CoffeeDrinksRemoteDataStoreTest {
     }
 
     private fun stubSetCoffeeAsFavourite(coffeeDrinkId: Long, accessToken: String, single: Single<CoffeeDrinkEntity>) {
-        every { repository.addCoffeeDrinkToFavourite(coffeeDrinkId, true, accessToken) } returns single
+        every { repository.addCoffeeDrinkToFavourite(coffeeDrinkId, accessToken) } returns single
     }
 
     private fun stubSetCoffeeAsNotFavourite(coffeeDrinkId: Long, accessToken: String, single: Single<CoffeeDrinkEntity>) {
-        every { repository.addCoffeeDrinkToFavourite(coffeeDrinkId, false, accessToken) } returns single
+        every { repository.addCoffeeDrinkToFavourite(coffeeDrinkId, accessToken) } returns single
     }
 
     private fun stubGetAccessToken(accessToken: String) {
         every { preferencesRepository.getSessionInfo().accessToken } returns accessToken
     }
-
-
-
 }

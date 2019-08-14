@@ -67,14 +67,16 @@ class CoffeeDrinkDetailsActivity : AppCompatActivity() {
             ResourceState.SUCCESS -> {
                 progressBar.visibility = View.GONE
                 currentCoffeeDrink = resource.data as CoffeeDrinkView
-                coffeeDrinkName.text = resource.data?.name
+                coffeeDrinkName.text = resource.data.name
                 Glide.with(this)
-                    .load("$LARGE_COFFEE_DRINK_ICON_BASE_URL/${resource.data?.imageUrl}")
+                    .load("$LARGE_COFFEE_DRINK_ICON_BASE_URL/${resource.data.imageUrl}")
                     .apply(RequestOptions.circleCropTransform())
                     .into(coffeeDrinkPicture)
 
                 val coffeeDrinkItem = mutableListOf<CoffeeDrinkDetailsItemView>()
-                coffeeDrinkItem.add(CoffeeDrinkDetailsItemView(R.drawable.ic_description_black_24dp, resource.data?.description!!))
+                coffeeDrinkItem.add(CoffeeDrinkDetailsItemView(R.drawable.ic_description_black_24dp,
+                    resource.data.description
+                ))
                 coffeeDrinkItem.add(CoffeeDrinkDetailsItemView(R.drawable.ic_book_black_24dp, getStringIngredients(resource.data.ingredients)))
 
                 val layoutManager = LinearLayoutManager(this)
@@ -93,7 +95,6 @@ class CoffeeDrinkDetailsActivity : AppCompatActivity() {
                 progressBar.visibility = View.GONE
                 Log.d("CoffeeDrinkDetails", "ERROR... -> " + resource.error?.message)
                 // show message that coffee drink cannot be mark as favourite
-
             }
         }
     }

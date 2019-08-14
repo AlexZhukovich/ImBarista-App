@@ -13,7 +13,7 @@ class CoffeeMapper : ModelMapper<CoffeeDrinkModel, CoffeeDrinkEntity> {
             model.imageUrl,
             model.description,
             model.ingredients,
-            model.isCoffeeDrinkFaviorite()
+            model.isCoffeeDrinkFavourite()
         )
     }
 }

@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class CoffeeDrinkView(
     val id: Long = -1L,
     val name: String = "",
-    val imageUrl: String ="",
+    val imageUrl: String = "",
     val description: String = "",
     val ingredients: String = "",
     val isFavourite: Boolean = false

@@ -1,7 +1,6 @@
 package com.alexzh.imbarista.domain.repository
 
 import com.alexzh.imbarista.domain.model.CoffeeDrink
-import io.reactivex.Completable
 import io.reactivex.Single
 
 interface CoffeeDrinksRepository {
