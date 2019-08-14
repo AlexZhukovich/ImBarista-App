@@ -27,12 +27,12 @@ class CoffeeDrinksRemoteDataStore(
 
     override fun setCoffeeAsFavourite(id: Long): Single<CoffeeDrinkEntity> {
         val sessionEntity = preferencesRepository.getSessionInfo()
-        return remoteRepository.addCoffeeDrinkToFavourite(id, true, sessionEntity.accessToken)
+        return remoteRepository.addCoffeeDrinkToFavourite(id, sessionEntity.accessToken)
     }
 
     override fun setCoffeeAsNotFavourite(id: Long): Single<CoffeeDrinkEntity> {
         val sessionEntity = preferencesRepository.getSessionInfo()
-        return remoteRepository.addCoffeeDrinkToFavourite(id, false, sessionEntity.accessToken)
+        return remoteRepository.addCoffeeDrinkToFavourite(id, sessionEntity.accessToken)
     }
 
     override fun saveCoffeeDrinks(coffeeDrinks: List<CoffeeDrinkEntity>): Completable {

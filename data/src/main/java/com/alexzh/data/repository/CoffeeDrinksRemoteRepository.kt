@@ -9,7 +9,7 @@ interface CoffeeDrinksRemoteRepository {
 
     fun getCoffeeById(coffeeDrinkId: Long, accessToken: String): Single<CoffeeDrinkEntity>
 
-    fun addCoffeeDrinkToFavourite(coffeeDrinkId: Long, isFavourite: Boolean, accessToken: String): Single<CoffeeDrinkEntity>
+    fun addCoffeeDrinkToFavourite(coffeeDrinkId: Long, accessToken: String): Single<CoffeeDrinkEntity>
 
-    fun removeCoffeeDrinkFromFavourite(coffeeDrinkId: Long, isFavourite: Boolean, accessToken: String): Single<CoffeeDrinkEntity>
+    fun removeCoffeeDrinkFromFavourite(coffeeDrinkId: Long, accessToken: String): Single<CoffeeDrinkEntity>
 }

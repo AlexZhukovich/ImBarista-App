@@ -6,7 +6,6 @@ import com.alexzh.imbarista.remote.mapper.CoffeeMapper
 import com.alexzh.imbarista.remote.model.CoffeeDrinkFavouriteValueModel
 import com.alexzh.imbarista.remote.service.CoffeeDrinksService
 import io.reactivex.Single
-import java.lang.UnsupportedOperationException
 
 class CoffeeDrinkRemoteRepositoryImpl(
     private val service: CoffeeDrinksService,
@@ -38,10 +37,9 @@ class CoffeeDrinkRemoteRepositoryImpl(
 
     override fun addCoffeeDrinkToFavourite(
         coffeeDrinkId: Long,
-        isFavourite: Boolean,
         accessToken: String
     ): Single<CoffeeDrinkEntity> {
-        return service.markDrinkAsFavourite(coffeeDrinkId, accessToken, CoffeeDrinkFavouriteValueModel(isFavourite))
+        return service.markDrinkAsFavourite(coffeeDrinkId, accessToken, CoffeeDrinkFavouriteValueModel(true))
             .map { response ->
                 response.data.data.map { coffeeDrinkModel ->
                     mapper.mapFromModel(coffeeDrinkModel)
@@ -54,10 +52,9 @@ class CoffeeDrinkRemoteRepositoryImpl(
 
     override fun removeCoffeeDrinkFromFavourite(
         coffeeDrinkId: Long,
-        isFavourite: Boolean,
         accessToken: String
     ): Single<CoffeeDrinkEntity> {
-        return service.markDrinkAsFavourite(coffeeDrinkId, accessToken, CoffeeDrinkFavouriteValueModel(isFavourite))
+        return service.markDrinkAsFavourite(coffeeDrinkId, accessToken, CoffeeDrinkFavouriteValueModel(false))
             .map { response ->
                 response.data.data.map { coffeeDrinkModel ->
                     mapper.mapFromModel(coffeeDrinkModel)
