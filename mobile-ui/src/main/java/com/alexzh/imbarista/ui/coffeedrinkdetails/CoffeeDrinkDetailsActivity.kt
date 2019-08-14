@@ -3,7 +3,6 @@ package com.alexzh.imbarista.ui.coffeedrinkdetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -17,6 +16,7 @@ import com.alexzh.imbarista.ui.coffeedrinkdetails.adapter.CoffeeDetailsAdapter
 import com.alexzh.imbarista.viewmodel.CoffeeDrinkDetailsViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_coffee_drink_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -93,8 +93,11 @@ class CoffeeDrinkDetailsActivity : AppCompatActivity() {
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
-                Log.d("CoffeeDrinkDetails", "ERROR... -> " + resource.error?.message)
-                // show message that coffee drink cannot be mark as favourite
+                Snackbar.make(root, R.string.error_coffee_drink_favourite_state_cannot_be_changed, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.try_again_action) {
+                        coffeeDrinkDetailsViewModel.fetchCoffeeDrink(intent.getParcelableExtra<CoffeeDrinkView>(KEY_COFFEE).id)
+                    }
+                    .show()
             }
         }
     }

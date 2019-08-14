@@ -62,7 +62,10 @@ class CoffeeDrinksFragment : Fragment() {
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
-                Snackbar.make(root, "ERROR", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(root, R.string.error_cannot_load_coffee_drinks, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.try_again_action) { coffeeDrinksViewModel.fetchCoffeeDrinks() }
+                    .show()
+
             }
         }
     }
