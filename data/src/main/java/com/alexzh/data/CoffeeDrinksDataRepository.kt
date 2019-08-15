@@ -16,6 +16,10 @@ class CoffeeDrinksDataRepository(
     private val userRepository: UserRepository
 ) : CoffeeDrinksRepository {
 
+    companion object {
+        const val REPEAT_REQUEST_COUNT = 3L
+    }
+
     override fun getCoffeeDrinks(): Single<List<CoffeeDrink>> {
         return storeFactory.getRemoteDataStore().getCoffeeDrinks()
             .onErrorResumeNext { error ->
@@ -25,7 +29,7 @@ class CoffeeDrinksDataRepository(
                 }
                 return@onErrorResumeNext Single.error(error)
             }
-            .retry(3)
+            .retry(REPEAT_REQUEST_COUNT)
             .map { it.map { entity -> coffeeMapper.mapFromEntity(entity) } }
     }
 
@@ -42,7 +46,7 @@ class CoffeeDrinksDataRepository(
                 }
                 return@onErrorResumeNext Single.error(error)
             }
-            .retry(3)
+            .retry(REPEAT_REQUEST_COUNT)
             .map { coffeeMapper.mapFromEntity(it) }
     }
 
@@ -55,7 +59,7 @@ class CoffeeDrinksDataRepository(
                 }
                 return@onErrorResumeNext Single.error(error)
             }
-            .retry(3)
+            .retry(REPEAT_REQUEST_COUNT)
             .map { coffeeMapper.mapFromEntity(it) }
     }
 
@@ -68,7 +72,7 @@ class CoffeeDrinksDataRepository(
                 }
                 return@onErrorResumeNext Single.error(error)
             }
-            .retry(3)
+            .retry(REPEAT_REQUEST_COUNT)
             .map { coffeeMapper.mapFromEntity(it) }
     }
 }

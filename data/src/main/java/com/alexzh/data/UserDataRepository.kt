@@ -18,8 +18,13 @@ class UserDataRepository(
     private val preferencesRepository: PreferencesRepository
 ) : UserRepository {
 
+    companion object {
+        const val REPEAT_REQUEST_COUNT = 3L
+    }
+
     override fun createAccount(name: String, email: String, password: String): Single<User> {
         return userDataStore.createAccount(name, email, password)
+            .retry(REPEAT_REQUEST_COUNT)
             .map { userMapper.mapFromEntity(it) }
     }
 
@@ -29,6 +34,7 @@ class UserDataRepository(
                 preferencesRepository.saveSessionInfo(it)
                 Single.just(it)
             }
+            .retry(REPEAT_REQUEST_COUNT)
             .map { sessionMapper.mapFromEntity(it) }
     }
 
@@ -46,6 +52,7 @@ class UserDataRepository(
                 preferencesRepository.saveSessionInfo(it)
                 Single.just(it)
             }
+            .retry(REPEAT_REQUEST_COUNT)
             .map { sessionMapper.mapFromEntity(it) }
     }
 
@@ -58,12 +65,13 @@ class UserDataRepository(
                 }
                 return@onErrorResumeNext Single.error(error)
             }
-            .retry(3)
+            .retry(REPEAT_REQUEST_COUNT)
             .map { userMapper.mapFromEntity(it) }
     }
 
     override fun getExistingSession(): Single<Session> {
         return Single.just(preferencesRepository.getSessionInfo())
+            .retry(REPEAT_REQUEST_COUNT)
             .map { sessionMapper.mapFromEntity(it) }
     }
 }

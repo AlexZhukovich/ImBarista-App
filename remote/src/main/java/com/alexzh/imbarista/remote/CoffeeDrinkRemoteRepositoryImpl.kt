@@ -61,7 +61,7 @@ class CoffeeDrinkRemoteRepositoryImpl(
 
     private fun convertCoffeeDrinkResponseToCoffeeDrinkEntities(
         response: ResponseModel<CoffeeDrinkDataModel>
-    ) : List<CoffeeDrinkEntity> {
+    ): List<CoffeeDrinkEntity> {
         return response.data.data.map { coffeeMapper.mapFromModel(it) }
     }
 }
