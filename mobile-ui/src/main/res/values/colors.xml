@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#855446</color>
     <color name="colorPrimaryDark">#663E34</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccentPink">#F5B8C9</color>
+    <color name="colorAccent">#993215</color>
 
-    <color name="icon_favourite_tint">#F44336</color>
+    <color name="colorGray">#858585</color>
 </resources>

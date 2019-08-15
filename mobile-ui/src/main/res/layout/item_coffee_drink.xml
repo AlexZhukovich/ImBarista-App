@@ -5,48 +5,51 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="92dp">
 
     <ImageView
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            tools:srcCompat="@tools:sample/avatars"
             android:id="@+id/photo"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="72dp"
+            android:layout_height="0dp"
+            tools:srcCompat="@tools:sample/avatars"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
-            android:text="TextView"
+            android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/ingredients" app:layout_constraintStart_toEndOf="@+id/photo"
-            android:layout_marginStart="16dp" app:layout_constraintEnd_toStartOf="@+id/favouriteIcon"
-            android:layout_marginEnd="16dp"/>
+            app:layout_constraintBottom_toTopOf="@+id/ingredients"
+            app:layout_constraintStart_toEndOf="@+id/photo"
+            app:layout_constraintEnd_toStartOf="@+id/favouriteIcon"/>
 
     <TextView
-            android:text="TextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:id="@+id/ingredients"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:maxLines="2"
             android:ellipsize="end"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name" app:layout_constraintStart_toStartOf="@+id/name"
-            app:layout_constraintEnd_toEndOf="@+id/favouriteIcon"/>
+            android:layout_marginBottom="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintStart_toStartOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="@+id/favouriteIcon"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
             android:id="@+id/favouriteIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:tint="@color/icon_favourite_tint"
+            android:tint="@color/colorAccent"
             tools:srcCompat="@tools:sample/avatars"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
