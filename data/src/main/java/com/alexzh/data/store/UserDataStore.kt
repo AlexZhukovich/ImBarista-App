@@ -10,9 +10,9 @@ interface UserDataStore {
 
     fun logIn(email: String, password: String): Single<SessionEntity>
 
-    fun logOut(sessionId: Long, accessToken: String): Single<SessionEntity>
+    fun logOut(): Single<SessionEntity>
 
-    fun refreshToken(accessToken: String): Single<SessionEntity>
+    fun refreshToken(): Single<SessionEntity>
 
-    fun getCurrentUser(accessToken: String): Single<UserEntity>
+    fun getCurrentUser(): Single<UserEntity>
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 class CoffeeDrinksServiceFactory {
 
     companion object {
-        const val BASE_URL = "https://api.coffee-drinks.alexzh.com/v1/"
+        const val BASE_URL = "https://alexzh.com/api/coffee-drinks/v1/"
     }
 
     fun createCoffeeDrinksService(isDebug: Boolean): CoffeeDrinksService {
@@ -30,9 +30,10 @@ class CoffeeDrinksServiceFactory {
 
     private fun createOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
+            .hostnameVerifier { _, _ -> true }
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
-            .connectTimeout(90, TimeUnit.SECONDS)
-            .readTimeout(90, TimeUnit.SECONDS)
             .build()
     }
 

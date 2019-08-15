@@ -30,6 +30,11 @@
     <string name="error_email_password_validation">Check email and password</string>
     <string name="error_name_email_password_validation">Check name, email and password</string>
     <string name="error_loading_user_info">Loading user info error</string>
+    <string name="error_operation_cannot_be_finished">Operation cannot be finished</string>
+    <string name="error_cannot_load_coffee_drinks">Cannot load coffee drinks</string>
+    <string name="error_coffee_drink_favourite_state_cannot_be_changed">Coffee favourite state cannot be changed</string>
+
+    <string name="try_again_action">Try again</string>
 
     <!-- Messages -->
     <string name="user_was_created">User was created, please log in</string>

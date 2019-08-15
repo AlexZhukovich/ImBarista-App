@@ -2,17 +2,17 @@ package com.alexzh.imbarista.remote.mapper
 
 import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.imbarista.remote.model.CoffeeDrinkModel
-import com.alexzh.testdata.remote.GenerateRemoteTestData.generateCoffeeModel
+import com.alexzh.testdata.remote.GenerateRemoteTestData.generateCoffeeDrinkModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class CoffeeDrinkMapperTest {
 
-    private val mapper = CoffeeMapper(IngredientsMapper())
+    private val mapper = CoffeeMapper()
 
     @Test
     fun mapFromModelWithOneIngredientMapsDataCorrectly() {
-        val coffeeModel = generateCoffeeModel()
+        val coffeeModel = generateCoffeeDrinkModel()
         val coffeeEntity = mapper.mapFromModel(coffeeModel)
 
         assertEqualsData(coffeeModel, coffeeEntity)
@@ -20,7 +20,7 @@ class CoffeeDrinkMapperTest {
 
     @Test
     fun mapFromModelWithMultipleIngredientsMapsDataCorrectly() {
-        val coffeeModel = generateCoffeeModel(10)
+        val coffeeModel = generateCoffeeDrinkModel(10)
         val coffeeEntity = mapper.mapFromModel(coffeeModel)
 
         assertEqualsData(coffeeModel, coffeeEntity)
@@ -28,7 +28,7 @@ class CoffeeDrinkMapperTest {
 
     @Test
     fun mapFromModelWithNoIngredientsMapsDataCorrectly() {
-        val coffeeModel = generateCoffeeModel(0)
+        val coffeeModel = generateCoffeeDrinkModel(0)
         val coffeeEntity = mapper.mapFromModel(coffeeModel)
 
         assertEqualsData(coffeeModel, coffeeEntity)
@@ -40,11 +40,9 @@ class CoffeeDrinkMapperTest {
     ) {
         assertEquals(coffeeDrinkModel.id, coffeeDrinkEntity.id)
         assertEquals(coffeeDrinkModel.name, coffeeDrinkEntity.name)
+        assertEquals(coffeeDrinkModel.imageUrl, coffeeDrinkEntity.imageUrl)
         assertEquals(coffeeDrinkModel.description, coffeeDrinkEntity.description)
-
-        assertEquals(coffeeDrinkModel.ingredients.size, coffeeDrinkEntity.ingredients.size)
-        for (index in 0 until coffeeDrinkModel.ingredients.size) {
-            assertEquals(coffeeDrinkModel.ingredients[index].name, coffeeDrinkEntity.ingredients[index].name)
-        }
+        assertEquals(coffeeDrinkModel.ingredients, coffeeDrinkEntity.ingredients)
+        assertEquals(coffeeDrinkModel.isCoffeeDrinkFavourite(), coffeeDrinkEntity.isFavourite)
     }
 }

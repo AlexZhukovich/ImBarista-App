@@ -42,7 +42,7 @@
         </activity>
         <activity android:name="com.alexzh.imbarista.ui.home.HomeActivity">
         </activity>
-        <activity android:name="com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDetailsActivity">
+        <activity android:name="com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDrinkDetailsActivity">
         </activity>
         <activity
                 android:name="com.alexzh.imbarista.ui.settings.SettingsActivity"

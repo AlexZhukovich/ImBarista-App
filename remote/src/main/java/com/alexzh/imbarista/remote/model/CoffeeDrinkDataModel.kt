@@ -1,6 +1,8 @@
 package com.alexzh.imbarista.remote.model
 
+import com.google.gson.annotations.SerializedName
+
 data class CoffeeDrinkDataModel(
-    val rows: Long,
-    val data: List<CoffeeDrinkModel>
+    @SerializedName("row_returned") val rows: Long,
+    @SerializedName("coffee-drinks") val data: List<CoffeeDrinkModel>
 )

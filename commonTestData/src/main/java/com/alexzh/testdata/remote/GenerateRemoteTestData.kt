@@ -4,6 +4,7 @@ import com.alexzh.imbarista.remote.model.*
 import com.alexzh.testdata.base.RandomData.randomEmail
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
+import com.alexzh.testdata.base.RandomData.randomYN
 
 object GenerateRemoteTestData {
 
@@ -26,24 +27,31 @@ object GenerateRemoteTestData {
         )
     }
 
-    fun generateIngredientModel(): IngredientModel {
-        return IngredientModel(randomString())
-    }
+    fun generateCoffeeDrinkModel(ingredientsCount: Int = 1): CoffeeDrinkModel {
+        var ingredients = ""
+        repeat(ingredientsCount) {
+            ingredients += "${randomString()}, "
+        }
 
-    fun generateCoffeeModel(ingredientCount: Int = 1): CoffeeDrinkModel {
         return CoffeeDrinkModel(
             id = randomLong(),
             name = randomString(),
+            imageUrl = randomString(),
             description = randomString(),
-            ingredients = generateIngredientModels(ingredientCount)
+            ingredients = ingredients,
+            isFavourite = randomYN()
         )
     }
 
-    private fun generateIngredientModels(count: Int = 1): List<IngredientModel> {
-        val ingredients = mutableListOf<IngredientModel>()
-        repeat(count) {
-            ingredients.add(generateIngredientModel())
+    fun generateCoffeeDrinkDataModel(coffeeDrinkCount: Int = 1, ingredientsCount: Int = 1): CoffeeDrinkDataModel {
+        val coffeeDrinks = mutableListOf<CoffeeDrinkModel>()
+        repeat(coffeeDrinkCount) {
+            coffeeDrinks.add(generateCoffeeDrinkModel(ingredientsCount))
         }
-        return ingredients
+
+        return CoffeeDrinkDataModel(
+            rows = coffeeDrinkCount.toLong(),
+            data = coffeeDrinks
+        )
     }
 }

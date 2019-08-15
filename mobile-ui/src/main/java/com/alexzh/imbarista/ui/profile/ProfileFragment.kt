@@ -68,13 +68,11 @@ class ProfileFragment : Fragment() {
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
-                displayError(getString(R.string.error_loading_user_info))
+                Snackbar.make(root, R.string.error_loading_user_info, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.try_again_action) { getCurrentUserViewModel.fetchUserInfo() }
+                    .show()
             }
         }
-    }
-
-    private fun displayError(text: String) {
-        Snackbar.make(root, text, Snackbar.LENGTH_LONG).show()
     }
 
     private fun handleLogOut(resource: Resource<Any>) {

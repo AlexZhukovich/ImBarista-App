@@ -2,6 +2,7 @@ package com.alexzh.data
 
 import com.alexzh.data.mapper.SessionMapper
 import com.alexzh.data.mapper.UserMapper
+import com.alexzh.data.model.HttpDataException
 import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.data.store.UserDataStore
 import com.alexzh.imbarista.domain.model.Session
@@ -17,8 +18,13 @@ class UserDataRepository(
     private val preferencesRepository: PreferencesRepository
 ) : UserRepository {
 
+    companion object {
+        const val REPEAT_REQUEST_COUNT = 3L
+    }
+
     override fun createAccount(name: String, email: String, password: String): Single<User> {
         return userDataStore.createAccount(name, email, password)
+            .retry(REPEAT_REQUEST_COUNT)
             .map { userMapper.mapFromEntity(it) }
     }
 
@@ -28,26 +34,44 @@ class UserDataRepository(
                 preferencesRepository.saveSessionInfo(it)
                 Single.just(it)
             }
+            .retry(REPEAT_REQUEST_COUNT)
             .map { sessionMapper.mapFromEntity(it) }
     }
 
     override fun logOut(): Completable {
         return Completable.defer {
-            val sessionEntity = preferencesRepository.getSessionInfo()
-            userDataStore.logOut(sessionEntity.sessionId, sessionEntity.accessToken).blockingGet()
+            userDataStore.logOut().blockingGet()
             preferencesRepository.clearSessionInfo()
             Completable.complete()
         }
     }
 
+    override fun refreshToken(): Single<Session> {
+        return userDataStore.refreshToken()
+            .flatMap {
+                preferencesRepository.saveSessionInfo(it)
+                Single.just(it)
+            }
+            .retry(REPEAT_REQUEST_COUNT)
+            .map { sessionMapper.mapFromEntity(it) }
+    }
+
     override fun getCurrentUserInfo(): Single<User> {
-        val sessionEntity = preferencesRepository.getSessionInfo()
-        return userDataStore.getCurrentUser(sessionEntity.accessToken)
+        return userDataStore.getCurrentUser()
+            .onErrorResumeNext { error ->
+                if (error is HttpDataException && error.code == 401) {
+                    refreshToken().blockingGet()
+                    return@onErrorResumeNext userDataStore.getCurrentUser()
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
+            .retry(REPEAT_REQUEST_COUNT)
             .map { userMapper.mapFromEntity(it) }
     }
 
     override fun getExistingSession(): Single<Session> {
         return Single.just(preferencesRepository.getSessionInfo())
+            .retry(REPEAT_REQUEST_COUNT)
             .map { sessionMapper.mapFromEntity(it) }
     }
 }

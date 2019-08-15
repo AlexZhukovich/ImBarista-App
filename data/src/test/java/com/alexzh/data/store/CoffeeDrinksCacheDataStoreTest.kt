@@ -20,19 +20,21 @@ class CoffeeDrinksCacheDataStoreTest {
 
     @Test
     fun getCoffeeDrinksReturnsCompletesSuccessfully() {
+        val accessToken = randomString()
         stubGetCoffeeDrinks(Single.just(generateCoffeeEntities(2)))
 
-        dataStore.getCoffeeDrinks()
+        dataStore.getCoffeeDrinks(accessToken)
             .test()
             .assertComplete()
     }
 
     @Test
     fun getCoffeeDrinksReturnsReturnsCorrectData() {
+        val accessToken = randomString()
         val coffeeDrinks = generateCoffeeEntities(2)
         stubGetCoffeeDrinks(Single.just(coffeeDrinks))
 
-        dataStore.getCoffeeDrinks()
+        dataStore.getCoffeeDrinks(accessToken)
             .test()
             .assertValue(coffeeDrinks)
     }
@@ -82,7 +84,8 @@ class CoffeeDrinksCacheDataStoreTest {
     @Test
     fun setCoffeeAsFavouriteCompletesSuccessfully() {
         val coffeeId = randomLong()
-        stubSetCoffeeAsFavourite(coffeeId, Completable.complete())
+        val coffeeDrinkEntity = generateCoffeeEntity()
+        stubSetCoffeeAsFavourite(coffeeId, Single.just(coffeeDrinkEntity))
 
         dataStore.setCoffeeAsFavourite(coffeeId)
             .test()
@@ -92,7 +95,8 @@ class CoffeeDrinksCacheDataStoreTest {
     @Test
     fun setCoffeeAsNotFavouriteCompletesSuccessfully() {
         val coffeeId = randomLong()
-        stubSetCoffeeAsNotFavourite(coffeeId, Completable.complete())
+        val coffeeDrinkEntity = generateCoffeeEntity()
+        stubSetCoffeeAsNotFavourite(coffeeId, Single.just(coffeeDrinkEntity))
 
         dataStore.setCoffeeAsNotFavourite(coffeeId)
             .test()
@@ -138,16 +142,16 @@ class CoffeeDrinksCacheDataStoreTest {
 
     private fun stubSetCoffeeAsFavourite(
         id: Long,
-        completable: Completable
+        single: Single<CoffeeDrinkEntity>
     ) {
-        every { repository.setCoffeeAsFavourite(id) } returns completable
+        every { repository.setCoffeeAsFavourite(id) } returns single
     }
 
     private fun stubSetCoffeeAsNotFavourite(
         id: Long,
-        completable: Completable
+        single: Single<CoffeeDrinkEntity>
     ) {
-        every { repository.setCoffeeAsNotFavourite(id) } returns completable
+        every { repository.setCoffeeAsNotFavourite(id) } returns single
     }
 
     private fun stubSaveCoffeeDrinks(

@@ -1,23 +1,36 @@
 package com.alexzh.data
 
 import com.alexzh.data.mapper.CoffeeMapper
+import com.alexzh.data.model.HttpDataException
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
 import com.alexzh.data.store.CoffeeDrinksDataStoreFactory
 import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
-import io.reactivex.Completable
+import com.alexzh.imbarista.domain.repository.UserRepository
 import io.reactivex.Single
-import java.lang.UnsupportedOperationException
 
 class CoffeeDrinksDataRepository(
-    private val mapper: CoffeeMapper,
+    private val coffeeMapper: CoffeeMapper,
     private val cacheRepository: CoffeeDrinksCacheRepository,
-    private val storeFactory: CoffeeDrinksDataStoreFactory
+    private val storeFactory: CoffeeDrinksDataStoreFactory,
+    private val userRepository: UserRepository
 ) : CoffeeDrinksRepository {
+
+    companion object {
+        const val REPEAT_REQUEST_COUNT = 3L
+    }
 
     override fun getCoffeeDrinks(): Single<List<CoffeeDrink>> {
         return storeFactory.getRemoteDataStore().getCoffeeDrinks()
-            .map { it.map { entity -> mapper.mapFromEntity(entity) } }
+            .onErrorResumeNext { error ->
+                if (error is HttpDataException && error.code == 401) {
+                    userRepository.refreshToken().blockingGet()
+                    return@onErrorResumeNext storeFactory.getRemoteDataStore().getCoffeeDrinks()
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
+            .retry(REPEAT_REQUEST_COUNT)
+            .map { it.map { entity -> coffeeMapper.mapFromEntity(entity) } }
     }
 
     override fun getCoffeeDrinksByName(name: String): Single<List<CoffeeDrink>> {
@@ -26,20 +39,40 @@ class CoffeeDrinksDataRepository(
 
     override fun getCoffeeDrinkById(id: Long): Single<CoffeeDrink> {
         return storeFactory.getRemoteDataStore().getCoffeeById(id)
-            .map { mapper.mapFromEntity(it) }
+            .onErrorResumeNext { error ->
+                if (error is HttpDataException && error.code == 401) {
+                    userRepository.refreshToken().blockingGet()
+                    return@onErrorResumeNext storeFactory.getRemoteDataStore().getCoffeeById(id)
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
+            .retry(REPEAT_REQUEST_COUNT)
+            .map { coffeeMapper.mapFromEntity(it) }
     }
 
-    override fun addCoffeeDrinkToFavourites(coffeeId: Long): Completable {
-        return Completable.defer {
-            storeFactory.getRemoteDataStore().setCoffeeAsFavourite(coffeeId)
-            Completable.complete()
-        }
+    override fun addCoffeeDrinkToFavourites(coffeeId: Long): Single<CoffeeDrink> {
+        return storeFactory.getRemoteDataStore().setCoffeeAsFavourite(coffeeId)
+            .onErrorResumeNext { error ->
+                if (error is HttpDataException && error.code == 401) {
+                    userRepository.refreshToken().blockingGet()
+                    return@onErrorResumeNext storeFactory.getRemoteDataStore().setCoffeeAsFavourite(coffeeId)
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
+            .retry(REPEAT_REQUEST_COUNT)
+            .map { coffeeMapper.mapFromEntity(it) }
     }
 
-    override fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Completable {
-        return Completable.defer {
-            storeFactory.getRemoteDataStore().setCoffeeAsNotFavourite(coffeeId)
-            Completable.complete()
-        }
+    override fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Single<CoffeeDrink> {
+        return storeFactory.getRemoteDataStore().setCoffeeAsNotFavourite(coffeeId)
+            .onErrorResumeNext { error ->
+                if (error is HttpDataException && error.code == 401) {
+                    userRepository.refreshToken().blockingGet()
+                    return@onErrorResumeNext storeFactory.getRemoteDataStore().setCoffeeAsNotFavourite(coffeeId)
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
+            .retry(REPEAT_REQUEST_COUNT)
+            .map { coffeeMapper.mapFromEntity(it) }
     }
 }

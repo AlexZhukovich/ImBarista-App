@@ -5,5 +5,11 @@ import io.reactivex.Single
 
 interface CoffeeDrinksRemoteRepository {
 
-    fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>>
+    fun getCoffeeDrinks(accessToken: String): Single<List<CoffeeDrinkEntity>>
+
+    fun getCoffeeById(coffeeDrinkId: Long, accessToken: String): Single<CoffeeDrinkEntity>
+
+    fun addCoffeeDrinkToFavourite(coffeeDrinkId: Long, accessToken: String): Single<CoffeeDrinkEntity>
+
+    fun removeCoffeeDrinkFromFavourite(coffeeDrinkId: Long, accessToken: String): Single<CoffeeDrinkEntity>
 }

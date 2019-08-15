@@ -25,12 +25,14 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" android:id="@+id/scrollView3">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:id="@+id/scrollView3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
 
             <androidx.constraintlayout.widget.Guideline
                     android:layout_width="wrap_content"
@@ -53,7 +55,6 @@
                     app:errorEnabled="true"
                     app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/emailInputLayout"
                     app:layout_constraintVertical_chainStyle="packed">
@@ -73,7 +74,6 @@
                     app:errorEnabled="true"
                     app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:layout_constraintTop_toBottomOf="@+id/nameInputLayout"
                     app:layout_constraintBottom_toTopOf="@+id/passwordInputLayout">
 
@@ -88,11 +88,10 @@
                     android:id="@+id/passwordInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     app:errorEnabled="true"
                     app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
                     app:layout_constraintBottom_toTopOf="@+id/createAccountButton">
 

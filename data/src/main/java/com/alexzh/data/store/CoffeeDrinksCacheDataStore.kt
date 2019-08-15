@@ -21,11 +21,11 @@ class CoffeeDrinksCacheDataStore(
         return cacheRepository.getCoffeeById(id)
     }
 
-    override fun setCoffeeAsFavourite(id: Long): Completable {
+    override fun setCoffeeAsFavourite(id: Long): Single<CoffeeDrinkEntity> {
         return cacheRepository.setCoffeeAsFavourite(id)
     }
 
-    override fun setCoffeeAsNotFavourite(id: Long): Completable {
+    override fun setCoffeeAsNotFavourite(id: Long): Single<CoffeeDrinkEntity> {
         return cacheRepository.setCoffeeAsNotFavourite(id)
     }
 

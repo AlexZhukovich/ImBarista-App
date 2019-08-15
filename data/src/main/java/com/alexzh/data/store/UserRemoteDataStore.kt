@@ -2,11 +2,13 @@ package com.alexzh.data.store
 
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.data.model.UserEntity
+import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.data.repository.UserRemoteRepository
 import io.reactivex.Single
 
 class UserRemoteDataStore(
-    private val repository: UserRemoteRepository
+    private val repository: UserRemoteRepository,
+    private val preferencesRepository: PreferencesRepository
 ) : UserDataStore {
 
     override fun createAccount(name: String, email: String, password: String): Single<UserEntity> {
@@ -17,15 +19,18 @@ class UserRemoteDataStore(
         return repository.logIn(email, password)
     }
 
-    override fun logOut(sessionId: Long, accessToken: String): Single<SessionEntity> {
-        return repository.logOut(sessionId, accessToken)
+    override fun logOut(): Single<SessionEntity> {
+        val sessionEntity = preferencesRepository.getSessionInfo()
+        return repository.logOut(sessionEntity.sessionId, sessionEntity.accessToken)
     }
 
-    override fun refreshToken(accessToken: String): Single<SessionEntity> {
-        return repository.refreshToken(accessToken)
+    override fun refreshToken(): Single<SessionEntity> {
+        val sessionEntity = preferencesRepository.getSessionInfo()
+        return repository.refreshToken(sessionEntity.sessionId, sessionEntity.accessToken, sessionEntity.refreshToken)
     }
 
-    override fun getCurrentUser(accessToken: String): Single<UserEntity> {
-        return repository.getCurrentUser(accessToken)
+    override fun getCurrentUser(): Single<UserEntity> {
+        val sessionEntity = preferencesRepository.getSessionInfo()
+        return repository.getCurrentUser(sessionEntity.accessToken)
     }
 }

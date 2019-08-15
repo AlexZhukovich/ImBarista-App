@@ -5,10 +5,10 @@ import com.alexzh.data.model.UserEntity
 import com.alexzh.data.repository.UserRemoteRepository
 import com.alexzh.imbarista.remote.mapper.SessionMapper
 import com.alexzh.imbarista.remote.mapper.UserMapper
+import com.alexzh.imbarista.remote.model.RefreshTokenModel
 import com.alexzh.imbarista.remote.model.UserModel
 import com.alexzh.imbarista.remote.service.CoffeeDrinksService
 import io.reactivex.Single
-import java.lang.UnsupportedOperationException
 
 class UserRemoteRepositoryImpl(
     private val service: CoffeeDrinksService,
@@ -40,8 +40,10 @@ class UserRemoteRepositoryImpl(
             .map { sessionMapper.mapFromModel(it.data) }
     }
 
-    override fun refreshToken(accessToken: String): Single<SessionEntity> {
-        return Single.error(UnsupportedOperationException("Not implemented yet"))
+    override fun refreshToken(sessionId: Long, accessToken: String, refreshToken: String): Single<SessionEntity> {
+        return service.refreshToken(sessionId, accessToken, RefreshTokenModel(refreshToken))
+
+            .map { sessionMapper.mapFromModel(it.data) }
     }
 
     override fun getCurrentUser(accessToken: String): Single<UserEntity> {

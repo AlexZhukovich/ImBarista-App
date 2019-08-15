@@ -2,17 +2,19 @@ package com.alexzh.data
 
 import com.alexzh.data.mapper.CoffeeMapper
 import com.alexzh.data.model.CoffeeDrinkEntity
+import com.alexzh.data.model.SessionEntity
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
+import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.data.store.CoffeeDrinksDataStoreFactory
 import com.alexzh.data.store.CoffeeDrinksRemoteDataStore
 import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntity
-import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffee
+import com.alexzh.testdata.data.GenerateDataTestData.generateSessionEntity
+import com.alexzh.testdata.domain.GenerateDomainTestData.generateCoffeeDrink
 import io.mockk.every
 import io.mockk.mockk
-import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Test
 
@@ -22,19 +24,23 @@ class CoffeeDrinksDataRepositoryTest {
     private val storeFactory = mockk<CoffeeDrinksDataStoreFactory>()
     private val cacheRepository = mockk<CoffeeDrinksCacheRepository>()
     private val remoteDataStore = mockk<CoffeeDrinksRemoteDataStore>()
+    private val preferencesRepository = mockk<PreferencesRepository>()
 
     private val dataRepository = CoffeeDrinksDataRepository(
         mapper,
         cacheRepository,
-        storeFactory
+        storeFactory,
+        preferencesRepository
     )
 
     @Test
     fun getCoffeeDrinksCompletesSuccessfully() {
+        val sessionEntity = generateSessionEntity()
         val coffeeEntity = generateCoffeeEntity()
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
 
         stubGetRemoteDataStore()
+        stunGetSessionInfo(sessionEntity)
         stubGetCoffeeDrinksFromRemoteStore(Single.just(listOf(coffeeEntity)))
         stubMapFromEntity(coffeeEntity, coffee)
 
@@ -45,11 +51,13 @@ class CoffeeDrinksDataRepositoryTest {
 
     @Test
     fun getCoffeeDrinksReturnsCorrectData() {
+        val sessionEntity = generateSessionEntity()
         val coffeeEntity = generateCoffeeEntity()
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
         val expectedCoffeeDrinks = listOf(coffee)
 
         stubGetRemoteDataStore()
+        stunGetSessionInfo(sessionEntity)
         stubGetCoffeeDrinksFromRemoteStore(Single.just(listOf(coffeeEntity)))
         stubMapFromEntity(coffeeEntity, coffee)
 
@@ -68,7 +76,7 @@ class CoffeeDrinksDataRepositoryTest {
     @Test
     fun getCoffeeDrinkByIdCompletesSuccessfully() {
         val coffeeEntity = generateCoffeeEntity()
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
 
         stubGetRemoteDataStore()
         stubGetCoffeeFromRemoteStoreById(coffeeEntity.id, Single.just(coffeeEntity))
@@ -82,7 +90,7 @@ class CoffeeDrinksDataRepositoryTest {
     @Test
     fun getCoffeeDrinkByIdReturnsCorrectData() {
         val coffeeEntity = generateCoffeeEntity()
-        val coffee = generateCoffee()
+        val coffee = generateCoffeeDrink()
 
         stubGetRemoteDataStore()
         stubGetCoffeeFromRemoteStoreById(coffeeEntity.id, Single.just(coffeeEntity))
@@ -96,9 +104,11 @@ class CoffeeDrinksDataRepositoryTest {
     @Test
     fun addCoffeeToFavouritesCompletesSuccessfully() {
         val coffeeId = randomLong()
-
+        val coffeeDrinkEntity = generateCoffeeEntity()
+        val coffeeDrink = generateCoffeeDrink()
         stubGetRemoteDataStore()
-        stubAddCoffeeToFavourites(coffeeId, Completable.complete())
+        stubMapFromEntity(coffeeDrinkEntity, coffeeDrink)
+        stubAddCoffeeToFavourites(coffeeId, Single.just(coffeeDrinkEntity))
 
         dataRepository.addCoffeeDrinkToFavourites(coffeeId)
             .test()
@@ -106,15 +116,45 @@ class CoffeeDrinksDataRepositoryTest {
     }
 
     @Test
+    fun addCoffeeToFavouritesReturnsCorrectData() {
+        val coffeeId = randomLong()
+        val coffeeDrinkEntity = generateCoffeeEntity()
+        val coffeeDrink = generateCoffeeDrink()
+        stubGetRemoteDataStore()
+        stubMapFromEntity(coffeeDrinkEntity, coffeeDrink)
+        stubAddCoffeeToFavourites(coffeeId, Single.just(coffeeDrinkEntity))
+
+        dataRepository.addCoffeeDrinkToFavourites(coffeeId)
+            .test()
+            .assertValue(coffeeDrink)
+    }
+
+    @Test
     fun removeCoffeeFromFavouritesCompletesSuccessfully() {
         val coffeeId = randomLong()
-
+        val coffeeDrinkEntity = generateCoffeeEntity()
+        val coffeeDrink = generateCoffeeDrink()
         stubGetRemoteDataStore()
-        stubRemoveCoffeeFromFavourites(coffeeId, Completable.complete())
+        stubMapFromEntity(coffeeDrinkEntity, coffeeDrink)
+        stubRemoveCoffeeFromFavourites(coffeeId, Single.just(coffeeDrinkEntity))
 
         dataRepository.removeCoffeeDrinkFromFavourites(randomLong())
             .test()
             .assertComplete()
+    }
+
+    @Test
+    fun removeCoffeeFromFavouritesReturnsCorrectData() {
+        val coffeeId = randomLong()
+        val coffeeDrinkEntity = generateCoffeeEntity()
+        val coffeeDrink = generateCoffeeDrink()
+        stubGetRemoteDataStore()
+        stubMapFromEntity(coffeeDrinkEntity, coffeeDrink)
+        stubRemoveCoffeeFromFavourites(coffeeId, Single.just(coffeeDrinkEntity))
+
+        dataRepository.removeCoffeeDrinkFromFavourites(randomLong())
+            .test()
+            .assertValue(coffeeDrink)
     }
 
     private fun stubGetRemoteDataStore() {
@@ -122,7 +162,7 @@ class CoffeeDrinksDataRepositoryTest {
     }
 
     private fun stubGetCoffeeDrinksFromRemoteStore(coffeeDrinksSingle: Single<List<CoffeeDrinkEntity>>) {
-        every { remoteDataStore.getCoffeeDrinks() } returns coffeeDrinksSingle
+        every { remoteDataStore.getCoffeeDrinks(any()) } returns coffeeDrinksSingle
     }
 
     private fun stubGetCoffeeFromRemoteStoreById(coffeeId: Long, coffeeDrinkSingle: Single<CoffeeDrinkEntity>) {
@@ -138,15 +178,19 @@ class CoffeeDrinksDataRepositoryTest {
 
     private fun stubAddCoffeeToFavourites(
         coffeeId: Long,
-        completable: Completable
+        single: Single<CoffeeDrinkEntity>
     ) {
-        every { remoteDataStore.setCoffeeAsFavourite(coffeeId) } returns completable
+        every { remoteDataStore.setCoffeeAsFavourite(coffeeId) } returns single
     }
 
     private fun stubRemoveCoffeeFromFavourites(
         coffeeId: Long,
-        completable: Completable
+        single: Single<CoffeeDrinkEntity>
     ) {
-        every { remoteDataStore.setCoffeeAsNotFavourite(coffeeId) } returns completable
+        every { remoteDataStore.setCoffeeAsNotFavourite(coffeeId) } returns single
+    }
+
+    private fun stunGetSessionInfo(sessionInfo: SessionEntity) {
+        every { preferencesRepository.getSessionInfo() } returns sessionInfo
     }
 }

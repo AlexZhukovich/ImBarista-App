@@ -2,9 +2,11 @@ package com.alexzh.data.store
 
 import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.data.repository.CoffeeDrinksRemoteRepository
+import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntities
+import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntity
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
@@ -20,21 +22,27 @@ class CoffeeDrinksRemoteDataStoreTest {
 
     private val repository = mockk<CoffeeDrinksRemoteRepository>()
 
-    private val store = CoffeeDrinksRemoteDataStore(repository)
+    private val preferencesRepository = mockk<PreferencesRepository>()
+
+    private val store = CoffeeDrinksRemoteDataStore(repository, preferencesRepository)
 
     @Test
     fun getCoffeeDrinksCompletesSuccessfully() {
+        val accessToken = randomString()
+        stubGetAccessToken(accessToken)
         stubGetCoffeeDrinks(Single.just(generateCoffeeEntities(2)))
-        store.getCoffeeDrinks()
+        store.getCoffeeDrinks(accessToken)
             .test()
             .assertComplete()
     }
 
     @Test
     fun getCoffeeDrinksReturnsCorrectData() {
+        val accessToken = randomString()
+        stubGetAccessToken(accessToken)
         val coffeeDrinks = generateCoffeeEntities(2)
         stubGetCoffeeDrinks(Single.just(coffeeDrinks))
-        store.getCoffeeDrinks()
+        store.getCoffeeDrinks(accessToken)
             .test()
             .assertValue(coffeeDrinks)
     }
@@ -48,27 +56,87 @@ class CoffeeDrinksRemoteDataStoreTest {
     }
 
     @Test
-    fun getCoffeeByIdThrowsException() {
-        expectedException.expect(UnsupportedOperationException::class.java)
-        expectedException.expectMessage("'Getting coffee by id' operation is unsupported")
+    fun getCoffeeByIdCompletesSuccessfully() {
+        val coffeeDrinkId = randomLong()
+        val accessToken = randomString()
+        val coffeeDrink = generateCoffeeEntity()
 
-        store.getCoffeeById(randomLong())
+        stubGetAccessToken(accessToken)
+        stubGetCoffeeDrinkById(coffeeDrinkId, accessToken, Single.just(coffeeDrink))
+
+        store.getCoffeeById(coffeeDrinkId)
+            .test()
+            .assertComplete()
     }
 
     @Test
-    fun setCoffeeAsFavouriteThrowsException() {
-        expectedException.expect(UnsupportedOperationException::class.java)
-        expectedException.expectMessage("'Setting coffee as favourite' operation is unsupported")
+    fun getCoffeeByIdReturnsCorrectData() {
+        val coffeeDrinkId = randomLong()
+        val accessToken = randomString()
+        val coffeeDrink = generateCoffeeEntity()
 
-        store.setCoffeeAsFavourite(randomLong())
+        stubGetAccessToken(accessToken)
+        stubGetCoffeeDrinkById(coffeeDrinkId, accessToken, Single.just(coffeeDrink))
+
+        store.getCoffeeById(coffeeDrinkId)
+            .test()
+            .assertValue(coffeeDrink)
     }
 
     @Test
-    fun setCoffeeAsNotFavouriteThrowsException() {
-        expectedException.expect(UnsupportedOperationException::class.java)
-        expectedException.expectMessage("'Setting coffee as not favourite' operation is unsupported")
+    fun setCoffeeAsFavouriteCompletesSuccessfully() {
+        val coffeeDrinkId = randomLong()
+        val accessToken = randomString()
+        val coffeeDrink = generateCoffeeEntity()
 
-        store.setCoffeeAsNotFavourite(randomLong())
+        stubGetAccessToken(accessToken)
+        stubSetCoffeeAsFavourite(coffeeDrinkId, accessToken, Single.just(coffeeDrink))
+
+        store.setCoffeeAsFavourite(coffeeDrinkId)
+            .test()
+            .assertComplete()
+    }
+
+    @Test
+    fun setCoffeeAsFavouriteReturnsCorrectData() {
+        val coffeeDrinkId = randomLong()
+        val accessToken = randomString()
+        val coffeeDrink = generateCoffeeEntity()
+
+        stubGetAccessToken(accessToken)
+        stubSetCoffeeAsFavourite(coffeeDrinkId, accessToken, Single.just(coffeeDrink))
+
+        store.setCoffeeAsFavourite(coffeeDrinkId)
+            .test()
+            .assertValue(coffeeDrink)
+    }
+
+    @Test
+    fun setCoffeeAsNotFavouriteCompletesSuccessfully() {
+        val coffeeDrinkId = randomLong()
+        val accessToken = randomString()
+        val coffeeDrink = generateCoffeeEntity()
+
+        stubGetAccessToken(accessToken)
+        stubSetCoffeeAsNotFavourite(coffeeDrinkId, accessToken, Single.just(coffeeDrink))
+
+        store.setCoffeeAsNotFavourite(coffeeDrinkId)
+            .test()
+            .assertComplete()
+    }
+
+    @Test
+    fun setCoffeeAsNotFavouriteReturnsCorrectData() {
+        val coffeeDrinkId = randomLong()
+        val accessToken = randomString()
+        val coffeeDrink = generateCoffeeEntity()
+
+        stubGetAccessToken(accessToken)
+        stubSetCoffeeAsNotFavourite(coffeeDrinkId, accessToken, Single.just(coffeeDrink))
+
+        store.setCoffeeAsNotFavourite(coffeeDrinkId)
+            .test()
+            .assertValue(coffeeDrink)
     }
 
     @Test
@@ -88,6 +156,22 @@ class CoffeeDrinksRemoteDataStoreTest {
     }
 
     private fun stubGetCoffeeDrinks(coffeeDrinksSingle: Single<List<CoffeeDrinkEntity>>) {
-        every { repository.getCoffeeDrinks() } returns coffeeDrinksSingle
+        every { repository.getCoffeeDrinks(any()) } returns coffeeDrinksSingle
+    }
+
+    private fun stubGetCoffeeDrinkById(coffeeDrinkId: Long, accessToken: String, single: Single<CoffeeDrinkEntity>) {
+        every { repository.getCoffeeById(coffeeDrinkId, accessToken) } returns single
+    }
+
+    private fun stubSetCoffeeAsFavourite(coffeeDrinkId: Long, accessToken: String, single: Single<CoffeeDrinkEntity>) {
+        every { repository.addCoffeeDrinkToFavourite(coffeeDrinkId, accessToken) } returns single
+    }
+
+    private fun stubSetCoffeeAsNotFavourite(coffeeDrinkId: Long, accessToken: String, single: Single<CoffeeDrinkEntity>) {
+        every { repository.addCoffeeDrinkToFavourite(coffeeDrinkId, accessToken) } returns single
+    }
+
+    private fun stubGetAccessToken(accessToken: String) {
+        every { preferencesRepository.getSessionInfo().accessToken } returns accessToken
     }
 }
