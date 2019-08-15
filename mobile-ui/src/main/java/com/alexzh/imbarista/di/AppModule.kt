@@ -72,11 +72,11 @@ val mapperModule = module {
 val dataModule = module {
     factory { CoffeeDrinksServiceFactory().createCoffeeDrinksService(true) }
     factory<CoffeeDrinksCacheRepository> { CoffeeDrinksCacheRepositoryImpl() }
-    factory<CoffeeDrinksRemoteRepository> { CoffeeDrinkRemoteRepositoryImpl(service = get(), mapper = get()) }
+    factory<CoffeeDrinksRemoteRepository> { CoffeeDrinkRemoteRepositoryImpl(service = get(), coffeeMapper = get(), sessionMapper = get(), preferencesRepository = get()) }
     factory { CoffeeDrinksCacheDataStore(cacheRepository = get()) }
     factory { CoffeeDrinksRemoteDataStore(remoteRepository = get(), preferencesRepository = get()) }
     factory { CoffeeDrinksDataStoreFactory(remoteDataStore = get(), cacheDataStore = get()) }
-    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(mapper = get(), cacheRepository = get(), storeFactory = get(), preferencesRepository = get()) }
+    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(coffeeMapper = get(), cacheRepository = get(), storeFactory = get(), preferencesRepository = get()) }
     factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userMapper = get(), sessionMapper = get()) }
     factory<UserDataStore> { UserRemoteDataStore(repository = get()) }
     factory<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(androidContext()) }

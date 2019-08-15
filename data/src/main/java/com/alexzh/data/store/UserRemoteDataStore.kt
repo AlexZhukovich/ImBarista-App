@@ -21,8 +21,8 @@ class UserRemoteDataStore(
         return repository.logOut(sessionId, accessToken)
     }
 
-    override fun refreshToken(accessToken: String): Single<SessionEntity> {
-        return repository.refreshToken(accessToken)
+    override fun refreshToken(sessionId: Long, accessToken: String, refreshToken: String): Single<SessionEntity> {
+        return repository.refreshToken(sessionId, accessToken, refreshToken)
     }
 
     override fun getCurrentUser(accessToken: String): Single<UserEntity> {

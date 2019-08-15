@@ -40,6 +40,16 @@ class UserDataRepository(
         }
     }
 
+    override fun refreshToken(): Single<Session> {
+        val sessionEntity = preferencesRepository.getSessionInfo()
+        return userDataStore.refreshToken(sessionEntity.sessionId, sessionEntity.accessToken, sessionEntity.refreshToken)
+            .flatMap {
+                preferencesRepository.saveSessionInfo(it)
+                Single.just(it)
+            }
+            .map { sessionMapper.mapFromEntity(it) }
+    }
+
     override fun getCurrentUserInfo(): Single<User> {
         val sessionEntity = preferencesRepository.getSessionInfo()
         return userDataStore.getCurrentUser(sessionEntity.accessToken)

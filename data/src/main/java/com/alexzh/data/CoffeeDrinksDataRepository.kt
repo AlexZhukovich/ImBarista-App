@@ -10,7 +10,7 @@ import io.reactivex.Single
 import java.lang.UnsupportedOperationException
 
 class CoffeeDrinksDataRepository(
-    private val mapper: CoffeeMapper,
+    private val coffeeMapper: CoffeeMapper,
     private val cacheRepository: CoffeeDrinksCacheRepository,
     private val storeFactory: CoffeeDrinksDataStoreFactory,
     private val preferencesRepository: PreferencesRepository
@@ -19,7 +19,7 @@ class CoffeeDrinksDataRepository(
     override fun getCoffeeDrinks(): Single<List<CoffeeDrink>> {
         val sessionEntity = preferencesRepository.getSessionInfo()
         return storeFactory.getRemoteDataStore().getCoffeeDrinks(sessionEntity.accessToken)
-            .map { it.map { entity -> mapper.mapFromEntity(entity) } }
+            .map { it.map { entity -> coffeeMapper.mapFromEntity(entity) } }
     }
 
     override fun getCoffeeDrinksByName(name: String): Single<List<CoffeeDrink>> {
@@ -28,16 +28,16 @@ class CoffeeDrinksDataRepository(
 
     override fun getCoffeeDrinkById(id: Long): Single<CoffeeDrink> {
         return storeFactory.getRemoteDataStore().getCoffeeById(id)
-            .map { mapper.mapFromEntity(it) }
+            .map { coffeeMapper.mapFromEntity(it) }
     }
 
     override fun addCoffeeDrinkToFavourites(coffeeId: Long): Single<CoffeeDrink> {
         return storeFactory.getRemoteDataStore().setCoffeeAsFavourite(coffeeId)
-            .map { mapper.mapFromEntity(it) }
+            .map { coffeeMapper.mapFromEntity(it) }
     }
 
     override fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Single<CoffeeDrink> {
         return storeFactory.getRemoteDataStore().setCoffeeAsNotFavourite(coffeeId)
-            .map { mapper.mapFromEntity(it) }
+            .map { coffeeMapper.mapFromEntity(it) }
     }
 }
