@@ -2,6 +2,7 @@
 
     <style name="AppTheme.SplashScreen" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
@@ -11,7 +12,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Hides elements for TomTom maps -->
     <style name="CenterOnCurrentLocationView" parent="BaseCompactView">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="CompassView" parent="BaseCompactView">
         <item name="android:visibility">gone</item>
     </style>
 
