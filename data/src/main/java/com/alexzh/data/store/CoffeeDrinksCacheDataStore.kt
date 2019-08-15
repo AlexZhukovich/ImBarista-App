@@ -9,7 +9,7 @@ class CoffeeDrinksCacheDataStore(
     private val cacheRepository: CoffeeDrinksCacheRepository
 ) : CoffeeDrinksDataStore {
 
-    override fun getCoffeeDrinks(accessToken: String): Single<List<CoffeeDrinkEntity>> {
+    override fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>> {
         return cacheRepository.getCoffeeDrinks()
     }
 

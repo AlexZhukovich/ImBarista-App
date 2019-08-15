@@ -6,7 +6,7 @@ import io.reactivex.Single
 
 interface CoffeeDrinksDataStore {
 
-    fun getCoffeeDrinks(accessToken: String): Single<List<CoffeeDrinkEntity>>
+    fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>>
 
     fun getCoffeeDrinksByName(name: String): Single<List<CoffeeDrinkEntity>>
 

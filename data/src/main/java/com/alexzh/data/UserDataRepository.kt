@@ -2,6 +2,7 @@ package com.alexzh.data
 
 import com.alexzh.data.mapper.SessionMapper
 import com.alexzh.data.mapper.UserMapper
+import com.alexzh.data.model.HttpDataException
 import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.data.store.UserDataStore
 import com.alexzh.imbarista.domain.model.Session
@@ -33,16 +34,14 @@ class UserDataRepository(
 
     override fun logOut(): Completable {
         return Completable.defer {
-            val sessionEntity = preferencesRepository.getSessionInfo()
-            userDataStore.logOut(sessionEntity.sessionId, sessionEntity.accessToken).blockingGet()
+            userDataStore.logOut().blockingGet()
             preferencesRepository.clearSessionInfo()
             Completable.complete()
         }
     }
 
     override fun refreshToken(): Single<Session> {
-        val sessionEntity = preferencesRepository.getSessionInfo()
-        return userDataStore.refreshToken(sessionEntity.sessionId, sessionEntity.accessToken, sessionEntity.refreshToken)
+        return userDataStore.refreshToken()
             .flatMap {
                 preferencesRepository.saveSessionInfo(it)
                 Single.just(it)
@@ -51,8 +50,15 @@ class UserDataRepository(
     }
 
     override fun getCurrentUserInfo(): Single<User> {
-        val sessionEntity = preferencesRepository.getSessionInfo()
-        return userDataStore.getCurrentUser(sessionEntity.accessToken)
+        return userDataStore.getCurrentUser()
+            .onErrorResumeNext { error ->
+                if (error is HttpDataException && error.code == 401) {
+                    refreshToken().blockingGet()
+                    return@onErrorResumeNext userDataStore.getCurrentUser()
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
+            .retry(3)
             .map { userMapper.mapFromEntity(it) }
     }
 

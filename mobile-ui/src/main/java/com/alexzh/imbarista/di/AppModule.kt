@@ -26,6 +26,7 @@ import com.alexzh.imbarista.mapper.SessionViewMapper
 import com.alexzh.imbarista.mapper.UserViewMapper
 import com.alexzh.imbarista.remote.CoffeeDrinkRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.UserRemoteRepositoryImpl
+import com.alexzh.imbarista.remote.mapper.HttpExceptionMapper
 import com.alexzh.imbarista.remote.mapper.SessionMapper
 import com.alexzh.imbarista.remote.mapper.UserMapper
 import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
@@ -67,18 +68,19 @@ val mapperModule = module {
     factory { com.alexzh.data.mapper.SessionMapper() }
     factory { com.alexzh.imbarista.cache.mapper.SessionMapper() }
     factory { CoffeeDrinkViewMapper() }
+    factory { HttpExceptionMapper() }
 }
 
 val dataModule = module {
     factory { CoffeeDrinksServiceFactory().createCoffeeDrinksService(true) }
     factory<CoffeeDrinksCacheRepository> { CoffeeDrinksCacheRepositoryImpl() }
-    factory<CoffeeDrinksRemoteRepository> { CoffeeDrinkRemoteRepositoryImpl(service = get(), coffeeMapper = get(), sessionMapper = get(), preferencesRepository = get()) }
+    factory<CoffeeDrinksRemoteRepository> { CoffeeDrinkRemoteRepositoryImpl(service = get(), coffeeMapper = get(), httpExceptionMapper = get()) }
     factory { CoffeeDrinksCacheDataStore(cacheRepository = get()) }
     factory { CoffeeDrinksRemoteDataStore(remoteRepository = get(), preferencesRepository = get()) }
     factory { CoffeeDrinksDataStoreFactory(remoteDataStore = get(), cacheDataStore = get()) }
-    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(coffeeMapper = get(), cacheRepository = get(), storeFactory = get(), preferencesRepository = get()) }
+    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(coffeeMapper = get(), cacheRepository = get(), storeFactory = get(), userRepository = get()) }
     factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userMapper = get(), sessionMapper = get()) }
-    factory<UserDataStore> { UserRemoteDataStore(repository = get()) }
+    factory<UserDataStore> { UserRemoteDataStore(repository = get(), preferencesRepository = get()) }
     factory<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(androidContext()) }
     factory<PreferencesRepository> { SharedPreferencesRepository(prefs = get(), sessionMapper = get()) }
     factory<UserRepository> { UserDataRepository(userDataStore = get(), userMapper = get(), sessionMapper = get(), preferencesRepository = get()) }
