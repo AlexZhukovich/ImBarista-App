@@ -2,17 +2,18 @@ package com.alexzh.imbarista.ui.home
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.alexzh.imbarista.R
 import com.alexzh.imbarista.ui.coffeedrinks.CoffeeDrinksFragment
-import com.alexzh.imbarista.ui.map.TomTomMapFragment
+import com.alexzh.imbarista.ui.map.MapFactory
 import com.alexzh.imbarista.ui.profile.ProfileFragment
 import com.alexzh.imbarista.ui.settings.SettingsActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
+import org.koin.android.ext.android.inject
 
 class HomeActivity : AppCompatActivity() {
 
@@ -21,6 +22,8 @@ class HomeActivity : AppCompatActivity() {
             context.startActivity(Intent(context, HomeActivity::class.java))
         }
     }
+
+    private val mapFactory by inject<MapFactory>()
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         if (navigation.selectedItemId == item.itemId) {
@@ -63,7 +66,7 @@ class HomeActivity : AppCompatActivity() {
                 supportActionBar?.title = getString(R.string.nav_coffee_drinks)
             }
             R.id.navigation_near_me -> {
-                replaceFragment(TomTomMapFragment())
+                replaceFragment(mapFactory.getMap())
                 supportActionBar?.title = getString(R.string.nav_near_me)
             }
             R.id.navigation_profile -> {

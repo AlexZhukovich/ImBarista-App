@@ -22,6 +22,7 @@ class ImBaristaApp : Application() {
                 executorModule,
                 mapperModule,
                 dataModule,
+                mapProviderModule,
                 useCaseModule,
                 viewModelModule
             ))
