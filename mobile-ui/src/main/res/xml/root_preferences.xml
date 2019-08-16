@@ -5,7 +5,7 @@
             app:title="@string/pref_map_header">
 
         <ListPreference
-                app:key="reply"
+                app:key="@string/map_provider_value_key"
                 app:title="@string/pref_map_provider_label"
                 app:icon="@drawable/ic_map_black_24dp"
                 app:entries="@array/pref_map_provider_entries"

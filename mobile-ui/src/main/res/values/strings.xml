@@ -44,6 +44,7 @@
     <string name="pref_map_provider_label">Map Provider</string>
     <string name="pref_map_provider_google_entity_option">Google</string>
     <string name="pref_map_provider_tomtom_entity_option">TomTom</string>
-    <string name="pref_map_provider_google_value_option">google</string>
-    <string name="pref_map_provider_tomtom_value_option">tomtom</string>
+    <string name="pref_map_provider_google_value_option">GOOGLE</string>
+    <string name="pref_map_provider_tomtom_value_option">TOMTOM</string>
+    <string name="map_provider_value_key">map_provider</string>
 </resources>
