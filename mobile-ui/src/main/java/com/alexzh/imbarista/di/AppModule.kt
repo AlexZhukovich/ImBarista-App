@@ -3,6 +3,7 @@ package com.alexzh.imbarista.di
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.alexzh.data.CoffeeDrinksDataRepository
+import com.alexzh.data.MapDataProvider
 import com.alexzh.data.UserDataRepository
 import com.alexzh.data.mapper.CoffeeMapper
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
@@ -12,6 +13,8 @@ import com.alexzh.data.repository.UserRemoteRepository
 import com.alexzh.data.store.*
 import com.alexzh.imbarista.cache.CoffeeDrinksCacheRepositoryImpl
 import com.alexzh.imbarista.cache.SharedPreferencesRepository
+import com.alexzh.imbarista.cache.mapper.MapMapper
+import com.alexzh.imbarista.domain.MapProvider
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinkById
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinks
@@ -22,6 +25,7 @@ import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
 import com.alexzh.imbarista.domain.repository.UserRepository
 import com.alexzh.imbarista.executor.UiThread
 import com.alexzh.imbarista.mapper.CoffeeDrinkViewMapper
+import com.alexzh.imbarista.mapper.MapViewMapper
 import com.alexzh.imbarista.mapper.SessionViewMapper
 import com.alexzh.imbarista.mapper.UserViewMapper
 import com.alexzh.imbarista.remote.CoffeeDrinkRemoteRepositoryImpl
@@ -30,6 +34,7 @@ import com.alexzh.imbarista.remote.mapper.HttpExceptionMapper
 import com.alexzh.imbarista.remote.mapper.SessionMapper
 import com.alexzh.imbarista.remote.mapper.UserMapper
 import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
+import com.alexzh.imbarista.ui.map.MapFactory
 import com.alexzh.imbarista.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -57,6 +62,11 @@ val useCaseModule = module {
     factory { RemoveCoffeeDrinkFromFavourite(coffeeDrinksRepository = get(), postExecutionThread = get()) }
 }
 
+val mapProviderModule = module {
+    factory<MapProvider> { MapDataProvider(preferencesRepository = get(), mapMapper = get()) }
+    factory { MapFactory(mapProvider = get(), mapViewMapper = get()) }
+}
+
 val mapperModule = module {
     factory { CoffeeMapper() }
     factory { com.alexzh.imbarista.remote.mapper.CoffeeMapper() }
@@ -69,6 +79,9 @@ val mapperModule = module {
     factory { com.alexzh.imbarista.cache.mapper.SessionMapper() }
     factory { CoffeeDrinkViewMapper() }
     factory { HttpExceptionMapper() }
+    factory { MapMapper() }
+    factory { com.alexzh.data.mapper.MapMapper() }
+    factory { MapViewMapper() }
 }
 
 val dataModule = module {
@@ -82,7 +95,7 @@ val dataModule = module {
     factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userMapper = get(), sessionMapper = get()) }
     factory<UserDataStore> { UserRemoteDataStore(repository = get(), preferencesRepository = get()) }
     factory<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(androidContext()) }
-    factory<PreferencesRepository> { SharedPreferencesRepository(prefs = get(), sessionMapper = get()) }
+    factory<PreferencesRepository> { SharedPreferencesRepository(prefs = get(), sessionMapper = get(), mapMapper = get()) }
     factory<UserRepository> { UserDataRepository(userDataStore = get(), userMapper = get(), sessionMapper = get(), preferencesRepository = get()) }
 }
 

@@ -1,29 +1,39 @@
 package com.alexzh.imbarista.cache
 
 import android.content.SharedPreferences
+import com.alexzh.data.model.MapEntity
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.data.repository.PreferencesRepository
+import com.alexzh.imbarista.cache.mapper.MapMapper
 import com.alexzh.imbarista.cache.mapper.SessionMapper
+import com.alexzh.imbarista.cache.model.Map
 import com.alexzh.imbarista.cache.model.Session
 
 class SharedPreferencesRepository(
     private val prefs: SharedPreferences,
-    private val sessionMapper: SessionMapper
+    private val sessionMapper: SessionMapper,
+    private val mapMapper: MapMapper
 ) : PreferencesRepository {
 
     companion object {
         private const val STR_DEFAULT_VALUE = ""
         private const val LONG_DEFAULT_VALUE = -1L
 
+        private const val MAP_PROVIDER = "map_provider"
+
         private const val SESSION_ID = "session_id"
         private const val ACCESS_TOKEN = "access_token"
         private const val REFRESH_TOKEN = "refresh_token"
         private const val ACCESS_TOKEN_EXPIRY = "access_token_expiry"
         private const val REFRESH_TOKEN_EXPIRY = "refresh_token_expiry"
+    }
 
-        private const val USER_ID = "user_id"
-        private const val USER_NAME = "user_name"
-        private const val USER_EMAIL = "user_email"
+    override fun getMapProvider(): MapEntity {
+        return mapMapper.mapFromCached(
+            Map.valueOf(
+                prefs.getString(MAP_PROVIDER, STR_DEFAULT_VALUE) as String
+            )
+        )
     }
 
     override fun getSessionInfo(): SessionEntity {
