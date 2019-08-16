@@ -29,10 +29,12 @@ class SharedPreferencesRepository(
     }
 
     override fun getMapProvider(): MapEntity {
+        val mapValue = prefs.getString(MAP_PROVIDER, STR_DEFAULT_VALUE) as String
         return mapMapper.mapFromCached(
-            Map.valueOf(
-                prefs.getString(MAP_PROVIDER, STR_DEFAULT_VALUE) as String
-            )
+            if (mapValue.isBlank())
+                Map.GOOGLE
+            else
+                Map.valueOf(mapValue)
         )
     }
 
