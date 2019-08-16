@@ -53,9 +53,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        replaceFragment(CoffeeDrinksFragment())
-
-        navigation.selectedItemId = R.id.navigation_coffee_drinks
+        // TODO: fix it when application will support cache
+        refreshExistingFragment()
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
@@ -81,5 +80,17 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragment)
             .commit()
+    }
+
+    private fun refreshExistingFragment() {
+        when {
+            navigation.selectedItemId == R.id.navigation_coffee_drinks -> replaceFragment(CoffeeDrinksFragment())
+            navigation.selectedItemId == R.id.navigation_near_me -> replaceFragment(mapFactory.getMap())
+            navigation.selectedItemId == R.id.navigation_profile -> replaceFragment(ProfileFragment())
+            else -> {
+                replaceFragment(CoffeeDrinksFragment())
+                navigation.selectedItemId = R.id.navigation_coffee_drinks
+            }
+        }
     }
 }
