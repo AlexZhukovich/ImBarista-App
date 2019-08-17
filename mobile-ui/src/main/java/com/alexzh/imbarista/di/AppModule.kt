@@ -46,7 +46,7 @@ val viewModelModule = module {
     viewModel { CheckExistingSessionViewModel(getExistingSession = get(), mapper = get()) }
     viewModel { LogOutViewModel(logOut = get()) }
     viewModel { GetCurrentUserViewModel(getCurrentUser = get(), mapper = get()) }
-    viewModel { GetCoffeeDrinksViewModel(getCoffeeDrinks = get(), coffeeDrinkViewMapper = get()) }
+    viewModel { GetCoffeeDrinksViewModel(getCoffeeDrinks = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get()) }
     viewModel { CoffeeDrinkDetailsViewModel(getCoffeeDrinkById = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get()) }
 }
 
