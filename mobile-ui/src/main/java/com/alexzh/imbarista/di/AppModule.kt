@@ -1,39 +1,41 @@
 package com.alexzh.imbarista.di
 
+import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.alexzh.data.CoffeeDrinksDataRepository
 import com.alexzh.data.MapDataProvider
+import com.alexzh.data.NearMeCafeDataRepository
 import com.alexzh.data.UserDataRepository
 import com.alexzh.data.mapper.CoffeeMapper
-import com.alexzh.data.repository.CoffeeDrinksCacheRepository
-import com.alexzh.data.repository.CoffeeDrinksRemoteRepository
-import com.alexzh.data.repository.PreferencesRepository
-import com.alexzh.data.repository.UserRemoteRepository
+import com.alexzh.data.repository.*
 import com.alexzh.data.store.*
 import com.alexzh.imbarista.cache.CoffeeDrinksCacheRepositoryImpl
 import com.alexzh.imbarista.cache.SharedPreferencesRepository
 import com.alexzh.imbarista.cache.mapper.MapMapper
 import com.alexzh.imbarista.domain.MapProvider
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
+import com.alexzh.imbarista.domain.interactor.cafe.GetNearCafeFromTomTomSource
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinkById
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinks
 import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.AddCoffeeDrinkToFavourites
 import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.RemoveCoffeeDrinkFromFavourite
 import com.alexzh.imbarista.domain.interactor.user.*
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
+import com.alexzh.imbarista.domain.repository.NearMeCafeRepository
 import com.alexzh.imbarista.domain.repository.UserRepository
 import com.alexzh.imbarista.executor.UiThread
-import com.alexzh.imbarista.mapper.CoffeeDrinkViewMapper
-import com.alexzh.imbarista.mapper.MapViewMapper
-import com.alexzh.imbarista.mapper.SessionViewMapper
-import com.alexzh.imbarista.mapper.UserViewMapper
+import com.alexzh.imbarista.mapper.*
+import com.alexzh.imbarista.remote.CafeRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.CoffeeDrinkRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.UserRemoteRepositoryImpl
+import com.alexzh.imbarista.remote.mapper.CafeMapper
 import com.alexzh.imbarista.remote.mapper.HttpExceptionMapper
 import com.alexzh.imbarista.remote.mapper.SessionMapper
 import com.alexzh.imbarista.remote.mapper.UserMapper
 import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
+import com.alexzh.imbarista.remote.service.TomTomDataSearchService
+import com.alexzh.imbarista.remote.service.TomTomSearchService
 import com.alexzh.imbarista.ui.map.MapFactory
 import com.alexzh.imbarista.viewmodel.*
 import org.koin.android.ext.koin.androidContext
@@ -48,6 +50,7 @@ val viewModelModule = module {
     viewModel { GetCurrentUserViewModel(getCurrentUser = get(), mapper = get()) }
     viewModel { GetCoffeeDrinksViewModel(getCoffeeDrinks = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get()) }
     viewModel { CoffeeDrinkDetailsViewModel(getCoffeeDrinkById = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get()) }
+    viewModel { TomTomMapViewModel(getNearCafeFromTomTomSource = get(), cafeViewMapper = get(), application = androidContext() as Application) }
 }
 
 val useCaseModule = module {
@@ -60,6 +63,7 @@ val useCaseModule = module {
     factory { GetCoffeeDrinkById(coffeeDrinksRepository = get(), postExecutionThread = get()) }
     factory { AddCoffeeDrinkToFavourites(coffeeDrinksRepository = get(), postExecutionThread = get()) }
     factory { RemoveCoffeeDrinkFromFavourite(coffeeDrinksRepository = get(), postExecutionThread = get()) }
+    factory { GetNearCafeFromTomTomSource(nearMeCafeRepository = get(), postExecutionThread = get()) }
 }
 
 val mapProviderModule = module {
@@ -82,6 +86,9 @@ val mapperModule = module {
     factory { MapMapper() }
     factory { com.alexzh.data.mapper.MapMapper() }
     factory { MapViewMapper() }
+    factory { CafeMapper() }
+    factory { com.alexzh.data.mapper.CafeMapper() }
+    factory { CafeViewMapper() }
 }
 
 val dataModule = module {
@@ -97,6 +104,10 @@ val dataModule = module {
     factory<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(androidContext()) }
     factory<PreferencesRepository> { SharedPreferencesRepository(prefs = get(), sessionMapper = get(), mapMapper = get()) }
     factory<UserRepository> { UserDataRepository(userDataStore = get(), userMapper = get(), sessionMapper = get(), preferencesRepository = get()) }
+    factory<TomTomSearchService> { TomTomDataSearchService(androidContext() as Application) }
+    factory<CafeRemoteRepository> { CafeRemoteRepositoryImpl(tomTomSearchService = get(), cafeMapper = get()) }
+    factory<CafeDataStore> { CafeRemoteDataStore(repository = get()) }
+    factory<NearMeCafeRepository> { NearMeCafeDataRepository(cafeDataStore = get(), cafeMapper = get()) }
 }
 
 val executorModule = module {

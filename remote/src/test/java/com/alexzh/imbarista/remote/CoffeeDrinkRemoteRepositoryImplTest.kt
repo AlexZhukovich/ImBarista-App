@@ -11,7 +11,7 @@ import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntities
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntity
-import com.alexzh.testdata.remote.GenerateRemoteTestData.generateCoffeeDrinkDataModel
+import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.generateCoffeeDrinkDataModel
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single

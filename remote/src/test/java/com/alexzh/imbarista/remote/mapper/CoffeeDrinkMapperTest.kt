@@ -2,7 +2,7 @@ package com.alexzh.imbarista.remote.mapper
 
 import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.imbarista.remote.model.CoffeeDrinkModel
-import com.alexzh.testdata.remote.GenerateRemoteTestData.generateCoffeeDrinkModel
+import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.generateCoffeeDrinkModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

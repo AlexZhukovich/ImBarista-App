@@ -2,7 +2,7 @@ package com.alexzh.imbarista.remote.mapper
 
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.imbarista.remote.model.SessionModel
-import com.alexzh.testdata.remote.GenerateRemoteTestData.generateSessionModel
+import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.generateSessionModel
 import org.junit.Assert
 import org.junit.Test
 

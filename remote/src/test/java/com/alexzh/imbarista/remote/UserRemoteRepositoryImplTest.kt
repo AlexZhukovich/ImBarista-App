@@ -13,7 +13,7 @@ import com.alexzh.testdata.base.RandomData.randomLong
 import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateSessionEntity
 import com.alexzh.testdata.data.GenerateDataTestData.generateUserEntity
-import com.alexzh.testdata.remote.GenerateRemoteTestData.generateSessionModel
+import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.generateSessionModel
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single

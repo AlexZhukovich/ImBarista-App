@@ -1,4 +1,4 @@
-package com.alexzh.testdata.remote
+package com.alexzh.imbarista.commonandroidtestdata.remote
 
 import com.alexzh.imbarista.remote.model.*
 import com.alexzh.testdata.base.RandomData.randomEmail
@@ -46,7 +46,11 @@ object GenerateRemoteTestData {
     fun generateCoffeeDrinkDataModel(coffeeDrinkCount: Int = 1, ingredientsCount: Int = 1): CoffeeDrinkDataModel {
         val coffeeDrinks = mutableListOf<CoffeeDrinkModel>()
         repeat(coffeeDrinkCount) {
-            coffeeDrinks.add(generateCoffeeDrinkModel(ingredientsCount))
+            coffeeDrinks.add(
+                generateCoffeeDrinkModel(
+                    ingredientsCount
+                )
+            )
         }
 
         return CoffeeDrinkDataModel(

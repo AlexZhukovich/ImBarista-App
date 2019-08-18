@@ -69,6 +69,7 @@ dependencies {
 
     // TomTom Maps SDK
     implementation mobileUiDependencies.tomtomMaps
+    implementation mobileUiDependencies.tomtomMapsSearch
     api mobileUiDependencies.tomtomMapsExtensions
 
     // RxJava and RxKotlin

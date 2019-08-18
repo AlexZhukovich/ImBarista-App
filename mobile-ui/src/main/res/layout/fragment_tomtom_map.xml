@@ -3,7 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/root">
 
     <fragment
             android:id="@+id/mapFragment"
@@ -21,7 +22,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/ic_gps_fixed_black_24dp"
+            app:srcCompat="@drawable/ic_search_cafe_white"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintEnd_toEndOf="parent"
