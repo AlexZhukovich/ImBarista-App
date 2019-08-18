@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinks
+import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.AddCoffeeDrinkToFavourites
+import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.RemoveCoffeeDrinkFromFavourite
 import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.imbarista.mapper.CoffeeDrinkViewMapper
 import com.alexzh.imbarista.model.CoffeeDrinkView
@@ -13,6 +15,8 @@ import io.reactivex.observers.DisposableSingleObserver
 
 class GetCoffeeDrinksViewModel(
     private val getCoffeeDrinks: GetCoffeeDrinks,
+    private val addCoffeeDrinkToFavourites: AddCoffeeDrinkToFavourites,
+    private val removeCoffeeDrinkFromFavourite: RemoveCoffeeDrinkFromFavourite,
     private val coffeeDrinkViewMapper: CoffeeDrinkViewMapper
 ) : ViewModel() {
 
@@ -28,8 +32,30 @@ class GetCoffeeDrinksViewModel(
         )
     }
 
+    fun addCoffeeDrinkToFavourite(coffeeDrinkId: Long) {
+        // it needed until app support only remote source
+        coffeeDrinksLiveData.postValue(Resource(ResourceState.LOADING, null, null))
+
+        addCoffeeDrinkToFavourites.execute(
+            CoffeeDrinkSubscriber(),
+            AddCoffeeDrinkToFavourites.Param.forCoffeeDrink(coffeeDrinkId)
+        )
+    }
+
+    fun removeCoffeeDrinkFromFavourites(coffeeDrinkId: Long) {
+        // it needed until app support only remote source
+        coffeeDrinksLiveData.postValue(Resource(ResourceState.LOADING, null, null))
+
+        removeCoffeeDrinkFromFavourite.execute(
+            CoffeeDrinkSubscriber(),
+            RemoveCoffeeDrinkFromFavourite.Param.forCoffeeDrink(coffeeDrinkId)
+        )
+    }
+
     override fun onCleared() {
         getCoffeeDrinks.dispose()
+        addCoffeeDrinkToFavourites.dispose()
+        removeCoffeeDrinkFromFavourite.dispose()
         super.onCleared()
     }
 
@@ -43,13 +69,24 @@ class GetCoffeeDrinksViewModel(
         }
 
         override fun onError(error: Throwable) {
-            coffeeDrinksLiveData.postValue(
-                Resource(
+            coffeeDrinksLiveData.postValue(Resource(
                 ResourceState.ERROR,
                 null,
                 error
-            )
-            )
+            ))
+        }
+    }
+
+    private inner class CoffeeDrinkSubscriber : DisposableSingleObserver<CoffeeDrink>() {
+
+        override fun onSuccess(coffeeDrink: CoffeeDrink) {
+            // it's needed because app supports only remote data source
+            fetchCoffeeDrinks()
+        }
+
+        override fun onError(error: Throwable) {
+            // it's needed because app supports only remote data source
+            fetchCoffeeDrinks()
         }
     }
 }
