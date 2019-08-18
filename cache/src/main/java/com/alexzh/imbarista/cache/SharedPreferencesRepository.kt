@@ -32,7 +32,7 @@ class SharedPreferencesRepository(
         val mapValue = prefs.getString(MAP_PROVIDER, STR_DEFAULT_VALUE) as String
         return mapMapper.mapFromCached(
             if (mapValue.isBlank())
-                Map.GOOGLE
+                Map.TOMTOM
             else
                 Map.valueOf(mapValue)
         )
