@@ -33,6 +33,8 @@
     <string name="error_operation_cannot_be_finished">Operation cannot be finished</string>
     <string name="error_cannot_load_coffee_drinks">Cannot load coffee drinks</string>
     <string name="error_coffee_drink_favourite_state_cannot_be_changed">Coffee favourite state cannot be changed</string>
+    <string name="error_no_cafes_near_you">No cafes near you</string>
+    <string name="error_unexpected_error_during_loading_cafes_near_you">Unexpected error during loading cafes near you</string>
 
     <string name="try_again_action">Try again</string>
 

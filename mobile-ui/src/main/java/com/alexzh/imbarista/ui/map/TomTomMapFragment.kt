@@ -74,16 +74,23 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
             ResourceState.SUCCESS -> {
                 this.map.clear()
 
-                resource.data?.forEach {
-                    val marker = MarkerBuilder(LatLng(it.latitude, it.longitude))
-                        .icon(Icon.Factory.fromResources(this@TomTomMapFragment.requireContext(), R.drawable.ic_map_cafe_poi))
-                        .markerBalloon(SimpleMarkerBalloon(it.title))
+                if (resource.data != null) {
+                    if (resource.data.isNotEmpty()) {
+                        resource.data.forEach {
+                            val marker = MarkerBuilder(LatLng(it.latitude, it.longitude))
+                                .icon(Icon.Factory.fromResources(this@TomTomMapFragment.requireContext(), R.drawable.ic_map_cafe_poi))
+                                .markerBalloon(SimpleMarkerBalloon(it.title))
 
-                    this.map.addMarker(marker)
+                            this.map.addMarker(marker)
+                        }
+                        map.centerOnMyLocation()
+                    } else {
+                        Snackbar.make(root, R.string.error_no_cafes_near_you, Snackbar.LENGTH_LONG).show()
+                    }
                 }
-                map.centerOnMyLocation()
             }
             ResourceState.ERROR -> {
+                Snackbar.make(root, R.string.error_unexpected_error_during_loading_cafes_near_you, Snackbar.LENGTH_LONG).show()
             }
         }
     }
