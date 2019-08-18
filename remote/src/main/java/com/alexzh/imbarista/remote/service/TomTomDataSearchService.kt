@@ -16,7 +16,6 @@ class TomTomDataSearchService(
     application: Application
 ) : TomTomSearchService, SearchServiceConnectionCallback {
 
-
     companion object {
         const val SEARCH_RADIUS = 1_000.0F
         const val QUERY_TEXT = "cafe"
@@ -38,7 +37,7 @@ class TomTomDataSearchService(
     override fun getCafeNearMe(
         currentLatitude: Double,
         currentLongitude: Double
-    ) : Single<FuzzySearchResponse> {
+    ): Single<FuzzySearchResponse> {
         val currentPosition = LatLng(currentLatitude, currentLongitude)
         val query = FuzzySearchQueryBuilder(QUERY_TEXT)
             .withCategory(true)
@@ -51,6 +50,5 @@ class TomTomDataSearchService(
         } else {
             searchService?.search(query)
         }) as Single<FuzzySearchResponse>
-
     }
 }

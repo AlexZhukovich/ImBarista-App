@@ -8,5 +8,5 @@ interface TomTomSearchService {
     fun getCafeNearMe(
         currentLatitude: Double,
         currentLongitude: Double
-    ) : Single<FuzzySearchResponse>
+    ): Single<FuzzySearchResponse>
 }

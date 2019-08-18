@@ -70,7 +70,6 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
     private fun handleLoadingCafes(resource: Resource<List<CafeView>>) {
         when (resource.status) {
             ResourceState.LOADING -> {
-
             }
             ResourceState.SUCCESS -> {
                 this.map.clear()
@@ -85,7 +84,6 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
                 map.centerOnMyLocation()
             }
             ResourceState.ERROR -> {
-
             }
         }
     }

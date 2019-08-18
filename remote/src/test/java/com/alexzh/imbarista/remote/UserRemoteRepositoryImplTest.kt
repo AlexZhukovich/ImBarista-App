@@ -14,6 +14,7 @@ import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateSessionEntity
 import com.alexzh.testdata.data.GenerateDataTestData.generateUserEntity
 import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.generateSessionModel
+import com.alexzh.imbarista.remote.model.RefreshTokenModel
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
@@ -136,11 +137,37 @@ class UserRemoteRepositoryImplTest {
     }
 
     @Test
-    fun refreshTokenThrowsException() {
+    fun refreshTokenCompletesSuccessfully() {
+        val sessionId = randomLong()
+        val refreshToken = randomString()
         val accessToken = randomString()
-        repository.refreshToken(accessToken)
+        val sessionEntity = generateSessionEntity()
+        val sessionModel = generateSessionModel()
+        val expectedResponse = ResponseModel(data = sessionModel)
+
+        stubRefreshToken(sessionId, accessToken, refreshToken, Single.just(expectedResponse))
+        stubSessionMapper(sessionModel, sessionEntity)
+
+        repository.refreshToken(sessionId, accessToken, refreshToken)
             .test()
-            .assertError(UnsupportedOperationException::class.java)
+            .assertComplete()
+    }
+
+    @Test
+    fun refreshTokenReturnsCorrectData() {
+        val sessionId = randomLong()
+        val refreshToken = randomString()
+        val accessToken = randomString()
+        val sessionEntity = generateSessionEntity()
+        val sessionModel = generateSessionModel()
+        val expectedResponse = ResponseModel(data = sessionModel)
+
+        stubRefreshToken(sessionId, accessToken, refreshToken, Single.just(expectedResponse))
+        stubSessionMapper(sessionModel, sessionEntity)
+
+        repository.refreshToken(sessionId, accessToken, refreshToken)
+            .test()
+            .assertValue(sessionEntity)
     }
 
     private fun stubCreateUser(user: UserModel, response: Single<ResponseModel<UserModel>>) {
@@ -153,6 +180,10 @@ class UserRemoteRepositoryImplTest {
 
     private fun stubLogOut(sessionId: Long, accessToken: String, sessionSingle: Single<ResponseModel<SessionModel>>) {
         every { service.logOut(sessionId, accessToken) } returns sessionSingle
+    }
+
+    private fun stubRefreshToken(sessionId: Long, accessToken: String, refreshToken: String, single: Single<ResponseModel<SessionModel>>) {
+        every { service.refreshToken(sessionId, accessToken, RefreshTokenModel(refreshToken)) } returns single
     }
 
     private fun stubUserMapper(userModel: UserModel, userEntity: UserEntity) {

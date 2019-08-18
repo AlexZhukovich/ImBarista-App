@@ -16,6 +16,6 @@ class NearMeCafeDataRepository(
         currentLongitude: Double
     ): Single<List<Cafe>> {
         return cafeDataStore.getCafes(currentLatitude, currentLongitude)
-            .map { cafes ->  cafes.map { cafeMapper.mapFromEntity(it) } }
+            .map { cafes -> cafes.map { cafeMapper.mapFromEntity(it) } }
     }
 }

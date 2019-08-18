@@ -5,7 +5,8 @@ import io.reactivex.Single
 
 interface NearMeCafeRepository {
 
-    fun getCafes(currentLatitude: Double,
-                 currentLongitude: Double
+    fun getCafes(
+        currentLatitude: Double,
+        currentLongitude: Double
     ): Single<List<Cafe>>
 }

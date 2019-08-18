@@ -25,7 +25,7 @@ class GetNearCafeFromTomTomSource(
             fun forCafeNearMe(
                 currentLatitude: Double,
                 currentLongitude: Double
-            ) : Param{
+            ): Param {
                 return Param(currentLatitude, currentLongitude)
             }
         }

@@ -38,6 +38,7 @@ dependencies {
     implementation remoteDependencies.tomtomMapsSearch
 
     testImplementation project(':commonTestData')
+    testImplementation project(':commonAndroidTestData')
     testImplementation remoteTestDependencies.junit
     testImplementation remoteTestDependencies.mockK
 }

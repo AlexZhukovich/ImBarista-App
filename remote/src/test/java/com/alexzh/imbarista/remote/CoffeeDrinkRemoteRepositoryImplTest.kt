@@ -12,6 +12,7 @@ import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntities
 import com.alexzh.testdata.data.GenerateDataTestData.generateCoffeeEntity
 import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.generateCoffeeDrinkDataModel
+import com.alexzh.imbarista.remote.mapper.HttpExceptionMapper
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
@@ -20,9 +21,10 @@ import org.junit.Test
 class CoffeeDrinkRemoteRepositoryImplTest {
 
     private val service = mockk<CoffeeDrinksService>()
-    private val mapper = mockk<CoffeeMapper>()
+    private val coffeeMapper = mockk<CoffeeMapper>()
+    private val httpExceptionMapper = mockk<HttpExceptionMapper>()
 
-    private val repository = CoffeeDrinkRemoteRepositoryImpl(service, mapper)
+    private val repository = CoffeeDrinkRemoteRepositoryImpl(service, coffeeMapper, httpExceptionMapper)
 
     @Test
     fun getCoffeeDrinksCompletesSuccessfully() {
@@ -188,6 +190,6 @@ class CoffeeDrinkRemoteRepositoryImplTest {
         model: CoffeeDrinkModel,
         entity: CoffeeDrinkEntity
     ) {
-        every { mapper.mapFromModel(model) } returns entity
+        every { coffeeMapper.mapFromModel(model) } returns entity
     }
 }
