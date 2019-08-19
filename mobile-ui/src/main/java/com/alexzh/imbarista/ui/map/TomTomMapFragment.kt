@@ -99,6 +99,7 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
         this.map = map
         this.map.isMyLocationEnabled = true
         this.map.markerSettings.setMarkersClustering(true)
+        this.map.uiSettings.compassView.hide()
 
         tomtomMapViewModel.fetchCafes(this.map.locationSource)
     }
