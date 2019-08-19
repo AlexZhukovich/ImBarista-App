@@ -6,6 +6,8 @@ import io.reactivex.Single
 interface CafeRemoteRepository {
     fun getCafes(
         currentLatitude: Double,
-        currentLongitude: Double
+        currentLongitude: Double,
+        searchRadius: Int,
+        numberCafesOnMap: Int
     ): Single<List<CafeEntity>>
 }

@@ -12,9 +12,13 @@ class CafeRemoteRepositoryImpl(
     private val tomTomSearchService: TomTomSearchService,
     private val cafeMapper: CafeMapper
 ) : CafeRemoteRepository {
-
-    override fun getCafes(currentLatitude: Double, currentLongitude: Double): Single<List<CafeEntity>> {
-        return tomTomSearchService.getCafeNearMe(currentLatitude, currentLongitude)
+    override fun getCafes(
+        currentLatitude: Double,
+        currentLongitude: Double,
+        searchRadius: Int,
+        numberCafesOnMap: Int
+    ): Single<List<CafeEntity>> {
+        return tomTomSearchService.getCafeNearMe(currentLatitude, currentLongitude, searchRadius, numberCafesOnMap)
             .onErrorResumeNext { Single.error(RuntimeException(it)) }
             .map { response ->
                 response.results.map {

@@ -106,7 +106,7 @@ val dataModule = module {
     factory<UserRepository> { UserDataRepository(userDataStore = get(), userMapper = get(), sessionMapper = get(), preferencesRepository = get()) }
     factory<TomTomSearchService> { TomTomDataSearchService(androidContext() as Application) }
     factory<CafeRemoteRepository> { CafeRemoteRepositoryImpl(tomTomSearchService = get(), cafeMapper = get()) }
-    factory<CafeDataStore> { CafeRemoteDataStore(repository = get()) }
+    factory<CafeDataStore> { CafeRemoteDataStore(repository = get(), preferencesRepository = get()) }
     factory<NearMeCafeRepository> { NearMeCafeDataRepository(cafeDataStore = get(), cafeMapper = get()) }
 }
 

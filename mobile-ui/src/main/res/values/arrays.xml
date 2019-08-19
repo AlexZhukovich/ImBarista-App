@@ -26,13 +26,11 @@
         <item>@string/pref_cafe_search_cafe_limit_five_entity</item>
         <item>@string/pref_cafe_search_cafe_limit_ten_entity</item>
         <item>@string/pref_cafe_search_cafe_limit_twenty_entity</item>
-        <item>@string/pref_cafe_search_cafe_limit_all_entity</item>
     </string-array>
 
     <string-array name="pref_search_number_cafe_on_map_values">
         <item>@string/pref_cafe_search_cafe_limit_five_value</item>
         <item>@string/pref_cafe_search_cafe_limit_ten_value</item>
         <item>@string/pref_cafe_search_cafe_limit_twenty_value</item>
-        <item>@string/pref_cafe_search_cafe_limit_all_value</item>
     </string-array>
 </resources>

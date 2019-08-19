@@ -57,7 +57,7 @@
     <string name="pref_cafe_search_category_title">Cafe Search</string>
     <string name="pref_cafe_search_radius_title">Search radius</string>
     <string name="pref_cafe_search_radius_key">search_radius</string>
-    <string name="pref_cafe_search_radius_default_value">1000</string>
+    <string name="pref_cafe_search_radius_default_value">@string/pref_cafe_search_radius_1000_m_value</string>
     <string name="pref_cafe_search_radius_500_m_entity">500 meters</string>
     <string name="pref_cafe_search_radius_1000_m_entity">1000 meters</string>
     <string name="pref_cafe_search_radius_2000_m_entity">2000 meters</string>
@@ -68,12 +68,11 @@
 
     <string name="pref_cafe_search_cafe_limits_on_map_title">Number of cafes on map</string>
     <string name="pref_cafe_search_cafe_limits_on_map_key">number_cafes_on_map</string>
+    <string name="pref_cafe_search_cafe_limits_on_map_default_value">@string/pref_cafe_search_cafe_limit_ten_value</string>
     <string name="pref_cafe_search_cafe_limit_five_entity">5 cafes</string>
     <string name="pref_cafe_search_cafe_limit_ten_entity">10 cafes</string>
     <string name="pref_cafe_search_cafe_limit_twenty_entity">20 cafes</string>
-    <string name="pref_cafe_search_cafe_limit_all_entity">All cafes</string>
     <string name="pref_cafe_search_cafe_limit_five_value">5</string>
     <string name="pref_cafe_search_cafe_limit_ten_value">10</string>
     <string name="pref_cafe_search_cafe_limit_twenty_value">20</string>
-    <string name="pref_cafe_search_cafe_limit_all_value">-1</string>
 </resources>
