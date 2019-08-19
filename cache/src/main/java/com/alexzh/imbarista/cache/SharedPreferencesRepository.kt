@@ -33,7 +33,6 @@ class SharedPreferencesRepository(
 
     override fun getSearchRadius(): Int {
         return (prefs.getString(CAFE_SEARCH_RADIUS, STR_DEFAULT_VALUE) as String).toInt()
-
     }
 
     override fun saveDefaultSearchRadius(searchRadius: Int) {
