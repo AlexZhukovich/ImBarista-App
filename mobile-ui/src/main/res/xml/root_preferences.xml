@@ -20,6 +20,7 @@
         <ListPreference
                 app:key="@string/pref_cafe_search_radius_key"
                 app:title="@string/pref_cafe_search_radius_title"
+                app:icon="@drawable/ic_radius_black_24dp"
                 app:entries="@array/pref_search_radius_cafe_entities"
                 app:entryValues="@array/pref_search_radius_cafe_values"
                 app:defaultValue="@string/pref_cafe_search_radius_1000_m_value"
@@ -28,6 +29,7 @@
         <ListPreference
                 app:key="@string/pref_cafe_search_cafe_limits_on_map_key"
                 app:title="@string/pref_cafe_search_cafe_limits_on_map_title"
+                app:icon="@drawable/ic_place_black_24dp"
                 app:entries="@array/pref_search_number_cafe_on_map_entries"
                 app:entryValues="@array/pref_search_number_cafe_on_map_values"
                 app:defaultValue="@string/pref_cafe_search_cafe_limit_ten_value"

@@ -78,7 +78,7 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
                     if (resource.data.isNotEmpty()) {
                         resource.data.forEach {
                             val marker = MarkerBuilder(LatLng(it.latitude, it.longitude))
-                                .icon(Icon.Factory.fromResources(this@TomTomMapFragment.requireContext(), R.drawable.ic_map_cafe_poi))
+                                .icon(Icon.Factory.fromResources(this@TomTomMapFragment.requireContext(), R.drawable.ic_map_poi_cafe_poi))
                                 .markerBalloon(SimpleMarkerBalloon(it.title))
 
                             this.map.addMarker(marker)
