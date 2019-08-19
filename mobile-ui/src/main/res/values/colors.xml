@@ -6,4 +6,6 @@
     <color name="colorAccent">#993215</color>
 
     <color name="colorGray">#858585</color>
+
+    <color name="bottom_navigation_inactive">#3d1e04</color>
 </resources>
