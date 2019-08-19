@@ -24,6 +24,7 @@ dependencies {
     def commonAndroidTestDataDependencies = rootProject.ext.commonAndroidTestDataDependencies
 
     implementation project(':cache')
+    implementation project(':remote')
     implementation project(':commonTestData')
     implementation commonAndroidTestDataDependencies.kotlin
 }

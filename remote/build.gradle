@@ -1,4 +1,25 @@
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    def globalConfig = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfig["androidCompileSdkVersion"]
+    buildToolsVersion globalConfig["androidBuildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion globalConfig["androidMinSdkVersion"]
+        targetSdkVersion globalConfig["androidTargetSdkVersion"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions.unitTests.includeAndroidResources = true
+}
 
 dependencies {
     def remoteDependencies = rootProject.ext.remoteDependencies
@@ -14,11 +35,10 @@ dependencies {
     implementation remoteDependencies.retrofit
     implementation remoteDependencies.retrofitConverter
     implementation remoteDependencies.retrofitAdapter
+    implementation remoteDependencies.tomtomMapsSearch
 
-    testCompile project(':commonTestData')
+    testImplementation project(':commonTestData')
+    testImplementation project(':commonAndroidTestData')
     testImplementation remoteTestDependencies.junit
     testImplementation remoteTestDependencies.mockK
 }
-
-sourceCompatibility = "8"
-targetCompatibility = "8"

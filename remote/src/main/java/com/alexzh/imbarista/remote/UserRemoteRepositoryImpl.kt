@@ -42,7 +42,6 @@ class UserRemoteRepositoryImpl(
 
     override fun refreshToken(sessionId: Long, accessToken: String, refreshToken: String): Single<SessionEntity> {
         return service.refreshToken(sessionId, accessToken, RefreshTokenModel(refreshToken))
-
             .map { sessionMapper.mapFromModel(it.data) }
     }
 

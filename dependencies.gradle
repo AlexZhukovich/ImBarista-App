@@ -80,6 +80,7 @@ ext {
             googleServicesMaps:         "com.google.android.gms:play-services-maps:${googlePlayServicesMapsVersion}",
             googleServicesLocation:     "com.google.android.gms:play-services-location:${googlePlayServicesLocationVersion}",
             tomtomMaps:                 "com.tomtom.online:sdk-maps:${tomtomOnlineMapsVersion}",
+            tomtomMapsSearch:           "com.tomtom.online:sdk-search:${tomtomOnlineMapsVersion}",
             tomtomMapsExtensions:       "com.tomtom.online:sdk-maps-ui-extensions:${tomtomOnlineMapsVersion}",
             rxJava:                     "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxKotlin:                   "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
@@ -137,7 +138,8 @@ ext {
             okHttpLogger:               "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
             retrofit:                   "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitConverter:          "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitAdapter:            "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+            retrofitAdapter:            "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            tomtomMapsSearch:           "com.tomtom.online:sdk-search:${tomtomOnlineMapsVersion}",
     ]
 
     remoteTestDependencies = [

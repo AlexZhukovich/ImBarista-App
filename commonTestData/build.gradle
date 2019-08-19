@@ -5,7 +5,7 @@ dependencies {
 
     implementation project(':data')
     implementation project(':domain')
-    implementation project(':remote')
+
     implementation commonTestDataDependencies.kotlin
 }
 

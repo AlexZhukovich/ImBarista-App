@@ -19,6 +19,9 @@ class SharedPreferencesRepository(
         private const val STR_DEFAULT_VALUE = ""
         private const val LONG_DEFAULT_VALUE = -1L
 
+        private const val CAFE_SEARCH_RADIUS = "search_radius"
+        private const val NUMBER_CAFES_ON_MAP = "number_cafes_on_map"
+
         private const val MAP_PROVIDER = "map_provider"
 
         private const val SESSION_ID = "session_id"
@@ -28,11 +31,31 @@ class SharedPreferencesRepository(
         private const val REFRESH_TOKEN_EXPIRY = "refresh_token_expiry"
     }
 
+    override fun getSearchRadius(): Int {
+        return (prefs.getString(CAFE_SEARCH_RADIUS, STR_DEFAULT_VALUE) as String).toInt()
+    }
+
+    override fun saveDefaultSearchRadius(searchRadius: Int) {
+        prefs.edit()
+            .putString(CAFE_SEARCH_RADIUS, searchRadius.toString())
+            .apply()
+    }
+
+    override fun getNumberCafesOnMap(): Int {
+        return (prefs.getString(NUMBER_CAFES_ON_MAP, STR_DEFAULT_VALUE) as String).toInt()
+    }
+
+    override fun saveDefaultNumberCafesOnMap(numberCafesOnMap: Int) {
+        prefs.edit()
+            .putString(NUMBER_CAFES_ON_MAP, numberCafesOnMap.toString())
+            .apply()
+    }
+
     override fun getMapProvider(): MapEntity {
         val mapValue = prefs.getString(MAP_PROVIDER, STR_DEFAULT_VALUE) as String
         return mapMapper.mapFromCached(
             if (mapValue.isBlank())
-                Map.GOOGLE
+                Map.TOMTOM
             else
                 Map.valueOf(mapValue)
         )
