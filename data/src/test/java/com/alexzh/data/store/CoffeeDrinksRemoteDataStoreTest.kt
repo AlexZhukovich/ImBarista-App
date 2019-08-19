@@ -31,7 +31,7 @@ class CoffeeDrinksRemoteDataStoreTest {
         val accessToken = randomString()
         stubGetAccessToken(accessToken)
         stubGetCoffeeDrinks(Single.just(generateCoffeeEntities(2)))
-        store.getCoffeeDrinks(accessToken)
+        store.getCoffeeDrinks()
             .test()
             .assertComplete()
     }
@@ -42,7 +42,7 @@ class CoffeeDrinksRemoteDataStoreTest {
         stubGetAccessToken(accessToken)
         val coffeeDrinks = generateCoffeeEntities(2)
         stubGetCoffeeDrinks(Single.just(coffeeDrinks))
-        store.getCoffeeDrinks(accessToken)
+        store.getCoffeeDrinks()
             .test()
             .assertValue(coffeeDrinks)
     }
@@ -168,7 +168,7 @@ class CoffeeDrinksRemoteDataStoreTest {
     }
 
     private fun stubSetCoffeeAsNotFavourite(coffeeDrinkId: Long, accessToken: String, single: Single<CoffeeDrinkEntity>) {
-        every { repository.addCoffeeDrinkToFavourite(coffeeDrinkId, accessToken) } returns single
+        every { repository.removeCoffeeDrinkFromFavourite(coffeeDrinkId, accessToken) } returns single
     }
 
     private fun stubGetAccessToken(accessToken: String) {

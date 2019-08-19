@@ -22,10 +22,18 @@ class CoffeeDrinksFragment : Fragment() {
 
     private val coffeeDrinksViewModel: GetCoffeeDrinksViewModel by viewModel()
 
-    private val adapter by lazy { CoffeeDrinksAdapter(coffeeDrinkItemClick) }
+    private val adapter by lazy { CoffeeDrinksAdapter(coffeeDrinkItemClick, coffeeDrinkFavouriteItem) }
 
     private val coffeeDrinkItemClick: (CoffeeDrinkView) -> Unit = {
         CoffeeDrinkDetailsActivity.start(this.activity!!, it)
+    }
+
+    private val coffeeDrinkFavouriteItem: (CoffeeDrinkView) -> Unit = {
+        if (it.isFavourite) {
+            coffeeDrinksViewModel.removeCoffeeDrinkFromFavourites(it.id)
+        } else {
+            coffeeDrinksViewModel.addCoffeeDrinkToFavourite(it.id)
+        }
     }
 
     init {
@@ -58,7 +66,7 @@ class CoffeeDrinksFragment : Fragment() {
             }
             ResourceState.SUCCESS -> {
                 progressBar.visibility = View.GONE
-                resource.data?.let { adapter.addCoffeeDrinks(it) }
+                resource.data?.let { adapter.setCoffeeDrinks(it) }
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE

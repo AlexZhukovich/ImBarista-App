@@ -1,16 +1,38 @@
 <androidx.preference.PreferenceScreen
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
             app:title="@string/pref_map_header">
 
         <ListPreference
-                app:key="@string/map_provider_value_key"
+                app:key="@string/pref_map_provider_value_key"
                 app:title="@string/pref_map_provider_label"
                 app:icon="@drawable/ic_map_black_24dp"
                 app:entries="@array/pref_map_provider_entries"
                 app:entryValues="@array/pref_map_provider_values"
-                app:defaultValue="@string/pref_map_provider_google_value_option"
+                app:defaultValue="@string/pref_map_provider_tomtom_value_option"
+                app:useSimpleSummaryProvider="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            app:title="@string/pref_cafe_search_category_title">
+
+        <ListPreference
+                app:key="@string/pref_cafe_search_radius_key"
+                app:title="@string/pref_cafe_search_radius_title"
+                app:icon="@drawable/ic_radius_black_24dp"
+                app:entries="@array/pref_search_radius_cafe_entities"
+                app:entryValues="@array/pref_search_radius_cafe_values"
+                app:defaultValue="@string/pref_cafe_search_radius_1000_m_value"
+                app:useSimpleSummaryProvider="true"/>
+
+        <ListPreference
+                app:key="@string/pref_cafe_search_cafe_limits_on_map_key"
+                app:title="@string/pref_cafe_search_cafe_limits_on_map_title"
+                app:icon="@drawable/ic_place_black_24dp"
+                app:entries="@array/pref_search_number_cafe_on_map_entries"
+                app:entryValues="@array/pref_search_number_cafe_on_map_values"
+                app:defaultValue="@string/pref_cafe_search_cafe_limit_ten_value"
                 app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>

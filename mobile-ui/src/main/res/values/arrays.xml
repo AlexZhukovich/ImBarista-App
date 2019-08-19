@@ -8,4 +8,29 @@
         <item>@string/pref_map_provider_google_value_option</item>
         <item>@string/pref_map_provider_tomtom_value_option</item>
     </string-array>
+
+    <!-- Cafe Search preferences -->
+    <string-array name="pref_search_radius_cafe_entities">
+        <item>@string/pref_cafe_search_radius_500_m_entity</item>
+        <item>@string/pref_cafe_search_radius_1000_m_entity</item>
+        <item>@string/pref_cafe_search_radius_2000_m_entity</item>
+    </string-array>
+
+    <string-array name="pref_search_radius_cafe_values">
+        <item>@string/pref_cafe_search_radius_500_m_value</item>
+        <item>@string/pref_cafe_search_radius_1000_m_value</item>
+        <item>@string/pref_cafe_search_radius_2000_m_value</item>
+    </string-array>
+
+    <string-array name="pref_search_number_cafe_on_map_entries">
+        <item>@string/pref_cafe_search_cafe_limit_five_entity</item>
+        <item>@string/pref_cafe_search_cafe_limit_ten_entity</item>
+        <item>@string/pref_cafe_search_cafe_limit_twenty_entity</item>
+    </string-array>
+
+    <string-array name="pref_search_number_cafe_on_map_values">
+        <item>@string/pref_cafe_search_cafe_limit_five_value</item>
+        <item>@string/pref_cafe_search_cafe_limit_ten_value</item>
+        <item>@string/pref_cafe_search_cafe_limit_twenty_value</item>
+    </string-array>
 </resources>

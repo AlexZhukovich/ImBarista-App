@@ -2,7 +2,7 @@ package com.alexzh.imbarista.remote.mapper
 
 import com.alexzh.data.model.UserEntity
 import com.alexzh.imbarista.remote.model.UserModel
-import com.alexzh.testdata.remote.GenerateRemoteTestData.generateUserModel
+import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.generateUserModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

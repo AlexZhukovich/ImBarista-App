@@ -20,21 +20,19 @@ class CoffeeDrinksCacheDataStoreTest {
 
     @Test
     fun getCoffeeDrinksReturnsCompletesSuccessfully() {
-        val accessToken = randomString()
         stubGetCoffeeDrinks(Single.just(generateCoffeeEntities(2)))
 
-        dataStore.getCoffeeDrinks(accessToken)
+        dataStore.getCoffeeDrinks()
             .test()
             .assertComplete()
     }
 
     @Test
     fun getCoffeeDrinksReturnsReturnsCorrectData() {
-        val accessToken = randomString()
         val coffeeDrinks = generateCoffeeEntities(2)
         stubGetCoffeeDrinks(Single.just(coffeeDrinks))
 
-        dataStore.getCoffeeDrinks(accessToken)
+        dataStore.getCoffeeDrinks()
             .test()
             .assertValue(coffeeDrinks)
     }

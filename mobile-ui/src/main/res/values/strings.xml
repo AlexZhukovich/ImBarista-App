@@ -33,18 +33,46 @@
     <string name="error_operation_cannot_be_finished">Operation cannot be finished</string>
     <string name="error_cannot_load_coffee_drinks">Cannot load coffee drinks</string>
     <string name="error_coffee_drink_favourite_state_cannot_be_changed">Coffee favourite state cannot be changed</string>
+    <string name="error_no_cafes_near_you">No cafes near you</string>
+    <string name="error_unexpected_error_during_loading_cafes_near_you">Unexpected error during loading cafes near you</string>
 
     <string name="try_again_action">Try again</string>
 
     <!-- Messages -->
     <string name="user_was_created">User was created, please log in</string>
 
+    <!-- Permissions -->
+    <string name="permission_explanation">We need location permission because we would like to show nearest cafes based on your location</string>
+    <string name="permission_grant_text">Grant</string>
+
     <!-- Preference Screen -->
     <string name="pref_map_header">Map</string>
     <string name="pref_map_provider_label">Map Provider</string>
-    <string name="pref_map_provider_google_entity_option">Google</string>
+    <string name="pref_map_provider_google_entity_option">Google (in development)</string>
     <string name="pref_map_provider_tomtom_entity_option">TomTom</string>
     <string name="pref_map_provider_google_value_option">GOOGLE</string>
     <string name="pref_map_provider_tomtom_value_option">TOMTOM</string>
-    <string name="map_provider_value_key">map_provider</string>
+    <string name="pref_map_provider_value_key">map_provider</string>
+
+    <string name="pref_cafe_search_category_title">Cafe Search</string>
+    <string name="pref_cafe_search_radius_title">Search radius</string>
+    <string name="pref_cafe_search_radius_key">search_radius</string>
+    <string name="pref_cafe_search_radius_default_value">@string/pref_cafe_search_radius_1000_m_value</string>
+    <string name="pref_cafe_search_radius_500_m_entity">500 meters</string>
+    <string name="pref_cafe_search_radius_1000_m_entity">1000 meters</string>
+    <string name="pref_cafe_search_radius_2000_m_entity">2000 meters</string>
+    <string name="pref_cafe_search_radius_500_m_value">500</string>
+    <string name="pref_cafe_search_radius_1000_m_value">1000</string>
+    <string name="pref_cafe_search_radius_2000_m_value">2000</string>
+
+
+    <string name="pref_cafe_search_cafe_limits_on_map_title">Number of cafes on map</string>
+    <string name="pref_cafe_search_cafe_limits_on_map_key">number_cafes_on_map</string>
+    <string name="pref_cafe_search_cafe_limits_on_map_default_value">@string/pref_cafe_search_cafe_limit_ten_value</string>
+    <string name="pref_cafe_search_cafe_limit_five_entity">5 cafes</string>
+    <string name="pref_cafe_search_cafe_limit_ten_entity">10 cafes</string>
+    <string name="pref_cafe_search_cafe_limit_twenty_entity">20 cafes</string>
+    <string name="pref_cafe_search_cafe_limit_five_value">5</string>
+    <string name="pref_cafe_search_cafe_limit_ten_value">10</string>
+    <string name="pref_cafe_search_cafe_limit_twenty_value">20</string>
 </resources>

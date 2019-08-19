@@ -10,7 +10,8 @@ import kotlinx.android.synthetic.main.item_coffee_drink.view.*
 
 class CoffeeDrinkViewHolder(
     private val view: View,
-    val itemClick: (CoffeeDrinkView) -> Unit
+    val itemClick: (CoffeeDrinkView) -> Unit,
+    val favouriteItemClick: (CoffeeDrinkView) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
     companion object {
@@ -34,6 +35,7 @@ class CoffeeDrinkViewHolder(
                 .load(if (isFavourite) R.drawable.ic_favorite_black_24dp else R.drawable.ic_favorite_border_black_24dp)
                 .into(itemView.favouriteIcon)
 
+            itemView.favouriteIcon.setOnClickListener { favouriteItemClick(coffeeDrink) }
             itemView.setOnClickListener { itemClick(coffeeDrink) }
         }
     }

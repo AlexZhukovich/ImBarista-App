@@ -18,6 +18,8 @@ import org.koin.android.ext.android.inject
 class HomeActivity : AppCompatActivity() {
 
     companion object {
+        const val LOCATION_REQUEST_CODE = 100
+
         fun start(context: Context) {
             context.startActivity(Intent(context, HomeActivity::class.java))
         }
