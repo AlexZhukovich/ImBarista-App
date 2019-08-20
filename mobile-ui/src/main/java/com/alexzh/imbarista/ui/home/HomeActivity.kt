@@ -64,15 +64,15 @@ class HomeActivity : AppCompatActivity() {
         when (itemId) {
             R.id.navigation_coffee_drinks -> {
                 replaceFragment(CoffeeDrinksFragment())
-                supportActionBar?.title = getString(R.string.nav_coffee_drinks)
+                supportActionBar?.title = getString(R.string.title_coffee_drinks)
             }
             R.id.navigation_near_me -> {
                 replaceFragment(mapFactory.getMap())
-                supportActionBar?.title = getString(R.string.nav_near_me)
+                supportActionBar?.title = getString(R.string.title_cafes_near_me)
             }
             R.id.navigation_profile -> {
                 replaceFragment(ProfileFragment())
-                supportActionBar?.title = getString(R.string.nav_profile)
+                supportActionBar?.title = getString(R.string.title_profile)
             }
         }
         return true
