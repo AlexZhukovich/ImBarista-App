@@ -47,7 +47,7 @@
     <string name="user_was_created">User was created, please log in</string>
 
     <!-- Permissions -->
-    <string name="permission_explanation">We need location permission because we would like to show nearest cafes based on your location</string>
+    <string name="permission_explanation">We need location permission because we would like to show the nearest cafes based on your location</string>
     <string name="permission_grant_text">Grant</string>
 
     <!-- Preference Screen -->
