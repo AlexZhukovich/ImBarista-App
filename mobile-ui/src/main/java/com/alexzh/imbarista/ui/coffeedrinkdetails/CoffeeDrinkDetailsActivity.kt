@@ -14,9 +14,8 @@ import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.coffeedrinkdetails.adapter.CoffeeDetailsAdapter
 import com.alexzh.imbarista.viewmodel.CoffeeDrinkDetailsViewModel
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_coffee_drink_details.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -68,9 +67,9 @@ class CoffeeDrinkDetailsActivity : AppCompatActivity() {
                 progressBar.visibility = View.GONE
                 currentCoffeeDrink = resource.data as CoffeeDrinkView
                 coffeeDrinkName.text = resource.data.name
-                Glide.with(this)
+
+                Picasso.get()
                     .load("$LARGE_COFFEE_DRINK_ICON_BASE_URL/${resource.data.imageUrl}")
-                    .apply(RequestOptions.circleCropTransform())
                     .into(coffeeDrinkPicture)
 
                 val coffeeDrinkItem = mutableListOf<CoffeeDrinkDetailsItemView>()
@@ -109,6 +108,7 @@ class CoffeeDrinkDetailsActivity : AppCompatActivity() {
             R.drawable.ic_favorite_border_black_24dp
         }
         coffeeDrinkFavourite.setImageResource(favouriteIcon)
+        coffeeDrinkFavourite.tag = if (isFavourite) "favourite" else "not-favourite"
     }
 
     private fun getStringIngredients(ingredients: String): String {
