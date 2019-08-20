@@ -57,8 +57,12 @@ ext {
     robolectricVersion = '4.2'
 
     // UI Testing dependencies
+    androidxTestExtVersion = '1.1.1'
+    androidxTestCoreVersion = '1.2.0'
+    androidxTestRulesVersion = '1.2.0'
     androidxTestRunnerVersion = '1.2.0'
     espressoCoreVersion = '3.2.0'
+    uiAutomatorVersion = '2.2.0'
 
     commonTestDataDependencies = [
             kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
@@ -102,9 +106,19 @@ ext {
 
     ]
 
+
+
     mobileUiAndroidTestDependencies = [
+            mockK:                      "io.mockk:mockk-android:${mockKVersion}",
+            koinTest:                   "org.koin:koin-test:${koinVersion}",
+            testExt:                    "androidx.test.ext:junit:${androidxTestExtVersion}",
+            testCore:                   "androidx.test:core:${androidxTestCoreVersion}",
+            testRules:                  "androidx.test:rules:${androidxTestRulesVersion}",
             testRunner:                 "androidx.test:runner:${androidxTestRunnerVersion}",
-            espressoCore:               "androidx.test.espresso:espresso-core:${espressoCoreVersion}"
+            espressoCore:               "androidx.test.espresso:espresso-core:${espressoCoreVersion}",
+            espressoContrib:            "androidx.test.espresso:espresso-contrib:${espressoCoreVersion}",
+            espressoIntents:            "androidx.test.espresso:espresso-intents:${espressoCoreVersion}",
+            uiAutomator:                "androidx.test.uiautomator:uiautomator:${uiAutomatorVersion}"
     ]
 
     domainDependencies = [
