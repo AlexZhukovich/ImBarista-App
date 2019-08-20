@@ -24,7 +24,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TomTomMapFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var map: TomtomMap
+    private var map: TomtomMap? = null
 
     private val tomtomMapViewModel: TomTomMapViewModel by viewModel()
 
@@ -39,8 +39,8 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getAsyncMap(this)
 
         rootView.currentLocation.setOnClickListener {
-            map.centerOnMyLocation()
-            tomtomMapViewModel.fetchCafes(this.map.locationSource)
+            map?.centerOnMyLocation()
+            tomtomMapViewModel.fetchCafes(this.map?.locationSource!!)
         }
 
         return rootView
@@ -72,7 +72,7 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
             ResourceState.LOADING -> {
             }
             ResourceState.SUCCESS -> {
-                this.map.clear()
+                this.map?.clear()
 
                 if (resource.data != null) {
                     if (resource.data.isNotEmpty()) {
@@ -81,9 +81,9 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
                                 .icon(Icon.Factory.fromResources(this@TomTomMapFragment.requireContext(), R.drawable.ic_map_poi_cafe_poi))
                                 .markerBalloon(SimpleMarkerBalloon(it.title))
 
-                            this.map.addMarker(marker)
+                            this.map?.addMarker(marker)
                         }
-                        map.centerOnMyLocation()
+                        map?.centerOnMyLocation()
                     } else {
                         Snackbar.make(root, R.string.error_no_cafes_near_you, Snackbar.LENGTH_LONG).show()
                     }
@@ -97,16 +97,16 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: TomtomMap) {
         this.map = map
-        this.map.isMyLocationEnabled = true
-        this.map.markerSettings.setMarkersClustering(true)
-        this.map.uiSettings.compassView.hide()
+        this.map?.isMyLocationEnabled = true
+        this.map?.markerSettings?.setMarkersClustering(true)
+        this.map?.uiSettings?.compassView?.hide()
 
-        tomtomMapViewModel.fetchCafes(this.map.locationSource)
+        this.map?.locationSource?.let { tomtomMapViewModel.fetchCafes(it) }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        this.map.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        this.map?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -115,7 +115,7 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onStop() {
-        this.map.clear()
+        this.map?.clear()
         super.onStop()
     }
 

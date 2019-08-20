@@ -8,6 +8,7 @@ import com.alexzh.data.MapDataProvider
 import com.alexzh.data.NearMeCafeDataRepository
 import com.alexzh.data.UserDataRepository
 import com.alexzh.data.mapper.CoffeeMapper
+import com.alexzh.data.mapper.UserAlreadyExistExceptionMapper
 import com.alexzh.data.repository.*
 import com.alexzh.data.store.*
 import com.alexzh.imbarista.cache.CoffeeDrinksCacheRepositoryImpl
@@ -29,10 +30,7 @@ import com.alexzh.imbarista.mapper.*
 import com.alexzh.imbarista.remote.CafeRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.CoffeeDrinkRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.UserRemoteRepositoryImpl
-import com.alexzh.imbarista.remote.mapper.CafeMapper
-import com.alexzh.imbarista.remote.mapper.HttpExceptionMapper
-import com.alexzh.imbarista.remote.mapper.SessionMapper
-import com.alexzh.imbarista.remote.mapper.UserMapper
+import com.alexzh.imbarista.remote.mapper.*
 import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
 import com.alexzh.imbarista.remote.service.TomTomDataSearchService
 import com.alexzh.imbarista.remote.service.TomTomSearchService

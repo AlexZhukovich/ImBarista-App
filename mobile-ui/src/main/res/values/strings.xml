@@ -17,6 +17,10 @@
     <string name="nav_near_me">Near Me</string>
     <string name="nav_profile">Profile</string>
 
+    <string name="title_coffee_drinks">Coffee Drinks</string>
+    <string name="title_cafes_near_me">Cafes Near Me</string>
+    <string name="title_profile">Profile</string>
+
     <string name="settings_action">Settings</string>
     <string name="search_action">Search</string>
     <string name="logout_action">Log Out</string>
