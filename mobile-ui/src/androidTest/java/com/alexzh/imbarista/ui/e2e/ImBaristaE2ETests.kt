@@ -1,5 +1,6 @@
 package com.alexzh.imbarista.ui.e2e
 
+import org.junit.Assert.fail
 import org.junit.Test
 
 class ImBaristaE2ETests {
@@ -15,7 +16,7 @@ class ImBaristaE2ETests {
      */
     @Test
     fun shouldBeChangedCoffeeDrinkStateForTheLoginUserSuccessfully() {
-
+        fail()
     }
 
     /**
@@ -35,6 +36,6 @@ class ImBaristaE2ETests {
      */
     @Test
     fun shouldBeRestoredCorrectTabAfterRotation() {
-
+        fail()
     }
 }

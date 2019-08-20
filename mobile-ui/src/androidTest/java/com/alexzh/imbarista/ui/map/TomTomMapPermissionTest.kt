@@ -1,5 +1,6 @@
 package com.alexzh.imbarista.ui.map
 
+import org.junit.Assert.fail
 import org.junit.Test
 
 class TomTomMapPermissionTest {
@@ -10,7 +11,7 @@ class TomTomMapPermissionTest {
      */
     @Test
     fun shouldBeDisplayedMessageWhenLocationPermissionIsDenny() {
-
+        fail()
     }
 
     /**
@@ -20,6 +21,6 @@ class TomTomMapPermissionTest {
      */
     @Test
     fun shouldBeAskedForPermissionWhenGrandActionWasClicked() {
-
+        fail()
     }
 }

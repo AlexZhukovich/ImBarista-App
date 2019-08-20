@@ -1,13 +1,9 @@
 package com.alexzh.imbarista.ui.settings
 
-import androidx.test.rule.ActivityTestRule
-import org.junit.Rule
+import org.junit.Assert.fail
 import org.junit.Test
 
 class SettingsActivityTest {
-
-    @Rule @JvmField
-    val activity = ActivityTestRule(SettingsActivity::class.java)
 
     /**
      * - Settings has "Map" category
@@ -18,7 +14,7 @@ class SettingsActivityTest {
      */
     @Test
     fun shouldBeDisplayedSettingsItems() {
-
+        fail()
     }
 
     /**
@@ -28,7 +24,7 @@ class SettingsActivityTest {
      */
     @Test
     fun shouldMapProviderDisplayDefaultAndNonDefaultValues() {
-
+        fail()
     }
 
     /**
@@ -38,7 +34,7 @@ class SettingsActivityTest {
      */
     @Test
     fun shouldSearchRadiusDisplayDefaultAndNonDefaultValues() {
-
+        fail()
     }
 
     /**
@@ -48,6 +44,6 @@ class SettingsActivityTest {
      */
     @Test
     fun shouldNumberOfCafesOnMapDisplayDefaultAndNonDefaultValues() {
-
+        fail()
     }
 }

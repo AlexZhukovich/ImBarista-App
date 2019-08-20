@@ -1,5 +1,6 @@
 package com.alexzh.imbarista.ui.login
 
+import org.junit.Assert.fail
 import org.junit.Test
 
 class LoginActivityTest {
@@ -13,7 +14,7 @@ class LoginActivityTest {
      */
     @Test
     fun shouldBeDisplayed() {
-
+        fail()
     }
 
     /**
@@ -23,7 +24,7 @@ class LoginActivityTest {
      */
     @Test
     fun shouldBeHandledEmailInputFiendErrors() {
-
+        fail()
     }
 
     /**
@@ -32,7 +33,7 @@ class LoginActivityTest {
      */
     @Test
     fun shouldBeHandledPasswordInputFieldErrors() {
-
+        fail()
     }
 
     /**
@@ -43,7 +44,7 @@ class LoginActivityTest {
      */
     @Test
     fun shouldBeNoErrorsWhenNameEmailAndPasswordAreCorrect() {
-
+        fail()
     }
 
     /**
@@ -54,7 +55,7 @@ class LoginActivityTest {
      */
     @Test
     fun shouldBeDisplayedCheckEmailAndPasswordErrorWhenDataAreIncorrect() {
-
+        fail()
     }
 
     /**
@@ -65,6 +66,6 @@ class LoginActivityTest {
      */
     @Test
     fun shouldBeOpenedHomeScreenWhenUserLoginSuccessfully() {
-
+        fail()
     }
 }

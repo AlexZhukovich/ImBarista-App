@@ -1,5 +1,6 @@
 package com.alexzh.imbarista.ui.home
 
+import org.junit.Assert.fail
 import org.junit.Test
 import org.koin.test.KoinTest
 
@@ -10,7 +11,7 @@ class HomeActivityTest : KoinTest {
      */
     @Test
     fun shouldBeDisplayedBottomNavigationWith3Tabs() {
-
+        fail()
     }
 
     /**
@@ -20,6 +21,6 @@ class HomeActivityTest : KoinTest {
      */
     @Test
     fun shouldBeDisplayedCorrectToolbarTitleForEachTab() {
-
+        fail()
     }
 }

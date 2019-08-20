@@ -1,5 +1,6 @@
 package com.alexzh.imbarista.ui.createaccount
 
+import org.junit.Assert.fail
 import org.junit.Test
 
 class CreateAccountActivityTest {
@@ -13,7 +14,7 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeDisplayed() {
-
+        fail()
     }
 
     /**
@@ -22,7 +23,7 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeHandledNameInputFieldErrors() {
-
+        fail()
     }
 
     /**
@@ -32,7 +33,7 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeHandledEmailInputFiendErrors() {
-
+        fail()
     }
 
     /**
@@ -41,7 +42,7 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeHandledPasswordInputFieldErrors() {
-
+        fail()
     }
 
     /**
@@ -54,7 +55,7 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeNoErrorsWhenNameEmailAndPasswordAreCorrect() {
-
+        fail()
     }
 
     /**
@@ -68,10 +69,8 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeOpenLoginScreenWhenUserCreatedSuccessfully() {
-
+        fail()
     }
-
-
 
     /**
      * - "Name Input Field" should have any text
@@ -82,6 +81,6 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeDisplayedErrorMessageThatUserAlreadyExist() {
-
+        fail()
     }
 }
