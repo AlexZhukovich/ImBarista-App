@@ -27,6 +27,7 @@
     <string name="error_email_is_not_email">Text is not an email address</string>
     <string name="error_password_is_blank">Password is blank</string>
     <string name="error_internet_connection">Internet connection error</string>
+    <string name="error_user_already_exist">User already exist</string>
     <string name="error_email_password_validation">Check email and password</string>
     <string name="error_name_email_password_validation">Check name, email and password</string>
     <string name="error_loading_user_info">Loading user info error</string>

@@ -89,6 +89,9 @@ val mapperModule = module {
     factory { CafeMapper() }
     factory { com.alexzh.data.mapper.CafeMapper() }
     factory { CafeViewMapper() }
+    factory { UserAlreadyExistViewExceptionMapper() }
+    factory { UserAlreadyExistExceptionMapper() }
+    factory { com.alexzh.imbarista.remote.mapper.UserAlreadyExistExceptionMapper() }
 }
 
 val dataModule = module {
@@ -99,11 +102,11 @@ val dataModule = module {
     factory { CoffeeDrinksRemoteDataStore(remoteRepository = get(), preferencesRepository = get()) }
     factory { CoffeeDrinksDataStoreFactory(remoteDataStore = get(), cacheDataStore = get()) }
     factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(coffeeMapper = get(), cacheRepository = get(), storeFactory = get(), userRepository = get()) }
-    factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userMapper = get(), sessionMapper = get()) }
-    factory<UserDataStore> { UserRemoteDataStore(repository = get(), preferencesRepository = get()) }
+    factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userMapper = get(), sessionMapper = get(), userAlreadyExceptionExceptionMapper = get()) }
+    factory<UserDataStore> { UserRemoteDataStore(repository = get(), preferencesRepository = get(), userAlreadyExistExceptionMapper = get()) }
     factory<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(androidContext()) }
     factory<PreferencesRepository> { SharedPreferencesRepository(prefs = get(), sessionMapper = get(), mapMapper = get()) }
-    factory<UserRepository> { UserDataRepository(userDataStore = get(), userMapper = get(), sessionMapper = get(), preferencesRepository = get()) }
+    single<UserRepository>(override = true) { UserDataRepository(userDataStore = get(), userMapper = get(), sessionMapper = get(), preferencesRepository = get()) }
     factory<TomTomSearchService> { TomTomDataSearchService(androidContext() as Application) }
     factory<CafeRemoteRepository> { CafeRemoteRepositoryImpl(tomTomSearchService = get(), cafeMapper = get()) }
     factory<CafeDataStore> { CafeRemoteDataStore(repository = get(), preferencesRepository = get()) }
