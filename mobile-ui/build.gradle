@@ -61,7 +61,7 @@ dependencies {
     implementation mobileUiDependencies.materialDesignComp
 
     // Glide
-    implementation mobileUiDependencies.glide
+    implementation mobileUiDependencies.picasso
 
     // Google Maps SDK
     implementation mobileUiDependencies.googleServicesMaps

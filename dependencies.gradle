@@ -36,8 +36,8 @@ ext {
     // Material Design Components
     materialDesignComponentsVersion = '1.0.0'
 
-    // Glide
-    glideVersion = '4.9.0'
+    // Picasso
+    picassoVersion = '2.71828'
 
     // Retrofit
     gsonVersion = '2.8.5'
@@ -76,7 +76,7 @@ ext {
             androidxConstraintlayout:   "androidx.constraintlayout:constraintlayout:${androidxConstraintLayoutVersion}",
             androidxCoreKtx:            "androidx.core:core-ktx:${androidxCoreKtxVersion}",
             materialDesignComp:         "com.google.android.material:material:${materialDesignComponentsVersion}",
-            glide:                      "com.github.bumptech.glide:glide:${glideVersion}",
+            picasso:                    "com.squareup.picasso:picasso:${picassoVersion}",
             googleServicesMaps:         "com.google.android.gms:play-services-maps:${googlePlayServicesMapsVersion}",
             googleServicesLocation:     "com.google.android.gms:play-services-location:${googlePlayServicesLocationVersion}",
             tomtomMaps:                 "com.tomtom.online:sdk-maps:${tomtomOnlineMapsVersion}",
