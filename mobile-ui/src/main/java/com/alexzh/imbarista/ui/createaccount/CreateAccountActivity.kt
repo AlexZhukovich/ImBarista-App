@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
 import com.alexzh.imbarista.R
+import com.alexzh.imbarista.model.UserAlreadyExistViewException
 import com.alexzh.imbarista.model.UserView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
