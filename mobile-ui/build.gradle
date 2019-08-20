@@ -90,6 +90,13 @@ dependencies {
     testImplementation mobileUiTestDependencies.robolectric
 
     // UI Testing
-    androidTestImplementation mobileUiAndroidTestDependencies.testRunner
+    androidTestImplementation mobileUiAndroidTestDependencies.mockK
+    androidTestImplementation mobileUiAndroidTestDependencies.koinTest
+    androidTestImplementation mobileUiAndroidTestDependencies.testExt
+    androidTestImplementation mobileUiAndroidTestDependencies.testCore
+    androidTestImplementation mobileUiAndroidTestDependencies.testRules
     androidTestImplementation mobileUiAndroidTestDependencies.espressoCore
+    androidTestImplementation mobileUiAndroidTestDependencies.espressoContrib
+    androidTestImplementation mobileUiAndroidTestDependencies.espressoIntents
+    androidTestImplementation mobileUiAndroidTestDependencies.uiAutomator
 }
