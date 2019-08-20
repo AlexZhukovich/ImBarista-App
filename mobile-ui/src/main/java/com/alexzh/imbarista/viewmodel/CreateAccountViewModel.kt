@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.alexzh.imbarista.R
 import com.alexzh.imbarista.domain.interactor.user.CreateAccount
 import com.alexzh.imbarista.domain.model.User
+import com.alexzh.imbarista.domain.model.UserAlreadyExistException
 import com.alexzh.imbarista.ext.isValidEmail
+import com.alexzh.imbarista.mapper.UserAlreadyExistViewExceptionMapper
 import com.alexzh.imbarista.mapper.UserViewMapper
 import com.alexzh.imbarista.model.UserView
 import com.alexzh.imbarista.state.Resource
@@ -81,10 +83,16 @@ class CreateAccountViewModel(
         }
 
         override fun onError(error: Throwable) {
+            val newError = if (error is UserAlreadyExistException) {
+                UserAlreadyExistViewExceptionMapper().mapToView(error)
+            } else {
+                error
+            }
+
             userLiveData.postValue(Resource(
                 ResourceState.ERROR,
                 null,
-                error
+                newError
             ))
         }
     }

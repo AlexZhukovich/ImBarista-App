@@ -158,6 +158,7 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun displayErrorMessage(error: Throwable?) {
         val text: String = when (error) {
             is UnknownHostException -> getString(R.string.error_internet_connection)
+            is UserAlreadyExistViewException -> getString(R.string.error_user_already_exist)
             else -> getString(R.string.error_name_email_password_validation)
         }
         Snackbar.make(root, text, Snackbar.LENGTH_LONG).show()
