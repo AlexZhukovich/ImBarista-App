@@ -1,9 +1,32 @@
 package com.alexzh.imbarista.ui.createaccount
 
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.replaceText
+import androidx.test.espresso.assertion.ViewAssertions.*
+import androidx.test.espresso.intent.Intents
+import androidx.test.espresso.intent.matcher.IntentMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObject2
+import com.alexzh.imbarista.R
+import com.alexzh.imbarista.matchers.TextInputLayoutMatchers
+import com.alexzh.imbarista.ui.login.LoginActivity
+import org.hamcrest.CoreMatchers.`is`
+import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
+import org.junit.Rule
 import org.junit.Test
+import java.util.*
 
 class CreateAccountActivityTest {
+
+    @Rule @JvmField
+    val activityRule = ActivityTestRule(CreateAccountActivity::class.java)
 
     /**
      * - "Create account" title should be displayed in Toolbar
@@ -14,7 +37,8 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeDisplayed() {
-        fail()
+        onView(withText("Create Account"))
+            .perform(click())
     }
 
     /**
@@ -23,7 +47,17 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeHandledNameInputFieldErrors() {
-        fail()
+        val nameIsBlankError = activityRule.activity.getString(R.string.error_name_is_blank)
+
+        onView(withId(R.id.nameInputLayout))
+            .perform(click())
+            .check(matches(TextInputLayoutMatchers.withTextInputLayoutError(`is`(nameIsBlankError))))
+
+        onView(withId(R.id.nameEditText))
+            .perform(replaceText("test"))
+
+        onView(withId(R.id.nameInputLayout))
+            .check(matches(TextInputLayoutMatchers.hasNoErrorsInTextInputLayout()))
     }
 
     /**
@@ -69,7 +103,44 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeOpenLoginScreenWhenUserCreatedSuccessfully() {
-        fail()
+        val name = "test"
+        val email = "test-${Date().time}@test.com"
+        val password = "test"
+
+        Intents.init()
+
+        onView(withId(R.id.nameEditText))
+            .perform(replaceText(name))
+
+        onView(withId(R.id.emailEditText))
+            .perform(replaceText(email))
+
+        onView(withId(R.id.passwordEditText))
+            .perform(replaceText(password))
+
+        onView(withId(R.id.createAccountButton))
+            .perform(click())
+
+        assertTrue(verifyMessage(activityRule.activity.getString(R.string.user_was_created)))
+
+        onView(withId(com.google.android.material.R.id.snackbar_action))
+            .check(matches(withText(R.string.login_btn_text)))
+            .perform(click())
+
+        Intents.intended(IntentMatchers.hasComponent(LoginActivity::class.java.name))
+        Intents.release()
+    }
+
+    private fun verifyMessage(text: String): Boolean {
+        val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        repeat(10) {
+            val msg = uiDevice.findObject(By.text(text))
+            if (msg != null) {
+                return true
+            }
+            uiDevice.waitForIdle(500)
+        }
+        return false
     }
 
     /**

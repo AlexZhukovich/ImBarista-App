@@ -15,7 +15,7 @@ object TextInputLayoutMatchers {
             }
 
             override fun matchesSafely(textInputEditText: TextInputLayout?): Boolean {
-                return false
+                return textMatcher.matches(textInputEditText?.error.toString())
             }
         }
     }
@@ -27,7 +27,7 @@ object TextInputLayoutMatchers {
             }
 
             override fun matchesSafely(textInputEditText: TextInputLayout?): Boolean {
-                return false
+                return textInputEditText?.error == null
             }
         }
     }
