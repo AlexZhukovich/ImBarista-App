@@ -151,7 +151,7 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun displaySuccessMessage() {
-        Snackbar.make(root, R.string.user_was_created, Snackbar.LENGTH_LONG)
+        Snackbar.make(root, R.string.user_was_created, Snackbar.LENGTH_INDEFINITE)
             .setAction(R.string.login_btn_text) { LoginActivity.start(this@CreateAccountActivity) }
             .show()
     }
