@@ -1,4 +1,5 @@
 package com.alexzh.imbarista.exception
 
-class AuthViewException {
-}
+import java.lang.RuntimeException
+
+class AuthViewException : RuntimeException()

@@ -1,4 +1,11 @@
 package com.alexzh.imbarista.mapper
 
-class AuthViewExceptionMapper {
+import com.alexzh.imbarista.domain.exception.AuthException
+import com.alexzh.imbarista.exception.AuthViewException
+
+class AuthViewExceptionMapper : ExceptionMapper<AuthViewException, AuthException> {
+
+    override fun mapToView(type: AuthException): AuthViewException {
+        return AuthViewException()
+    }
 }

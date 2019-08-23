@@ -36,12 +36,14 @@
     <string name="error_name_email_password_validation">Check name, email and password</string>
     <string name="error_loading_user_info">Loading user info error</string>
     <string name="error_operation_cannot_be_finished">Operation cannot be finished</string>
+    <string name="error_please_log_again">Please log in again</string>
     <string name="error_cannot_load_coffee_drinks">Cannot load coffee drinks</string>
     <string name="error_coffee_drink_favourite_state_cannot_be_changed">Coffee favourite state cannot be changed</string>
     <string name="error_no_cafes_near_you">No cafes near you</string>
     <string name="error_unexpected_error_during_loading_cafes_near_you">Unexpected error during loading cafes near you</string>
 
     <string name="try_again_action">Try again</string>
+    <string name="log_in_again">Log in</string>
 
     <!-- Messages -->
     <string name="user_was_created">User was created, please log in</string>

@@ -9,11 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexzh.imbarista.R
+import com.alexzh.imbarista.exception.AuthViewException
 import com.alexzh.imbarista.model.CoffeeDrinkView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDrinkDetailsActivity
 import com.alexzh.imbarista.ui.coffeedrinks.adapter.CoffeeDrinksAdapter
+import com.alexzh.imbarista.ui.login.LoginActivity
 import com.alexzh.imbarista.viewmodel.GetCoffeeDrinksViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_coffee_drinks.*
@@ -77,10 +79,21 @@ class CoffeeDrinksFragment : Fragment() {
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
-                showErrorMessage(
-                    getString(R.string.error_cannot_load_coffee_drinks),
-                    getString(R.string.try_again_action)
-                ) { coffeeDrinksViewModel.fetchCoffeeDrinks() }
+
+                if (resource.error is AuthViewException) {
+                    showErrorMessage(
+                        getString(R.string.error_please_log_again),
+                        getString(R.string.log_in_again)
+                    ) {
+                        LoginActivity.start(this.requireContext())
+                        activity?.finish()
+                    }
+                } else {
+                    showErrorMessage(
+                        getString(R.string.error_cannot_load_coffee_drinks),
+                        getString(R.string.try_again_action)
+                    ) { coffeeDrinksViewModel.fetchCoffeeDrinks() }
+                }
             }
         }
     }
