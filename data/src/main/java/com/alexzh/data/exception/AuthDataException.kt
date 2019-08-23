@@ -1,4 +1,5 @@
 package com.alexzh.data.exception
 
-class AuthException {
-}
+import java.lang.RuntimeException
+
+class AuthDataException : RuntimeException()

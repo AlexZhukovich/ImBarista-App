@@ -1,5 +1,5 @@
-package com.alexzh.data.exception
+package com.alexzh.imbarista.domain.exception
 
 import java.lang.RuntimeException
 
-class AuthDataException : RuntimeException()
+class AuthException : RuntimeException()

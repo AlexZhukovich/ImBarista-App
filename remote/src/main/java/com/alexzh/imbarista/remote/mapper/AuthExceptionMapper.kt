@@ -1,4 +1,11 @@
 package com.alexzh.imbarista.remote.mapper
 
-class AuthExceptionMapper {
+import com.alexzh.data.exception.AuthDataException
+import retrofit2.HttpException
+
+class AuthExceptionMapper : ExceptionMapper<HttpException, AuthDataException> {
+
+    override fun mapToDataException(remoteException: HttpException): AuthDataException {
+        return AuthDataException()
+    }
 }
