@@ -1,7 +1,9 @@
 package com.alexzh.imbarista.ui.coffeedrinks
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,8 +17,8 @@ import com.alexzh.imbarista.ui.coffeedrinks.adapter.CoffeeDrinksAdapter
 import com.alexzh.imbarista.viewmodel.GetCoffeeDrinksViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_coffee_drinks.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlinx.android.synthetic.main.fragment_coffee_drinks.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CoffeeDrinksFragment : Fragment() {
 
@@ -51,6 +53,11 @@ class CoffeeDrinksFragment : Fragment() {
         return rootView
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.coffee_drinks_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
     override fun onResume() {
         super.onResume()
         coffeeDrinksViewModel.getCoffeeDrinks().observe(this, Observer<Resource<List<CoffeeDrinkView>>> {
@@ -70,15 +77,32 @@ class CoffeeDrinksFragment : Fragment() {
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
-                Snackbar.make(root, R.string.error_cannot_load_coffee_drinks, Snackbar.LENGTH_LONG)
-                    .setAction(R.string.try_again_action) { coffeeDrinksViewModel.fetchCoffeeDrinks() }
-                    .show()
+                showErrorMessage(
+                    getString(R.string.error_cannot_load_coffee_drinks),
+                    getString(R.string.try_again_action)
+                ) { coffeeDrinksViewModel.fetchCoffeeDrinks() }
             }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.coffee_drinks_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    @SuppressLint("PrivateResource")
+    private fun showErrorMessage(
+        messageText: String,
+        actionText: String,
+        action: () -> Unit
+    ) {
+        Snackbar.make(root, messageText, Snackbar.LENGTH_INDEFINITE)
+            .setAction(actionText) { action() }
+            .apply {
+                val commonMargin = resources.getDimension(R.dimen.common_margin)
+                val navigationHeight = resources.getDimension(R.dimen.design_bottom_navigation_height)
+                view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams)
+                    .apply {
+                        setMargins(leftMargin, topMargin, rightMargin, (navigationHeight + commonMargin).toInt())
+                    }
+            }
+            .show()
     }
+
+
 }
