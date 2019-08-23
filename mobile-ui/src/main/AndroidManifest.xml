@@ -38,16 +38,13 @@
         <activity
                 android:name="com.alexzh.imbarista.ui.createaccount.CreateAccountActivity"
                 android:label="@string/activity_create_account_title"
-                android:windowSoftInputMode="stateVisible|adjustResize">
-        </activity>
-        <activity android:name="com.alexzh.imbarista.ui.home.HomeActivity">
-        </activity>
+                android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
-                android:name="com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDrinkDetailsActivity"
-                android:launchMode="singleTask"/>
+                android:name="com.alexzh.imbarista.ui.home.HomeActivity"/>
+        <activity
+                android:name="com.alexzh.imbarista.ui.coffeedrinkdetails.CoffeeDrinkDetailsActivity"/>
         <activity
                 android:name="com.alexzh.imbarista.ui.settings.SettingsActivity"
-                android:launchMode="singleTask"
                 android:label="@string/activity_settings_title"/>
     </application>
 

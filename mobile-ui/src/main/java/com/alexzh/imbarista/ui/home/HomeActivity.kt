@@ -60,6 +60,16 @@ class HomeActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
+    override fun onBackPressed() {
+        if (navigation.selectedItemId == R.id.navigation_coffee_drinks) {
+            finish()
+        } else {
+            navigation.selectedItemId = R.id.navigation_coffee_drinks
+            handleNavigationItemClick(R.id.navigation_coffee_drinks)
+
+        }
+    }
+
     private fun handleNavigationItemClick(itemId: Int): Boolean {
         when (itemId) {
             R.id.navigation_coffee_drinks -> {

@@ -88,6 +88,7 @@ class ProfileFragment : Fragment() {
             ResourceState.SUCCESS -> {
                 progressBar.visibility = View.GONE
                 this@ProfileFragment.activity?.let { LoginActivity.start(it) }
+                this.activity?.finish()
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
