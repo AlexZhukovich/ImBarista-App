@@ -70,8 +70,15 @@ class UserDataRepository(
     }
 
     override fun getExistingSession(): Single<Session> {
-        return Single.just(preferencesRepository.getSessionInfo())
-            .retry(REPEAT_REQUEST_COUNT)
-            .map { sessionMapper.mapFromEntity(it) }
+        val session = preferencesRepository.getSessionInfo()
+
+        return if (session.sessionId != -1L) {
+            Single.just(preferencesRepository.getSessionInfo())
+                .map { sessionMapper.mapFromEntity(it) }
+        } else {
+            Single.error(IllegalArgumentException("No data stored in shared preferences"))
+        }
+
+
     }
 }
