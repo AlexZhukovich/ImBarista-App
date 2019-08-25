@@ -115,6 +115,7 @@ class LoginActivity : AppCompatActivity() {
                 loginButton.isEnabled = true
                 createAccountButton.isEnabled = true
                 HomeActivity.start(this@LoginActivity)
+                finish()
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE

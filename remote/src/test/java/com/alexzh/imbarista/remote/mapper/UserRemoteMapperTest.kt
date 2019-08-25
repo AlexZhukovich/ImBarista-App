@@ -6,9 +6,9 @@ import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class UserMapperTest {
+class UserRemoteMapperTest {
 
-    private val mapper = UserMapper()
+    private val mapper = UserRemoteMapper()
 
     @Test
     fun mapFromModelMapsDataCorrectly() {

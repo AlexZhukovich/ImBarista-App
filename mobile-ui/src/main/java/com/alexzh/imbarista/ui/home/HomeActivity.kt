@@ -6,11 +6,16 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.alexzh.imbarista.R
+import com.alexzh.imbarista.model.SessionView
+import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.ui.coffeedrinks.CoffeeDrinksFragment
+import com.alexzh.imbarista.ui.login.LoginActivity
 import com.alexzh.imbarista.ui.map.MapFactory
 import com.alexzh.imbarista.ui.profile.ProfileFragment
 import com.alexzh.imbarista.ui.settings.SettingsActivity
+import com.alexzh.imbarista.viewmodel.CheckExistingSessionViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.android.ext.android.inject
@@ -25,6 +30,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private val checkExistingSessionViewModel by inject<CheckExistingSessionViewModel>()
     private val mapFactory by inject<MapFactory>()
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -55,9 +61,27 @@ class HomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        checkExistingSessionViewModel.getExistingSessionInfo().observe(this, Observer<Resource<SessionView>> {
+            if (it.error != null) {
+                LoginActivity.start(this)
+                finish()
+            }
+        })
+        checkExistingSessionViewModel.checkExistingSession()
+
         // TODO: fix it when application will support cache
         refreshExistingFragment()
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    }
+
+    override fun onBackPressed() {
+        if (navigation.selectedItemId == R.id.navigation_coffee_drinks) {
+            finish()
+        } else {
+            navigation.selectedItemId = R.id.navigation_coffee_drinks
+            handleNavigationItemClick(R.id.navigation_coffee_drinks)
+
+        }
     }
 
     private fun handleNavigationItemClick(itemId: Int): Boolean {

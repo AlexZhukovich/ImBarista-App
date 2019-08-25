@@ -1,11 +1,13 @@
 package com.alexzh.imbarista.ui.map
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.*
+import android.widget.FrameLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -53,7 +55,7 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     this.requireActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-                showPermissionExplanationSnackBar()
+                showPermissionExplanation()
             } else {
                 // No explanation needed, we can request the permission.
                 requestLocationPermissions(this.requireActivity())
@@ -85,12 +87,12 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
                         }
                         map?.centerOnMyLocation()
                     } else {
-                        Snackbar.make(root, R.string.error_no_cafes_near_you, Snackbar.LENGTH_LONG).show()
+                        showErrorMessage(getString(R.string.error_no_cafes_near_you))
                     }
                 }
             }
             ResourceState.ERROR -> {
-                Snackbar.make(root, R.string.error_unexpected_error_during_loading_cafes_near_you, Snackbar.LENGTH_LONG).show()
+                showErrorMessage(getString(R.string.error_unexpected_error_during_loading_cafes_near_you))
             }
         }
     }
@@ -119,10 +121,13 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
         super.onStop()
     }
 
-    private fun showPermissionExplanationSnackBar() {
-        Snackbar.make(root, R.string.permission_explanation, Snackbar.LENGTH_LONG)
-            .setAction(R.string.permission_grant_text) { requestLocationPermissions(this.activity!!) }
-            .show()
+    private fun showPermissionExplanation() {
+        showErrorMessage(
+            getString(R.string.permission_explanation),
+            getString(R.string.permission_grant_text),
+            { requestLocationPermissions(this.activity!!) },
+            Snackbar.LENGTH_INDEFINITE
+        )
     }
 
     private fun checkLocationPermission(context: Context): Boolean {
@@ -136,5 +141,27 @@ class TomTomMapFragment : Fragment(), OnMapReadyCallback {
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
             HomeActivity.LOCATION_REQUEST_CODE
         )
+    }
+
+    @SuppressLint("PrivateResource")
+    private fun showErrorMessage(
+        messageText: String,
+        actionText: String? = null,
+        action: (() -> Unit)? = null,
+        snackbarLength: Int = Snackbar.LENGTH_LONG
+    ) {
+        val snackbar = Snackbar.make(root, messageText, snackbarLength)
+        snackbar.apply {
+            val commonMargin = resources.getDimension(R.dimen.common_margin)
+            val navigationHeight = resources.getDimension(R.dimen.design_bottom_navigation_height)
+            view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams)
+                .apply {
+                    setMargins(leftMargin, topMargin, rightMargin, (navigationHeight + commonMargin).toInt())
+                }
+        }
+        if (actionText != null &&  action != null) {
+            snackbar.setAction(actionText) { action() }
+        }
+        snackbar.show()
     }
 }

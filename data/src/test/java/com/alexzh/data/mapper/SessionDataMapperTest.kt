@@ -7,9 +7,9 @@ import com.alexzh.testdata.domain.GenerateDomainTestData.generateSession
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class SessionMapperTest {
+class SessionDataMapperTest {
 
-    private val mapper = SessionMapper()
+    private val mapper = SessionDataMapper()
 
     @Test
     fun mapFromEntityToDomainModelCorrectly() {

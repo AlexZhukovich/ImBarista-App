@@ -1,7 +1,9 @@
 package com.alexzh.imbarista.ui.profile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.alexzh.imbarista.R
@@ -25,9 +27,7 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_profile, container, false)
-
-        return rootView
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -59,18 +59,23 @@ class ProfileFragment : Fragment() {
     private fun handleProfileInfo(resource: Resource<UserView>) {
         when (resource.status) {
             ResourceState.LOADING -> {
+                changeUserDataVisibility(isNameVisible = false, isEmailVisible = false)
                 progressBar.visibility = View.VISIBLE
             }
             ResourceState.SUCCESS -> {
-                nameTextView.text = resource.data?.name
-                emailTextView.text = resource.data?.email
+                showUserData(
+                    resource.data?.name ?: "",
+                    resource.data?.email ?: ""
+                )
                 progressBar.visibility = View.GONE
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
-                Snackbar.make(root, R.string.error_loading_user_info, Snackbar.LENGTH_LONG)
-                    .setAction(R.string.try_again_action) { getCurrentUserViewModel.fetchUserInfo() }
-                    .show()
+                changeUserDataVisibility(isNameVisible = false, isEmailVisible = false)
+                showErrorMessage(
+                    getString(R.string.error_loading_user_info),
+                    getString(R.string.try_again_action)
+                ) { getCurrentUserViewModel.fetchUserInfo() }
             }
         }
     }
@@ -83,10 +88,60 @@ class ProfileFragment : Fragment() {
             ResourceState.SUCCESS -> {
                 progressBar.visibility = View.GONE
                 this@ProfileFragment.activity?.let { LoginActivity.start(it) }
+                this.activity?.finish()
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
             }
         }
+    }
+
+    private fun showUserData(
+        name: String,
+        email: String
+    ) {
+        changeUserDataVisibility(name.isNotBlank(), email.isNotEmpty())
+        nameTextView.text = name
+        emailTextView.text = email
+    }
+
+    private fun changeUserDataVisibility(
+        isNameVisible: Boolean,
+        isEmailVisible: Boolean
+    ) {
+        if (isNameVisible) {
+            nameImageView.visibility = View.VISIBLE
+            nameTextView.visibility = View.VISIBLE
+        } else {
+            nameImageView.visibility = View.GONE
+            nameTextView.visibility = View.GONE
+        }
+
+        if (isEmailVisible) {
+            emailImageView.visibility = View.VISIBLE
+            emailTextView.visibility = View.VISIBLE
+        } else {
+            emailImageView.visibility = View.GONE
+            emailTextView.visibility = View.GONE
+        }
+    }
+
+    @SuppressLint("PrivateResource")
+    private fun showErrorMessage(
+        messageText: String,
+        actionText: String,
+        action: () -> Unit
+    ) {
+        Snackbar.make(root, messageText, Snackbar.LENGTH_INDEFINITE)
+            .setAction(actionText) { action() }
+            .apply {
+                val commonMargin = resources.getDimension(R.dimen.common_margin)
+                val navigationHeight = resources.getDimension(R.dimen.design_bottom_navigation_height)
+                view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams)
+                    .apply {
+                        setMargins(leftMargin, topMargin, rightMargin, (navigationHeight + commonMargin).toInt())
+                    }
+            }
+            .show()
     }
 }

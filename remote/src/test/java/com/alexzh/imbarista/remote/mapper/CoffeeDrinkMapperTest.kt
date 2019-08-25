@@ -8,7 +8,7 @@ import org.junit.Test
 
 class CoffeeDrinkMapperTest {
 
-    private val mapper = CoffeeMapper()
+    private val mapper = CoffeeDrinkRemoteMapper()
 
     @Test
     fun mapFromModelWithOneIngredientMapsDataCorrectly() {

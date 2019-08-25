@@ -33,6 +33,9 @@ ext {
     testRunner = '1.1.0'
     testRules = '1.1.0'
 
+    // AndroidX Test Orchestrator
+    testOrchestratorVersion = '1.2.0'
+
     // Material Design Components
     materialDesignComponentsVersion = '1.0.0'
 
@@ -103,7 +106,6 @@ ext {
             testRunner:                 "androidx.test:runner:${testRunner}",
             testRules:                  "androidx.test:rules:${testRules}",
             robolectric:                "org.robolectric:robolectric:${robolectricVersion}"
-
     ]
 
 
@@ -118,7 +120,8 @@ ext {
             espressoCore:               "androidx.test.espresso:espresso-core:${espressoCoreVersion}",
             espressoContrib:            "androidx.test.espresso:espresso-contrib:${espressoCoreVersion}",
             espressoIntents:            "androidx.test.espresso:espresso-intents:${espressoCoreVersion}",
-            uiAutomator:                "androidx.test.uiautomator:uiautomator:${uiAutomatorVersion}"
+            uiAutomator:                "androidx.test.uiautomator:uiautomator:${uiAutomatorVersion}",
+            androidXTestOrchestrator:   "androidx.test:orchestrator:${testOrchestratorVersion}",
     ]
 
     domainDependencies = [
