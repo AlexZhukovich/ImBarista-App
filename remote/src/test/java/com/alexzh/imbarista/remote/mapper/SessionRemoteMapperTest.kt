@@ -6,9 +6,9 @@ import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.
 import org.junit.Assert
 import org.junit.Test
 
-class SessionMapperTest {
+class SessionRemoteMapperTest {
 
-    private val mapper = SessionMapper()
+    private val mapper = SessionRemoteMapper()
 
     @Test
     fun mapFromModelMapsDataCorrectly() {

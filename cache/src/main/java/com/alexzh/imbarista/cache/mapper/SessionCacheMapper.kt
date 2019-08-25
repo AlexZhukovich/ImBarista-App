@@ -3,7 +3,7 @@ package com.alexzh.imbarista.cache.mapper
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.imbarista.cache.model.Session
 
-class SessionMapper : CachedMapper<Session, SessionEntity> {
+class SessionCacheMapper : CachedMapper<Session, SessionEntity> {
 
     override fun mapFromCached(cacheModel: Session): SessionEntity {
         return SessionEntity(

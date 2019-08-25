@@ -7,9 +7,9 @@ import com.alexzh.testdata.domain.GenerateDomainTestData.generateUser
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class UserMapperTest {
+class UserDataMapperTest {
 
-    private val mapper = UserMapper()
+    private val mapper = UserDataMapper()
 
     @Test
     fun mapFromEntityToDomainModelCorrectly() {

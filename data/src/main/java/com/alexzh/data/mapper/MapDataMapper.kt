@@ -3,7 +3,7 @@ package com.alexzh.data.mapper
 import com.alexzh.data.model.MapEntity
 import com.alexzh.imbarista.domain.model.Map
 
-class MapMapper : EntityMapper<MapEntity, Map> {
+class MapDataMapper : EntityMapper<MapEntity, Map> {
 
     override fun mapFromEntity(entity: MapEntity): Map {
         return Map.valueOf(entity.name)
