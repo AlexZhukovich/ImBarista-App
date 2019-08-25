@@ -2,8 +2,8 @@ package com.alexzh.imbarista.remote
 
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.data.model.UserEntity
-import com.alexzh.imbarista.remote.mapper.SessionMapper
-import com.alexzh.imbarista.remote.mapper.UserMapper
+import com.alexzh.imbarista.remote.mapper.SessionRemoteMapper
+import com.alexzh.imbarista.remote.mapper.UserRemoteMapper
 import com.alexzh.imbarista.remote.model.ResponseModel
 import com.alexzh.imbarista.remote.model.SessionModel
 import com.alexzh.imbarista.remote.model.UserModel
@@ -23,8 +23,8 @@ import org.junit.Test
 class UserRemoteRepositoryImplTest {
 
     private val service = mockk<CoffeeDrinksService>()
-    private val userMapper = mockk<UserMapper>()
-    private val sessionMapper = mockk<SessionMapper>()
+    private val userMapper = mockk<UserRemoteMapper>()
+    private val sessionMapper = mockk<SessionRemoteMapper>()
 
     private val repository = UserRemoteRepositoryImpl(service, userMapper, sessionMapper)
 

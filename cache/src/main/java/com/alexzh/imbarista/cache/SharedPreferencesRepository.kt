@@ -4,15 +4,15 @@ import android.content.SharedPreferences
 import com.alexzh.data.model.MapEntity
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.data.repository.PreferencesRepository
-import com.alexzh.imbarista.cache.mapper.MapMapper
-import com.alexzh.imbarista.cache.mapper.SessionMapper
+import com.alexzh.imbarista.cache.mapper.MapCacheMapper
+import com.alexzh.imbarista.cache.mapper.SessionCacheMapper
 import com.alexzh.imbarista.cache.model.Map
 import com.alexzh.imbarista.cache.model.Session
 
 class SharedPreferencesRepository(
     private val prefs: SharedPreferences,
-    private val sessionMapper: SessionMapper,
-    private val mapMapper: MapMapper
+    private val sessionCacheMapper: SessionCacheMapper,
+    private val mapCacheMapper: MapCacheMapper
 ) : PreferencesRepository {
 
     companion object {
@@ -53,7 +53,7 @@ class SharedPreferencesRepository(
 
     override fun getMapProvider(): MapEntity {
         val mapValue = prefs.getString(MAP_PROVIDER, STR_DEFAULT_VALUE) as String
-        return mapMapper.mapFromCached(
+        return mapCacheMapper.mapFromCached(
             if (mapValue.isBlank())
                 Map.TOMTOM
             else
@@ -62,7 +62,7 @@ class SharedPreferencesRepository(
     }
 
     override fun getSessionInfo(): SessionEntity {
-        return sessionMapper.mapFromCached(
+        return sessionCacheMapper.mapFromCached(
             Session(
                 prefs.getLong(SESSION_ID, LONG_DEFAULT_VALUE),
                 prefs.getString(ACCESS_TOKEN, STR_DEFAULT_VALUE) as String,
@@ -74,7 +74,7 @@ class SharedPreferencesRepository(
     }
 
     override fun saveSessionInfo(sessionEntity: SessionEntity) {
-        val session = sessionMapper.mapToCached(sessionEntity)
+        val session = sessionCacheMapper.mapToCached(sessionEntity)
         prefs.edit()
             .putLong(SESSION_ID, session.sessionId)
             .putString(ACCESS_TOKEN, session.accessToken)

@@ -2,7 +2,7 @@ package com.alexzh.imbarista.remote
 
 import com.alexzh.data.model.CafeEntity
 import com.alexzh.data.repository.CafeRemoteRepository
-import com.alexzh.imbarista.remote.mapper.CafeMapper
+import com.alexzh.imbarista.remote.mapper.CafeRemoteMapper
 import com.alexzh.imbarista.remote.model.CafeModel
 import com.alexzh.imbarista.remote.service.TomTomSearchService
 import io.reactivex.Single
@@ -10,7 +10,7 @@ import java.lang.RuntimeException
 
 class CafeRemoteRepositoryImpl(
     private val tomTomSearchService: TomTomSearchService,
-    private val cafeMapper: CafeMapper
+    private val cafeRemoteMapper: CafeRemoteMapper
 ) : CafeRemoteRepository {
     override fun getCafes(
         currentLatitude: Double,
@@ -22,7 +22,7 @@ class CafeRemoteRepositoryImpl(
             .onErrorResumeNext { Single.error(RuntimeException(it)) }
             .map { response ->
                 response.results.map {
-                    cafeMapper.mapFromModel(
+                    cafeRemoteMapper.mapFromModel(
                         CafeModel(
                             it.poi.name,
                             it.position.latitude,

@@ -7,9 +7,9 @@ import com.alexzh.testdata.data.GenerateDataTestData.generateSessionEntity
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class SessionMapperTest {
+class SessionCacheMapperTest {
 
-    private val mapper = SessionMapper()
+    private val mapper = SessionCacheMapper()
 
     @Test
     fun mapFromEntityToCacheModelCorrectly() {

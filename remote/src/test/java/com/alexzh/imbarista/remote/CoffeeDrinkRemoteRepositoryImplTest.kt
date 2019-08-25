@@ -1,7 +1,7 @@
 package com.alexzh.imbarista.remote
 
 import com.alexzh.data.model.CoffeeDrinkEntity
-import com.alexzh.imbarista.remote.mapper.CoffeeMapper
+import com.alexzh.imbarista.remote.mapper.CoffeeDrinkRemoteMapper
 import com.alexzh.imbarista.remote.model.CoffeeDrinkDataModel
 import com.alexzh.imbarista.remote.model.CoffeeDrinkFavouriteValueModel
 import com.alexzh.imbarista.remote.model.CoffeeDrinkModel
@@ -21,7 +21,7 @@ import org.junit.Test
 class CoffeeDrinkRemoteRepositoryImplTest {
 
     private val service = mockk<CoffeeDrinksService>()
-    private val coffeeMapper = mockk<CoffeeMapper>()
+    private val coffeeMapper = mockk<CoffeeDrinkRemoteMapper>()
     private val httpExceptionMapper = mockk<HttpExceptionMapper>()
 
     private val repository = CoffeeDrinkRemoteRepositoryImpl(service, coffeeMapper, httpExceptionMapper)

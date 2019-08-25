@@ -4,8 +4,8 @@ import android.content.Context
 import android.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.alexzh.data.model.SessionEntity
-import com.alexzh.imbarista.cache.mapper.MapMapper
-import com.alexzh.imbarista.cache.mapper.SessionMapper
+import com.alexzh.imbarista.cache.mapper.MapCacheMapper
+import com.alexzh.imbarista.cache.mapper.SessionCacheMapper
 import com.alexzh.testdata.data.GenerateDataTestData.generateSessionEntity
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -16,8 +16,8 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class SharedPreferencesRepositoryTest {
 
-    private val sessionMapper = SessionMapper()
-    private val mapMapper = MapMapper()
+    private val sessionMapper = SessionCacheMapper()
+    private val mapMapper = MapCacheMapper()
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
     private val repository = SharedPreferencesRepository(prefs, sessionMapper, mapMapper)
