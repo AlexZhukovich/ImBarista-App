@@ -6,8 +6,7 @@ import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.uiautomator.By
@@ -15,6 +14,7 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.alexzh.imbarista.R
 import com.alexzh.imbarista.matchers.TextInputLayoutMatchers
+import com.alexzh.imbarista.matchers.ToolbarMatchers
 import com.alexzh.imbarista.ui.login.LoginActivity
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertTrue
@@ -37,8 +37,22 @@ class CreateAccountActivityTest {
      */
     @Test
     fun shouldBeDisplayed() {
-        onView(withText("Create Account"))
-            .perform(click())
+        val expectedTitle = InstrumentationRegistry.getInstrumentation().targetContext.getString(R.string.activity_create_account_title)
+
+        onView(withId(R.id.toolbar))
+            .check(matches(ToolbarMatchers.withToolbarTitle(`is`(expectedTitle))))
+
+        onView(withId(R.id.nameEditText))
+            .check(matches(isEnabled()))
+
+        onView(withId(R.id.emailEditText))
+            .check(matches(isEnabled()))
+
+        onView(withId(R.id.passwordEditText))
+            .check(matches(isEnabled()))
+
+        onView(withId(R.id.createAccountButton))
+            .check(matches(isEnabled()))
     }
 
     /**
