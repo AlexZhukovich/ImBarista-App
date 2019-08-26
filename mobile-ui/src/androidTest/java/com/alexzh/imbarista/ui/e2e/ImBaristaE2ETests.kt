@@ -1,11 +1,9 @@
 package com.alexzh.imbarista.ui.e2e
 
-import android.app.Activity
 import android.view.View
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -13,11 +11,10 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
-import androidx.test.runner.lifecycle.Stage
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import com.alexzh.imbarista.R
+import com.alexzh.imbarista.idlingresources.ViewVisibilityIdlingResource
 import com.alexzh.imbarista.matchers.RecyclerViewMatchers
 import com.alexzh.imbarista.ui.coffeedrinks.adapter.CoffeeDrinkViewHolder
 import com.alexzh.imbarista.ui.splash.SplashActivity
@@ -183,45 +180,6 @@ class ImBaristaE2ETests {
         fail()
     }
 
-    class ViewVisibilityIdlingResource(
-        private val viewId: Int,
-        private val expectedVisibility: Int
-    ) : IdlingResource {
-
-        private var resourceCallback: IdlingResource.ResourceCallback? = null
-
-        override fun getName(): String {
-            return ViewVisibilityIdlingResource::class.java.name
-        }
-
-        override fun isIdleNow(): Boolean {
-            val view: View? = getIdlingResourceActivityInstance().findViewById(viewId)
-            val isIdleNow = if (view != null) {
-                view.visibility == expectedVisibility
-            } else {
-                false
-            }
-
-            if (isIdleNow && resourceCallback != null) {
-                resourceCallback?.onTransitionToIdle()
-            }
-            return isIdleNow
-        }
-
-        override fun registerIdleTransitionCallback(callback: IdlingResource.ResourceCallback?) {
-            this.resourceCallback = callback
-        }
-
-        private fun getIdlingResourceActivityInstance(): Activity {
-            var currentActivity: Activity? = null
-                val resumedActivity =
-                    ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED)
-                if (resumedActivity.iterator().hasNext()) {
-                    currentActivity = resumedActivity.iterator().next()
-                }
-            return currentActivity!!
-        }
-    }
     private fun verifyMessage(text: String): Boolean {
         val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         repeat(10) {
