@@ -11,7 +11,8 @@ object BottomNavigationViewMatchers {
     fun withItemCount(count: Int): Matcher<View> {
         return object : BoundedMatcher<View, BottomNavigationView>(BottomNavigationView::class.java) {
             override fun matchesSafely(view: BottomNavigationView): Boolean {
-                return false
+                val menu = view.menu
+                return menu.size() == count
             }
 
             override fun describeTo(description: Description) {
@@ -23,6 +24,13 @@ object BottomNavigationViewMatchers {
     fun hasItemTitle(text: String): Matcher<View> {
         return object : BoundedMatcher<View, BottomNavigationView>(BottomNavigationView::class.java) {
             override fun matchesSafely(view: BottomNavigationView): Boolean {
+                val menu = view.menu
+                for (i in 0 until menu.size()) {
+                    val item = menu.getItem(i)
+                    if (item.title.contains(text)) {
+                        return true
+                    }
+                }
                 return false
             }
 
@@ -35,6 +43,13 @@ object BottomNavigationViewMatchers {
     fun hasCheckedItem(itemId: Int): Matcher<View> {
         return object : BoundedMatcher<View, BottomNavigationView>(BottomNavigationView::class.java) {
             override fun matchesSafely(view: BottomNavigationView): Boolean {
+                val menu = view.menu
+                for (i in 0 until menu.size()) {
+                    val item = menu.getItem(i)
+                    if (item.isChecked) {
+                        return item.itemId == itemId
+                    }
+                }
                 return false
             }
 
