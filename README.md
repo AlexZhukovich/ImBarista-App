@@ -27,6 +27,15 @@ Features of the application:
   <img src="/art/screenshots/settings-screen-framed.png" height="500" />
 </p>
 
+# Structure of the project
+The project has the main branches:
+* master
+* workshop-start
+
+The **master** branch has all test cases with solutions.
+
+The **workshop-start** branch has all failed test cases with description for each test case and test classes.   
+
 # App screens with views
 **"Login" screen**
 <p align="center">
