@@ -27,6 +27,8 @@ Features of the application:
   <img src="/art/screenshots/settings-screen-framed.png" height="500" />
 </p>
 
+[Application diagram with connections between screens](https://raw.githubusercontent.com/AlexZhukovich/ImBarista-App/add-images-to-project/art/ImBarista-app-mockup.png)
+
 # Structure of the project
 The project has the main branches:
 * master
