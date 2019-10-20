@@ -1,7 +1,7 @@
 package com.alexzh.data
 
-import com.alexzh.data.mapper.SessionMapper
-import com.alexzh.data.mapper.UserMapper
+import com.alexzh.data.mapper.SessionDataMapper
+import com.alexzh.data.mapper.UserDataMapper
 import com.alexzh.data.model.HttpDataException
 import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.data.store.UserDataStore
@@ -13,8 +13,8 @@ import io.reactivex.Single
 
 class UserDataRepository(
     private val userDataStore: UserDataStore,
-    private val userMapper: UserMapper,
-    private val sessionMapper: SessionMapper,
+    private val userDataMapper: UserDataMapper,
+    private val sessionDataMapper: SessionDataMapper,
     private val preferencesRepository: PreferencesRepository
 ) : UserRepository {
 
@@ -25,7 +25,7 @@ class UserDataRepository(
     override fun createAccount(name: String, email: String, password: String): Single<User> {
         return userDataStore.createAccount(name, email, password)
             .retry(REPEAT_REQUEST_COUNT)
-            .map { userMapper.mapFromEntity(it) }
+            .map { userDataMapper.mapFromEntity(it) }
     }
 
     override fun logIn(email: String, password: String): Single<Session> {
@@ -35,7 +35,7 @@ class UserDataRepository(
                 preferencesRepository.saveSessionInfo(it)
                 Single.just(it)
             }
-            .map { sessionMapper.mapFromEntity(it) }
+            .map { sessionDataMapper.mapFromEntity(it) }
     }
 
     override fun logOut(): Completable {
@@ -53,7 +53,7 @@ class UserDataRepository(
                 preferencesRepository.saveSessionInfo(it)
                 Single.just(it)
             }
-            .map { sessionMapper.mapFromEntity(it) }
+            .map { sessionDataMapper.mapFromEntity(it) }
     }
 
     override fun getCurrentUserInfo(): Single<User> {
@@ -66,12 +66,19 @@ class UserDataRepository(
                 return@onErrorResumeNext Single.error(error)
             }
             .retry(REPEAT_REQUEST_COUNT)
-            .map { userMapper.mapFromEntity(it) }
+            .map { userDataMapper.mapFromEntity(it) }
     }
 
     override fun getExistingSession(): Single<Session> {
-        return Single.just(preferencesRepository.getSessionInfo())
-            .retry(REPEAT_REQUEST_COUNT)
-            .map { sessionMapper.mapFromEntity(it) }
+        val session = preferencesRepository.getSessionInfo()
+
+        return if (session.sessionId != -1L) {
+            Single.just(preferencesRepository.getSessionInfo())
+                .map { sessionDataMapper.mapFromEntity(it) }
+        } else {
+            Single.error(IllegalArgumentException("No data stored in shared preferences"))
+        }
+
+
     }
 }

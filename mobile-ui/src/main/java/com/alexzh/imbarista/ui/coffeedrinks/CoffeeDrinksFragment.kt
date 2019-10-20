@@ -32,6 +32,8 @@ class CoffeeDrinksFragment : Fragment() {
         CoffeeDrinkDetailsActivity.start(this.activity!!, it)
     }
 
+    private var snackbar: Snackbar? = null
+
     private val coffeeDrinkFavouriteItem: (CoffeeDrinkView) -> Unit = {
         if (it.isFavourite) {
             coffeeDrinksViewModel.removeCoffeeDrinkFromFavourites(it.id)
@@ -104,7 +106,7 @@ class CoffeeDrinksFragment : Fragment() {
         actionText: String,
         action: () -> Unit
     ) {
-        Snackbar.make(root, messageText, Snackbar.LENGTH_INDEFINITE)
+        snackbar = Snackbar.make(root, messageText, Snackbar.LENGTH_INDEFINITE)
             .setAction(actionText) { action() }
             .apply {
                 val commonMargin = resources.getDimension(R.dimen.common_margin)
@@ -114,8 +116,13 @@ class CoffeeDrinksFragment : Fragment() {
                         setMargins(leftMargin, topMargin, rightMargin, (navigationHeight + commonMargin).toInt())
                     }
             }
-            .show()
+        snackbar?.show()
     }
 
-
+    override fun onPause() {
+        if (snackbar != null) {
+            snackbar?.dismiss()
+        }
+        super.onPause()
+    }
 }

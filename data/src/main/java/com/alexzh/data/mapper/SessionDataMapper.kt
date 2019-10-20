@@ -3,7 +3,8 @@ package com.alexzh.data.mapper
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.imbarista.domain.model.Session
 
-class SessionMapper : EntityMapper<SessionEntity, Session> {
+class SessionDataMapper : EntityMapper<SessionEntity, Session> {
+
     override fun mapFromEntity(entity: SessionEntity): Session {
         return Session(
             entity.sessionId,

@@ -2,8 +2,9 @@ package com.alexzh.imbarista.remote
 
 import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.data.repository.CoffeeDrinksRemoteRepository
-import com.alexzh.imbarista.remote.mapper.AuthExceptionMapper
-import com.alexzh.imbarista.remote.mapper.CoffeeMapper
+
+import com.alexzh.imbarista.remote.mapper.AuthExceptionRemoteMapper
+import com.alexzh.imbarista.remote.mapper.CoffeeDrinkRemoteMapper
 import com.alexzh.imbarista.remote.mapper.HttpExceptionMapper
 import com.alexzh.imbarista.remote.model.CoffeeDrinkDataModel
 import com.alexzh.imbarista.remote.model.CoffeeDrinkFavouriteValueModel
@@ -14,9 +15,9 @@ import retrofit2.HttpException
 
 class CoffeeDrinkRemoteRepositoryImpl(
     private val service: CoffeeDrinksService,
-    private val coffeeMapper: CoffeeMapper,
-    private val httpExceptionMapper: HttpExceptionMapper,
-    private val authExceptionMapper: AuthExceptionMapper
+    private val authExceptionMapper: AuthExceptionRemoteMapper,
+    private val coffeeDrinkRemoteMapper: CoffeeDrinkRemoteMapper,
+    private val httpExceptionMapper: HttpExceptionMapper
 ) : CoffeeDrinksRemoteRepository {
 
     override fun getCoffeeDrinks(
@@ -75,6 +76,6 @@ class CoffeeDrinkRemoteRepositoryImpl(
     private fun convertCoffeeDrinkResponseToCoffeeDrinkEntities(
         response: ResponseModel<CoffeeDrinkDataModel>
     ): List<CoffeeDrinkEntity> {
-        return response.data.data.map { coffeeMapper.mapFromModel(it) }
+        return response.data.data.map { coffeeDrinkRemoteMapper.mapFromModel(it) }
     }
 }

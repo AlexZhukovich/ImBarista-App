@@ -1,5 +1,6 @@
 package com.alexzh.data.store
 
+import com.alexzh.data.mapper.AuthExceptionMapper
 import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.data.repository.CoffeeDrinksRemoteRepository
 import com.alexzh.data.repository.PreferencesRepository
@@ -24,7 +25,9 @@ class CoffeeDrinksRemoteDataStoreTest {
 
     private val preferencesRepository = mockk<PreferencesRepository>()
 
-    private val store = CoffeeDrinksRemoteDataStore(repository, preferencesRepository)
+    private val authExceptionMapper = mockk<AuthExceptionMapper>()
+
+    private val store = CoffeeDrinksRemoteDataStore(repository, preferencesRepository, authExceptionMapper)
 
     @Test
     fun getCoffeeDrinksCompletesSuccessfully() {

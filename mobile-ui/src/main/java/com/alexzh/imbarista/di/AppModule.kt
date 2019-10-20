@@ -7,13 +7,13 @@ import com.alexzh.data.CoffeeDrinksDataRepository
 import com.alexzh.data.MapDataProvider
 import com.alexzh.data.NearMeCafeDataRepository
 import com.alexzh.data.UserDataRepository
-import com.alexzh.data.mapper.CoffeeMapper
-import com.alexzh.data.mapper.UserAlreadyExistExceptionMapper
+import com.alexzh.data.mapper.*
 import com.alexzh.data.repository.*
 import com.alexzh.data.store.*
 import com.alexzh.imbarista.cache.CoffeeDrinksCacheRepositoryImpl
 import com.alexzh.imbarista.cache.SharedPreferencesRepository
-import com.alexzh.imbarista.cache.mapper.MapMapper
+import com.alexzh.imbarista.cache.mapper.MapCacheMapper
+import com.alexzh.imbarista.cache.mapper.SessionCacheMapper
 import com.alexzh.imbarista.domain.MapProvider
 import com.alexzh.imbarista.domain.executor.PostExecutionThread
 import com.alexzh.imbarista.domain.interactor.cafe.GetNearCafeFromTomTomSource
@@ -31,6 +31,7 @@ import com.alexzh.imbarista.remote.CafeRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.CoffeeDrinkRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.UserRemoteRepositoryImpl
 import com.alexzh.imbarista.remote.mapper.*
+import com.alexzh.imbarista.remote.mapper.SessionRemoteMapper
 import com.alexzh.imbarista.remote.service.CoffeeDrinksServiceFactory
 import com.alexzh.imbarista.remote.service.TomTomDataSearchService
 import com.alexzh.imbarista.remote.service.TomTomSearchService
@@ -47,7 +48,7 @@ val viewModelModule = module {
     viewModel { LogOutViewModel(logOut = get(), authViewExceptionMapper = get()) }
     viewModel { GetCurrentUserViewModel(getCurrentUser = get(), mapper = get()) }
     viewModel { GetCoffeeDrinksViewModel(getCoffeeDrinks = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get(), authViewExceptionMapper = get()) }
-    viewModel { CoffeeDrinkDetailsViewModel(getCoffeeDrinkById = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get()) }
+    viewModel { CoffeeDrinkDetailsViewModel(getCoffeeDrinkById = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get(), authViewExceptionMapper = get()) }
     viewModel { TomTomMapViewModel(getNearCafeFromTomTomSource = get(), cafeViewMapper = get(), application = androidContext() as Application) }
 }
 
@@ -65,53 +66,67 @@ val useCaseModule = module {
 }
 
 val mapProviderModule = module {
-    factory<MapProvider> { MapDataProvider(preferencesRepository = get(), mapMapper = get()) }
+    factory<MapProvider> { MapDataProvider(preferencesRepository = get(), mapDataMapper = get()) }
     factory { MapFactory(mapProvider = get(), mapViewMapper = get()) }
 }
 
 val mapperModule = module {
-    factory { CoffeeMapper() }
-    factory { com.alexzh.imbarista.remote.mapper.CoffeeMapper() }
-    factory { SessionViewMapper() }
-    factory { UserViewMapper() }
-    factory { UserMapper() }
-    factory { com.alexzh.data.mapper.UserMapper() }
-    factory { SessionMapper() }
-    factory { com.alexzh.data.mapper.SessionMapper() }
-    factory { com.alexzh.imbarista.cache.mapper.SessionMapper() }
+    factory { CoffeeDrinkDataMapper() }
+    factory { CoffeeDrinkRemoteMapper() }
     factory { CoffeeDrinkViewMapper() }
-    factory { HttpExceptionMapper() }
-    factory { MapMapper() }
-    factory { com.alexzh.data.mapper.MapMapper() }
+
+    factory { UserRemoteMapper() }
+    factory { UserDataMapper() }
+    factory { UserViewMapper() }
+
+    factory { SessionRemoteMapper() }
+    factory { SessionCacheMapper() }
+    factory { SessionDataMapper() }
+    factory { SessionViewMapper() }
+
+    factory { MapCacheMapper() }
+    factory { MapDataMapper() }
     factory { MapViewMapper() }
-    factory { CafeMapper() }
-    factory { com.alexzh.data.mapper.CafeMapper() }
+
+    factory { CafeRemoteMapper() }
+    factory { CafeDataMapper() }
     factory { CafeViewMapper() }
-    factory { UserAlreadyExistViewExceptionMapper() }
-    factory { UserAlreadyExistExceptionMapper() }
-    factory { com.alexzh.imbarista.remote.mapper.UserAlreadyExistExceptionMapper() }
+
     factory { AuthViewExceptionMapper() }
     factory { AuthExceptionMapper() }
-    factory { com.alexzh.data.mapper.AuthExceptionMapper() }
+    factory { AuthExceptionRemoteMapper() }
+
+    factory { HttpExceptionMapper() }
+
+    factory { UserAlreadyExistExceptionRemoteMapper() }
+    factory { UserAlreadyExistExceptionDataMapper() }
+    factory { UserAlreadyExistExceptionViewMapper() }
 }
 
 val dataModule = module {
-    factory { CoffeeDrinksServiceFactory().createCoffeeDrinksService(true) }
-    factory<CoffeeDrinksCacheRepository> { CoffeeDrinksCacheRepositoryImpl() }
-    factory<CoffeeDrinksRemoteRepository> { CoffeeDrinkRemoteRepositoryImpl(service = get(), coffeeMapper = get(), httpExceptionMapper = get(), authExceptionMapper = get()) }
-    factory { CoffeeDrinksCacheDataStore(cacheRepository = get()) }
-    factory { CoffeeDrinksRemoteDataStore(remoteRepository = get(), preferencesRepository = get(), authExceptionMapper = get()) }
-    factory { CoffeeDrinksDataStoreFactory(remoteDataStore = get(), cacheDataStore = get()) }
-    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(coffeeMapper = get(), cacheRepository = get(), storeFactory = get(), userRepository = get(), preferencesRepository = get()) }
-    factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userMapper = get(), sessionMapper = get(), userAlreadyExceptionExceptionMapper = get(), authExceptionMapper = get()) }
-    factory<UserDataStore> { UserRemoteDataStore(repository = get(), preferencesRepository = get(), userAlreadyExistExceptionMapper = get(), authExceptionMapper = get()) }
+    // android
     factory<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(androidContext()) }
-    factory<PreferencesRepository> { SharedPreferencesRepository(prefs = get(), sessionMapper = get(), mapMapper = get()) }
-    single<UserRepository>(override = true) { UserDataRepository(userDataStore = get(), userMapper = get(), sessionMapper = get(), preferencesRepository = get()) }
+
+    // domain
+    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(coffeeDrinkDataMapper = get(), cacheRepository = get(), storeFactory = get(), userRepository = get(), preferencesRepository = get()) }
+    single<UserRepository>(override = true) { UserDataRepository(userDataStore = get(), userDataMapper = get(), sessionDataMapper = get(), preferencesRepository = get()) }
+    factory<NearMeCafeRepository> { NearMeCafeDataRepository(cafeDataStore = get(), cafeDataMapper = get()) }
+
+    // remote
+    factory { CoffeeDrinksServiceFactory().createCoffeeDrinksService(true) }
     factory<TomTomSearchService> { TomTomDataSearchService(androidContext() as Application) }
-    factory<CafeRemoteRepository> { CafeRemoteRepositoryImpl(tomTomSearchService = get(), cafeMapper = get()) }
+
+    // data
+    factory<CafeRemoteRepository> { CafeRemoteRepositoryImpl(tomTomSearchService = get(), cafeRemoteMapper = get()) }
+    factory<CoffeeDrinksRemoteRepository> { CoffeeDrinkRemoteRepositoryImpl(service = get(), coffeeDrinkRemoteMapper = get(), httpExceptionMapper = get(), authExceptionMapper = get()) }
+    factory<CoffeeDrinksCacheRepository> { CoffeeDrinksCacheRepositoryImpl() }
+    factory { CoffeeDrinksRemoteDataStore(remoteRepository = get(), preferencesRepository = get(), authExceptionMapper = get()) }
+    factory { CoffeeDrinksCacheDataStore(cacheRepository = get()) }
+    factory { CoffeeDrinksDataStoreFactory(remoteDataStore = get(), cacheDataStore = get()) }
+    factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userRemoteMapper = get(), sessionRemoteMapper = get(), userAlreadyExceptionExceptionRemoteMapper = get(), authExceptionMapper = get()) }
+    factory<UserDataStore> { UserRemoteDataStore(repository = get(), preferencesRepository = get(), userAlreadyExistExceptionDataMapper = get(), authExceptionMapper = get()) }
+    factory<PreferencesRepository> { SharedPreferencesRepository(prefs = get(), sessionCacheMapper = get(), mapCacheMapper = get()) }
     factory<CafeDataStore> { CafeRemoteDataStore(repository = get(), preferencesRepository = get()) }
-    factory<NearMeCafeRepository> { NearMeCafeDataRepository(cafeDataStore = get(), cafeMapper = get()) }
 }
 
 val executorModule = module {

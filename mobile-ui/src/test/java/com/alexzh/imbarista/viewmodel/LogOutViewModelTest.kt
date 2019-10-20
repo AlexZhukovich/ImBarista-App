@@ -2,6 +2,7 @@ package com.alexzh.imbarista.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.alexzh.imbarista.domain.interactor.user.LogOut
+import com.alexzh.imbarista.mapper.AuthViewExceptionMapper
 import com.alexzh.imbarista.state.ResourceState
 import io.mockk.mockk
 import io.mockk.slot
@@ -18,7 +19,9 @@ class LogOutViewModelTest {
 
     private val logOut = mockk<LogOut>(relaxed = true)
 
-    private val viewModel = LogOutViewModel(logOut)
+    private val authViewExceptionMapper = mockk<AuthViewExceptionMapper>()
+
+    private val viewModel = LogOutViewModel(logOut, authViewExceptionMapper)
 
     private val slot = slot<DisposableCompletableObserver>()
 

@@ -9,7 +9,7 @@ import org.junit.Test
 
 class CoffeeDrinkMapperTest {
 
-    private val mapper = CoffeeMapper()
+    private val mapper = CoffeeDrinkDataMapper()
 
     @Test
     fun mapFromEntityMapsDataCorrectly() {

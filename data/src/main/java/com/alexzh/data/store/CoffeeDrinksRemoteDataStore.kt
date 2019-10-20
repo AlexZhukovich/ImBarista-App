@@ -18,7 +18,7 @@ class CoffeeDrinksRemoteDataStore(
     override fun getCoffeeDrinks(): Single<List<CoffeeDrinkEntity>> {
         val sessionEntity = preferencesRepository.getSessionInfo()
         return remoteRepository.getCoffeeDrinks(sessionEntity.accessToken)
-//            .onErrorResumeNext { handleAuthError(it) }
+            .onErrorResumeNext { handleAuthError(it) }
     }
 
     override fun getCoffeeDrinksByName(name: String): Single<List<CoffeeDrinkEntity>> {
@@ -28,19 +28,19 @@ class CoffeeDrinksRemoteDataStore(
     override fun getCoffeeById(id: Long): Single<CoffeeDrinkEntity> {
         val sessionEntity = preferencesRepository.getSessionInfo()
         return remoteRepository.getCoffeeById(id, sessionEntity.accessToken)
-//            .onErrorResumeNext { handleAuthError(it) }
+            .onErrorResumeNext { handleAuthError(it) }
     }
 
     override fun setCoffeeAsFavourite(id: Long): Single<CoffeeDrinkEntity> {
         val sessionEntity = preferencesRepository.getSessionInfo()
         return remoteRepository.addCoffeeDrinkToFavourite(id, sessionEntity.accessToken)
-//            .onErrorResumeNext { handleAuthError(it) }
+            .onErrorResumeNext { handleAuthError(it) }
     }
 
     override fun setCoffeeAsNotFavourite(id: Long): Single<CoffeeDrinkEntity> {
         val sessionEntity = preferencesRepository.getSessionInfo()
         return remoteRepository.removeCoffeeDrinkFromFavourite(id, sessionEntity.accessToken)
-//            .onErrorResumeNext { handleAuthError(it) }
+            .onErrorResumeNext { handleAuthError(it) }
     }
 
     override fun saveCoffeeDrinks(coffeeDrinks: List<CoffeeDrinkEntity>): Completable {
@@ -51,10 +51,10 @@ class CoffeeDrinksRemoteDataStore(
         throw UnsupportedOperationException("'Clearing coffee drinks' operation is unsupported")
     }
 
-//    private fun <T> handleAuthError(error: Throwable): Single<T> {
-//        if (error is AuthDataException) {
-//            return Single.error(authExceptionMapper.mapFromEntityException(error))
-//        }
-//        return Single.error(error)
-//    }
+    private fun <T> handleAuthError(error: Throwable): Single<T> {
+        if (error is AuthDataException) {
+            return Single.error(authExceptionMapper.mapFromEntityException(error))
+        }
+        return Single.error(error)
+    }
 }

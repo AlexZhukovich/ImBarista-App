@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
         resValue("string", "tomtom_maps_api_key", "$System.env.BARISTA_TOMTOM_MAPS_API_KEY")
         resValue("string", "google_maps_api_key", "$System.env.BARISTA_GOOGLE_MAPS_API_KEY")
     }
@@ -28,6 +29,14 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 
@@ -99,4 +108,5 @@ dependencies {
     androidTestImplementation mobileUiAndroidTestDependencies.espressoContrib
     androidTestImplementation mobileUiAndroidTestDependencies.espressoIntents
     androidTestImplementation mobileUiAndroidTestDependencies.uiAutomator
+    androidTestUtil mobileUiAndroidTestDependencies.androidXTestOrchestrator
 }

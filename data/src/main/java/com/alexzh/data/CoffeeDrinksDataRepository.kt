@@ -1,7 +1,7 @@
 package com.alexzh.data
 
 import com.alexzh.data.exception.AuthDataException
-import com.alexzh.data.mapper.CoffeeMapper
+import com.alexzh.data.mapper.CoffeeDrinkDataMapper
 import com.alexzh.data.model.HttpDataException
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
 import com.alexzh.data.repository.PreferencesRepository
@@ -12,7 +12,7 @@ import com.alexzh.imbarista.domain.repository.UserRepository
 import io.reactivex.Single
 
 class CoffeeDrinksDataRepository(
-    private val coffeeMapper: CoffeeMapper,
+    private val coffeeDrinkDataMapper: CoffeeDrinkDataMapper,
     private val cacheRepository: CoffeeDrinksCacheRepository,
     private val storeFactory: CoffeeDrinksDataStoreFactory,
     private val userRepository: UserRepository,
@@ -39,7 +39,7 @@ class CoffeeDrinksDataRepository(
                 return@onErrorResumeNext Single.error(error)
             }
             .retry(REPEAT_REQUEST_COUNT)
-            .map { it.map { entity -> coffeeMapper.mapFromEntity(entity) } }
+            .map { it.map { entity -> coffeeDrinkDataMapper.mapFromEntity(entity) } }
     }
 
     override fun getCoffeeDrinksByName(name: String): Single<List<CoffeeDrink>> {
@@ -62,7 +62,7 @@ class CoffeeDrinksDataRepository(
                 return@onErrorResumeNext Single.error(error)
             }
             .retry(REPEAT_REQUEST_COUNT)
-            .map { coffeeMapper.mapFromEntity(it) }
+            .map { coffeeDrinkDataMapper.mapFromEntity(it) }
     }
 
     override fun addCoffeeDrinkToFavourites(coffeeId: Long): Single<CoffeeDrink> {
@@ -81,7 +81,7 @@ class CoffeeDrinksDataRepository(
                 return@onErrorResumeNext Single.error(error)
             }
             .retry(REPEAT_REQUEST_COUNT)
-            .map { coffeeMapper.mapFromEntity(it) }
+            .map { coffeeDrinkDataMapper.mapFromEntity(it) }
     }
 
     override fun removeCoffeeDrinkFromFavourites(coffeeId: Long): Single<CoffeeDrink> {
@@ -100,6 +100,6 @@ class CoffeeDrinksDataRepository(
                 return@onErrorResumeNext Single.error(error)
             }
             .retry(REPEAT_REQUEST_COUNT)
-            .map { coffeeMapper.mapFromEntity(it) }
+            .map { coffeeDrinkDataMapper.mapFromEntity(it) }
     }
 }

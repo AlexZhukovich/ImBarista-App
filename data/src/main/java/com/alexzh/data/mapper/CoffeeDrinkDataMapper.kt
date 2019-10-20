@@ -3,7 +3,7 @@ package com.alexzh.data.mapper
 import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.imbarista.domain.model.CoffeeDrink
 
-class CoffeeMapper : EntityMapper<CoffeeDrinkEntity, CoffeeDrink> {
+class CoffeeDrinkDataMapper : EntityMapper<CoffeeDrinkEntity, CoffeeDrink> {
 
     override fun mapFromEntity(entity: CoffeeDrinkEntity): CoffeeDrink {
         return CoffeeDrink(

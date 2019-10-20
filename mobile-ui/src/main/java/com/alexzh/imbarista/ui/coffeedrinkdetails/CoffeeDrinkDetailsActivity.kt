@@ -8,11 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexzh.imbarista.R
+import com.alexzh.imbarista.exception.AuthViewException
 import com.alexzh.imbarista.model.CoffeeDrinkDetailsItemView
 import com.alexzh.imbarista.model.CoffeeDrinkView
+import com.alexzh.imbarista.model.SessionView
 import com.alexzh.imbarista.state.Resource
 import com.alexzh.imbarista.state.ResourceState
 import com.alexzh.imbarista.ui.coffeedrinkdetails.adapter.CoffeeDetailsAdapter
+import com.alexzh.imbarista.ui.login.LoginActivity
+import com.alexzh.imbarista.viewmodel.CheckExistingSessionViewModel
 import com.alexzh.imbarista.viewmodel.CoffeeDrinkDetailsViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
@@ -34,6 +38,7 @@ class CoffeeDrinkDetailsActivity : AppCompatActivity() {
 
     private val adapter by lazy { CoffeeDetailsAdapter() }
 
+    private val checkExistingSessionViewModel: CheckExistingSessionViewModel by viewModel()
     private val coffeeDrinkDetailsViewModel: CoffeeDrinkDetailsViewModel by viewModel()
 
     private lateinit var currentCoffeeDrink: CoffeeDrinkView
@@ -52,6 +57,15 @@ class CoffeeDrinkDetailsActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        checkExistingSessionViewModel.getExistingSessionInfo().observe(this, Observer<Resource<SessionView>> {
+            if (it.error != null) {
+                LoginActivity.start(this)
+                finish()
+            }
+        })
+        checkExistingSessionViewModel.checkExistingSession()
+
         coffeeDrinkDetailsViewModel.getCoffeeDrinkInfo().observe(this, Observer<Resource<CoffeeDrinkView>> {
             it?.let { handleCoffeeDrinkChanges(it) }
         })
@@ -92,11 +106,23 @@ class CoffeeDrinkDetailsActivity : AppCompatActivity() {
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
-                Snackbar.make(root, R.string.error_coffee_drink_favourite_state_cannot_be_changed, Snackbar.LENGTH_LONG)
-                    .setAction(R.string.try_again_action) {
-                        coffeeDrinkDetailsViewModel.fetchCoffeeDrink(intent.getParcelableExtra<CoffeeDrinkView>(KEY_COFFEE).id)
+
+                if (resource.error is AuthViewException) {
+                    finish()
+                } else {
+                    Snackbar.make(
+                        root,
+                        R.string.error_coffee_drink_favourite_state_cannot_be_changed,
+                        Snackbar.LENGTH_LONG
+                    ).setAction(R.string.try_again_action) {
+                        coffeeDrinkDetailsViewModel.fetchCoffeeDrink(
+                            intent.getParcelableExtra<CoffeeDrinkView>(
+                                KEY_COFFEE
+                            ).id
+                        )
                     }
                     .show()
+                }
             }
         }
     }

@@ -2,8 +2,8 @@ package com.alexzh.imbarista.remote
 
 import com.alexzh.data.model.SessionEntity
 import com.alexzh.data.model.UserEntity
-import com.alexzh.imbarista.remote.mapper.SessionMapper
-import com.alexzh.imbarista.remote.mapper.UserMapper
+import com.alexzh.imbarista.remote.mapper.SessionRemoteMapper
+import com.alexzh.imbarista.remote.mapper.UserRemoteMapper
 import com.alexzh.imbarista.remote.model.ResponseModel
 import com.alexzh.imbarista.remote.model.SessionModel
 import com.alexzh.imbarista.remote.model.UserModel
@@ -14,6 +14,8 @@ import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateSessionEntity
 import com.alexzh.testdata.data.GenerateDataTestData.generateUserEntity
 import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.generateSessionModel
+import com.alexzh.imbarista.remote.mapper.AuthExceptionRemoteMapper
+import com.alexzh.imbarista.remote.mapper.UserAlreadyExistExceptionRemoteMapper
 import com.alexzh.imbarista.remote.model.RefreshTokenModel
 import io.mockk.every
 import io.mockk.mockk
@@ -23,10 +25,12 @@ import org.junit.Test
 class UserRemoteRepositoryImplTest {
 
     private val service = mockk<CoffeeDrinksService>()
-    private val userMapper = mockk<UserMapper>()
-    private val sessionMapper = mockk<SessionMapper>()
+    private val userMapper = mockk<UserRemoteMapper>()
+    private val sessionMapper = mockk<SessionRemoteMapper>()
+    private val authExceptionRemoteMapper = mockk<AuthExceptionRemoteMapper>()
+    private val userAuthExceptionRemoteMapper = mockk<UserAlreadyExistExceptionRemoteMapper>()
 
-    private val repository = UserRemoteRepositoryImpl(service, userMapper, sessionMapper)
+    private val repository = UserRemoteRepositoryImpl(service, userMapper, sessionMapper, userAuthExceptionRemoteMapper, authExceptionRemoteMapper)
 
     @Test
     fun createAccountCompletesSuccessfully() {
