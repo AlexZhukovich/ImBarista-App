@@ -3,10 +3,12 @@ package com.alexzh.imbarista.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.alexzh.imbarista.domain.exception.AuthException
 import com.alexzh.imbarista.domain.interactor.coffeedrink.browse.GetCoffeeDrinks
 import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.AddCoffeeDrinkToFavourites
 import com.alexzh.imbarista.domain.interactor.coffeedrink.favourite.RemoveCoffeeDrinkFromFavourite
 import com.alexzh.imbarista.domain.model.CoffeeDrink
+import com.alexzh.imbarista.mapper.AuthViewExceptionMapper
 import com.alexzh.imbarista.mapper.CoffeeDrinkViewMapper
 import com.alexzh.imbarista.model.CoffeeDrinkView
 import com.alexzh.imbarista.state.Resource
@@ -17,7 +19,8 @@ class GetCoffeeDrinksViewModel(
     private val getCoffeeDrinks: GetCoffeeDrinks,
     private val addCoffeeDrinkToFavourites: AddCoffeeDrinkToFavourites,
     private val removeCoffeeDrinkFromFavourite: RemoveCoffeeDrinkFromFavourite,
-    private val coffeeDrinkViewMapper: CoffeeDrinkViewMapper
+    private val coffeeDrinkViewMapper: CoffeeDrinkViewMapper,
+    private val authViewExceptionMapper: AuthViewExceptionMapper
 ) : ViewModel() {
 
     private val coffeeDrinksLiveData: MutableLiveData<Resource<List<CoffeeDrinkView>>> = MutableLiveData()
@@ -69,10 +72,16 @@ class GetCoffeeDrinksViewModel(
         }
 
         override fun onError(error: Throwable) {
+            val newError = if (error is AuthException) {
+                authViewExceptionMapper.mapToView(error)
+            } else {
+                error
+            }
+
             coffeeDrinksLiveData.postValue(Resource(
                 ResourceState.ERROR,
                 null,
-                error
+                newError
             ))
         }
     }

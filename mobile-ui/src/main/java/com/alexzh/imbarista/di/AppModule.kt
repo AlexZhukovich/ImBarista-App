@@ -45,10 +45,10 @@ val viewModelModule = module {
     viewModel { LogInViewModel(logIn = get(), mapper = get()) }
     viewModel { CreateAccountViewModel(createAccount = get(), mapper = get()) }
     viewModel { CheckExistingSessionViewModel(getExistingSession = get(), mapper = get()) }
-    viewModel { LogOutViewModel(logOut = get()) }
+    viewModel { LogOutViewModel(logOut = get(), authViewExceptionMapper = get()) }
     viewModel { GetCurrentUserViewModel(getCurrentUser = get(), mapper = get()) }
-    viewModel { GetCoffeeDrinksViewModel(getCoffeeDrinks = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get()) }
-    viewModel { CoffeeDrinkDetailsViewModel(getCoffeeDrinkById = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get()) }
+    viewModel { GetCoffeeDrinksViewModel(getCoffeeDrinks = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get(), authViewExceptionMapper = get()) }
+    viewModel { CoffeeDrinkDetailsViewModel(getCoffeeDrinkById = get(), addCoffeeDrinkToFavourites = get(), removeCoffeeDrinkFromFavourite = get(), coffeeDrinkViewMapper = get(), authViewExceptionMapper = get()) }
     viewModel { TomTomMapViewModel(getNearCafeFromTomTomSource = get(), cafeViewMapper = get(), application = androidContext() as Application) }
 }
 
@@ -92,6 +92,10 @@ val mapperModule = module {
     factory { CafeDataMapper() }
     factory { CafeViewMapper() }
 
+    factory { AuthViewExceptionMapper() }
+    factory { AuthExceptionMapper() }
+    factory { AuthExceptionRemoteMapper() }
+
     factory { HttpExceptionMapper() }
 
     factory { UserAlreadyExistExceptionRemoteMapper() }
@@ -104,7 +108,7 @@ val dataModule = module {
     factory<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(androidContext()) }
 
     // domain
-    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(coffeeDrinkDataMapper = get(), cacheRepository = get(), storeFactory = get(), userRepository = get()) }
+    factory<CoffeeDrinksRepository> { CoffeeDrinksDataRepository(coffeeDrinkDataMapper = get(), cacheRepository = get(), storeFactory = get(), userRepository = get(), preferencesRepository = get()) }
     single<UserRepository>(override = true) { UserDataRepository(userDataStore = get(), userDataMapper = get(), sessionDataMapper = get(), preferencesRepository = get()) }
     factory<NearMeCafeRepository> { NearMeCafeDataRepository(cafeDataStore = get(), cafeDataMapper = get()) }
 
@@ -114,13 +118,13 @@ val dataModule = module {
 
     // data
     factory<CafeRemoteRepository> { CafeRemoteRepositoryImpl(tomTomSearchService = get(), cafeRemoteMapper = get()) }
-    factory<CoffeeDrinksRemoteRepository> { CoffeeDrinkRemoteRepositoryImpl(service = get(), coffeeDrinkRemoteMapper = get(), httpExceptionMapper = get()) }
-    factory { CoffeeDrinksRemoteDataStore(remoteRepository = get(), preferencesRepository = get()) }
+    factory<CoffeeDrinksRemoteRepository> { CoffeeDrinkRemoteRepositoryImpl(service = get(), coffeeDrinkRemoteMapper = get(), httpExceptionMapper = get(), authExceptionMapper = get()) }
     factory<CoffeeDrinksCacheRepository> { CoffeeDrinksCacheRepositoryImpl() }
+    factory { CoffeeDrinksRemoteDataStore(remoteRepository = get(), preferencesRepository = get(), authExceptionMapper = get()) }
     factory { CoffeeDrinksCacheDataStore(cacheRepository = get()) }
     factory { CoffeeDrinksDataStoreFactory(remoteDataStore = get(), cacheDataStore = get()) }
-    factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userRemoteMapper = get(), sessionRemoteMapper = get(), userAlreadyExceptionExceptionRemoteMapper = get()) }
-    factory<UserDataStore> { UserRemoteDataStore(repository = get(), preferencesRepository = get(), userAlreadyExistExceptionDataMapper = get()) }
+    factory<UserRemoteRepository> { UserRemoteRepositoryImpl(service = get(), userRemoteMapper = get(), sessionRemoteMapper = get(), userAlreadyExceptionExceptionRemoteMapper = get(), authExceptionMapper = get()) }
+    factory<UserDataStore> { UserRemoteDataStore(repository = get(), preferencesRepository = get(), userAlreadyExistExceptionDataMapper = get(), authExceptionMapper = get()) }
     factory<PreferencesRepository> { SharedPreferencesRepository(prefs = get(), sessionCacheMapper = get(), mapCacheMapper = get()) }
     factory<CafeDataStore> { CafeRemoteDataStore(repository = get(), preferencesRepository = get()) }
 }

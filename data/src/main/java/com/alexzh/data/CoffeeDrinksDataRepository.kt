@@ -1,8 +1,10 @@
 package com.alexzh.data
 
+import com.alexzh.data.exception.AuthDataException
 import com.alexzh.data.mapper.CoffeeDrinkDataMapper
 import com.alexzh.data.model.HttpDataException
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
+import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.data.store.CoffeeDrinksDataStoreFactory
 import com.alexzh.imbarista.domain.model.CoffeeDrink
 import com.alexzh.imbarista.domain.repository.CoffeeDrinksRepository
@@ -13,7 +15,8 @@ class CoffeeDrinksDataRepository(
     private val coffeeDrinkDataMapper: CoffeeDrinkDataMapper,
     private val cacheRepository: CoffeeDrinksCacheRepository,
     private val storeFactory: CoffeeDrinksDataStoreFactory,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val preferencesRepository: PreferencesRepository
 ) : CoffeeDrinksRepository {
 
     companion object {
@@ -26,6 +29,12 @@ class CoffeeDrinksDataRepository(
                 if (error is HttpDataException && error.code == 401) {
                     userRepository.refreshToken().blockingGet()
                     return@onErrorResumeNext storeFactory.getRemoteDataStore().getCoffeeDrinks()
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
+            .onErrorResumeNext { error ->
+                if (error is AuthDataException) {
+                    preferencesRepository.clearSessionInfo()
                 }
                 return@onErrorResumeNext Single.error(error)
             }
@@ -46,6 +55,12 @@ class CoffeeDrinksDataRepository(
                 }
                 return@onErrorResumeNext Single.error(error)
             }
+            .onErrorResumeNext { error ->
+                if (error is AuthDataException) {
+                    preferencesRepository.clearSessionInfo()
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
             .retry(REPEAT_REQUEST_COUNT)
             .map { coffeeDrinkDataMapper.mapFromEntity(it) }
     }
@@ -59,6 +74,12 @@ class CoffeeDrinksDataRepository(
                 }
                 return@onErrorResumeNext Single.error(error)
             }
+            .onErrorResumeNext { error ->
+                if (error is AuthDataException) {
+                    preferencesRepository.clearSessionInfo()
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
             .retry(REPEAT_REQUEST_COUNT)
             .map { coffeeDrinkDataMapper.mapFromEntity(it) }
     }
@@ -69,6 +90,12 @@ class CoffeeDrinksDataRepository(
                 if (error is HttpDataException && error.code == 401) {
                     userRepository.refreshToken().blockingGet()
                     return@onErrorResumeNext storeFactory.getRemoteDataStore().setCoffeeAsNotFavourite(coffeeId)
+                }
+                return@onErrorResumeNext Single.error(error)
+            }
+            .onErrorResumeNext { error ->
+                if (error is AuthDataException) {
+                    preferencesRepository.clearSessionInfo()
                 }
                 return@onErrorResumeNext Single.error(error)
             }

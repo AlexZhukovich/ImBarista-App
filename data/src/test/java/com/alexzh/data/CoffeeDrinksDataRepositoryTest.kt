@@ -3,6 +3,7 @@ package com.alexzh.data
 import com.alexzh.data.mapper.CoffeeDrinkDataMapper
 import com.alexzh.data.model.CoffeeDrinkEntity
 import com.alexzh.data.repository.CoffeeDrinksCacheRepository
+import com.alexzh.data.repository.PreferencesRepository
 import com.alexzh.data.store.CoffeeDrinksDataStoreFactory
 import com.alexzh.data.store.CoffeeDrinksRemoteDataStore
 import com.alexzh.imbarista.domain.model.CoffeeDrink
@@ -23,12 +24,14 @@ class CoffeeDrinksDataRepositoryTest {
     private val cacheRepository = mockk<CoffeeDrinksCacheRepository>()
     private val remoteDataStore = mockk<CoffeeDrinksRemoteDataStore>()
     private val userRepository = mockk<UserRepository>()
+    private val preferencesRepository = mockk<PreferencesRepository>()
 
     private val dataRepository = CoffeeDrinksDataRepository(
         mapper,
         cacheRepository,
         storeFactory,
-        userRepository
+        userRepository,
+        preferencesRepository
     )
 
     @Test

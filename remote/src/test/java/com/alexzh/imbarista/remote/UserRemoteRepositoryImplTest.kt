@@ -14,6 +14,8 @@ import com.alexzh.testdata.base.RandomData.randomString
 import com.alexzh.testdata.data.GenerateDataTestData.generateSessionEntity
 import com.alexzh.testdata.data.GenerateDataTestData.generateUserEntity
 import com.alexzh.imbarista.commonandroidtestdata.remote.GenerateRemoteTestData.generateSessionModel
+import com.alexzh.imbarista.remote.mapper.AuthExceptionRemoteMapper
+import com.alexzh.imbarista.remote.mapper.UserAlreadyExistExceptionRemoteMapper
 import com.alexzh.imbarista.remote.model.RefreshTokenModel
 import io.mockk.every
 import io.mockk.mockk
@@ -25,8 +27,10 @@ class UserRemoteRepositoryImplTest {
     private val service = mockk<CoffeeDrinksService>()
     private val userMapper = mockk<UserRemoteMapper>()
     private val sessionMapper = mockk<SessionRemoteMapper>()
+    private val authExceptionRemoteMapper = mockk<AuthExceptionRemoteMapper>()
+    private val userAuthExceptionRemoteMapper = mockk<UserAlreadyExistExceptionRemoteMapper>()
 
-    private val repository = UserRemoteRepositoryImpl(service, userMapper, sessionMapper)
+    private val repository = UserRemoteRepositoryImpl(service, userMapper, sessionMapper, userAuthExceptionRemoteMapper, authExceptionRemoteMapper)
 
     @Test
     fun createAccountCompletesSuccessfully() {

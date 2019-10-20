@@ -30,11 +30,11 @@ class UserDataRepository(
 
     override fun logIn(email: String, password: String): Single<Session> {
         return userDataStore.logIn(email, password)
+            .retry(REPEAT_REQUEST_COUNT)
             .flatMap {
                 preferencesRepository.saveSessionInfo(it)
                 Single.just(it)
             }
-            .retry(REPEAT_REQUEST_COUNT)
             .map { sessionDataMapper.mapFromEntity(it) }
     }
 
@@ -48,11 +48,11 @@ class UserDataRepository(
 
     override fun refreshToken(): Single<Session> {
         return userDataStore.refreshToken()
+            .retry(REPEAT_REQUEST_COUNT)
             .flatMap {
                 preferencesRepository.saveSessionInfo(it)
                 Single.just(it)
             }
-            .retry(REPEAT_REQUEST_COUNT)
             .map { sessionDataMapper.mapFromEntity(it) }
     }
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexzh.imbarista.R
+import com.alexzh.imbarista.exception.AuthViewException
 import com.alexzh.imbarista.model.CoffeeDrinkDetailsItemView
 import com.alexzh.imbarista.model.CoffeeDrinkView
 import com.alexzh.imbarista.model.SessionView
@@ -105,11 +106,23 @@ class CoffeeDrinkDetailsActivity : AppCompatActivity() {
             }
             ResourceState.ERROR -> {
                 progressBar.visibility = View.GONE
-                Snackbar.make(root, R.string.error_coffee_drink_favourite_state_cannot_be_changed, Snackbar.LENGTH_LONG)
-                    .setAction(R.string.try_again_action) {
-                        coffeeDrinkDetailsViewModel.fetchCoffeeDrink(intent.getParcelableExtra<CoffeeDrinkView>(KEY_COFFEE).id)
+
+                if (resource.error is AuthViewException) {
+                    finish()
+                } else {
+                    Snackbar.make(
+                        root,
+                        R.string.error_coffee_drink_favourite_state_cannot_be_changed,
+                        Snackbar.LENGTH_LONG
+                    ).setAction(R.string.try_again_action) {
+                        coffeeDrinkDetailsViewModel.fetchCoffeeDrink(
+                            intent.getParcelableExtra<CoffeeDrinkView>(
+                                KEY_COFFEE
+                            ).id
+                        )
                     }
                     .show()
+                }
             }
         }
     }
