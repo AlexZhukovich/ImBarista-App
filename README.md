@@ -1,5 +1,32 @@
 # ImBarista-App
 
+The **I'm Barista** application has a list of coffee drinks with a description of each coffee drink. The app was created for testing workshop and demonstrate many general practises which are usually used in mobile applications.  
+
+Features of the application:
+* Demonstrating list of coffee drinks
+* User can mark/unmark coffee drink as a favourite
+* User can create account/Login into app
+* User can interact with a map and find a cafe
+
+**Create Account** and **Login** screen
+<p align="center">
+  <img src="/art/screenshots/create-account-screen-framed.png" height="500" />
+  <img src="/art/screenshots/login-screen-framed.png" height="500" />
+</p>
+
+**Coffee drinks**, **Near Me** and **Profile** screens
+<p align="center">
+  <img src="/art/screenshots/home-coffee-drinks-screen-framed.png" height="500" />
+  <img src="/art/screenshots/home-near-me-screen-framed.png" height="500" />
+  <img src="/art/screenshots/home-profile-screen-framed.png" height="500" />
+</p>
+
+**Coffee drinks details** and **Settings** screens
+<p align="center">
+  <img src="/art/screenshots/coffee-drink-details-screen-framed.png" height="500" />
+  <img src="/art/screenshots/settings-screen-framed.png" height="500" />
+</p>
+
 # App screens with views
 **"Login" screen**
 <p align="center">
