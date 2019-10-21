@@ -29,6 +29,7 @@ The **I'm Barista** application has a list of coffee drinks with a description o
 * User can create account/Login into app
 * User can interact with a map and find a cafe
 
+# Frameworks and Tools
 **Development Frameworks and Tools**:
 * Kotlin
 * Kotlin coroutines
