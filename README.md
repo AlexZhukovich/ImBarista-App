@@ -2,6 +2,8 @@
 
 The **I'm Barista** application has a list of coffee drinks with a description of each coffee drink. The app was created for testing workshop and demonstrate many general practises which are usually used in mobile applications.
 
+> Note: If you want to improve basic of Espresso framework and skills of creating custom Hamcrest Matchers you can check the [IntroToAndroidUITesting](https://github.com/AlexZhukovich/IntroToAndroidUITesting) repository.  
+
 **Create Account** and **Login** screen
 <p align="center">
   <img src="/art/screenshots/create-account-screen-framed.png" height="500" />
