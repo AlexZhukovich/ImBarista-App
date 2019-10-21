@@ -1,12 +1,6 @@
 # ImBarista-App
 
-The **I'm Barista** application has a list of coffee drinks with a description of each coffee drink. The app was created for testing workshop and demonstrate many general practises which are usually used in mobile applications.  
-
-Features of the application:
-* Demonstrating list of coffee drinks
-* User can mark/unmark coffee drink as a favourite
-* User can create account/Login into app
-* User can interact with a map and find a cafe
+The **I'm Barista** application has a list of coffee drinks with a description of each coffee drink. The app was created for testing workshop and demonstrate many general practises which are usually used in mobile applications.
 
 **Create Account** and **Login** screen
 <p align="center">
@@ -28,6 +22,12 @@ Features of the application:
 </p>
 
 [Application diagram with connections between screens](https://raw.githubusercontent.com/AlexZhukovich/ImBarista-App/add-images-to-project/art/ImBarista-app-mockup.png)
+
+Features of the application:
+* Demonstrating list of coffee drinks
+* User can mark/unmark coffee drink as a favourite
+* User can create account/Login into app
+* User can interact with a map and find a cafe
 
 # Structure of the project
 The source code split between different modules:
