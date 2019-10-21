@@ -38,6 +38,10 @@ The **master** branch has all test cases with solutions.
 
 The **workshop-start** branch has all failed test cases with description for each test case and test classes.   
 
+# Configuration
+* TomTom Maps API key should be added as System variable with the `BARISTA_TOMTOM_MAPS_API_KEY` key
+* Google Maps API key should be added as System variable with the `BARISTA_GOOGLE_MAPS_API_KEY` key
+
 # App screens with views
 **"Login" screen**
 <p align="center">
@@ -73,7 +77,3 @@ The **workshop-start** branch has all failed test cases with description for eac
 <p align="center">
   <img src="art/screens-with-views/settings-screen.png" width="800" />
 </p>
-
-# Configuration
-* TomTom Maps API key should be added as System variable with the `BARISTA_TOMTOM_MAPS_API_KEY` key
-* Google Maps API key should be added as System variable with the `BARISTA_GOOGLE_MAPS_API_KEY` key
