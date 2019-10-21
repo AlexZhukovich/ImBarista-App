@@ -30,6 +30,21 @@ Features of the application:
 [Application diagram with connections between screens](https://raw.githubusercontent.com/AlexZhukovich/ImBarista-App/add-images-to-project/art/ImBarista-app-mockup.png)
 
 # Structure of the project
+The source code split between different modules:
+* domain
+* data
+* remote
+* cache
+* mobile-ui
+
+<p align="center">
+  <img src="/art/architecture/modules.png" height="500" />
+</p>
+
+Modules for generating test data:
+* commonTestData
+* commonAndroidTestData
+
 The project has the main branches:
 * master
 * workshop-start
