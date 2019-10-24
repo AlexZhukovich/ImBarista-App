@@ -20,11 +20,11 @@ object ToolbarMatchers {
     fun withToolbarTitle(textMatcher: Matcher<String>): Matcher<View> {
         return object : BoundedMatcher<View, Toolbar>(Toolbar::class.java) {
             override fun describeTo(description: Description?) {
-                description?.appendText(textMatcher.toString())
+                // should be implemented
             }
 
             override fun matchesSafely(toolbar: Toolbar?): Boolean {
-                return textMatcher.matches(toolbar?.title)
+                return false
             }
         }
     }

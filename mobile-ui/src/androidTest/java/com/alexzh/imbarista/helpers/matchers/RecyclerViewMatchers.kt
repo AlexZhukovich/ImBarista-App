@@ -21,11 +21,11 @@ object RecyclerViewMatchers {
     fun withItemCount(count: Int): Matcher<View> {
         return object : BoundedMatcher<View, RecyclerView>(RecyclerView::class.java) {
             override fun describeTo(description: Description?) {
-                description?.appendText("$count items")
+                // should be implemented
             }
 
             override fun matchesSafely(recyclerView: RecyclerView?): Boolean {
-                return recyclerView?.adapter?.itemCount == count
+                return false
             }
         }
     }
@@ -37,12 +37,11 @@ object RecyclerViewMatchers {
     fun atPosition(position: Int, itemMatcher: Matcher<View>): Matcher<View> {
         return object : BoundedMatcher<View, RecyclerView>(RecyclerView::class.java) {
             override fun describeTo(description: Description?) {
-                description?.appendText("$itemMatcher at position: $position")
+                // should be implemented
             }
 
             override fun matchesSafely(recyclerView: RecyclerView?): Boolean {
-                val viewHolder = recyclerView?.findViewHolderForAdapterPosition(position)
-                return itemMatcher.matches(viewHolder?.itemView)
+                return false
             }
         }
     }

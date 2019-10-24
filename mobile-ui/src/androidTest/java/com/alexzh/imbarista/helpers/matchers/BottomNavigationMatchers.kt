@@ -20,12 +20,11 @@ object BottomNavigationMatchers {
     fun withItemCount(count: Int): Matcher<View> {
         return object : BoundedMatcher<View, BottomNavigationView>(BottomNavigationView::class.java) {
             override fun matchesSafely(view: BottomNavigationView): Boolean {
-                val menu = view.menu
-                return menu.size() == count
+                return false
             }
 
             override fun describeTo(description: Description) {
-                description.appendText("$count item")
+                // should be implemented
             }
         }
     }
@@ -39,18 +38,11 @@ object BottomNavigationMatchers {
     fun hasItemTitle(text: String): Matcher<View> {
         return object : BoundedMatcher<View, BottomNavigationView>(BottomNavigationView::class.java) {
             override fun matchesSafely(view: BottomNavigationView): Boolean {
-                val menu = view.menu
-                for (i in 0 until menu.size()) {
-                    val item = menu.getItem(i)
-                    if (item.title.contains(text)) {
-                        return true
-                    }
-                }
                 return false
             }
 
             override fun describeTo(description: Description) {
-                description.appendText("\"$text\" title")
+                // should be implemented
             }
         }
     }
@@ -64,18 +56,11 @@ object BottomNavigationMatchers {
     fun hasCheckedItem(itemId: Int): Matcher<View> {
         return object : BoundedMatcher<View, BottomNavigationView>(BottomNavigationView::class.java) {
             override fun matchesSafely(view: BottomNavigationView): Boolean {
-                val menu = view.menu
-                for (i in 0 until menu.size()) {
-                    val item = menu.getItem(i)
-                    if (item.isChecked) {
-                        return item.itemId == itemId
-                    }
-                }
                 return false
             }
 
             override fun describeTo(description: Description) {
-                description.appendText("view with $itemId checked")
+                // should be implemented
             }
         }
     }
