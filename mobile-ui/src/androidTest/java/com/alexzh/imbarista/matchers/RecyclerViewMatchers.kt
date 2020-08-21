@@ -12,13 +12,12 @@ object RecyclerViewMatchers {
     fun withItemCount(count: Int): Matcher<View> {
         return object : TypeSafeMatcher<View>() {
             override fun matchesSafely(view: View): Boolean {
-                val recyclerView = view as RecyclerView
-                val adapter = recyclerView.adapter
-                return adapter?.itemCount == count
+                // TODO: implement it
+                return false
             }
 
             override fun describeTo(description: Description) {
-                description.appendText("has $count items")
+                // TODO: implement it
             }
         }
     }
