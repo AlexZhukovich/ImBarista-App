@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 class CoffeeDrinksServiceFactory {
 
     companion object {
-        const val BASE_URL = "https://alexzh.com/api/coffee-drinks/v1/"
+        const val BASE_URL = "https://sandbox-api.alexzh.com/coffee-drinks/v1/"
     }
 
     fun createCoffeeDrinksService(isDebug: Boolean): CoffeeDrinksService {

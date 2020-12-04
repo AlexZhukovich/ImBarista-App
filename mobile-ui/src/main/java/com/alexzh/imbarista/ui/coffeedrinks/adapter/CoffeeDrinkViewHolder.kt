@@ -14,7 +14,7 @@ class CoffeeDrinkViewHolder(
 ) : RecyclerView.ViewHolder(view) {
 
     companion object {
-        const val SMALL_COFFEE_DRINK_ICON_BASE_URL = "https://api.coffee-drinks.alexzh.com/store/img/196"
+        const val SMALL_COFFEE_DRINK_ICON_BASE_URL = "https://sandbox-api.alexzh.com/coffee-drinks/store/img/196"
     }
 
     fun bind(coffeeDrink: CoffeeDrinkView) {
